@@ -1,0 +1,7 @@
+{
+  "name": "KeikoHub",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
