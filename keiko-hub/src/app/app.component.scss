@@ -1,3 +1,13 @@
+ion-menu {
+  display: none;
+}
+
+@media only screen and (max-width: 991px) {
+  ion-menu {
+    display: block;
+  }
+}
+
 ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
