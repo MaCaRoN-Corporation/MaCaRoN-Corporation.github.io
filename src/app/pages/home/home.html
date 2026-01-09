@@ -1,0 +1,240 @@
+<div class="home-page">
+  <div class="home-content">
+    <div class="main-actions">
+      <!-- Carousel des modes de passage -->
+      <div class="mode-carousel-wrapper">
+        <button class="carousel-nav carousel-nav-left" (click)="previousMode()" aria-label="Mode précédent" type="button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        
+        <div class="logo-container">
+          <!-- Boutons de navigation sur mobile, positionnés sur le panel -->
+          <button class="carousel-nav carousel-nav-left-mobile" (click)="previousMode()" aria-label="Mode précédent" type="button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="carousel-nav carousel-nav-right-mobile" (click)="nextMode()" aria-label="Mode suivant" type="button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+          
+          <div class="mode-icon-wrapper">
+            <div class="mode-icon">
+              <!-- SVG Classique - Style logo avec livre/rouleau traditionnel -->
+            <svg *ngIf="currentMode.id === 'classique'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+              <defs>
+                <linearGradient id="classiqueRedGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#c41e3a;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#e63946;stop-opacity:0.8" />
+                </linearGradient>
+                <linearGradient id="classiqueBlackGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:0.9" />
+                </linearGradient>
+                <filter id="classiqueShadow">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+                  <feOffset dx="2" dy="2" result="offsetblur"/>
+                  <feComponentTransfer>
+                    <feFuncA type="linear" slope="0.3"/>
+                  </feComponentTransfer>
+                  <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <circle cx="100" cy="100" r="92" fill="none" stroke="url(#classiqueBlackGradient)" stroke-width="5" opacity="0.95"/>
+              <circle cx="100" cy="100" r="85" fill="none" stroke="#c41e3a" stroke-width="1.5" opacity="0.4"/>
+              <circle cx="100" cy="100" r="75" fill="none" stroke="#1a1a1a" stroke-width="1" opacity="0.3"/>
+              <circle cx="100" cy="100" r="65" fill="none" stroke="#c41e3a" stroke-width="1" opacity="0.3"/>
+              <!-- Livre ouvert / Rouleau traditionnel -->
+              <rect x="60" y="70" width="80" height="60" rx="4" fill="url(#classiqueRedGradient)" opacity="0.9" filter="url(#classiqueShadow)"/>
+              <rect x="65" y="75" width="70" height="50" rx="3" fill="url(#classiqueBlackGradient)" opacity="0.85"/>
+              <!-- Lignes de texte (représentant l'ordre classique) -->
+              <line x1="75" y1="90" x2="125" y2="90" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+              <line x1="75" y1="100" x2="125" y2="100" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+              <line x1="75" y1="110" x2="125" y2="110" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+              <!-- Reliure centrale -->
+              <line x1="100" y1="75" x2="100" y2="125" stroke="#c41e3a" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+              <g stroke="#c41e3a" stroke-width="1.5" opacity="0.4">
+                <line x1="100" y1="100" x2="100" y2="20" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="100" y2="180" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="20" y2="100" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="180" y2="100" stroke-linecap="round"/>
+              </g>
+              <circle cx="100" cy="20" r="3" fill="#c41e3a" opacity="0.8"/>
+              <circle cx="100" cy="180" r="3" fill="#1a1a1a" opacity="0.8"/>
+            </svg>
+            
+              <!-- SVG Progression - Style logo avec flèches vers le haut -->
+            <svg *ngIf="currentMode.id === 'progression'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+              <defs>
+                <linearGradient id="progressionRedGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#c41e3a;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#e63946;stop-opacity:0.8" />
+                </linearGradient>
+                <linearGradient id="progressionBlackGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:0.9" />
+                </linearGradient>
+                <filter id="progressionShadow">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+                  <feOffset dx="2" dy="2" result="offsetblur"/>
+                  <feComponentTransfer>
+                    <feFuncA type="linear" slope="0.3"/>
+                  </feComponentTransfer>
+                  <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <circle cx="100" cy="100" r="92" fill="none" stroke="url(#progressionBlackGradient)" stroke-width="5" opacity="0.95"/>
+              <circle cx="100" cy="100" r="85" fill="none" stroke="#c41e3a" stroke-width="1.5" opacity="0.4"/>
+              <circle cx="100" cy="100" r="75" fill="none" stroke="#1a1a1a" stroke-width="1" opacity="0.3"/>
+              <circle cx="100" cy="100" r="65" fill="none" stroke="#c41e3a" stroke-width="1" opacity="0.3"/>
+              <!-- Flèches progression vers le haut -->
+              <path d="M 100 40 L 120 70 L 110 70 L 110 120 L 90 120 L 90 70 L 80 70 Z" fill="url(#progressionRedGradient)" opacity="0.9" filter="url(#progressionShadow)"/>
+              <path d="M 100 50 L 110 70 L 100 85 L 90 70 Z" fill="url(#progressionBlackGradient)" opacity="0.85"/>
+              <g stroke="#c41e3a" stroke-width="1.5" opacity="0.4">
+                <line x1="100" y1="100" x2="100" y2="20" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="20" y2="100" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="180" y2="100" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="140" y2="60" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="60" y2="60" stroke-linecap="round"/>
+              </g>
+              <circle cx="100" cy="20" r="3" fill="#c41e3a" opacity="0.8"/>
+              <circle cx="100" cy="100" r="8" fill="#ffffff" opacity="0.9"/>
+              <circle cx="100" cy="100" r="5" fill="#c41e3a"/>
+            </svg>
+            
+            <!-- SVG Aléatoire - Style logo avec motif shuffle -->
+            <svg *ngIf="currentMode.id === 'aleatoire'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+              <defs>
+                <linearGradient id="aleatoireRedGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#c41e3a;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#e63946;stop-opacity:0.8" />
+                </linearGradient>
+                <linearGradient id="aleatoireBlackGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:0.9" />
+                </linearGradient>
+                <filter id="aleatoireShadow">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+                  <feOffset dx="2" dy="2" result="offsetblur"/>
+                  <feComponentTransfer>
+                    <feFuncA type="linear" slope="0.3"/>
+                  </feComponentTransfer>
+                  <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <circle cx="100" cy="100" r="92" fill="none" stroke="url(#aleatoireBlackGradient)" stroke-width="5" opacity="0.95"/>
+              <circle cx="100" cy="100" r="85" fill="none" stroke="#c41e3a" stroke-width="1.5" opacity="0.4"/>
+              <circle cx="100" cy="100" r="75" fill="none" stroke="#1a1a1a" stroke-width="1" opacity="0.3"/>
+              <circle cx="100" cy="100" r="65" fill="none" stroke="#c41e3a" stroke-width="1" opacity="0.3"/>
+              <!-- Motif shuffle/croisement -->
+              <path d="M 60 60 L 140 60 L 140 80 L 100 100 L 140 120 L 140 140 L 60 140 L 60 120 L 100 100 L 60 80 Z" fill="url(#aleatoireRedGradient)" opacity="0.9" filter="url(#aleatoireShadow)"/>
+              <path d="M 70 70 L 130 70 L 130 85 L 100 100 L 130 115 L 130 130 L 70 130 L 70 115 L 100 100 L 70 85 Z" fill="url(#aleatoireBlackGradient)" opacity="0.85"/>
+              <g stroke="#c41e3a" stroke-width="1.5" opacity="0.4">
+                <line x1="100" y1="100" x2="60" y2="60" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="140" y2="60" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="60" y2="140" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="140" y2="140" stroke-linecap="round"/>
+              </g>
+              <circle cx="100" cy="100" r="8" fill="#ffffff" opacity="0.9"/>
+              <circle cx="100" cy="100" r="5" fill="#c41e3a"/>
+            </svg>
+            
+            <!-- SVG Révision - Style logo avec checkmark -->
+            <svg *ngIf="currentMode.id === 'revision'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+              <defs>
+                <linearGradient id="revisionRedGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#c41e3a;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#e63946;stop-opacity:0.8" />
+                </linearGradient>
+                <linearGradient id="revisionBlackGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:0.9" />
+                </linearGradient>
+                <filter id="revisionShadow">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+                  <feOffset dx="2" dy="2" result="offsetblur"/>
+                  <feComponentTransfer>
+                    <feFuncA type="linear" slope="0.3"/>
+                  </feComponentTransfer>
+                  <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <circle cx="100" cy="100" r="92" fill="none" stroke="url(#revisionBlackGradient)" stroke-width="5" opacity="0.95"/>
+              <circle cx="100" cy="100" r="85" fill="none" stroke="#c41e3a" stroke-width="1.5" opacity="0.4"/>
+              <circle cx="100" cy="100" r="75" fill="none" stroke="#1a1a1a" stroke-width="1" opacity="0.3"/>
+              <circle cx="100" cy="100" r="65" fill="none" stroke="#c41e3a" stroke-width="1" opacity="0.3"/>
+              <!-- Cercle avec checkmark -->
+              <circle cx="100" cy="100" r="50" fill="url(#revisionRedGradient)" opacity="0.9" filter="url(#revisionShadow)"/>
+              <circle cx="100" cy="100" r="40" fill="url(#revisionBlackGradient)" opacity="0.85"/>
+              <path d="M 75 100 L 90 115 L 125 80" fill="none" stroke="#c41e3a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              <g stroke="#c41e3a" stroke-width="1.5" opacity="0.4">
+                <line x1="100" y1="100" x2="100" y2="20" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="100" y2="180" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="20" y2="100" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="180" y2="100" stroke-linecap="round"/>
+              </g>
+              <circle cx="100" cy="20" r="3" fill="#c41e3a" opacity="0.8"/>
+              <circle cx="100" cy="180" r="3" fill="#1a1a1a" opacity="0.8"/>
+            </svg>
+            </div>
+          </div>
+          <div class="mode-text">
+            <div class="mode-name">{{ currentMode.name }}</div>
+            <div class="mode-description">{{ currentMode.description }}</div>
+          </div>
+        </div>
+        
+        <button class="carousel-nav carousel-nav-right" (click)="nextMode()" aria-label="Mode suivant" type="button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="buttons-container">
+        <button class="start-button" (click)="startPassage()" type="button">
+          Hajime | 始め
+        </button>
+        
+        <!-- Bouton de configuration visible uniquement sur mobile -->
+        <a *ngIf="isMobile" routerLink="/config" class="config-button" title="Configuration" aria-label="Configuration">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Panel de configuration visible uniquement sur PC -->
+    <div class="config-panel" *ngIf="!isMobile">
+      <div class="config-content">
+        <div class="config-section">
+          <h3>Configuration du passage</h3>
+          <p class="config-description">Personnalisez votre entraînement avant de démarrer</p>
+          
+          <!-- Les contrôles de configuration seront ajoutés ici dans les stories suivantes -->
+          <div class="config-placeholder">
+            <p>Les options de configuration (grade, timing, filtres) seront disponibles ici.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

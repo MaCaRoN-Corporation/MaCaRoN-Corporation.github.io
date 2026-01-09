@@ -1,0 +1,63 @@
+.app-container {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; // Pas de scroll sur le conteneur principal
+  position: relative;
+  
+  // Sur PC, s'assurer qu'il n'y a pas de scroll
+  @media (min-width: 768px) {
+    max-height: 100vh;
+  }
+
+  // Overlay pour assurer la lisibilité du contenu - tons chauds harmonisés (plus transparent pour voir l'arrière-plan)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(245, 241, 232, 0.05) 0%, rgba(240, 235, 225, 0.03) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  overflow: hidden; // Pas de scroll sur le contenu principal
+  min-height: 0; // Permet au flex de fonctionner correctement
+  position: relative;
+  z-index: 1; // Au-dessus de l'overlay
+}
+
+.app-footer {
+  padding: var(--spacing-xs) var(--spacing-md);
+  text-align: center;
+  position: relative;
+  z-index: 1; // Au-dessus de l'overlay
+  background-color: rgba(255, 252, 245, 0.6);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(139, 123, 98, 0.15);
+  flex-shrink: 0; // Ne pas rétrécir
+  
+  @media (min-width: 768px) {
+    padding: var(--spacing-xs) var(--spacing-lg);
+  }
+}
+
+.copyright {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+  
+  @media (max-width: 767px) {
+    font-size: 0.7rem;
+  }
+}

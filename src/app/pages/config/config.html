@@ -1,0 +1,22 @@
+<div class="config-page" [class.slide-out-right]="isLeaving">
+  <div class="config-header">
+    <a routerLink="/" class="back-button" (click)="onBackClick($event)" aria-label="Retour à l'accueil">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </a>
+    <h1>Configuration</h1>
+  </div>
+  
+  <div class="config-content">
+    <div class="config-section">
+      <h2>Configuration du passage</h2>
+      <p class="config-description">Personnalisez votre entraînement avant de démarrer</p>
+      
+      <!-- Les contrôles de configuration seront ajoutés ici dans les stories suivantes -->
+      <div class="config-placeholder">
+        <p>Les options de configuration (grade, timing, filtres) seront disponibles ici.</p>
+      </div>
+    </div>
+  </div>
+</div>
