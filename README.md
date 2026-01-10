@@ -107,6 +107,41 @@ Ce projet utilise Angular avec des composants standalone et le routing intégré
 - Services avec `providedIn: 'root'`
 - Gestion des unsubscriptions dans `ngOnDestroy`
 
+## Mode Maintenance
+
+L'application dispose d'un système de mode maintenance simple qui permet de rediriger tous les utilisateurs vers une page de maintenance dédiée.
+
+### Activer le mode maintenance
+
+1. Ouvrir le fichier `src/assets/data/maintenance-config.json`
+2. Modifier la valeur de `maintenanceEnabled` à `true` :
+   ```json
+   {
+     "maintenanceEnabled": true
+   }
+   ```
+3. Recharger l'application (ou redéployer en production)
+
+Quand le mode maintenance est activé :
+- Toutes les routes sont bloquées (même via URL directe)
+- Tous les utilisateurs sont automatiquement redirigés vers `/maintenance`
+- Seule la page de maintenance reste accessible
+
+### Désactiver le mode maintenance
+
+1. Ouvrir le fichier `src/assets/data/maintenance-config.json`
+2. Modifier la valeur de `maintenanceEnabled` à `false` :
+   ```json
+   {
+     "maintenanceEnabled": false
+   }
+   ```
+3. Recharger l'application (ou redéployer en production)
+
+Le site redevient accessible normalement avec toutes les pages fonctionnelles.
+
+**Note :** En production, vous devrez redéployer l'application après modification du fichier pour que les changements prennent effet.
+
 ## Contribution
 
 Ce projet suit un workflow BMAD (Business Model Agile Development) avec des stories définies dans `docs/stories/`.
