@@ -66,7 +66,11 @@ TEXT_LIST = [
 "Hanmi handachi waza",
 "Kumijo",
 "Gyaku hanmi katate dori",
-"Naname kokyu nage"
+"Naname kokyu nage",
+"Morote dori",
+"Tachi dori",
+"Jiyu waza",
+"Randori"
 ]
 
 # =========================
