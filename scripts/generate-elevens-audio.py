@@ -70,7 +70,8 @@ TEXT_LIST = [
 "Morote dori",
 "Tachi dori",
 "Jiyu waza",
-"Randori"
+"Randori",
+"Gyaku Yokomen"
 ]
 
 # =========================
