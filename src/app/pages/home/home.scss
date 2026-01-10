@@ -574,6 +574,612 @@
   border: 2px dashed var(--color-border);
 }
 
+// Section Sélection du grade (PC)
+.grade-selection-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.grade-selector {
+  position: relative;
+  margin-top: var(--spacing-md);
+  width: 100%;
+}
+
+.grade-select-button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.875rem; // 14px - compact
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+  min-height: 36px; // Compact mais touchable
+  justify-content: space-between;
+
+  .grade-select-label {
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-normal);
+    white-space: nowrap;
+  }
+
+  .grade-select-value {
+    flex: 1;
+    text-align: left;
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .grade-select-chevron {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    color: var(--color-text-secondary);
+    transition: transform var(--transition-fast);
+  }
+
+  // État hover
+  &:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+
+    .grade-select-label,
+    .grade-select-value {
+      color: var(--color-text-primary);
+    }
+
+    .grade-select-chevron {
+      color: var(--color-text-secondary);
+    }
+  }
+
+  // État ouvert
+  &.open {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 61, 47, 31), 0.1);
+    background-color: var(--color-surface);
+
+    .grade-select-chevron {
+      transform: rotate(180deg);
+      color: var(--color-primary);
+    }
+  }
+
+  // État focus
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
+  }
+
+  // État disabled
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    color: var(--color-text-secondary);
+    background-color: var(--color-background);
+  }
+}
+
+.grade-dropdown {
+  position: absolute;
+  top: calc(100% + var(--spacing-xs));
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 6px;
+  padding: var(--spacing-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 2px;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  // Assurer que le scrollbar utilise les couleurs du thème
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--color-background);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--color-primary);
+    }
+  }
+}
+
+.grade-option {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.8125rem; // 13px - très compact
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 28px; // Compact
+  box-sizing: border-box;
+
+  // État hover
+  &:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  // État sélectionné
+  &.selected {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    // Pour le texte sur fond primary, utiliser le contraste approprié selon le thème
+    // En clair: primary est sombre, donc texte clair. En sombre: primary est clair, donc texte sombre.
+    color: var(--color-background);
+    font-weight: var(--font-weight-semibold);
+    box-shadow: var(--shadow-sm);
+    
+    // S'assurer que le texte reste lisible sur thème sombre où primary peut être clair
+    // On utilise --color-text-primary comme fallback si nécessaire, mais --color-background devrait fonctionner
+  }
+
+  // État focus
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 61, 47, 31), 0.2);
+  }
+
+  // État disabled
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    color: var(--color-text-secondary);
+    background-color: var(--color-background);
+  }
+}
+
+// Section Configuration du temps
+.time-configuration-section {
+  margin-bottom: var(--spacing-md);
+}
+
+.time-controls-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+
+  // Sur PC, afficher les 3 contrôles en ligne
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+  }
+}
+
+// Section Options supplémentaires
+.additional-options-section {
+  margin-bottom: var(--spacing-lg);
+  
+  @media (min-width: 768px) {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  // Réduire l'espace au-dessus des toggles
+  .config-description {
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
+// Conteneur pour les toggles armes et randori (affichage en ligne sur PC)
+.weapon-randori-toggles {
+  margin-bottom: 0;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  
+  // Sur PC, afficher les boutons pill centrés
+  @media (min-width: 768px) {
+    align-items: center;
+    gap: 0;
+  }
+}
+
+// Conteneur pour les boutons pill sur PC
+.pill-toggles-container {
+  display: none; // Masquer sur mobile
+  
+  // Afficher sur PC
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+.pill-toggles-buttons {
+  display: none; // Masquer sur mobile
+  
+  // Afficher sur PC
+  @media (min-width: 768px) {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+// Toggle pour mobile (style avec le petit switch)
+.weapon-time-toggle-mobile {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  
+  // Masquer sur PC
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.weapon-time-toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  cursor: pointer;
+  width: 100%;
+  margin: 0;
+}
+
+.weapon-time-toggle-text-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.weapon-time-toggle-text {
+  font-size: 1rem; // 16px sur mobile
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.weapon-time-toggle-duration {
+  font-size: 0.75rem; // 12px - plus petit pour la durée
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+
+// Boutons Pill/Tab style pour PC
+.pill-toggle-button {
+  display: none; // Masquer sur mobile
+  
+  // Afficher sur PC
+  @media (min-width: 768px) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 0.875rem; // 14px
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 20px; // Pill shape
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    min-height: 32px;
+    width: 35%; // 35% de la largeur disponible pour chaque bouton
+    flex-shrink: 0;
+    position: relative; // Pour positionner la pastille
+    
+    // Hover sur PC
+    &:hover:not(.active) {
+      border-color: var(--color-primary);
+      background: rgba(var(--color-primary-rgb, 61, 47, 31), 0.05);
+      color: var(--color-primary);
+    }
+    
+    // État actif (surbrillance)
+    &.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--color-background);
+      font-weight: var(--font-weight-semibold);
+      box-shadow: 0 2px 8px rgba(var(--color-primary-rgb, 61, 47, 31), 0.25);
+      
+      // Pastille sur le bord haut droit (même style que les boutons de thème)
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 24px;
+        height: 24px;
+        background-color: var(--color-accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      
+      // Coche dans la pastille (même style que les boutons de thème)
+      &::after {
+        content: '✓';
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 24px;
+        height: 24px;
+        color: var(--color-background);
+        font-size: 14px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 11; // Au-dessus de ::before
+      }
+    }
+    
+    // État focus
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
+    }
+    
+    // Désactiver le tap highlight
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.pill-toggle-duration {
+  font-size: 0.875rem; // 14px - même taille que le texte parent
+  font-weight: var(--font-weight-normal);
+  font-style: italic;
+  opacity: 0.9;
+  margin-left: 4px; // Espace entre "RANDORI" et "(3 min)"
+
+  // Quand le bouton est actif, la durée suit la couleur du bouton (couleur background)
+  .pill-toggle-button.active & {
+    color: var(--color-background);
+    opacity: 0.95;
+  }
+}
+
+// La coche a été remplacée par une pastille via ::before et ::after sur .pill-toggle-button.active
+
+// Styles pour le toggle switch sur mobile uniquement
+.weapon-time-toggle-button {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  padding: 0;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: 13px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  
+  // Masquer sur PC
+  @media (min-width: 768px) {
+    display: none;
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
+  }
+  
+  &:hover {
+    border-color: var(--color-primary);
+  }
+  
+  &.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+}
+
+.weapon-time-toggle-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background: var(--color-surface);
+  border-radius: 50%;
+  transition: transform var(--transition-fast);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  .weapon-time-toggle-button.active & {
+    transform: translateX(22px);
+  }
+}
+
+.time-control {
+  flex: 1;
+  margin-bottom: 0;
+
+  .time-control-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.875rem; // 14px
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+  }
+}
+
+.time-input-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  width: 100%;
+}
+
+.time-input-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--color-text-primary);
+
+  svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+  }
+
+  // État hover
+  &:hover:not(:disabled) {
+    background: var(--color-background);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  // État focus
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
+  }
+
+  // État disabled
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--color-background);
+    border-color: var(--color-border);
+    color: var(--color-text-secondary);
+
+    svg {
+      opacity: 0.5;
+    }
+  }
+
+  // Désactiver le tap highlight sur mobile
+  -webkit-tap-highlight-color: transparent;
+}
+
+.time-value {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.9375rem; // 15px
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  text-align: center;
+  box-sizing: border-box;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.time-input-unit {
+  flex-shrink: 0;
+  font-size: 0.8125rem; // 13px
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  padding: 0 var(--spacing-xs);
+}
+
+.time-preview {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  text-align: center;
+
+  // Réduire la hauteur sur PC
+  @media (min-width: 768px) {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+  }
+}
+
+.time-preview-text {
+  margin: 0;
+  font-size: 0.8125rem; // 13px
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+
+  // Réduire la taille du texte sur PC
+  @media (min-width: 768px) {
+    font-size: 0.75rem; // 12px
+    line-height: 1.4;
+  }
+}
+
+.time-preview-count {
+  font-size: 1.125rem; // 18px
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: 0 var(--spacing-xs);
+
+  // Réduire la taille sur PC
+  @media (min-width: 768px) {
+    font-size: 1rem; // 16px
+  }
+}
+
 .config-button {
   background: linear-gradient(135deg, var(--color-secondary) 0%, #3d3d3d 100%);
   color: #ffffff;

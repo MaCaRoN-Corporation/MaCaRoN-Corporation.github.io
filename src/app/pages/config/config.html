@@ -9,14 +9,199 @@
   </div>
   
   <div class="config-content">
-    <div class="config-section">
-      <h2>Configuration du passage</h2>
-      <p class="config-description">Personnalisez votre entraînement avant de démarrer</p>
+    <!-- Section Sélection du grade -->
+    <section class="config-section grade-selection-section" [class.dropdown-open]="isGradeDropdownOpen">
+      <h2>Sélection du grade</h2>
+      <p class="config-description">Choisissez le grade pour lequel vous souhaitez vous entraîner</p>
       
-      <!-- Les contrôles de configuration seront ajoutés ici dans les stories suivantes -->
-      <div class="config-placeholder">
-        <p>Les options de configuration (grade, timing, filtres) seront disponibles ici.</p>
+      <!-- Bouton avec dropdown pour la sélection du grade -->
+      <div class="grade-selector">
+        <button
+          type="button"
+          class="grade-select-button"
+          [class.open]="isGradeDropdownOpen"
+          (click)="toggleGradeDropdown()"
+          [attr.aria-expanded]="isGradeDropdownOpen"
+          aria-haspopup="listbox"
+          aria-label="Sélectionner le grade">
+          <span class="grade-select-label">Grade:</span>
+          <span class="grade-select-value">{{ selectedGrade }}</span>
+          <svg class="grade-select-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 6 8 10 12 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div
+          *ngIf="isGradeDropdownOpen"
+          class="grade-dropdown"
+          role="listbox"
+          aria-label="Liste des grades">
+          <button
+            *ngFor="let grade of grades"
+            type="button"
+            class="grade-option"
+            [class.selected]="selectedGrade === grade"
+            (click)="onGradeSelect(grade)"
+            role="option"
+            [attr.aria-selected]="selectedGrade === grade">
+            {{ grade }}
+          </button>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Section Options supplémentaires (mobile avec glassmorphisme) -->
+    <section class="config-section additional-options-section">
+      <h2>Options supplémentaires</h2>
+      <p class="config-description">Allouer du temps spécifique aux armes ou au randori</p>
+      
+      <div class="pill-toggles-container-mobile">
+        <div class="pill-toggles-buttons-mobile">
+          <button
+            type="button"
+            class="pill-toggle-button-mobile"
+            *ngIf="shouldShowWeaponToggle"
+            [class.active]="includeWeaponTime"
+            (click)="toggleIncludeWeaponTime()"
+            [attr.aria-pressed]="includeWeaponTime"
+            [attr.aria-label]="includeWeaponTime ? 'Désactiver le temps dédié aux armes' : 'Activer le temps dédié aux armes'">
+            <span class="pill-toggle-content-wrapper">
+              <span class="pill-toggle-text-mobile">ARMES</span>
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="pill-toggle-button-mobile"
+            [class.active]="includeRandoriTime"
+            (click)="toggleIncludeRandoriTime()"
+            [attr.aria-pressed]="includeRandoriTime"
+            [attr.aria-label]="includeRandoriTime ? 'Désactiver le temps dédié au randori (3 min)' : 'Activer le temps dédié au randori (3 min)'">
+            <span class="pill-toggle-content-wrapper">
+              <span class="pill-toggle-text-mobile">RANDORI</span>
+            </span>
+            <span class="pill-toggle-duration-mobile">(3 min)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Configuration du temps -->
+    <section class="config-section time-configuration-section">
+      <h2>Configuration du temps</h2>
+      <p class="config-description">Configurez le rythme de votre entraînement</p>
+      
+      <!-- Contrôle Temps entre techniques -->
+      <div class="time-control">
+        <label class="time-control-label">Temps entre techniques</label>
+        <div class="time-input-group">
+          <button
+            type="button"
+            class="time-input-button"
+            (click)="decrementTimeBetween()"
+            [disabled]="timeBetweenTechniques <= MIN_TIME_BETWEEN"
+            [attr.aria-label]="'Diminuer le temps entre techniques'"
+            [attr.aria-disabled]="timeBetweenTechniques <= MIN_TIME_BETWEEN">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="8" x2="12" y2="8"></line>
+            </svg>
+          </button>
+          <span class="time-value" [attr.aria-valuemin]="MIN_TIME_BETWEEN" [attr.aria-valuemax]="MAX_TIME_BETWEEN" [attr.aria-valuenow]="timeBetweenTechniques">
+            {{ timeBetweenTechniques }}
+          </span>
+          <span class="time-input-unit">secondes</span>
+          <button
+            type="button"
+            class="time-input-button"
+            (click)="incrementTimeBetween()"
+            [disabled]="timeBetweenTechniques >= MAX_TIME_BETWEEN"
+            [attr.aria-label]="'Augmenter le temps entre techniques'"
+            [attr.aria-disabled]="timeBetweenTechniques >= MAX_TIME_BETWEEN">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="4" x2="8" y2="12"></line>
+              <line x1="4" y1="8" x2="12" y2="8"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Contrôle Temps dédié aux armes (affiché uniquement si grade >= 1er Kyū) -->
+      <div class="time-control" *ngIf="shouldShowWeaponTime">
+        <label class="time-control-label">Temps dédié aux armes</label>
+        <div class="time-input-group">
+          <button
+            type="button"
+            class="time-input-button"
+            (click)="decrementWeaponTime()"
+            [disabled]="weaponTime <= MIN_WEAPON_TIME"
+            [attr.aria-label]="'Diminuer le temps dédié aux armes'"
+            [attr.aria-disabled]="weaponTime <= MIN_WEAPON_TIME">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="8" x2="12" y2="8"></line>
+            </svg>
+          </button>
+          <span class="time-value" [attr.aria-valuemin]="MIN_WEAPON_TIME" [attr.aria-valuemax]="MAX_WEAPON_TIME" [attr.aria-valuenow]="weaponTime">
+            {{ weaponTime }}
+          </span>
+          <span class="time-input-unit">minutes</span>
+          <button
+            type="button"
+            class="time-input-button"
+            (click)="incrementWeaponTime()"
+            [disabled]="weaponTime >= MAX_WEAPON_TIME"
+            [attr.aria-label]="'Augmenter le temps dédié aux armes'"
+            [attr.aria-disabled]="weaponTime >= MAX_WEAPON_TIME">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="4" x2="8" y2="12"></line>
+              <line x1="4" y1="8" x2="12" y2="8"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Contrôle Durée totale -->
+      <div class="time-control">
+        <label class="time-control-label">Durée totale</label>
+        <div class="time-input-group">
+          <button
+            type="button"
+            class="time-input-button"
+            (click)="decrementDuration()"
+            [disabled]="totalDuration <= MIN_DURATION"
+            [attr.aria-label]="'Diminuer la durée totale'"
+            [attr.aria-disabled]="totalDuration <= MIN_DURATION">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="8" x2="12" y2="8"></line>
+            </svg>
+          </button>
+          <span class="time-value" [attr.aria-valuemin]="MIN_DURATION" [attr.aria-valuemax]="MAX_DURATION" [attr.aria-valuenow]="totalDuration">
+            {{ totalDuration }}
+          </span>
+          <span class="time-input-unit">minutes</span>
+          <button
+            type="button"
+            class="time-input-button"
+            (click)="incrementDuration()"
+            [disabled]="totalDuration >= MAX_DURATION"
+            [attr.aria-label]="'Augmenter la durée totale'"
+            [attr.aria-disabled]="totalDuration >= MAX_DURATION">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="4" x2="8" y2="12"></line>
+              <line x1="4" y1="8" x2="12" y2="8"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Aperçu du nombre estimé de techniques -->
+      <div class="time-preview">
+        <p class="time-preview-text">
+          Environ <strong class="time-preview-count">{{ estimatedTechniqueCount }}</strong> technique{{ estimatedTechniqueCount > 1 ? 's' : '' }} seront annoncée{{ estimatedTechniqueCount > 1 ? 's' : '' }} <span *ngIf="exclusionText">{{ exclusionText }}</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Les autres sections de configuration seront ajoutées dans les stories suivantes -->
   </div>
 </div>
