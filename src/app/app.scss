@@ -23,6 +23,11 @@
     pointer-events: none;
     z-index: 0;
   }
+  
+  // Overlay adapté pour le thème sombre (voile léger pour améliorer la lisibilité)
+  .theme-sombre &::before {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.1) 100%);
+  }
 }
 
 .main-content {
@@ -31,7 +36,7 @@
   overflow: hidden; // Pas de scroll sur le contenu principal
   min-height: 0; // Permet au flex de fonctionner correctement
   position: relative;
-  z-index: 1; // Au-dessus de l'overlay
+  z-index: 1; // Au-dessus de l'overlay, mais la navigation (z-index: 100) reste au-dessus
 }
 
 .app-footer {
@@ -39,9 +44,9 @@
   text-align: center;
   position: relative;
   z-index: 1; // Au-dessus de l'overlay
-  background-color: rgba(255, 252, 245, 0.6);
+  background-color: var(--footer-bg);
   backdrop-filter: blur(8px);
-  border-top: 1px solid rgba(139, 123, 98, 0.15);
+  border-top: 1px solid var(--footer-border);
   flex-shrink: 0; // Ne pas rétrécir
   
   @media (min-width: 768px) {

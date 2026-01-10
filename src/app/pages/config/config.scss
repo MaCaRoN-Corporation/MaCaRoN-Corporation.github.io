@@ -20,6 +20,11 @@
     pointer-events: none;
     z-index: 0;
   }
+  
+  // Overlay adapté pour le thème sombre (voile léger pour améliorer la lisibilité)
+  .theme-sombre &::before {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.1) 100%);
+  }
 
   // Animation d'entrée : glissement depuis la droite vers la gauche (visible uniquement sur mobile)
   @media (max-width: 767px) {

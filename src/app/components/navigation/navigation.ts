@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { SettingsService } from '../../services/settings.service';
+import { UserSettings } from '../../models/settings.model';
 
 @Component({
   selector: 'app-navigation',
@@ -12,12 +14,22 @@ import { Subscription } from 'rxjs';
 export class NavigationComponent implements OnInit, OnDestroy {
   isFullscreen = false;
   isMobile = false;
+  currentTheme: 'clair' | 'sombre' = 'clair';
   private subscriptions = new Subscription();
+
+  constructor(private settingsService: SettingsService) {}
 
   ngOnInit(): void {
     this.checkFullscreen();
     this.checkMobile();
     window.addEventListener('resize', () => this.checkMobile());
+    
+    // S'abonner aux réglages pour connaître le thème actuel
+    this.subscriptions.add(
+      this.settingsService.getSettings().subscribe((settings: UserSettings) => {
+        this.currentTheme = settings.theme;
+      })
+    );
   }
 
   ngOnDestroy(): void {
@@ -73,5 +85,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   private checkMobile(): void {
     this.isMobile = window.innerWidth < 768;
+  }
+
+  toggleTheme(): void {
+    const newTheme = this.currentTheme === 'clair' ? 'sombre' : 'clair';
+    this.settingsService.applyTheme(newTheme);
   }
 }
