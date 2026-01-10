@@ -48,6 +48,18 @@ html {
   background-image: url('/assets/images/Background_night.png') !important;
 }
 
+// Image d'arrière-plan spécifique pour la page de maintenance
+// La classe maintenance-mode est appliquée directement sur documentElement (html)
+html.maintenance-mode {
+  background-image: url('/assets/images/maintenance.png') !important;
+}
+
+// Image d'arrière-plan spécifique pour la page 404
+// La classe not-found-mode est appliquée directement sur documentElement (html)
+html.not-found-mode {
+  background-image: url('/assets/images/Error_404.png') !important;
+}
+
 body {
   margin: 0;
   padding: 0;

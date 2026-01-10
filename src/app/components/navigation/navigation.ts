@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { SettingsService } from '../../services/settings.service';
 import { UserSettings, Appearance } from '../../models/settings.model';
 
@@ -15,14 +16,30 @@ export class NavigationComponent implements OnInit, OnDestroy {
   isFullscreen = false;
   isMobile = false;
   currentAppearance: Appearance = 'clair';
+  isMaintenancePage = false;
   private subscriptions = new Subscription();
 
-  constructor(private settingsService: SettingsService) {}
+  constructor(
+    private settingsService: SettingsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.checkFullscreen();
     this.checkMobile();
     window.addEventListener('resize', () => this.checkMobile());
+    
+    // Vérifier si on est sur la page de maintenance
+    this.checkMaintenancePage();
+    
+    // Écouter les changements de route pour détecter la page de maintenance
+    this.subscriptions.add(
+      this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      ).subscribe(() => {
+        this.checkMaintenancePage();
+      })
+    );
     
     // S'abonner aux réglages pour connaître l'apparence actuelle
     this.subscriptions.add(
@@ -30,6 +47,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
         this.currentAppearance = settings.appearance;
       })
     );
+  }
+  
+  private checkMaintenancePage(): void {
+    this.isMaintenancePage = this.router.url === '/maintenance';
   }
 
   ngOnDestroy(): void {
