@@ -1,243 +1,27 @@
 {
-  "Shomen Uchi-Ikkyo": [
-    "https://example.com/videos/shomen-uchi-ikkyo-1.mp4",
-    "https://example.com/videos/shomen-uchi-ikkyo-2.mp4"
+  "Chudan Tsuki-Ikkyo": [
+    "https://example.com/videos/chudan-tsuki-ikkyo-1.mp4",
+    "https://example.com/videos/chudan-tsuki-ikkyo-2.mp4"
   ],
-  "Shomen Uchi-Nikyo": [
-    "https://example.com/videos/shomen-uchi-nikyo-1.mp4",
-    "https://example.com/videos/shomen-uchi-nikyo-2.mp4"
+  "Chudan Tsuki-Nikyo": [
+    "https://example.com/videos/chudan-tsuki-nikyo-1.mp4",
+    "https://example.com/videos/chudan-tsuki-nikyo-2.mp4"
   ],
-  "Shomen Uchi-Sankyo": [
-    "https://example.com/videos/shomen-uchi-sankyo-1.mp4",
-    "https://example.com/videos/shomen-uchi-sankyo-2.mp4"
+  "Chudan Tsuki-Shihonage": [
+    "https://example.com/videos/chudan-tsuki-shihonage-1.mp4",
+    "https://example.com/videos/chudan-tsuki-shihonage-2.mp4"
   ],
-  "Shomen Uchi-Yonkyo": [
-    "https://example.com/videos/shomen-uchi-yonkyo-1.mp4",
-    "https://example.com/videos/shomen-uchi-yonkyo-2.mp4"
+  "Gyaku Yokomen-Ikkyo": [
+    "https://example.com/videos/gyaku-yokomen-ikkyo-1.mp4",
+    "https://example.com/videos/gyaku-yokomen-ikkyo-2.mp4"
   ],
-  "Shomen Uchi-Gokyo": [
-    "https://example.com/videos/shomen-uchi-gokyo-1.mp4",
-    "https://example.com/videos/shomen-uchi-gokyo-2.mp4"
+  "Gyaku Yokomen-Nikyo": [
+    "https://example.com/videos/gyaku-yokomen-nikyo-1.mp4",
+    "https://example.com/videos/gyaku-yokomen-nikyo-2.mp4"
   ],
-  "Shomen Uchi-Rokkyo": [
-    "https://example.com/videos/shomen-uchi-rokkyo-1.mp4",
-    "https://example.com/videos/shomen-uchi-rokkyo-2.mp4"
-  ],
-  "Yokomen Uchi-Ikkyo": [
-    "https://example.com/videos/yokomen-uchi-ikkyo-1.mp4",
-    "https://example.com/videos/yokomen-uchi-ikkyo-2.mp4"
-  ],
-  "Yokomen Uchi-Nikyo": [
-    "https://example.com/videos/yokomen-uchi-nikyo-1.mp4",
-    "https://example.com/videos/yokomen-uchi-nikyo-2.mp4"
-  ],
-  "Yokomen Uchi-Sankyo": [
-    "https://example.com/videos/yokomen-uchi-sankyo-1.mp4",
-    "https://example.com/videos/yokomen-uchi-sankyo-2.mp4"
-  ],
-  "Yokomen Uchi-Yonkyo": [
-    "https://example.com/videos/yokomen-uchi-yonkyo-1.mp4",
-    "https://example.com/videos/yokomen-uchi-yonkyo-2.mp4"
-  ],
-  "Yokomen Uchi-Gokyo": [
-    "https://example.com/videos/yokomen-uchi-gokyo-1.mp4",
-    "https://example.com/videos/yokomen-uchi-gokyo-2.mp4"
-  ],
-  "Yokomen Uchi-Rokkyo": [
-    "https://example.com/videos/yokomen-uchi-rokkyo-1.mp4",
-    "https://example.com/videos/yokomen-uchi-rokkyo-2.mp4"
-  ],
-  "Katate Dori-Ikkyo": [
-    "https://example.com/videos/katate-dori-ikkyo-1.mp4",
-    "https://example.com/videos/katate-dori-ikkyo-2.mp4"
-  ],
-  "Katate Dori-Nikyo": [
-    "https://example.com/videos/katate-dori-nikyo-1.mp4",
-    "https://example.com/videos/katate-dori-nikyo-2.mp4"
-  ],
-  "Katate Dori-Sankyo": [
-    "https://example.com/videos/katate-dori-sankyo-1.mp4",
-    "https://example.com/videos/katate-dori-sankyo-2.mp4"
-  ],
-  "Katate Dori-Shihonage": [
-    "https://example.com/videos/katate-dori-shihonage-1.mp4",
-    "https://example.com/videos/katate-dori-shihonage-2.mp4"
-  ],
-  "Katate Dori-Kote Gaeshi": [
-    "https://example.com/videos/katate-dori-kote-gaeshi-1.mp4",
-    "https://example.com/videos/katate-dori-kote-gaeshi-2.mp4"
-  ],
-  "Katate Dori-Irimi Nage": [
-    "https://example.com/videos/katate-dori-irimi-nage-1.mp4",
-    "https://example.com/videos/katate-dori-irimi-nage-2.mp4"
-  ],
-  "Katate Dori-Kaiten Nage": [
-    "https://example.com/videos/katate-dori-kaiten-nage-1.mp4",
-    "https://example.com/videos/katate-dori-kaiten-nage-2.mp4"
-  ],
-  "Katate Dori-Uchi Kaiten Nage": [
-    "https://example.com/videos/katate-dori-uchi-kaiten-nage-1.mp4",
-    "https://example.com/videos/katate-dori-uchi-kaiten-nage-2.mp4"
-  ],
-  "Katate Dori-Sokumen Irimi Nage": [
-    "https://example.com/videos/katate-dori-sokumen-irimi-nage-1.mp4",
-    "https://example.com/videos/katate-dori-sokumen-irimi-nage-2.mp4"
-  ],
-  "Katate Dori-Yonkyo": [
-    "https://example.com/videos/katate-dori-yonkyo-1.mp4",
-    "https://example.com/videos/katate-dori-yonkyo-2.mp4"
-  ],
-  "Katate Dori-Gokyo": [
-    "https://example.com/videos/katate-dori-gokyo-1.mp4",
-    "https://example.com/videos/katate-dori-gokyo-2.mp4"
-  ],
-  "Katate Dori-Rokkyo": [
-    "https://example.com/videos/katate-dori-rokkyo-1.mp4",
-    "https://example.com/videos/katate-dori-rokkyo-2.mp4"
-  ],
-  "Ryote Dori-Tenchi Nage": [
-    "https://example.com/videos/ryote-dori-tenchi-nage-1.mp4",
-    "https://example.com/videos/ryote-dori-tenchi-nage-2.mp4"
-  ],
-  "Ryote Dori-Koshi Nage": [
-    "https://example.com/videos/ryote-dori-koshi-nage-1.mp4",
-    "https://example.com/videos/ryote-dori-koshi-nage-2.mp4"
-  ],
-  "Ryote Dori-Kote Gaeshi": [
-    "https://example.com/videos/ryote-dori-kote-gaeshi-1.mp4",
-    "https://example.com/videos/ryote-dori-kote-gaeshi-2.mp4"
-  ],
-  "Ryote Dori-Sumi Otoshi": [
-    "https://example.com/videos/ryote-dori-sumi-otoshi-1.mp4",
-    "https://example.com/videos/ryote-dori-sumi-otoshi-2.mp4"
-  ],
-  "Ryote Dori-Aiki Otoshi": [
-    "https://example.com/videos/ryote-dori-aiki-otoshi-1.mp4",
-    "https://example.com/videos/ryote-dori-aiki-otoshi-2.mp4"
-  ],
-  "Ryote Dori-Ikkyo": [
-    "https://example.com/videos/ryote-dori-ikkyo-1.mp4",
-    "https://example.com/videos/ryote-dori-ikkyo-2.mp4"
-  ],
-  "Ryote Dori-Nikyo": [
-    "https://example.com/videos/ryote-dori-nikyo-1.mp4",
-    "https://example.com/videos/ryote-dori-nikyo-2.mp4"
-  ],
-  "Ryote Dori-Sankyo": [
-    "https://example.com/videos/ryote-dori-sankyo-1.mp4",
-    "https://example.com/videos/ryote-dori-sankyo-2.mp4"
-  ],
-  "Ryote Dori-Yonkyo": [
-    "https://example.com/videos/ryote-dori-yonkyo-1.mp4",
-    "https://example.com/videos/ryote-dori-yonkyo-2.mp4"
-  ],
-  "Ryote Dori-Gokyo": [
-    "https://example.com/videos/ryote-dori-gokyo-1.mp4",
-    "https://example.com/videos/ryote-dori-gokyo-2.mp4"
-  ],
-  "Ryote Dori-Rokkyo": [
-    "https://example.com/videos/ryote-dori-rokkyo-1.mp4",
-    "https://example.com/videos/ryote-dori-rokkyo-2.mp4"
-  ],
-  "Ushiro Ryote Dori-Ikkyo": [
-    "https://example.com/videos/ushiro-ryote-dori-ikkyo-1.mp4",
-    "https://example.com/videos/ushiro-ryote-dori-ikkyo-2.mp4"
-  ],
-  "Ushiro Ryote Dori-Shihonage": [
-    "https://example.com/videos/ushiro-ryote-dori-shihonage-1.mp4",
-    "https://example.com/videos/ushiro-ryote-dori-shihonage-2.mp4"
-  ],
-  "Ushiro Ryote Dori-Kote Gaeshi": [
-    "https://example.com/videos/ushiro-ryote-dori-kote-gaeshi-1.mp4",
-    "https://example.com/videos/ushiro-ryote-dori-kote-gaeshi-2.mp4"
-  ],
-  "Ushiro Ryote Dori-Koshi Nage": [
-    "https://example.com/videos/ushiro-ryote-dori-koshi-nage-1.mp4",
-    "https://example.com/videos/ushiro-ryote-dori-koshi-nage-2.mp4"
-  ],
-  "Ushiro Ryote Dori-Irimi Nage": [
-    "https://example.com/videos/ushiro-ryote-dori-irimi-nage-1.mp4",
-    "https://example.com/videos/ushiro-ryote-dori-irimi-nage-2.mp4"
-  ],
-  "Ushiro Ryote Dori-Kaiten Nage": [
-    "https://example.com/videos/ushiro-ryote-dori-kaiten-nage-1.mp4",
-    "https://example.com/videos/ushiro-ryote-dori-kaiten-nage-2.mp4"
-  ],
-  "Katate Dori Men Uchi-Shihonage": [
-    "https://example.com/videos/katate-dori-men-uchi-shihonage-1.mp4",
-    "https://example.com/videos/katate-dori-men-uchi-shihonage-2.mp4"
-  ],
-  "Katate Dori Men Uchi-Irimi Nage": [
-    "https://example.com/videos/katate-dori-men-uchi-irimi-nage-1.mp4",
-    "https://example.com/videos/katate-dori-men-uchi-irimi-nage-2.mp4"
-  ],
-  "Katate Dori Men Uchi-Kaiten Nage": [
-    "https://example.com/videos/katate-dori-men-uchi-kaiten-nage-1.mp4",
-    "https://example.com/videos/katate-dori-men-uchi-kaiten-nage-2.mp4"
-  ],
-  "Katate Dori Men Uchi-Kote Gaeshi": [
-    "https://example.com/videos/katate-dori-men-uchi-kote-gaeshi-1.mp4",
-    "https://example.com/videos/katate-dori-men-uchi-kote-gaeshi-2.mp4"
-  ],
-  "Katate Dori Men Uchi-Sokumen Irimi Nage": [
-    "https://example.com/videos/katate-dori-men-uchi-sokumen-irimi-nage-1.mp4",
-    "https://example.com/videos/katate-dori-men-uchi-sokumen-irimi-nage-2.mp4"
-  ],
-  "Ryote Dori Tsuki-Kote Gaeshi": [
-    "https://example.com/videos/ryote-dori-tsuki-kote-gaeshi-1.mp4",
-    "https://example.com/videos/ryote-dori-tsuki-kote-gaeshi-2.mp4"
-  ],
-  "Ryote Dori Tsuki-Koshi Nage": [
-    "https://example.com/videos/ryote-dori-tsuki-koshi-nage-1.mp4",
-    "https://example.com/videos/ryote-dori-tsuki-koshi-nage-2.mp4"
-  ],
-  "Ryote Dori Tsuki-Irimi Nage": [
-    "https://example.com/videos/ryote-dori-tsuki-irimi-nage-1.mp4",
-    "https://example.com/videos/ryote-dori-tsuki-irimi-nage-2.mp4"
-  ],
-  "Ryote Dori Tsuki-Sumi Otoshi": [
-    "https://example.com/videos/ryote-dori-tsuki-sumi-otoshi-1.mp4",
-    "https://example.com/videos/ryote-dori-tsuki-sumi-otoshi-2.mp4"
-  ],
-  "Ryote Dori Tsuki-Aiki Otoshi": [
-    "https://example.com/videos/ryote-dori-tsuki-aiki-otoshi-1.mp4",
-    "https://example.com/videos/ryote-dori-tsuki-aiki-otoshi-2.mp4"
-  ],
-  "Morote Dori-Ikkyo": [
-    "https://example.com/videos/morote-dori-ikkyo-1.mp4",
-    "https://example.com/videos/morote-dori-ikkyo-2.mp4"
-  ],
-  "Morote Dori-Shihonage": [
-    "https://example.com/videos/morote-dori-shihonage-1.mp4",
-    "https://example.com/videos/morote-dori-shihonage-2.mp4"
-  ],
-  "Morote Dori-Kote Gaeshi": [
-    "https://example.com/videos/morote-dori-kote-gaeshi-1.mp4",
-    "https://example.com/videos/morote-dori-kote-gaeshi-2.mp4"
-  ],
-  "Morote Dori-Irimi Nage": [
-    "https://example.com/videos/morote-dori-irimi-nage-1.mp4",
-    "https://example.com/videos/morote-dori-irimi-nage-2.mp4"
-  ],
-  "Morote Dori-Koshi Nage": [
-    "https://example.com/videos/morote-dori-koshi-nage-1.mp4",
-    "https://example.com/videos/morote-dori-koshi-nage-2.mp4"
-  ],
-  "Morote Dori-Tenchi Nage": [
-    "https://example.com/videos/morote-dori-tenchi-nage-1.mp4",
-    "https://example.com/videos/morote-dori-tenchi-nage-2.mp4"
-  ],
-  "Tanto Dori-Ikkyo": [
-    "https://example.com/videos/tanto-dori-ikkyo-1.mp4",
-    "https://example.com/videos/tanto-dori-ikkyo-2.mp4"
-  ],
-  "Tanto Dori-Nikyo": [
-    "https://example.com/videos/tanto-dori-nikyo-1.mp4",
-    "https://example.com/videos/tanto-dori-nikyo-2.mp4"
-  ],
-  "Tanto Dori-Shihonage": [
-    "https://example.com/videos/tanto-dori-shihonage-1.mp4",
-    "https://example.com/videos/tanto-dori-shihonage-2.mp4"
+  "Gyaku Yokomen-Shihonage": [
+    "https://example.com/videos/gyaku-yokomen-shihonage-1.mp4",
+    "https://example.com/videos/gyaku-yokomen-shihonage-2.mp4"
   ],
   "Jo Dori-Ikkyo": [
     "https://example.com/videos/jo-dori-ikkyo-1.mp4",
@@ -251,10 +35,6 @@
     "https://example.com/videos/jo-dori-shihonage-1.mp4",
     "https://example.com/videos/jo-dori-shihonage-2.mp4"
   ],
-  "Jo Dori-Irimi Nage": [
-    "https://example.com/videos/jo-dori-irimi-nage-1.mp4",
-    "https://example.com/videos/jo-dori-irimi-nage-2.mp4"
-  ],
   "Jo Nage-Ikkyo": [
     "https://example.com/videos/jo-nage-ikkyo-1.mp4",
     "https://example.com/videos/jo-nage-ikkyo-2.mp4"
@@ -267,9 +47,189 @@
     "https://example.com/videos/jo-nage-shihonage-1.mp4",
     "https://example.com/videos/jo-nage-shihonage-2.mp4"
   ],
-  "Jo Nage-Irimi Nage": [
-    "https://example.com/videos/jo-nage-irimi-nage-1.mp4",
-    "https://example.com/videos/jo-nage-irimi-nage-2.mp4"
+  "Katate Dori Men Uchi-Irimi Nage": [
+    "https://example.com/videos/katate-dori-men-uchi-irimi-nage-1.mp4",
+    "https://example.com/videos/katate-dori-men-uchi-irimi-nage-2.mp4"
+  ],
+  "Katate Dori Men Uchi-Kaiten Nage": [
+    "https://example.com/videos/katate-dori-men-uchi-kaiten-nage-1.mp4",
+    "https://example.com/videos/katate-dori-men-uchi-kaiten-nage-2.mp4"
+  ],
+  "Katate Dori Men Uchi-Kote Gaeshi": [
+    "https://example.com/videos/katate-dori-men-uchi-kote-gaeshi-1.mp4",
+    "https://example.com/videos/katate-dori-men-uchi-kote-gaeshi-2.mp4"
+  ],
+  "Katate Dori Men Uchi-Shihonage": [
+    "https://example.com/videos/katate-dori-men-uchi-shihonage-1.mp4",
+    "https://example.com/videos/katate-dori-men-uchi-shihonage-2.mp4"
+  ],
+  "Katate Dori Men Uchi-Sokumen Irimi Nage": [
+    "https://example.com/videos/katate-dori-men-uchi-sokumen-irimi-nage-1.mp4",
+    "https://example.com/videos/katate-dori-men-uchi-sokumen-irimi-nage-2.mp4"
+  ],
+  "Katate Dori-Gokyo": [
+    "https://example.com/videos/katate-dori-gokyo-1.mp4",
+    "https://example.com/videos/katate-dori-gokyo-2.mp4"
+  ],
+  "Katate Dori-Ikkyo": [
+    "https://example.com/videos/katate-dori-ikkyo-1.mp4",
+    "https://example.com/videos/katate-dori-ikkyo-2.mp4"
+  ],
+  "Katate Dori-Irimi Nage": [
+    "https://example.com/videos/katate-dori-irimi-nage-1.mp4",
+    "https://example.com/videos/katate-dori-irimi-nage-2.mp4"
+  ],
+  "Katate Dori-Kaiten Nage": [
+    "https://example.com/videos/katate-dori-kaiten-nage-1.mp4",
+    "https://example.com/videos/katate-dori-kaiten-nage-2.mp4"
+  ],
+  "Katate Dori-Kote Gaeshi": [
+    "https://example.com/videos/katate-dori-kote-gaeshi-1.mp4",
+    "https://example.com/videos/katate-dori-kote-gaeshi-2.mp4"
+  ],
+  "Katate Dori-Nikyo": [
+    "https://example.com/videos/katate-dori-nikyo-1.mp4",
+    "https://example.com/videos/katate-dori-nikyo-2.mp4"
+  ],
+  "Katate Dori-Rokkyo": [
+    "https://example.com/videos/katate-dori-rokkyo-1.mp4",
+    "https://example.com/videos/katate-dori-rokkyo-2.mp4"
+  ],
+  "Katate Dori-Sankyo": [
+    "https://example.com/videos/katate-dori-sankyo-1.mp4",
+    "https://example.com/videos/katate-dori-sankyo-2.mp4"
+  ],
+  "Katate Dori-Shihonage": [
+    "https://example.com/videos/katate-dori-shihonage-1.mp4",
+    "https://example.com/videos/katate-dori-shihonage-2.mp4"
+  ],
+  "Katate Dori-Sokumen Irimi Nage": [
+    "https://example.com/videos/katate-dori-sokumen-irimi-nage-1.mp4",
+    "https://example.com/videos/katate-dori-sokumen-irimi-nage-2.mp4"
+  ],
+  "Katate Dori-Uchi Kaiten Nage": [
+    "https://example.com/videos/katate-dori-uchi-kaiten-nage-1.mp4",
+    "https://example.com/videos/katate-dori-uchi-kaiten-nage-2.mp4"
+  ],
+  "Katate Dori-Yonkyo": [
+    "https://example.com/videos/katate-dori-yonkyo-1.mp4",
+    "https://example.com/videos/katate-dori-yonkyo-2.mp4"
+  ],
+  "Morote Dori-Ikkyo": [
+    "https://example.com/videos/morote-dori-ikkyo-1.mp4",
+    "https://example.com/videos/morote-dori-ikkyo-2.mp4"
+  ],
+  "Morote Dori-Irimi Nage": [
+    "https://example.com/videos/morote-dori-irimi-nage-1.mp4",
+    "https://example.com/videos/morote-dori-irimi-nage-2.mp4"
+  ],
+  "Morote Dori-Koshi Nage": [
+    "https://example.com/videos/morote-dori-koshi-nage-1.mp4",
+    "https://example.com/videos/morote-dori-koshi-nage-2.mp4"
+  ],
+  "Morote Dori-Kote Gaeshi": [
+    "https://example.com/videos/morote-dori-kote-gaeshi-1.mp4",
+    "https://example.com/videos/morote-dori-kote-gaeshi-2.mp4"
+  ],
+  "Morote Dori-Shihonage": [
+    "https://example.com/videos/morote-dori-shihonage-1.mp4",
+    "https://example.com/videos/morote-dori-shihonage-2.mp4"
+  ],
+  "Morote Dori-Tenchi Nage": [
+    "https://example.com/videos/morote-dori-tenchi-nage-1.mp4",
+    "https://example.com/videos/morote-dori-tenchi-nage-2.mp4"
+  ],
+  "Ryote Dori Tsuki-Aiki Otoshi": [
+    "https://example.com/videos/ryote-dori-tsuki-aiki-otoshi-1.mp4",
+    "https://example.com/videos/ryote-dori-tsuki-aiki-otoshi-2.mp4"
+  ],
+  "Ryote Dori Tsuki-Irimi Nage": [
+    "https://example.com/videos/ryote-dori-tsuki-irimi-nage-1.mp4",
+    "https://example.com/videos/ryote-dori-tsuki-irimi-nage-2.mp4"
+  ],
+  "Ryote Dori Tsuki-Koshi Nage": [
+    "https://example.com/videos/ryote-dori-tsuki-koshi-nage-1.mp4",
+    "https://example.com/videos/ryote-dori-tsuki-koshi-nage-2.mp4"
+  ],
+  "Ryote Dori Tsuki-Kote Gaeshi": [
+    "https://example.com/videos/ryote-dori-tsuki-kote-gaeshi-1.mp4",
+    "https://example.com/videos/ryote-dori-tsuki-kote-gaeshi-2.mp4"
+  ],
+  "Ryote Dori Tsuki-Sumi Otoshi": [
+    "https://example.com/videos/ryote-dori-tsuki-sumi-otoshi-1.mp4",
+    "https://example.com/videos/ryote-dori-tsuki-sumi-otoshi-2.mp4"
+  ],
+  "Ryote Dori-Aiki Otoshi": [
+    "https://example.com/videos/ryote-dori-aiki-otoshi-1.mp4",
+    "https://example.com/videos/ryote-dori-aiki-otoshi-2.mp4"
+  ],
+  "Ryote Dori-Gokyo": [
+    "https://example.com/videos/ryote-dori-gokyo-1.mp4",
+    "https://example.com/videos/ryote-dori-gokyo-2.mp4"
+  ],
+  "Ryote Dori-Ikkyo": [
+    "https://example.com/videos/ryote-dori-ikkyo-1.mp4",
+    "https://example.com/videos/ryote-dori-ikkyo-2.mp4"
+  ],
+  "Ryote Dori-Koshi Nage": [
+    "https://example.com/videos/ryote-dori-koshi-nage-1.mp4",
+    "https://example.com/videos/ryote-dori-koshi-nage-2.mp4"
+  ],
+  "Ryote Dori-Kote Gaeshi": [
+    "https://example.com/videos/ryote-dori-kote-gaeshi-1.mp4",
+    "https://example.com/videos/ryote-dori-kote-gaeshi-2.mp4"
+  ],
+  "Ryote Dori-Nikyo": [
+    "https://example.com/videos/ryote-dori-nikyo-1.mp4",
+    "https://example.com/videos/ryote-dori-nikyo-2.mp4"
+  ],
+  "Ryote Dori-Rokkyo": [
+    "https://example.com/videos/ryote-dori-rokkyo-1.mp4",
+    "https://example.com/videos/ryote-dori-rokkyo-2.mp4"
+  ],
+  "Ryote Dori-Sankyo": [
+    "https://example.com/videos/ryote-dori-sankyo-1.mp4",
+    "https://example.com/videos/ryote-dori-sankyo-2.mp4"
+  ],
+  "Ryote Dori-Sumi Otoshi": [
+    "https://example.com/videos/ryote-dori-sumi-otoshi-1.mp4",
+    "https://example.com/videos/ryote-dori-sumi-otoshi-2.mp4"
+  ],
+  "Ryote Dori-Tenchi Nage": [
+    "https://example.com/videos/ryote-dori-tenchi-nage-1.mp4",
+    "https://example.com/videos/ryote-dori-tenchi-nage-2.mp4"
+  ],
+  "Ryote Dori-Yonkyo": [
+    "https://example.com/videos/ryote-dori-yonkyo-1.mp4",
+    "https://example.com/videos/ryote-dori-yonkyo-2.mp4"
+  ],
+  "Shomen Uchi-Gokyo": [
+    "https://example.com/videos/shomen-uchi-gokyo-1.mp4",
+    "https://example.com/videos/shomen-uchi-gokyo-2.mp4"
+  ],
+  "Shomen Uchi-Ikkyo": [
+    "https://example.com/videos/shomen-uchi-ikkyo-1.mp4",
+    "https://example.com/videos/shomen-uchi-ikkyo-2.mp4"
+  ],
+  "Shomen Uchi-Nikyo": [
+    "https://example.com/videos/shomen-uchi-nikyo-1.mp4",
+    "https://example.com/videos/shomen-uchi-nikyo-2.mp4"
+  ],
+  "Shomen Uchi-Rokkyo": [
+    "https://example.com/videos/shomen-uchi-rokkyo-1.mp4",
+    "https://example.com/videos/shomen-uchi-rokkyo-2.mp4"
+  ],
+  "Shomen Uchi-Sankyo": [
+    "https://example.com/videos/shomen-uchi-sankyo-1.mp4",
+    "https://example.com/videos/shomen-uchi-sankyo-2.mp4"
+  ],
+  "Shomen Uchi-Shihonage": [
+    "https://example.com/videos/shomen-uchi-shihonage-1.mp4",
+    "https://example.com/videos/shomen-uchi-shihonage-2.mp4"
+  ],
+  "Shomen Uchi-Yonkyo": [
+    "https://example.com/videos/shomen-uchi-yonkyo-1.mp4",
+    "https://example.com/videos/shomen-uchi-yonkyo-2.mp4"
   ],
   "Tachi Dori-Ikkyo": [
     "https://example.com/videos/tachi-dori-ikkyo-1.mp4",
@@ -282,5 +242,57 @@
   "Tachi Dori-Shihonage": [
     "https://example.com/videos/tachi-dori-shihonage-1.mp4",
     "https://example.com/videos/tachi-dori-shihonage-2.mp4"
+  ],
+  "Ushiro Ryote Dori-Ikkyo": [
+    "https://example.com/videos/ushiro-ryote-dori-ikkyo-1.mp4",
+    "https://example.com/videos/ushiro-ryote-dori-ikkyo-2.mp4"
+  ],
+  "Ushiro Ryote Dori-Irimi Nage": [
+    "https://example.com/videos/ushiro-ryote-dori-irimi-nage-1.mp4",
+    "https://example.com/videos/ushiro-ryote-dori-irimi-nage-2.mp4"
+  ],
+  "Ushiro Ryote Dori-Kaiten Nage": [
+    "https://example.com/videos/ushiro-ryote-dori-kaiten-nage-1.mp4",
+    "https://example.com/videos/ushiro-ryote-dori-kaiten-nage-2.mp4"
+  ],
+  "Ushiro Ryote Dori-Koshi Nage": [
+    "https://example.com/videos/ushiro-ryote-dori-koshi-nage-1.mp4",
+    "https://example.com/videos/ushiro-ryote-dori-koshi-nage-2.mp4"
+  ],
+  "Ushiro Ryote Dori-Kote Gaeshi": [
+    "https://example.com/videos/ushiro-ryote-dori-kote-gaeshi-1.mp4",
+    "https://example.com/videos/ushiro-ryote-dori-kote-gaeshi-2.mp4"
+  ],
+  "Ushiro Ryote Dori-Shihonage": [
+    "https://example.com/videos/ushiro-ryote-dori-shihonage-1.mp4",
+    "https://example.com/videos/ushiro-ryote-dori-shihonage-2.mp4"
+  ],
+  "Yokomen Uchi-Gokyo": [
+    "https://example.com/videos/yokomen-uchi-gokyo-1.mp4",
+    "https://example.com/videos/yokomen-uchi-gokyo-2.mp4"
+  ],
+  "Yokomen Uchi-Ikkyo": [
+    "https://example.com/videos/yokomen-uchi-ikkyo-1.mp4",
+    "https://example.com/videos/yokomen-uchi-ikkyo-2.mp4"
+  ],
+  "Yokomen Uchi-Nikyo": [
+    "https://example.com/videos/yokomen-uchi-nikyo-1.mp4",
+    "https://example.com/videos/yokomen-uchi-nikyo-2.mp4"
+  ],
+  "Yokomen Uchi-Rokkyo": [
+    "https://example.com/videos/yokomen-uchi-rokkyo-1.mp4",
+    "https://example.com/videos/yokomen-uchi-rokkyo-2.mp4"
+  ],
+  "Yokomen Uchi-Sankyo": [
+    "https://example.com/videos/yokomen-uchi-sankyo-1.mp4",
+    "https://example.com/videos/yokomen-uchi-sankyo-2.mp4"
+  ],
+  "Yokomen Uchi-Shihonage": [
+    "https://example.com/videos/yokomen-uchi-shihonage-1.mp4",
+    "https://example.com/videos/yokomen-uchi-shihonage-2.mp4"
+  ],
+  "Yokomen Uchi-Yonkyo": [
+    "https://example.com/videos/yokomen-uchi-yonkyo-1.mp4",
+    "https://example.com/videos/yokomen-uchi-yonkyo-2.mp4"
   ]
 }

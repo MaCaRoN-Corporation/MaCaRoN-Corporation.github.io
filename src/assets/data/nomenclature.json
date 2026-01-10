@@ -113,7 +113,12 @@
       "Morote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Koshi Nage", "Jiyu Waza"]
     },
     "Armes": {
-      "Tanto Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+      "Tanto Dori": {
+        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      },
       "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
       "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
     }
@@ -138,7 +143,12 @@
       "Morote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Koshi Nage", "Jiyu Waza"]
     },
     "Armes": {
-      "Tanto Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+      "Tanto Dori": {
+        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      },
       "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
       "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
     }
@@ -163,12 +173,19 @@
       "Morote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Koshi Nage", "Jiyu Waza"]
     },
     "Armes": {
-      "Tanto Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+      "Tanto Dori": {
+        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      },
       "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
       "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
       "Ken Taï Ken": [],
       "Jo Taï Jo": [],
-      "Tachi Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      "Tachi Dori": {
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      }
     }
   },
   "4e Dan": {
@@ -191,12 +208,19 @@
       "Morote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Koshi Nage", "Tenchi Nage", "Jiyu Waza"]
     },
     "Armes": {
-      "Tanto Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+      "Tanto Dori": {
+        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      },
       "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
       "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
       "Ken Taï Ken": [],
       "Jo Taï Jo": [],
-      "Tachi Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      "Tachi Dori": {
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      }
     }
   },
   "5e Dan": {
@@ -219,12 +243,19 @@
       "Morote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Koshi Nage", "Tenchi Nage", "Jiyu Waza"]
     },
     "Armes": {
-      "Tanto Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+      "Tanto Dori": {
+        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      },
       "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
       "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
       "Ken Taï Ken": [],
       "Jo Taï Jo": [],
-      "Tachi Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      "Tachi Dori": {
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      }
     }
   }
 }
