@@ -1,0 +1,377 @@
+.settings-page {
+  padding: var(--spacing-md);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden; // Empêcher le scroll horizontal
+  
+  @media (max-width: 767px) {
+    padding: var(--spacing-sm);
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  h1 {
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-primary);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    // Améliorer la lisibilité du titre avec une ombre portée subtile
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    // Pour l'apparence claire, ombre plus prononcée pour contraste
+    .appearance-clair & {
+      text-shadow: 0 2px 6px rgba(255, 255, 255, 0.8), 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+.settings-section {
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden; // Empêcher tout débordement horizontal
+  
+  // Padding et border-radius par défaut - moins d'espace en haut, plus en bas
+  padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
+  border-radius: 16px;
+  
+  // Espacement entre sections - moins sur PC, plus sur mobile
+  margin-bottom: var(--spacing-lg);
+  
+  @media (max-width: 767px) {
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md) var(--spacing-md);
+    border-radius: 12px;
+    margin-bottom: var(--spacing-xl); // Plus d'espace sur mobile
+  }
+  
+  h2 {
+    margin-bottom: var(--spacing-sm);
+    margin-top: 0; // Pas de marge en haut pour réduire l'espace
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    word-wrap: break-word;
+    // Améliorer la lisibilité des sous-titres
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    
+    :host-context(.appearance-clair) & {
+      text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .section-description {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    word-wrap: break-word;
+    // Légère ombre portée pour améliorer la lisibilité
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+    
+    :host-context(.appearance-sombre) & {
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+  }
+  
+  p {
+    color: var(--color-text-secondary);
+    word-wrap: break-word;
+    // Légère ombre portée pour améliorer la lisibilité
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+    
+    :host-context(.appearance-sombre) & {
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+// Effet glassmorphism pour améliorer la lisibilité - adapté selon l'apparence
+// Utilisation de :host-context pour cibler correctement la classe sur html
+:host-context(.appearance-clair) .settings-section {
+  background-color: rgba(255, 252, 245, 0.7); // Fond semi-transparent clair pour apparence claire
+  backdrop-filter: blur(12px) saturate(180%); // Effet de verre dépoli avec saturation
+  -webkit-backdrop-filter: blur(12px) saturate(180%); // Support WebKit
+  border: 1px solid rgba(255, 255, 255, 0.4); // Bordure subtile pour effet de profondeur
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05); // Ombre douce
+}
+
+// Glassmorphism pour apparence sombre - fond sombre comme la bannière
+:host-context(.appearance-sombre) .settings-section {
+  background-color: rgba(15, 20, 30, 0.65); // Fond sombre bleuté semi-transparent (comme la bannière)
+  backdrop-filter: blur(12px) saturate(180%); // Effet de verre dépoli avec saturation
+  -webkit-backdrop-filter: blur(12px) saturate(180%); // Support WebKit
+  border: 1px solid rgba(180, 160, 130, 0.3); // Bordure beige clair subtile (comme la bannière)
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3); // Ombre plus prononcée pour le thème sombre
+}
+
+// Section Apparence - Styles hérités de .settings-section
+.appearance-toggle-mobile {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--spacing-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-align: left;
+  box-sizing: border-box;
+  overflow: hidden; // Empêcher tout débordement
+  
+  &:hover {
+    background-color: var(--color-background);
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.appearance-toggle-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.appearance-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--color-background);
+  color: var(--color-accent);
+  flex-shrink: 0;
+  
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.appearance-label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  flex: 1;
+}
+
+.appearance-name {
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  // Améliorer la lisibilité avec une ombre portée subtile uniquement pour l'apparence claire
+  .appearance-clair & {
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
+  }
+}
+
+.appearance-description {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  // Légère ombre portée pour améliorer la lisibilité uniquement pour l'apparence claire
+  .appearance-clair & {
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+  }
+}
+
+// Section Thème
+.theme-section {
+  // Visible sur toutes les tailles d'écran maintenant
+  overflow: visible; // Pas de scroll, tout doit être visible
+  max-height: none; // Pas de limite de hauteur
+  
+  // Encore plus d'espace en bas pour la section thème
+  padding-bottom: calc(var(--spacing-xl) * 1.5);
+  margin-bottom: calc(var(--spacing-lg) * 1.5); // Réduit par rapport à avant sur PC
+  
+  @media (max-width: 767px) {
+    padding-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+  }
+}
+
+.theme-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); // S'adapte automatiquement à la taille de l'écran
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  width: 100%;
+  box-sizing: border-box;
+  justify-items: center; // Centrer les boutons ronds
+  row-gap: calc(var(--spacing-md) + 35px); // Espacement vertical pour le titre en dessous
+  
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(auto-fit, minmax(65px, 1fr)); // S'adapte automatiquement sur mobile
+    gap: var(--spacing-xs);
+    row-gap: calc(var(--spacing-xs) + 30px); // Espacement vertical pour le titre en dessous
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+.theme-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: var(--spacing-xs);
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 50%; // Boutons ronds partout
+  aspect-ratio: 1;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  justify-content: center;
+  padding-bottom: 0; // Pas de padding-bottom, on gère l'espace avec le titre
+  
+  // Tailles différentes selon l'écran - réduites pour mieux centrer le cercle de couleur
+  width: 100%;
+  max-width: 80px; // PC : taille réduite
+  
+  @media (max-width: 767px) {
+    max-width: 65px; // Mobile : plus petit
+    padding: 4px;
+  }
+  
+  &:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+  
+  &.active {
+    border-color: var(--color-accent);
+    background-color: var(--color-background);
+    box-shadow: var(--shadow-lg);
+    border-width: 3px;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 24px;
+      height: 24px;
+      background-color: var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10; // Au-dessus du cercle de couleur (z-index: 1)
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Ombre pour meilleure visibilité
+      
+      @media (max-width: 767px) {
+        width: 20px;
+        height: 20px;
+        top: 0px;
+        right: 0px;
+      }
+    }
+    
+    &::after {
+      content: '✓';
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 24px;
+      height: 24px;
+      color: var(--color-background);
+      font-size: 14px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 11; // Au-dessus de ::before et du cercle de couleur
+      
+      @media (max-width: 767px) {
+        width: 20px;
+        height: 20px;
+        top: 0px;
+        right: 0px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.theme-preview {
+  display: block;
+  width: calc(80px - var(--spacing-xs) * 2 - 4px);
+  height: calc(80px - var(--spacing-xs) * 2 - 4px);
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 1; // En dessous de la pastille de sélection
+  position: relative;
+  margin: 0 auto;
+  flex-shrink: 0;
+  // Le gradient conique sera appliqué via [style.background] dans le template
+  
+  // Sur PC uniquement, remonter le rond dans le bouton
+  @media (min-width: 768px) {
+    transform: translateY(-4px);
+  }
+  
+  @media (max-width: 767px) {
+    width: calc(65px - 8px - 4px);
+    height: calc(65px - 8px - 4px);
+  }
+}
+
+.theme-option.active .theme-preview {
+  // Décaler le rond de couleur de 1px vers la gauche pour le thème sélectionné
+  @media (min-width: 768px) {
+    transform: translate(-1px, -4px);
+  }
+  
+  @media (max-width: 767px) {
+    transform: translateX(-1px);
+  }
+}
+
+.theme-color {
+  // On cache les divs individuelles car on utilise le gradient conique du parent
+  display: none;
+}
+
+.theme-name {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+  text-align: center;
+  z-index: 1; // Au-dessus du background
+  position: absolute;
+  bottom: -35px; // Plus d'espace entre le bouton et le titre
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none; // Ne pas bloquer les clics
+  box-sizing: border-box;
+  max-width: 120px; // Largeur max pour éviter le débordement
+  // Améliorer la lisibilité avec une ombre portée uniquement pour l'apparence claire
+  .appearance-clair & {
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 767px) {
+    font-size: 0.85rem;
+    bottom: -28px; // Plus d'espace sur mobile aussi
+    max-width: 100px; // Largeur max sur mobile
+  }
+}
+
+// Responsive pour mobile
+@media (max-width: 767px) {
+  .settings-section {
+    width: 100%;
+    max-width: 100%;
+  }
+}

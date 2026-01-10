@@ -1,0 +1,185 @@
+.navigation {
+  background-color: var(--banner-bg);
+  border-bottom: 1px solid var(--banner-border);
+  // Style vanilla - pas de décorations, design épuré
+  padding: var(--spacing-sm) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(8px);
+  position: relative;
+}
+
+.navigation-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold); // 800 pour un style très gras
+  transition: all var(--transition-fast);
+  padding: var(--spacing-xs) 0;
+
+  &:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+  filter: drop-shadow(0 1px 2px rgba(61, 47, 31, 0.15));
+}
+
+.logo-text {
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+  font-weight: 800; // Poids maximum pour un style très gras et proéminent
+  color: var(--color-primary);
+  text-shadow: 0 1px 2px rgba(61, 47, 31, 0.1);
+}
+
+
+.nav-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  position: relative;
+  background-color: transparent;
+
+  &:hover {
+    background-color: var(--color-background);
+    color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &.active {
+    color: var(--color-accent);
+    background-color: rgba(184, 92, 56, 0.12); // Couleur harmonisée
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 2px;
+      background-color: var(--color-accent);
+      border-radius: 2px;
+    }
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+// Bouton toggle d'apparence avec le même style que les autres boutons
+.appearance-toggle {
+  // Garder le même style que les autres boutons (historique, réglages)
+  border-radius: 8px;
+  border: none;
+  background: transparent !important;
+  box-shadow: none;
+  
+  &:hover {
+    background-color: var(--color-background) !important;
+    color: var(--color-accent) !important;
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    background-color: transparent !important;
+  }
+  
+  &.active {
+    background-color: transparent !important;
+  }
+}
+
+// Bouton plein écran avec le même style que les autres boutons
+.fullscreen-button {
+  // Visible uniquement sur PC
+  @media (max-width: 767px) {
+    display: none;
+  }
+  
+  // Garder le même style que les autres boutons (historique, réglages)
+  border-radius: 8px;
+  border: none;
+  background: transparent !important;
+  box-shadow: none;
+  
+  &:hover {
+    background-color: var(--color-background) !important;
+    color: var(--color-accent) !important;
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    background-color: transparent !important;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .navigation {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .navigation-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .logo {
+    height: 36px;
+  }
+
+  .logo-text {
+    font-size: 1.3rem;
+    font-weight: 800; // Même poids gras sur mobile
+  }
+
+
+  .nav-icon {
+    width: 40px;
+    height: 40px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

@@ -1,0 +1,870 @@
+.config-page {
+  // L'arrière-plan est géré par .app-container, pas besoin de le redéfinir ici
+  padding: var(--spacing-md);
+  position: relative;
+  
+  @media (min-width: 768px) {
+    display: none; // Masquer sur PC (le panel est intégré dans home)
+  }
+
+  // Overlay pour assurer la lisibilité du contenu - tons chauds harmonisés (plus transparent pour voir l'arrière-plan)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(245, 241, 232, 0.05) 0%, rgba(240, 235, 225, 0.03) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  // Overlay adapté pour le thème sombre (voile léger pour améliorer la lisibilité)
+  .appearance-sombre &::before {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.1) 100%);
+  }
+
+  // Animation d'entrée : glissement depuis la droite vers la gauche (visible uniquement sur mobile)
+  @media (max-width: 767px) {
+    animation: slideInLeft 0.3s ease-out forwards;
+    
+    &.slide-out-right {
+      animation: slideOutRight 0.3s ease-out forwards;
+    }
+  }
+}
+
+// Animation : entrée depuis la droite (glissement vers la gauche)
+@keyframes slideInLeft {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// Animation : sortie vers la droite
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.config-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  z-index: 1; // Au-dessus de l'overlay
+  
+  h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-bold); // 800 pour un style très gras
+    color: var(--color-primary);
+    text-shadow: 0 1px 2px rgba(61, 47, 31, 0.1);
+  }
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  
+  &:hover {
+    background: var(--color-background);
+    transform: translateX(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.config-content {
+  position: relative;
+  z-index: 1; // Au-dessus de l'overlay
+  
+  @media (min-width: 768px) {
+    background: var(--color-surface);
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.config-section {
+  h2 {
+    margin: 0 0 var(--spacing-xs) 0;
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold); // 800 pour un style très gras
+    color: var(--color-primary);
+    text-shadow: 0 1px 2px rgba(61, 47, 31, 0.1);
+    
+    // Afficher sur mobile pour la section grade-selection
+    @media (max-width: 767px) {
+      font-size: 1.25rem;
+      margin-bottom: var(--spacing-sm);
+    }
+  }
+
+  .config-description {
+    margin: 0 0 var(--spacing-lg) 0;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+  }
+
+  // Glassmorphism sur mobile uniquement - une section par config
+  @media (max-width: 767px) {
+    padding: var(--spacing-lg);
+    border-radius: 16px;
+    margin-bottom: 0; // Pas de margin par défaut, géré par chaque section
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Effet glassmorphism pour apparence claire (mobile uniquement)
+@media (max-width: 767px) {
+  :host-context(.appearance-clair) .config-section {
+    background-color: rgba(255, 252, 245, 0.7);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  // Glassmorphism pour apparence sombre (mobile uniquement)
+  :host-context(.appearance-sombre) .config-section {
+    background-color: rgba(15, 20, 30, 0.65);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(180, 160, 130, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  // Glassmorphism pour le toggle (mobile uniquement)
+  :host-context(.appearance-clair) .weapon-time-toggle {
+    background-color: rgba(255, 252, 245, 0.7);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  :host-context(.appearance-sombre) .weapon-time-toggle {
+    background-color: rgba(15, 20, 30, 0.65);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(180, 160, 130, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.config-placeholder {
+  padding: var(--spacing-lg);
+  background: var(--color-background);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  border: 2px dashed var(--color-border);
+}
+
+// Section Sélection du grade
+.grade-selection-section {
+  margin-bottom: 0;
+  
+  // Espacement sur mobile pour séparer des autres sections glassmorphism
+  @media (max-width: 767px) {
+    margin-bottom: var(--spacing-xl);
+    
+    // Augmenter le z-index quand le dropdown est ouvert pour passer devant la section temps
+    &.dropdown-open {
+      z-index: 10;
+    }
+  }
+}
+
+.grade-selector {
+  position: relative;
+  margin-top: var(--spacing-md);
+  width: 100%;
+}
+
+.grade-select-button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.875rem; // 14px - compact
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+  min-height: 36px; // Compact mais touchable
+  justify-content: space-between;
+
+  @media (max-width: 767px) {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9375rem; // 15px sur mobile - plus lisible
+    min-height: 44px; // Plus grand sur mobile pour le touch (taille standard recommandée)
+    gap: var(--spacing-sm);
+  }
+
+  .grade-select-label {
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-normal);
+    white-space: nowrap;
+  }
+
+  .grade-select-value {
+    flex: 1;
+    text-align: left;
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .grade-select-chevron {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    color: var(--color-text-secondary);
+    transition: transform var(--transition-fast);
+
+    @media (max-width: 767px) {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  // État hover
+  &:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+
+    .grade-select-label,
+    .grade-select-value {
+      color: var(--color-text-primary);
+    }
+
+    .grade-select-chevron {
+      color: var(--color-text-secondary);
+    }
+  }
+
+  // État ouvert
+  &.open {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 61, 47, 31), 0.1);
+    background-color: var(--color-surface);
+
+    .grade-select-chevron {
+      transform: rotate(180deg);
+      color: var(--color-primary);
+    }
+  }
+
+  // État focus
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
+  }
+
+  // État disabled
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    color: var(--color-text-secondary);
+    background-color: var(--color-background);
+  }
+
+  // Désactiver le tap highlight sur mobile
+  -webkit-tap-highlight-color: transparent;
+}
+
+.grade-dropdown {
+  position: absolute;
+  top: calc(100% + var(--spacing-xs));
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 2px;
+
+  @media (max-width: 767px) {
+    // Sur mobile : moins de colonnes pour que les boutons soient plus grands
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 6px;
+    padding: var(--spacing-sm);
+    max-height: 300px;
+    // Augmenter encore plus le z-index sur mobile pour passer devant toutes les sections
+    z-index: 1001;
+  }
+
+  @media (min-width: 768px) {
+    // Sur desktop : plus de colonnes car plus d'espace
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 6px;
+    padding: var(--spacing-sm);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  // Assurer que le scrollbar utilise les couleurs du thème
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--color-background);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--color-primary);
+    }
+  }
+}
+
+.grade-option {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.8125rem; // 13px - très compact
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 28px; // Compact
+  box-sizing: border-box;
+
+  @media (max-width: 767px) {
+    padding: var(--spacing-sm);
+    font-size: 0.875rem; // 14px sur mobile - plus lisible
+    min-height: 40px; // Plus grand sur mobile pour le touch (taille standard recommandée)
+    border-radius: 6px;
+  }
+
+  // État hover
+  @media (min-width: 768px) {
+    &:hover {
+      border-color: var(--color-primary);
+      background-color: var(--color-surface);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  // État sélectionné
+  &.selected {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    // Pour le texte sur fond primary, utiliser le contraste approprié selon le thème
+    // En clair: primary est sombre, donc texte clair. En sombre: primary est clair, donc texte sombre.
+    color: var(--color-background);
+    font-weight: var(--font-weight-semibold);
+    box-shadow: var(--shadow-sm);
+  }
+
+  // État focus
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 61, 47, 31), 0.2);
+  }
+
+  // Désactiver le tap highlight sur mobile
+  -webkit-tap-highlight-color: transparent;
+}
+
+// Section Configuration du temps
+.time-configuration-section {
+  margin-bottom: 0; // Le margin est géré par .config-section sur mobile
+}
+
+// Section Options supplémentaires (mobile avec glassmorphisme)
+.additional-options-section {
+  margin-bottom: var(--spacing-lg);
+  
+  // Sur mobile, appliquer le glassmorphisme
+  @media (max-width: 767px) {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .config-description {
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
+// Conteneur pour les boutons pill sur mobile
+.pill-toggles-container-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  width: 100%;
+  margin-top: var(--spacing-sm);
+}
+
+.pill-toggles-buttons-mobile {
+  display: flex;
+  flex-direction: row; // Sur la même ligne
+  gap: var(--spacing-md);
+  align-items: center;
+  justify-content: center;
+  width: 95%; // Limiter à 95% de la largeur du conteneur
+  max-width: 95%;
+  flex-wrap: nowrap; // Ne pas passer à la ligne
+}
+
+// Boutons Pill/Tab style pour mobile (même style que PC mais adapté et plus grand)
+.pill-toggle-button-mobile {
+  display: inline-flex;
+  flex-direction: column; // Permettre le passage à la ligne pour "(3 min)"
+  align-items: center; // Centrer le contenu horizontalement
+  justify-content: center;
+  padding: var(--spacing-md) var(--spacing-lg); // Padding horizontal augmenté
+  font-size: 0.9375rem; // 15px - plus grand maintenant que "(3 min)" est à la ligne
+  font-weight: var(--font-weight-bold); // Texte en gras
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 24px; // Pill shape légèrement plus arrondi
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  height: 64px; // Hauteur fixe pour que les 2 boutons aient la même hauteur
+  flex: 1; // Prendre l'espace disponible pour être côte à côte (répartis équitablement)
+  flex-shrink: 0;
+  max-width: calc(50% - var(--spacing-md) / 2); // Chaque bouton ne dépasse pas la moitié de l'espace disponible (moins la moitié du gap)
+  gap: 2px; // Espace entre le texte principal et "(3 min)"
+  position: relative; // Pour positionner la pastille
+  box-sizing: border-box; // Inclure le padding dans la hauteur
+  
+  // Hover
+  &:hover:not(.active) {
+    border-color: var(--color-primary);
+    background: rgba(var(--color-primary-rgb, 61, 47, 31), 0.05);
+    color: var(--color-primary);
+  }
+  
+  // État actif (surbrillance)
+  &.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-background);
+    font-weight: var(--font-weight-bold); // Conserver le gras à l'état actif
+    box-shadow: 0 2px 8px rgba(var(--color-primary-rgb, 61, 47, 31), 0.25);
+    
+    // Pastille sur le bord haut droit (même style que les boutons de thème)
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 20px;
+      height: 20px;
+      background-color: var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    // Coche dans la pastille (même style que les boutons de thème)
+    &::after {
+      content: '✓';
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 20px;
+      height: 20px;
+      color: var(--color-background);
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 11; // Au-dessus de ::before
+    }
+  }
+  
+  // État focus
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
+  }
+  
+  // Désactiver le tap highlight
+  -webkit-tap-highlight-color: transparent;
+  
+  // Masquer sur PC (les boutons PC sont dans home.html)
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.pill-toggle-content-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; // Centrer le texte
+  gap: 0; // Plus besoin d'espace pour la coche
+  line-height: 1.2;
+  width: 100%; // Prendre toute la largeur pour le centrage
+}
+
+.pill-toggle-text-mobile {
+  display: inline-block;
+  line-height: 1.2;
+  font-weight: var(--font-weight-bold); // Texte en gras
+}
+
+.pill-toggle-duration-mobile {
+  font-size: 0.75rem; // 12px - plus petit pour la durée sur la ligne suivante
+  font-weight: var(--font-weight-normal);
+  font-style: italic;
+  opacity: 0.9;
+  line-height: 1.2;
+  display: block; // Sur une nouvelle ligne
+  text-align: center; // Centrer "(3 min)"
+  width: 100%; // Prendre toute la largeur pour le centrage
+  margin: 0; // Pas de margin pour un meilleur alignement
+  
+  .pill-toggle-button-mobile.active & {
+    color: var(--color-background);
+    opacity: 0.95;
+  }
+}
+
+// La coche a été remplacée par une pastille via ::after sur .pill-toggle-button-mobile.active
+
+// Toggle pour inclure le temps dédié aux armes (entre les deux sections) - ANCIEN STYLE, conservé pour référence
+.weapon-time-toggle {
+  margin-bottom: var(--spacing-lg);
+  margin-top: 0;
+  padding: var(--spacing-md);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
+  
+  // Glassmorphism sur mobile uniquement (comme les sections)
+  @media (max-width: 767px) {
+    padding: var(--spacing-lg);
+    border-radius: 16px;
+    margin-bottom: var(--spacing-lg);
+    
+    // Dernier toggle avant la section de configuration du temps
+    &:last-of-type {
+      margin-bottom: var(--spacing-xl);
+    }
+  }
+}
+
+.weapon-time-toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  cursor: pointer;
+  width: 100%;
+  margin: 0;
+}
+
+.weapon-time-toggle-text-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.weapon-time-toggle-text {
+  font-size: 0.9375rem; // 15px
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  
+  @media (max-width: 767px) {
+    font-size: 1rem; // 16px sur mobile
+  }
+}
+
+.weapon-time-toggle-duration {
+  font-size: 0.75rem; // 12px - plus petit pour la durée
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+
+.weapon-time-toggle-button {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  padding: 0;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  
+  @media (max-width: 767px) {
+    width: 56px;
+    height: 32px;
+    border-radius: 16px;
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
+  }
+  
+  &:hover {
+    border-color: var(--color-primary);
+  }
+  
+  &.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+}
+
+.weapon-time-toggle-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  background: var(--color-surface);
+  border-radius: 50%;
+  transition: transform var(--transition-fast);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+  @media (max-width: 767px) {
+    width: 28px;
+    height: 28px;
+    top: 1px;
+    left: 1px;
+  }
+  
+  .weapon-time-toggle-button.active & {
+    transform: translateX(24px);
+    
+    @media (max-width: 767px) {
+      transform: translateX(26px);
+    }
+  }
+}
+
+.time-control {
+  margin-bottom: var(--spacing-lg);
+
+  .time-control-label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9375rem; // 15px
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+
+    @media (max-width: 767px) {
+      font-size: 1rem; // 16px sur mobile
+      margin-bottom: var(--spacing-xs);
+    }
+  }
+}
+
+.time-input-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  width: 100%;
+
+  @media (max-width: 767px) {
+    gap: var(--spacing-sm);
+  }
+}
+
+.time-input-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--color-text-primary);
+
+  @media (max-width: 767px) {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+  }
+
+  // État hover (desktop uniquement)
+  @media (min-width: 768px) {
+    &:hover:not(:disabled) {
+      background: var(--color-background);
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  // État focus
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
+  }
+
+  // État disabled
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--color-background);
+    border-color: var(--color-border);
+    color: var(--color-text-secondary);
+
+    svg {
+      opacity: 0.5;
+    }
+  }
+
+  // Désactiver le tap highlight sur mobile
+  -webkit-tap-highlight-color: transparent;
+}
+
+.time-value {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  text-align: center;
+  box-sizing: border-box;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 767px) {
+    font-size: 1.125rem; // 18px sur mobile - plus lisible
+    min-height: 44px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+
+.time-input-unit {
+  flex-shrink: 0;
+  font-size: 0.875rem; // 14px
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  padding: 0 var(--spacing-xs);
+
+  @media (max-width: 767px) {
+    font-size: 0.9375rem; // 15px sur mobile
+  }
+}
+
+.time-preview {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  text-align: center;
+
+  @media (max-width: 767px) {
+    padding: var(--spacing-md);
+    border-radius: 10px;
+  }
+}
+
+.time-preview-text {
+  margin: 0;
+  font-size: 0.9375rem; // 15px
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+
+  @media (max-width: 767px) {
+    font-size: 1rem; // 16px sur mobile
+  }
+}
+
+.time-preview-count {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: 0 var(--spacing-xs);
+
+  @media (max-width: 767px) {
+    font-size: 1.375rem; // 22px sur mobile
+  }
+}
