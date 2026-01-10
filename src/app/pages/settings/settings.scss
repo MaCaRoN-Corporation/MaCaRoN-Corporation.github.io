@@ -2,36 +2,58 @@
   padding: var(--spacing-md);
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden; // Empêcher le scroll horizontal
+  
+  @media (max-width: 767px) {
+    padding: var(--spacing-sm);
+    width: 100%;
+    max-width: 100%;
+  }
   
   h1 {
     margin-bottom: var(--spacing-lg);
     color: var(--color-primary);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 }
 
 .settings-section {
   margin-bottom: var(--spacing-xl);
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden; // Empêcher tout débordement horizontal
   
   h2 {
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
     font-size: 1.5rem;
     color: var(--color-primary);
+    word-wrap: break-word;
+  }
+  
+  .section-description {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    word-wrap: break-word;
   }
   
   p {
     color: var(--color-text-secondary);
+    word-wrap: break-word;
   }
 }
 
-.theme-section {
-  // Visible uniquement sur mobile
-  @media (min-width: 768px) {
-    display: none;
-  }
+// Section Apparence
+.appearance-section {
+  // Styles communs
 }
 
-.theme-toggle-mobile {
+.appearance-toggle-mobile {
   width: 100%;
+  max-width: 100%;
   padding: var(--spacing-md);
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -39,6 +61,8 @@
   cursor: pointer;
   transition: all var(--transition-normal);
   text-align: left;
+  box-sizing: border-box;
+  overflow: hidden; // Empêcher tout débordement
   
   &:hover {
     background-color: var(--color-background);
@@ -52,13 +76,13 @@
   }
 }
 
-.theme-toggle-content {
+.appearance-toggle-content {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
 }
 
-.theme-icon {
+.appearance-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,20 +99,210 @@
   }
 }
 
-.theme-label {
+.appearance-label {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
   flex: 1;
 }
 
-.theme-name {
+.appearance-name {
   font-size: 1.1rem;
   font-weight: var(--font-weight-semibold);
   color: var(--color-primary);
 }
 
-.theme-description {
+.appearance-description {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
+}
+
+// Section Thème
+.theme-section {
+  // Visible sur toutes les tailles d'écran maintenant
+  overflow: visible; // Pas de scroll, tout doit être visible
+  max-height: none; // Pas de limite de hauteur
+}
+
+.theme-selector {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); // Jusqu'à 10 thèmes par ligne sur PC
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  width: 100%;
+  box-sizing: border-box;
+  justify-items: center; // Centrer les boutons ronds
+  row-gap: calc(var(--spacing-md) + 35px); // Espacement vertical pour le titre en dessous
+  
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(3, 1fr); // Maximum 3 par ligne sur mobile
+    gap: var(--spacing-xs);
+    row-gap: calc(var(--spacing-xs) + 30px); // Espacement vertical pour le titre en dessous
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+.theme-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: var(--spacing-xs);
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 50%; // Boutons ronds partout
+  aspect-ratio: 1;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  justify-content: center;
+  padding-bottom: 0; // Pas de padding-bottom, on gère l'espace avec le titre
+  
+  // Tailles différentes selon l'écran - réduites pour mieux centrer le cercle de couleur
+  width: 100%;
+  max-width: 80px; // PC : taille réduite
+  
+  @media (max-width: 767px) {
+    max-width: 65px; // Mobile : plus petit
+    padding: 4px;
+  }
+  
+  &:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+  
+  &.active {
+    border-color: var(--color-accent);
+    background-color: var(--color-background);
+    box-shadow: var(--shadow-lg);
+    border-width: 3px;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 24px;
+      height: 24px;
+      background-color: var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10; // Au-dessus du cercle de couleur (z-index: 1)
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Ombre pour meilleure visibilité
+      
+      @media (max-width: 767px) {
+        width: 20px;
+        height: 20px;
+        top: 0px;
+        right: 0px;
+      }
+    }
+    
+    &::after {
+      content: '✓';
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 24px;
+      height: 24px;
+      color: var(--color-background);
+      font-size: 14px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 11; // Au-dessus de ::before et du cercle de couleur
+      
+      @media (max-width: 767px) {
+        width: 20px;
+        height: 20px;
+        top: 0px;
+        right: 0px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.theme-preview {
+  display: block;
+  width: calc(80px - var(--spacing-xs) * 2 - 4px);
+  height: calc(80px - var(--spacing-xs) * 2 - 4px);
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 1; // En dessous de la pastille de sélection
+  position: relative;
+  margin: 0 auto;
+  flex-shrink: 0;
+  // Le gradient conique sera appliqué via [style.background] dans le template
+  
+  // Sur PC uniquement, remonter le rond dans le bouton
+  @media (min-width: 768px) {
+    transform: translateY(-4px);
+  }
+  
+  @media (max-width: 767px) {
+    width: calc(65px - 8px - 4px);
+    height: calc(65px - 8px - 4px);
+  }
+}
+
+.theme-option.active .theme-preview {
+  // Décaler le rond de couleur de 1px vers la gauche pour le thème sélectionné
+  @media (min-width: 768px) {
+    transform: translate(-1px, -4px);
+  }
+  
+  @media (max-width: 767px) {
+    transform: translateX(-1px);
+  }
+}
+
+.theme-color {
+  // On cache les divs individuelles car on utilise le gradient conique du parent
+  display: none;
+}
+
+.theme-name {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+  text-align: center;
+  z-index: 1; // Au-dessus du background
+  position: absolute;
+  bottom: -35px; // Plus d'espace entre le bouton et le titre
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none; // Ne pas bloquer les clics
+  box-sizing: border-box;
+  font-weight: var(--font-weight-semibold);
+  
+  @media (max-width: 767px) {
+    font-size: 0.85rem;
+    bottom: -28px; // Plus d'espace sur mobile aussi
+    max-width: calc(100vw / 3 - var(--spacing-xs) * 2 - var(--spacing-sm) * 2);
+  }
+  
+  // Sur PC, limiter la largeur en fonction du nombre de colonnes (10)
+  @media (min-width: 768px) {
+    max-width: calc((100vw - var(--spacing-md) * 2) / 10 - var(--spacing-md) * 2);
+  }
+}
+
+// Responsive pour mobile
+@media (max-width: 767px) {
+  .settings-section {
+    width: 100%;
+    max-width: 100%;
+  }
 }

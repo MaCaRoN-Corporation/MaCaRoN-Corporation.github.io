@@ -174,4 +174,45 @@ describe('SettingsService', () => {
     expect(documentRemoveSpy).toHaveBeenCalledWith('theme-clair', 'theme-sombre');
     expect(documentAddSpy).toHaveBeenCalledWith('theme-sombre');
   });
+
+  it('should apply theme class on initialization when settings are loaded from localStorage', () => {
+    // Nettoyer localStorage
+    localStorage.clear();
+    
+    // Sauvegarder des settings avec thème sombre
+    const savedSettings: UserSettings = {
+      theme: 'sombre',
+      voice: 'féminin',
+      bannerColor: '#FF0000',
+      footerColor: '#00FF00',
+      elevenlabsApiKey: 'test-key'
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(savedSettings));
+    
+    // Créer des spies pour vérifier l'application du thème
+    const documentRemoveSpy = spyOn(document.documentElement.classList, 'remove');
+    const documentAddSpy = spyOn(document.documentElement.classList, 'add');
+    
+    // Créer une nouvelle instance - le constructeur devrait appliquer le thème
+    const newService = new SettingsService();
+    
+    // Vérifier que le thème sombre a été appliqué
+    expect(documentRemoveSpy).toHaveBeenCalledWith('theme-clair', 'theme-sombre');
+    expect(documentAddSpy).toHaveBeenCalledWith('theme-sombre');
+  });
+
+  it('should apply default theme (clair) on initialization when localStorage is empty', () => {
+    // S'assurer que localStorage est vide
+    localStorage.clear();
+    
+    // Créer des spies pour vérifier l'application du thème
+    const documentRemoveSpy = spyOn(document.documentElement.classList, 'remove');
+    const documentAddSpy = spyOn(document.documentElement.classList, 'add');
+    
+    // Créer une nouvelle instance - le constructeur devrait appliquer le thème par défaut
+    const newService = new SettingsService();
+    
+    // Vérifier que le thème clair (par défaut) a été appliqué
+    expect(documentAddSpy).toHaveBeenCalledWith('theme-clair');
+  });
 });

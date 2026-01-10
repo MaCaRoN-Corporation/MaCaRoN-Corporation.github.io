@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { UserSettings, DEFAULT_SETTINGS } from '../models/settings.model';
+import { UserSettings, DEFAULT_SETTINGS, Appearance, Theme } from '../models/settings.model';
 
 /**
  * Clé utilisée pour stocker les réglages dans localStorage
@@ -23,7 +23,8 @@ export class SettingsService {
     const loadedSettings = this.loadSettings();
     this.settings$.next(loadedSettings);
     
-    // Appliquer les couleurs au démarrage
+    // Appliquer l'apparence et le thème au démarrage
+    this.applyAppearanceAndThemeClasses(loadedSettings.appearance, loadedSettings.theme);
     this.applyColors();
   }
 
@@ -48,8 +49,12 @@ export class SettingsService {
     this.settings$.next(updatedSettings);
     this.saveSettings(updatedSettings);
     
-    // Si les couleurs ou le thème ont changé, appliquer les nouvelles couleurs
-    if (settings.bannerColor || settings.footerColor || settings.theme) {
+    // Si les couleurs, l'apparence ou le thème ont changé, appliquer les changements
+    if (settings.bannerColor || settings.footerColor || settings.appearance || settings.theme) {
+      if (settings.appearance || settings.theme) {
+        const finalSettings = { ...currentSettings, ...settings };
+        this.applyAppearanceAndThemeClasses(finalSettings.appearance, finalSettings.theme);
+      }
       this.applyColors();
     }
   }
@@ -63,20 +68,54 @@ export class SettingsService {
   }
 
   /**
-   * Applique un thème (clair ou sombre) à l'application
-   * @param theme Le thème à appliquer
+   * Applique les classes CSS d'apparence et de thème sur l'élément racine
+   * @param appearance L'apparence à appliquer (clair ou sombre)
+   * @param theme Le thème à appliquer (1-4)
+   * @private
    */
-  applyTheme(theme: 'clair' | 'sombre'): void {
+  private applyAppearanceAndThemeClasses(appearance: Appearance, theme: Theme): void {
     const rootElement = document.documentElement;
-    // Retirer toutes les classes de thème existantes
-    rootElement.classList.remove('theme-clair', 'theme-sombre');
+    
+    // Retirer toutes les classes d'apparence et de thème existantes
+    rootElement.classList.remove('appearance-clair', 'appearance-sombre', 'theme-1', 'theme-2', 'theme-3', 'theme-4');
+    
+    // Ajouter la nouvelle classe d'apparence
+    rootElement.classList.add(`appearance-${appearance}`);
+    
     // Ajouter la nouvelle classe de thème
     rootElement.classList.add(`theme-${theme}`);
-    
-    // Sauvegarder le thème dans les réglages
+  }
+
+  /**
+   * Applique une apparence (clair ou sombre) à l'application
+   * @param appearance L'apparence à appliquer
+   */
+  applyAppearance(appearance: Appearance): void {
+    const currentSettings = this.settings$.getValue();
+    this.applyAppearanceAndThemeClasses(appearance, currentSettings.theme);
+    this.updateSettings({ appearance });
+    this.applyColors();
+  }
+
+  /**
+   * Applique un thème (palette de couleurs 1-4) à l'application
+   * @param theme Le thème à appliquer
+   */
+  applyTheme(theme: Theme): void {
+    const currentSettings = this.settings$.getValue();
+    this.applyAppearanceAndThemeClasses(currentSettings.appearance, theme);
     this.updateSettings({ theme });
-    
-    // Appliquer également les couleurs de bannière et footer
+    this.applyColors();
+  }
+
+  /**
+   * Applique à la fois l'apparence et le thème
+   * @param appearance L'apparence à appliquer
+   * @param theme Le thème à appliquer
+   */
+  applyAppearanceAndTheme(appearance: Appearance, theme: Theme): void {
+    this.applyAppearanceAndThemeClasses(appearance, theme);
+    this.updateSettings({ appearance, theme });
     this.applyColors();
   }
 
@@ -91,9 +130,8 @@ export class SettingsService {
     rootElement.style.setProperty('--banner-color', settings.bannerColor);
     rootElement.style.setProperty('--footer-color', settings.footerColor);
     
-    // Adapter les fonds selon le thème
-    const currentTheme = settings.theme;
-    if (currentTheme === 'sombre') {
+    // Adapter les fonds selon l'apparence
+    if (settings.appearance === 'sombre') {
       // Pour le thème sombre, créer un voile sombre avec la couleur personnalisée assombrie
       // Convertir la couleur hex en rgba et l'assombrir pour créer un effet "nuit"
       const bannerRgb = this.hexToRgb(settings.bannerColor);
@@ -224,8 +262,13 @@ export class SettingsService {
 
     const settings = obj as Record<string, unknown>;
 
-    // Vérifier theme
-    if (settings['theme'] !== 'clair' && settings['theme'] !== 'sombre') {
+    // Vérifier appearance
+    if (settings['appearance'] !== 'clair' && settings['appearance'] !== 'sombre') {
+      return false;
+    }
+
+    // Vérifier theme (doit être un nombre entre 1 et 4)
+    if (typeof settings['theme'] !== 'number' || settings['theme'] < 1 || settings['theme'] > 4) {
       return false;
     }
 

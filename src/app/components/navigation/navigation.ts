@@ -3,7 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { SettingsService } from '../../services/settings.service';
-import { UserSettings } from '../../models/settings.model';
+import { UserSettings, Appearance } from '../../models/settings.model';
 
 @Component({
   selector: 'app-navigation',
@@ -14,7 +14,7 @@ import { UserSettings } from '../../models/settings.model';
 export class NavigationComponent implements OnInit, OnDestroy {
   isFullscreen = false;
   isMobile = false;
-  currentTheme: 'clair' | 'sombre' = 'clair';
+  currentAppearance: Appearance = 'clair';
   private subscriptions = new Subscription();
 
   constructor(private settingsService: SettingsService) {}
@@ -24,10 +24,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.checkMobile();
     window.addEventListener('resize', () => this.checkMobile());
     
-    // S'abonner aux réglages pour connaître le thème actuel
+    // S'abonner aux réglages pour connaître l'apparence actuelle
     this.subscriptions.add(
       this.settingsService.getSettings().subscribe((settings: UserSettings) => {
-        this.currentTheme = settings.theme;
+        this.currentAppearance = settings.appearance;
       })
     );
   }
@@ -87,8 +87,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.isMobile = window.innerWidth < 768;
   }
 
-  toggleTheme(): void {
-    const newTheme = this.currentTheme === 'clair' ? 'sombre' : 'clair';
-    this.settingsService.applyTheme(newTheme);
+  toggleAppearance(): void {
+    const newAppearance: Appearance = this.currentAppearance === 'clair' ? 'sombre' : 'clair';
+    this.settingsService.applyAppearance(newAppearance);
   }
 }

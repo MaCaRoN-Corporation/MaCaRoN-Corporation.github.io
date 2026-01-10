@@ -1,19 +1,22 @@
 <div class="settings-page">
   <h1>Réglages</h1>
   
-  <!-- Toggle de thème - visible uniquement sur mobile -->
-  <section *ngIf="isMobile" class="settings-section theme-section">
-    <h2>Thème</h2>
+  <!-- Section Apparence - Visible uniquement sur mobile -->
+  <section *ngIf="isMobile" class="settings-section appearance-section">
+    <h2>Apparence</h2>
+    <p class="section-description">Choisissez entre un mode clair ou sombre</p>
+    
+    <!-- Toggle d'apparence pour mobile -->
     <button 
-      (click)="toggleTheme()" 
-      class="theme-toggle-mobile" 
-      [title]="currentTheme === 'clair' ? 'Passer au thème sombre' : 'Passer au thème clair'"
-      [attr.aria-label]="currentTheme === 'clair' ? 'Passer au thème sombre' : 'Passer au thème clair'"
+      (click)="toggleAppearance()" 
+      class="appearance-toggle-mobile" 
+      [title]="currentAppearance === 'clair' ? 'Passer à l\'apparence sombre' : 'Passer à l\'apparence claire'"
+      [attr.aria-label]="currentAppearance === 'clair' ? 'Passer à l\'apparence sombre' : 'Passer à l\'apparence claire'"
       type="button">
-      <div class="theme-toggle-content">
-        <div class="theme-icon">
-          <!-- Icône soleil (thème clair actif) -->
-          <svg *ngIf="currentTheme === 'clair'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="appearance-toggle-content">
+        <div class="appearance-icon">
+          <!-- Icône soleil (apparence claire active) -->
+          <svg *ngIf="currentAppearance === 'clair'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -24,21 +27,49 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
-          <!-- Icône lune (thème sombre actif) -->
-          <svg *ngIf="currentTheme === 'sombre'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Icône lune (apparence sombre active) -->
+          <svg *ngIf="currentAppearance === 'sombre'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </div>
-        <div class="theme-label">
-          <span class="theme-name">{{ currentTheme === 'clair' ? 'Thème clair' : 'Thème sombre' }}</span>
-          <span class="theme-description">{{ currentTheme === 'clair' ? 'Passer au thème sombre' : 'Passer au thème clair' }}</span>
+        <div class="appearance-label">
+          <span class="appearance-name">{{ currentAppearance === 'clair' ? 'Apparence claire' : 'Apparence sombre' }}</span>
+          <span class="appearance-description">{{ currentAppearance === 'clair' ? 'Passer à l\'apparence sombre' : 'Passer à l\'apparence claire' }}</span>
         </div>
       </div>
     </button>
   </section>
   
+  <!-- Section Thème (Palette de couleurs) -->
+  <section class="settings-section theme-section">
+    <h2>Thème</h2>
+    <p class="section-description">Choisissez une palette de couleurs ({{ currentAppearance === 'clair' ? '4 thèmes disponibles' : '4 thèmes disponibles' }})</p>
+    
+    <div class="theme-selector">
+      <button
+        *ngFor="let theme of availableThemes; let i = index"
+        (click)="onThemeChange(theme.value)"
+        class="theme-option"
+        [class.theme-option-1]="i === 0"
+        [class.theme-option-2]="i === 1"
+        [class.theme-option-3]="i === 2"
+        [class.theme-option-4]="i === 3"
+        [class.active]="currentTheme === theme.value"
+        [attr.aria-label]="'Sélectionner le thème ' + theme.label"
+        type="button">
+        <div class="theme-preview" [style.background]="getThemeGradient(theme.value)">
+          <div class="theme-color theme-color-primary" [style.background-color]="getThemeColor(theme.value, 'primary')"></div>
+          <div class="theme-color theme-color-accent" [style.background-color]="getThemeColor(theme.value, 'accent')"></div>
+          <div class="theme-color theme-color-secondary" [style.background-color]="getThemeColor(theme.value, 'secondary')"></div>
+        </div>
+        <span class="theme-name">{{ theme.label }}</span>
+      </button>
+    </div>
+  </section>
+  
+  <!-- Section autres réglages -->
   <section class="settings-section">
     <h2>Autres réglages</h2>
-    <p>Page de configuration des réglages</p>
+    <p>Autres options de configuration seront disponibles ici</p>
   </section>
 </div>

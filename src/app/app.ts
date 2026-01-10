@@ -13,9 +13,10 @@ export class App implements OnInit {
   constructor(private settingsService: SettingsService) {}
 
   ngOnInit(): void {
-    // Charger et appliquer le thème sauvegardé au démarrage
+    // Charger et appliquer l'apparence et le thème sauvegardés au démarrage
+    // (déjà fait dans le constructeur du service, mais on s'assure que c'est bien appliqué)
     this.settingsService.getSettings().subscribe((settings) => {
-      this.settingsService.applyTheme(settings.theme);
+      this.settingsService.applyAppearanceAndTheme(settings.appearance, settings.theme);
     });
   }
 }

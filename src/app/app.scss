@@ -24,8 +24,8 @@
     z-index: 0;
   }
   
-  // Overlay adapté pour le thème sombre (voile léger pour améliorer la lisibilité)
-  .theme-sombre &::before {
+  // Overlay adapté pour l'apparence sombre (voile léger pour améliorer la lisibilité)
+  .appearance-sombre &::before {
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.1) 100%);
   }
 }
@@ -33,10 +33,19 @@
 .main-content {
   flex: 1;
   width: 100%;
-  overflow: hidden; // Pas de scroll sur le contenu principal
+  overflow-x: hidden; // Empêcher le scroll horizontal
+  overflow-y: auto; // Autoriser le scroll vertical
   min-height: 0; // Permet au flex de fonctionner correctement
   position: relative;
   z-index: 1; // Au-dessus de l'overlay, mais la navigation (z-index: 100) reste au-dessus
+  
+  // Masquer la scrollbar mais garder le scroll fonctionnel
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE et Edge
+  
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, Opera
+  }
 }
 
 .app-footer {

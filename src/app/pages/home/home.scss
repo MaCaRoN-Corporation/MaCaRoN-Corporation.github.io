@@ -25,7 +25,7 @@
   }
   
   // Overlay adapté pour le thème sombre (voile léger pour améliorer la lisibilité)
-  .theme-sombre &::before {
+  .appearance-sombre &::before {
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.1) 100%);
   }
 }

@@ -42,9 +42,9 @@ html {
   transition: background-image var(--transition-normal);
 }
 
-// Image d'arrière-plan pour le thème sombre
-// La classe theme-sombre est appliquée sur documentElement (html)
-.theme-sombre {
+// Image d'arrière-plan pour l'apparence sombre
+// La classe appearance-sombre est appliquée sur documentElement (html)
+.appearance-sombre {
   background-image: url('/assets/images/Background_night.png') !important;
 }
 
