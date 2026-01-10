@@ -43,17 +43,13 @@
   <!-- Section Thème (Palette de couleurs) -->
   <section class="settings-section theme-section">
     <h2>Thème</h2>
-    <p class="section-description">Choisissez une palette de couleurs ({{ currentAppearance === 'clair' ? '4 thèmes disponibles' : '4 thèmes disponibles' }})</p>
+    <p class="section-description">Choisissez une palette de couleurs ({{ availableThemes.length }} thèmes disponibles)</p>
     
     <div class="theme-selector">
       <button
-        *ngFor="let theme of availableThemes; let i = index"
+        *ngFor="let theme of availableThemes"
         (click)="onThemeChange(theme.value)"
         class="theme-option"
-        [class.theme-option-1]="i === 0"
-        [class.theme-option-2]="i === 1"
-        [class.theme-option-3]="i === 2"
-        [class.theme-option-4]="i === 3"
         [class.active]="currentTheme === theme.value"
         [attr.aria-label]="'Sélectionner le thème ' + theme.label"
         type="button">

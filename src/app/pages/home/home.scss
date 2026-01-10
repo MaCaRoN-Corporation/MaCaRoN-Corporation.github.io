@@ -423,7 +423,7 @@
   transition: all var(--transition-normal);
   min-height: 64px;
   min-width: 220px;
-  box-shadow: 0 6px 20px rgba(200, 74, 58, 0.45);
+  box-shadow: var(--button-shadow-default);
   letter-spacing: 0.5px;
   position: relative;
   overflow: hidden;
@@ -443,7 +443,7 @@
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(200, 74, 58, 0.55);
+    box-shadow: var(--button-shadow-hover);
 
     &::before {
       left: 100%;
@@ -452,7 +452,7 @@
 
   &:active {
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(200, 74, 58, 0.45);
+    box-shadow: var(--button-shadow-active);
   }
 
   &:focus {

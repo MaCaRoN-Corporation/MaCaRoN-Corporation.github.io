@@ -77,7 +77,7 @@ export class SettingsService {
     const rootElement = document.documentElement;
     
     // Retirer toutes les classes d'apparence et de thème existantes
-    rootElement.classList.remove('appearance-clair', 'appearance-sombre', 'theme-1', 'theme-2', 'theme-3', 'theme-4');
+    rootElement.classList.remove('appearance-clair', 'appearance-sombre', 'theme-1', 'theme-2', 'theme-3', 'theme-4', 'theme-5', 'theme-6', 'theme-7', 'theme-8', 'theme-9');
     
     // Ajouter la nouvelle classe d'apparence
     rootElement.classList.add(`appearance-${appearance}`);
@@ -267,8 +267,8 @@ export class SettingsService {
       return false;
     }
 
-    // Vérifier theme (doit être un nombre entre 1 et 4)
-    if (typeof settings['theme'] !== 'number' || settings['theme'] < 1 || settings['theme'] > 4) {
+    // Vérifier theme (doit être un nombre entre 1 et 9)
+    if (typeof settings['theme'] !== 'number' || settings['theme'] < 1 || settings['theme'] > 9) {
       return false;
     }
 

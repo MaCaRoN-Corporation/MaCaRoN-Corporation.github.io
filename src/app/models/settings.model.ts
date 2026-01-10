@@ -4,9 +4,10 @@
 export type Appearance = 'clair' | 'sombre';
 
 /**
- * Type pour le thème (palette de couleurs de 1 à 4)
+ * Type pour le thème (palette de couleurs de 1 à 9)
+ * 1 = Par défaut, 2-9 = Thèmes personnalisés
  */
-export type Theme = 1 | 2 | 3 | 4;
+export type Theme = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 /**
  * Réglages utilisateur persistés dans localStorage
