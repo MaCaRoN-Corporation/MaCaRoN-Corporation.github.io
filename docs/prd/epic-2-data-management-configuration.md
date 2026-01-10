@@ -117,17 +117,19 @@ so que je peux créer des entraînements ultra-ciblés (ex: seulement Shomen Uch
 ## Story 2.8: Weapons and Randori Configuration
 
 As a user,
-I want inclure ou exclure les armes et le Randori dans le passage,
+I want inclure ou exclure les armes dans le passage et activer une annonce audio "Randori" à la fin,
 so que je peux adapter le passage selon mes besoins d'entraînement.
 
 **Acceptance Criteria:**
 
 1. La page de configuration affiche des options pour inclure/exclure les armes
-2. Une option pour inclure/exclure le Randori est disponible
-3. Les options sont des toggles ou checkboxes clairs
-4. Les armes sont automatiquement exclues si le grade ne les inclut pas (ex: Bokken à partir du 3e Dan)
-5. Les options sont sauvegardées et appliquées lors de la génération
-6. L'interface indique clairement quelles options sont disponibles selon le grade
+2. Une option toggle/checkbox pour activer l'annonce audio finale "Randori" est disponible
+3. Un champ de configuration pour le temps de l'annonce Randori (personnalisable)
+4. Les options sont des toggles ou checkboxes clairs
+5. Les armes sont automatiquement exclues si le grade ne les inclut pas (ex: Bokken à partir du 3e Dan)
+6. Les options sont sauvegardées et appliquées lors de la génération
+7. L'interface indique clairement quelles options sont disponibles selon le grade
+8. **Note importante:** Randori n'est pas une position avec techniques dans nomenclature.json. C'est uniquement une annonce audio finale configurable (booléen + temps personnalisable).
 
 ## Story 2.9: Configuration Page Complete Integration
 
