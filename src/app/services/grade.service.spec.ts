@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { GradeService } from './grade.service';
 import { NomenclatureData } from '../models/nomenclature.model';
 import { VideosData } from '../models/videos.model';
+import { PassageFilters } from '../models/passage-filters.model';
 
 describe('GradeService', () => {
   let service: GradeService;
@@ -319,6 +320,309 @@ describe('GradeService', () => {
         const req = httpMock.expectOne('assets/data/videos.json');
         req.flush(mockVideos);
       });
+    });
+  });
+
+  describe('getGrades', () => {
+    it('should return all grades in order', () => {
+      service.loadNomenclature().subscribe(() => {
+        const grades = service.getGrades();
+        expect(grades.length).toBeGreaterThan(0);
+        expect(grades[0]).toBe('6e Kyū');
+        expect(grades[grades.length - 1]).toBe('5e Dan');
+      });
+
+      const req = httpMock.expectOne('assets/data/nomenclature.json');
+      req.flush(mockNomenclature);
+    });
+
+    it('should return empty array if nomenclature not loaded', () => {
+      const grades = service.getGrades();
+      expect(grades).toEqual([]);
+    });
+  });
+
+  describe('validateGrade', () => {
+    it('should return true for valid grade', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          expect(service.validateGrade('6e Kyū')).toBe(true);
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclature);
+      });
+    });
+
+    it('should return false for invalid grade', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          expect(service.validateGrade('Invalid Grade')).toBe(false);
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclature);
+      });
+    });
+
+    it('should return false if nomenclature not loaded', () => {
+      expect(service.validateGrade('6e Kyū')).toBe(false);
+    });
+  });
+
+  describe('getPositionsForGrade', () => {
+    it('should return positions for valid grade', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          const positions = service.getPositionsForGrade('6e Kyū');
+          expect(positions.length).toBeGreaterThan(0);
+          expect(positions).toContain('Suwariwaza');
+          expect(positions).toContain('Tashiwaza');
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclature);
+      });
+    });
+
+    it('should return empty array for invalid grade', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          const positions = service.getPositionsForGrade('Invalid Grade');
+          expect(positions).toEqual([]);
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclature);
+      });
+    });
+  });
+
+  describe('getAttacksForGradeAndPosition', () => {
+    it('should return attacks for valid grade and position', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          const attacks = service.getAttacksForGradeAndPosition('6e Kyū', 'Suwariwaza');
+          expect(attacks.length).toBeGreaterThan(0);
+          expect(attacks).toContain('Shomen Uchi');
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclature);
+      });
+    });
+
+    it('should return empty array for invalid grade', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          const attacks = service.getAttacksForGradeAndPosition('Invalid Grade', 'Suwariwaza');
+          expect(attacks).toEqual([]);
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclature);
+      });
+    });
+  });
+
+  describe('getTechniquesForGradePositionAttack', () => {
+    it('should return techniques for valid parameters', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          const techniques = service.getTechniquesForGradePositionAttack('6e Kyū', 'Suwariwaza', 'Shomen Uchi');
+          expect(techniques.length).toBeGreaterThan(0);
+          expect(techniques).toContain('Ikkyo');
+          expect(techniques).toContain('Nikyo');
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclature);
+      });
+    });
+
+    it('should return empty array for invalid parameters', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          const techniques = service.getTechniquesForGradePositionAttack('Invalid Grade', 'Suwariwaza', 'Shomen Uchi');
+          expect(techniques).toEqual([]);
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclature);
+      });
+    });
+  });
+
+  describe('getVideoUrls', () => {
+    it('should return video URLs for existing attack-technique', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadVideos().subscribe(() => {
+          const urls = service.getVideoUrls('Shomen Uchi', 'Ikkyo');
+          expect(urls).not.toBeNull();
+          expect(Array.isArray(urls)).toBe(true);
+          expect(urls!.length).toBeGreaterThan(0);
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/videos.json');
+        req.flush(mockVideos);
+      });
+    });
+
+    it('should return null for non-existent attack-technique', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadVideos().subscribe(() => {
+          const urls = service.getVideoUrls('Non Existent', 'Technique');
+          expect(urls).toBeNull();
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/videos.json');
+        req.flush(mockVideos);
+      });
+    });
+
+    it('should handle weapons with hyphenated attack format', () => {
+      return new Promise<void>((resolve, reject) => {
+        const mockVideosWithWeapons: VideosData = {
+          'Chudan Tsuki-Ikkyo': ['https://example.com/video1.mp4'],
+          'Jo Dori-Ikkyo': ['https://example.com/video2.mp4']
+        };
+
+        service.loadVideos().subscribe(() => {
+          // Pour "Tanto Dori-Chudan Tsuki", extraire "Chudan Tsuki"
+          const urls = service.getVideoUrls('Tanto Dori-Chudan Tsuki', 'Ikkyo');
+          expect(urls).not.toBeNull();
+          expect(urls![0]).toContain('video1');
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/videos.json');
+        req.flush(mockVideosWithWeapons);
+      });
+    });
+  });
+
+  describe('getWeaponPositions', () => {
+    it('should return weapon positions for grades with weapons', () => {
+      return new Promise<void>((resolve, reject) => {
+        const mockNomenclatureWithWeapons: NomenclatureData = {
+          '1er Dan': {
+            'Tashiwaza': {
+              'Katate Dori': ['Ikkyo']
+            },
+            'Armes': {
+              'Tanto Dori': {
+                'Chudan Tsuki': ['Ikkyo']
+              },
+              'Jo Dori': ['Ikkyo']
+            }
+          }
+        };
+
+        service.loadNomenclature().subscribe(() => {
+          const weapons = service.getWeaponPositions('1er Dan');
+          expect(weapons.length).toBeGreaterThan(0);
+          expect(weapons).toContain('Tanto Dori');
+          expect(weapons).toContain('Jo Dori');
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclatureWithWeapons);
+      });
+    });
+
+    it('should return empty array for grades without weapons', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          const weapons = service.getWeaponPositions('6e Kyū');
+          // 6e Kyū n'a pas d'armes dans mockNomenclature
+          expect(weapons).toEqual([]);
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclature);
+      });
+    });
+  });
+
+  describe('hasTechnique', () => {
+    it('should return true if technique exists', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          expect(service.hasTechnique('6e Kyū', 'Suwariwaza', 'Shomen Uchi', 'Ikkyo')).toBe(true);
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclature);
+      });
+    });
+
+    it('should return false if technique does not exist', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          expect(service.hasTechnique('6e Kyū', 'Suwariwaza', 'Shomen Uchi', 'Non Existent')).toBe(false);
+          resolve();
+        }, reject);
+
+        const req = httpMock.expectOne('assets/data/nomenclature.json');
+        req.flush(mockNomenclature);
+      });
+    });
+  });
+
+  describe('getTechniquesForGrade', () => {
+    it('should return techniques with filters', () => {
+      return new Promise<void>((resolve, reject) => {
+        service.loadNomenclature().subscribe(() => {
+          service.loadVideos().subscribe(() => {
+            const filters: PassageFilters = {
+              positions: ['Suwariwaza'],
+              attacks: ['Shomen Uchi'],
+              techniques: [],
+              includeWeapons: false,
+              includeRandori: false
+            };
+
+            const techniques = service.getTechniquesForGrade('6e Kyū', filters);
+            expect(techniques.length).toBeGreaterThan(0);
+            expect(techniques[0].position).toBe('Suwariwaza');
+            expect(techniques[0].attack).toBe('Shomen Uchi');
+            expect(techniques[0].order).toBe(1);
+            resolve();
+          }, reject);
+
+          const req2 = httpMock.expectOne('assets/data/videos.json');
+          req2.flush(mockVideos);
+        }, reject);
+
+        const req1 = httpMock.expectOne('assets/data/nomenclature.json');
+        req1.flush(mockNomenclature);
+      });
+    });
+
+    it('should return empty array for invalid grade', () => {
+      const filters: PassageFilters = {
+        positions: [],
+        attacks: [],
+        techniques: [],
+        includeWeapons: false,
+        includeRandori: false
+      };
+
+      const techniques = service.getTechniquesForGrade('Invalid Grade', filters);
+      expect(techniques).toEqual([]);
     });
   });
 
