@@ -114,24 +114,89 @@ Selon l'interface IONOS que vous utilisez :
 
 Si vous souhaitez que `keikohub.fr` (sans www) fonctionne également, vous avez deux options :
 
-### Option A : Rediriger keikohub.fr vers www.keikohub.fr (recommandé)
+### Option A : Rediriger keikohub.fr vers www.keikohub.fr (⭐ RECOMMANDÉ)
 
-1. Dans IONOS, allez dans la gestion DNS du domaine racine `keikohub.fr` (pas le sous-domaine www)
-2. Configurez une redirection :
-   - **Type** : Redirection (si disponible dans IONOS)
-   - **Source** : `keikohub.fr`
-   - **Destination** : `www.keikohub.fr`
-   - **Type de redirection** : 301 (permanente)
+Cette option redirige automatiquement `keikohub.fr` vers `www.keikohub.fr`. C'est la solution la plus simple et la meilleure pour le SEO.
+
+#### Étapes détaillées dans IONOS :
+
+1. **Connectez-vous à votre compte IONOS**
+   - Allez sur [IONOS.fr](https://www.ionos.fr) ou [IONOS.com](https://www.ionos.com)
+   - Connectez-vous avec vos identifiants
+
+2. **Accédez à la gestion des redirections**
+   - Dans le tableau de bord, cliquez sur **"Domaines & SSL"** (ou **"Domains & SSL"**)
+   - Trouvez votre domaine `keikohub.fr` dans la liste
+   - Cliquez sur l'**icône d'engrenage (⚙️)** dans la colonne **"Actions"**
+   - Dans le menu déroulant, cherchez **"Redirections"** ou **"Redirects"** ou **"Redirections de domaine"**
+   
+   **Note :** L'emplacement exact peut varier selon l'interface IONOS. Cherchez également dans :
+   - **"Paramètres du domaine"** → **"Redirections"**
+   - Ou directement dans **"Gestion DNS"** → **"Redirections"**
+
+3. **Configurez la redirection**
+   - Cliquez sur **"Ajouter une redirection"** (ou **"Add Redirect"**)
+   - **Source/Domaine source** : `keikohub.fr` (ou laissez vide si vous êtes déjà dans la configuration du domaine)
+   - **Destination/Cible** : `www.keikohub.fr`
+   - **Type de redirection** : Sélectionnez **301 (Permanent)** si disponible
+   - **Activer HTTPS/SSL** : Cochez si disponible (recommandé)
+
+4. **Sauvegardez**
+   - Cliquez sur **"Enregistrer"** (ou **"Save"**)
+   - La redirection sera active immédiatement (ou dans quelques minutes)
+
+#### Avantages de cette méthode :
+- ✅ Simple à configurer
+- ✅ Ne nécessite pas de modifier la configuration GitHub Pages
+- ✅ Bon pour le SEO (une seule version canonique avec www)
+- ✅ Redirection automatique vers HTTPS
+- ✅ Pas besoin de maintenir des IPs GitHub
+
+---
 
 ### Option B : Configurer des enregistrements A pour le domaine racine
 
-Si vous voulez que `keikohub.fr` pointe directement vers GitHub Pages :
+Si vous voulez que `keikohub.fr` pointe directement vers GitHub Pages (sans redirection) :
 
-1. Dans la gestion DNS du domaine racine `keikohub.fr`, ajoutez des enregistrements **A**
-2. Ajoutez les IPs GitHub Pages (consultez la [documentation GitHub](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain) pour les IPs à jour)
-3. ⚠️ **Note** : Les IPs GitHub Pages peuvent changer, il faut les mettre à jour régulièrement
+⚠️ **Note importante** : Cette option nécessite de changer le domaine personnalisé dans GitHub Pages de `www.keikohub.fr` vers `keikohub.fr`, car GitHub Pages ne supporte qu'un seul domaine personnalisé principal à la fois.
 
-**Recommandation** : Utilisez l'Option A (redirection) car c'est plus simple et plus stable.
+1. **Dans IONOS, ajoutez des enregistrements A pour le domaine racine**
+   - Allez dans la gestion DNS du domaine racine `keikohub.fr` (pas le sous-domaine www)
+   - Ajoutez **4 enregistrements A** avec ces valeurs :
+
+   | Type | Hostname | Points vers / Adresse | TTL |
+   |------|----------|----------------------|-----|
+   | A | @ (ou vide, ou keikohub.fr) | 185.199.108.153 | 3600 |
+   | A | @ (ou vide, ou keikohub.fr) | 185.199.109.153 | 3600 |
+   | A | @ (ou vide, ou keikohub.fr) | 185.199.110.153 | 3600 |
+   | A | @ (ou vide, ou keikohub.fr) | 185.199.111.153 | 3600 |
+
+   **Note :** Les IPs GitHub Pages peuvent changer. Vérifiez la [documentation GitHub](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain) pour les IPs à jour.
+
+2. **Changez le domaine personnalisé dans GitHub Pages**
+   - Allez dans votre repository GitHub → **Settings** → **Pages**
+   - Dans "Custom domain", remplacez `www.keikohub.fr` par `keikohub.fr`
+   - Sauvegardez
+   - Attendez la propagation DNS (1-48 heures)
+
+3. **Résultat**
+   - `keikohub.fr` fonctionnera directement
+   - `www.keikohub.fr` sera automatiquement redirigé vers `keikohub.fr` par GitHub
+
+#### Inconvénients de cette méthode :
+- ⚠️ Nécessite de changer la configuration GitHub Pages
+- ⚠️ Les IPs GitHub peuvent changer (à mettre à jour manuellement)
+- ⚠️ Moins simple que la redirection IONOS
+
+---
+
+### 🎯 Recommandation
+
+**Utilisez l'Option A (redirection IONOS)** car :
+- C'est plus simple et plus stable
+- Ne nécessite pas de changer la configuration GitHub Pages
+- Meilleur pour le SEO (une seule version canonique)
+- Pas de maintenance des IPs nécessaire
 
 ---
 
