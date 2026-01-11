@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.keikohub.fr/sitemap.xml
+
+# Disallow specific paths if needed (actuellement aucune restriction)
+# Disallow: /admin
+# Disallow: /private
