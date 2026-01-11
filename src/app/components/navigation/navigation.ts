@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ChangeDetectorRef } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -18,10 +18,16 @@ export class NavigationComponent implements OnInit, OnDestroy {
   currentAppearance: Appearance = 'clair';
   isMaintenancePage = false;
   private subscriptions = new Subscription();
+  
+  // Notification d'installation PWA
+  showInstallNotification = false;
+  deferredPrompt: any = null;
+  private readonly INSTALL_NOTIFICATION_DISMISSED_KEY = 'pwa-install-notification-dismissed';
 
   constructor(
     private settingsService: SettingsService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +53,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
         this.currentAppearance = settings.appearance;
       })
     );
+    
+    // Gérer l'installation PWA
+    this.setupPWAInstall();
   }
   
   private checkMaintenancePage(): void {
@@ -106,10 +115,128 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   private checkMobile(): void {
     this.isMobile = window.innerWidth < 768;
+    // Masquer la notification si on n'est plus sur mobile
+    if (!this.isMobile) {
+      this.showInstallNotification = false;
+    }
   }
 
   toggleAppearance(): void {
     const newAppearance: Appearance = this.currentAppearance === 'clair' ? 'sombre' : 'clair';
     this.settingsService.applyAppearance(newAppearance);
+  }
+
+  /**
+   * Configure l'installation PWA et gère l'affichage de la notification
+   */
+  private setupPWAInstall(): void {
+    // Vérifier si l'app est déjà installée
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                         (window.navigator as any).standalone ||
+                         (window.navigator as any).standalone === true;
+    
+    if (isStandalone) {
+      console.log('[PWA Install] App déjà installée, notification masquée');
+      this.showInstallNotification = false;
+      return;
+    }
+
+    // Vérifier si la notification a déjà été fermée
+    const notificationDismissed = localStorage.getItem(this.INSTALL_NOTIFICATION_DISMISSED_KEY);
+    if (notificationDismissed) {
+      console.log('[PWA Install] Notification déjà fermée par l\'utilisateur');
+      this.showInstallNotification = false;
+      return;
+    }
+
+    // Vérifier si on est sur mobile
+    if (!this.isMobile) {
+      console.log('[PWA Install] Pas sur mobile, notification masquée');
+      this.showInstallNotification = false;
+      return;
+    }
+    
+    console.log('[PWA Install] Configuration de l\'installation PWA');
+    
+    // Écouter l'événement beforeinstallprompt (Chrome/Edge/Opera)
+    window.addEventListener('beforeinstallprompt', (e: Event) => {
+      console.log('[PWA Install] beforeinstallprompt déclenché');
+      // Empêcher l'affichage automatique de la bannière
+      e.preventDefault();
+      // Sauvegarder l'événement pour l'utiliser plus tard
+      this.deferredPrompt = e;
+      
+      // Afficher la notification si elle n'a pas été fermée
+      if (!localStorage.getItem(this.INSTALL_NOTIFICATION_DISMISSED_KEY)) {
+        console.log('[PWA Install] Affichage de la notification (beforeinstallprompt)');
+        this.showInstallNotification = true;
+        this.cdr.detectChanges(); // Forcer la détection de changement
+      }
+    });
+
+    // Afficher la notification sur mobile après 2 secondes si elle n'a pas été fermée
+    // (cela fonctionne aussi pour iOS où beforeinstallprompt n'existe pas)
+    setTimeout(() => {
+      const stillStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                              (window.navigator as any).standalone;
+      const stillDismissed = localStorage.getItem(this.INSTALL_NOTIFICATION_DISMISSED_KEY);
+      
+      if (!stillStandalone && !stillDismissed && this.isMobile && !this.showInstallNotification) {
+        console.log('[PWA Install] Affichage automatique de la notification après 2 secondes');
+        this.showInstallNotification = true;
+        this.cdr.detectChanges(); // Forcer la détection de changement
+      }
+    }, 2000);
+
+    // Écouter l'événement appinstalled pour masquer la notification si l'app est installée
+    window.addEventListener('appinstalled', () => {
+      console.log('[PWA Install] App installée');
+      this.showInstallNotification = false;
+      this.deferredPrompt = null;
+    });
+  }
+
+  /**
+   * Déclenche l'installation de l'application PWA
+   */
+  async installPWA(): Promise<void> {
+    // Si on a l'événement beforeinstallprompt (Chrome/Edge/Opera)
+    if (this.deferredPrompt) {
+      try {
+        // Afficher l'invite d'installation
+        this.deferredPrompt.prompt();
+
+        // Attendre que l'utilisateur réponde à l'invite
+        const { outcome } = await this.deferredPrompt.userChoice;
+        
+        if (outcome === 'accepted') {
+          console.log('[PWA Install] L\'utilisateur a accepté l\'installation');
+        } else {
+          console.log('[PWA Install] L\'utilisateur a refusé l\'installation');
+        }
+      } catch (error) {
+        console.error('[PWA Install] Erreur lors de l\'installation:', error);
+      }
+
+      // Réinitialiser l'événement
+      this.deferredPrompt = null;
+      this.showInstallNotification = false;
+    } else {
+      // Sur iOS ou autres navigateurs sans beforeinstallprompt
+      // On peut rediriger vers des instructions ou simplement fermer la notification
+      console.log('[PWA Install] Installation manuelle requise (iOS ou autre)');
+      // Pour iOS, l'utilisateur doit utiliser le menu "Partager" > "Sur l'écran d'accueil"
+      // On ferme juste la notification ici
+      this.showInstallNotification = false;
+    }
+  }
+
+  /**
+   * Ferme la notification d'installation
+   */
+  dismissInstallNotification(): void {
+    this.showInstallNotification = false;
+    // Sauvegarder que l'utilisateur a fermé la notification
+    localStorage.setItem(this.INSTALL_NOTIFICATION_DISMISSED_KEY, 'true');
   }
 }
