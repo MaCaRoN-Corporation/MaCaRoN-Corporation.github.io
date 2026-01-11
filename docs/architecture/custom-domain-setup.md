@@ -16,6 +16,8 @@ Pour utiliser un domaine personnalisé (par exemple `www.votredomaine.com`) au l
 
 ### Étape 1 : Configuration DNS chez votre Registrar
 
+> **📘 Guide spécifique IONOS** : Si vous utilisez IONOS, consultez le guide détaillé : [Configuration DNS IONOS pour www.keikohub.fr](./ionos-dns-setup.md)
+
 Selon le type d'enregistrement que vous souhaitez utiliser :
 
 #### Option A : Utiliser un sous-domaine (recommandé : `www`)
@@ -51,16 +53,15 @@ Pour rediriger le domaine racine vers `www`, vous pouvez :
 - Configurer `www` avec un CNAME
 - Dans GitHub, ajouter les deux domaines (le domaine racine redirigera automatiquement vers `www`)
 
-### Étape 2 : Ajouter le fichier CNAME (AUTOMATISÉ)
+### Étape 2 : Ajouter le fichier CNAME (✅ AUTOMATISÉ)
 
-Le workflow GitHub Actions est **déjà configuré** pour créer automatiquement le fichier CNAME. 
+Le workflow GitHub Actions est **déjà configuré** pour créer automatiquement le fichier CNAME avec `www.keikohub.fr` à chaque déploiement.
 
-**Si vous utilisez l'automatisation** (recommandé) :
-- Modifiez le fichier `.github/workflows/deploy.yml` et ajoutez le domaine dans la variable `CUSTOM_DOMAIN` (voir section Automatisation ci-dessous)
+✅ **Vous n'avez rien à faire** - le fichier CNAME sera créé automatiquement lors du prochain déploiement.
 
-**Si vous préférez la méthode manuelle** :
+**Si vous préférez la méthode manuelle** (non recommandé) :
 1. Créez un fichier `CNAME` à la racine du dossier `public/` (sera copié dans le build)
-2. Le contenu doit être votre domaine : `www.votredomaine.com` (sans `http://` ni `https://`)
+2. Le contenu doit être votre domaine : `www.keikohub.fr` (sans `http://` ni `https://`)
 3. Commit et push
 
 ### Étape 3 : Configurer le domaine dans GitHub
@@ -68,7 +69,7 @@ Le workflow GitHub Actions est **déjà configuré** pour créer automatiquement
 1. Allez sur votre repository GitHub : `MaCaRoN-Corporation/MaCaRoN-Corporation.github.io`
 2. Cliquez sur **Settings** (Paramètres)
 3. Dans le menu de gauche, cliquez sur **Pages**
-4. Dans la section **Custom domain**, entrez votre domaine (ex: `www.votredomaine.com`)
+4. Dans la section **Custom domain**, entrez votre domaine : `www.keikohub.fr`
 5. Cochez **Enforce HTTPS** (recommandé) - GitHub générera automatiquement un certificat SSL
 6. Cliquez sur **Save**
 
@@ -80,10 +81,10 @@ Le workflow GitHub Actions est **déjà configuré** pour créer automatiquement
 2. Vérifiez que le domaine est configuré correctement :
    ```bash
    # Vérifier le CNAME
-   nslookup www.votredomaine.com
+   nslookup www.keikohub.fr
    
    # Vérifier si le site est accessible
-   curl -I https://www.votredomaine.com
+   curl -I https://www.keikohub.fr
    ```
 3. Accédez à votre site via le nouveau domaine
 4. Vérifiez que le certificat SSL est valide (cadenas vert dans le navigateur)

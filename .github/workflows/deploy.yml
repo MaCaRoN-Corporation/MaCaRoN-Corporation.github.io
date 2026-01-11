@@ -42,6 +42,10 @@ jobs:
         run: |
           touch ./dist/keiko-hub/browser/.nojekyll
 
+      - name: Create CNAME file
+        run: |
+          echo "www.keikohub.fr" > ./dist/keiko-hub/browser/CNAME
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
