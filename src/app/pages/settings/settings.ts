@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { SettingsService } from '../../services/settings.service';
+import { PwaService } from '../../services/pwa.service';
 import { UserSettings, Appearance, Theme } from '../../models/settings.model';
 
 @Component({
@@ -26,12 +27,20 @@ export class SettingsComponent implements OnInit, OnDestroy {
     { value: 9, label: 'Lavande' }
   ];
   private subscriptions = new Subscription();
+  canInstallPWA = false;
+  isPWAInstalled = false;
 
-  constructor(private settingsService: SettingsService) {}
+  constructor(
+    private settingsService: SettingsService,
+    private pwaService: PwaService
+  ) {}
 
   ngOnInit(): void {
     this.checkMobile();
     window.addEventListener('resize', () => this.checkMobile());
+    
+    // Vérifier l'état de l'installation PWA
+    this.checkPWAStatus();
     
     // S'abonner aux réglages pour connaître l'apparence et le thème actuel
     this.subscriptions.add(
@@ -53,6 +62,17 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   private checkMobile(): void {
     this.isMobile = window.innerWidth < 768;
+  }
+
+  private checkPWAStatus(): void {
+    this.isPWAInstalled = this.pwaService.isInstalled();
+    this.canInstallPWA = this.pwaService.canInstall() && !this.isPWAInstalled;
+  }
+
+  async installPWA(): Promise<void> {
+    await this.pwaService.installPWA();
+    // Mettre à jour le statut après l'installation
+    this.checkPWAStatus();
   }
 
   toggleAppearance(): void {

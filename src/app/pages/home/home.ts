@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     {
       id: 'classique',
       name: 'Classique',
-      description: 'Technique selon l\'ordre traditionnel de passage'
+      description: 'Déroulement de technique traditionnel'
     },
     {
       id: 'progression',
