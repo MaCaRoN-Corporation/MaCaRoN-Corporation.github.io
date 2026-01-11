@@ -75,6 +75,31 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.checkPWAStatus();
   }
 
+  resetAppData(): void {
+    if (confirm('Êtes-vous sûr de vouloir réinitialiser toutes les données de l\'application ? Cette action effacera vos réglages, votre historique et vos configurations. Cette action est irréversible.')) {
+      try {
+        // Effacer toutes les clés localStorage de l'application
+        const keysToRemove = [
+          'keiko-hub-settings',
+          'keiko-hub-config',
+          'keiko-hub-history',
+          'keiko-hub-last-grade',
+          'pwa-install-notification-dismissed'
+        ];
+        
+        keysToRemove.forEach(key => {
+          localStorage.removeItem(key);
+        });
+        
+        // Recharger la page pour appliquer les changements
+        window.location.reload();
+      } catch (error) {
+        console.error('[Settings] Erreur lors de la réinitialisation des données:', error);
+        alert('Une erreur est survenue lors de la réinitialisation des données.');
+      }
+    }
+  }
+
   toggleAppearance(): void {
     const newAppearance: Appearance = this.currentAppearance === 'clair' ? 'sombre' : 'clair';
     this.settingsService.applyAppearance(newAppearance);
