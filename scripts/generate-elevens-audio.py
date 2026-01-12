@@ -5,16 +5,24 @@ import requests
 # =========================
 # CONFIGURATION
 # =========================
-# M1-"3JDquces8E8bkmvbh6Bc"
-# F1-"wcs09USXSN5Bl7FXohVZ"
-# M2-"LIisRj2veIKEBdr6KZ5y"
-# F2-"GxhGYQesaQaYKePCZDEC"
-# F3-"8kgj5469z1URcH4MB2G4"
-# M3-"6wdSVG3CMjPfAthsnMv9"
+# JAPANESE VOICES
+# M1-"3JDquces8E8bkmvbh6Bc" --> A regéner si liste des techniques actuellement ok
+# M2-"LIisRj2veIKEBdr6KZ5y" --> A regéner si liste des techniques actuellement ok
+# M3-"6wdSVG3CMjPfAthsnMv9" --> A regéner si liste des techniques actuellement ok
+# F1-"wcs09USXSN5Bl7FXohVZ" --> A regéner si liste des techniques actuellement ok
+# F2-"GxhGYQesaQaYKePCZDEC" --> A regéner si liste des techniques actuellement ok
+# F3-"8kgj5469z1URcH4MB2G4" --> A regéner si liste des techniques actuellement ok
+# FRENCH VOICES
+# M1-"MIuhjMla9d1GsjEn0qCp"
+# M2-"zNijNwkR2nhHrbrmJITT"
+# M3-"w4FDa0ya9UrortMOEDXi"
+# F1-"Da9VfudgKUvFOKayCiue"
+# F2-"YxrwjAKoUKULGd0g8K9Y"
+# F3-"12CHcREbuPdJY02VY7zT"
 
 API_KEY = ""
-VOICE_ID = "6wdSVG3CMjPfAthsnMv9"
-OUTPUT_DIR = "../src/assets/audio/Male3"
+VOICE_ID = "12CHcREbuPdJY02VY7zT"
+OUTPUT_DIR = "../src/assets/audio/French/Female3"
 MODEL_ID = "eleven_multilingual_v2"
 
 # TEXT_LIST = [
@@ -74,78 +82,65 @@ MODEL_ID = "eleven_multilingual_v2"
 # "Gyaku Yokomen"
 # ]
 
-TEXT_LIST = [
-'<phoneme alphabet="ipa" ph="omote">Omote</phoneme>',
-'<phoneme alphabet="ipa" ph="ɯɾa">Ura</phoneme>',
-'<phoneme alphabet="ipa" ph="ikːjo">Ikkyo</phoneme>',
-'<phoneme alphabet="ipa" ph="nikʲo">Nikyo</phoneme>',
-'<phoneme alphabet="ipa" ph="saŋkʲo">Sankyo</phoneme>',
-'<phoneme alphabet="ipa" ph="joŋkʲo">Yonkyo</phoneme>',
-'<phoneme alphabet="ipa" ph="ɡokʲo">Gokyo</phoneme>',
-'<phoneme alphabet="ipa" ph="iɾimi naɡe">Irimi nage</phoneme>',
-'<phoneme alphabet="ipa" ph="ɕiho naɡe">Shiho nage</phoneme>',
-'<phoneme alphabet="ipa" ph="kote ɡaeɕi">Kote gaeshi</phoneme>',
-'<phoneme alphabet="ipa" ph="teɴtɕi naɡe">Tenchi nage</phoneme>',
-'<phoneme alphabet="ipa" ph="ɯtɕi kaiten naɡe">Uchi kaiten nage</phoneme>',
-'<phoneme alphabet="ipa" ph="soto kaiten naɡe">Soto kaiten nage</phoneme>',
-'<phoneme alphabet="ipa" ph="koɕi naɡe">Koshi nage</phoneme>',
-'<phoneme alphabet="ipa" ph="kokʲɯː naɡe">Kokyu nage</phoneme>',
-'<phoneme alphabet="ipa" ph="sokɯmeɴ iɾimi naɡe">Sokumen irimi nage</phoneme>',
-'<phoneme alphabet="ipa" ph="sɯmi otoɕi">Sumi otoshi</phoneme>',
-'<phoneme alphabet="ipa" ph="aiki otoɕi">Aiki otoshi</phoneme>',
-'<phoneme alphabet="ipa" ph="kɯbi naɡe">Kubi nage</phoneme>',
-'<phoneme alphabet="ipa" ph="hiji kime osae">Hiji kime osae</phoneme>',
-'<phoneme alphabet="ipa" ph="ɯde ɡaɾami">Ude garami</phoneme>',
-'<phoneme alphabet="ipa" ph="ai hanmi katate doɾi">Ai hanmi katate dori</phoneme>',
-'<phoneme alphabet="ipa" ph="katate doɾi">Katate dori</phoneme>',
-'<phoneme alphabet="ipa" ph="katate ɾʲote doɾi">Katate ryote dori</phoneme>',
-'<phoneme alphabet="ipa" ph="ɾʲote doɾi">Ryote dori</phoneme>',
-'<phoneme alphabet="ipa" ph="katate ɾʲote doɾi">Katate ryote dori</phoneme>',
-'<phoneme alphabet="ipa" ph="mɯna doɾi">Muna dori</phoneme>',
-'<phoneme alphabet="ipa" ph="kata doɾi">Kata dori</phoneme>',
-'<phoneme alphabet="ipa" ph="kata doɾi meɴ ɯtɕi">Kata dori men uchi</phoneme>',
-'<phoneme alphabet="ipa" ph="mae ɾʲo kata doɾi">Mae ryo kata dori</phoneme>',
-'<phoneme alphabet="ipa" ph="ɯɕiɾo ɾʲote doɾi">Ushiro ryote dori</phoneme>',
-'<phoneme alphabet="ipa" ph="ɯɕiɾo katate doɾi kɯbiɕime">Ushiro katate dori kubishime</phoneme>',
-'<phoneme alphabet="ipa" ph="ɯɕiɾo eɾi doɾi">Ushiro eri dori</phoneme>',
-'<phoneme alphabet="ipa" ph="ɯɕiɾo ɾʲo kata doɾi">Ushiro ryo kata dori</phoneme>',
-'<phoneme alphabet="ipa" ph="ɕomen ɯtɕi">Shomen uchi</phoneme>',
-'<phoneme alphabet="ipa" ph="jokomen ɯtɕi">Yokomen uchi</phoneme>',
-'<phoneme alphabet="ipa" ph="tɕɯːdaɴ tsɯki">Chudan tsuki</phoneme>',
-'<phoneme alphabet="ipa" ph="dʑoːdaɴ tsɯki">Jodan tsuki</phoneme>',
-'<phoneme alphabet="ipa" ph="taɴto doɾi">Tanto dori</phoneme>',
-'<phoneme alphabet="ipa" ph="keɴ tai keɴ">Ken tai ken</phoneme>',
-'<phoneme alphabet="ipa" ph="dʑo tai dʑo">Jo tai jo</phoneme>',
-'<phoneme alphabet="ipa" ph="dʑo doɾi">Jo dori</phoneme>',
-'<phoneme alphabet="ipa" ph="dʑo naɡe">Jo nage</phoneme>',
-'<phoneme alphabet="ipa" ph="tatɕi waza">Tachi waza</phoneme>',
-'<phoneme alphabet="ipa" ph="sɯwaɾi waza">Suwari waza</phoneme>',
-'<phoneme alphabet="ipa" ph="haɴmi handatɕi waza">Hanmi handachi waza</phoneme>',
-'<phoneme alphabet="ipa" ph="kɯmidʑo">Kumijo</phoneme>',
-'<phoneme alphabet="ipa" ph="ɡʲakɯ hanmi katate doɾi">Gyaku hanmi katate dori</phoneme>',
-'<phoneme alphabet="ipa" ph="naname kokʲɯː naɡe">Naname kokyu nage</phoneme>',
-'<phoneme alphabet="ipa" ph="moɾote doɾi">Morote dori</phoneme>',
-'<phoneme alphabet="ipa" ph="tatɕi doɾi">Tachi dori</phoneme>',
-'<phoneme alphabet="ipa" ph="dʑijɯː waza">Jiyu waza</phoneme>',
-'<phoneme alphabet="ipa" ph="ɾaɴdoɾi">Randori</phoneme>',
-'<phoneme alphabet="ipa" ph="ɡʲakɯ jokomen">Gyaku Yokomen</phoneme>'
-]
+TEXT_MAP = {
+    "Omote": "Omotè",
+    "Ura": "Oura",
+    "Ikkyo": "Ikkyo",
+    "Nikyo": "Nikkyo",
+    "Sankyo": "Sankyo",
+    "Yonkyo": "Yonkyo",
+    "Gokyo": "Gokyo",
+    "Irimi nage": "Irimi nagué",
+    "Shiho nage": "Shiho nagué",
+    "Kote gaeshi": "Koté gaéshi",
+    "Tenchi nage": "Tentchi nagué",
+    "Uchi kaiten nage": "Utchi kaïtèn nagué",
+    "Soto kaiten nage": "Soto kaïtèn nagué",
+    "Koshi nage": "Koshi nagué",
+    "Kokyu nage": "Kokyou nagué",
+    "Sokumen irimi nage": "Sokoumen irimi nagué",
+    "Sumi otoshi": "Soumi otoshi",
+    "Aiki otoshi": "Aïki otoshi",
+    "Kubi nage": "Koubi nagué",
+    "Hiji kime osae": "Hiji kimé ossaé",
+    "Ude garami": "Oudé garami",
+    "Ai hanmi katate dori": "Aï hanmi kataté dori",
+    "Katate dori": "Kataté dori",
+    "Katate ryote dori": "Kataté ryoté dori",
+    "Ryote dori": "Ryoté dori",
+    "Muna dori": "Mouna dori",
+    "Kata dori": "Kata dori",
+    "Kata dori men uchi": "Kata dori men utchi",
+    "Mae ryo kata dori": "Maé ryo kata dori",
+    "Ushiro ryote dori": "Oushiro ryoté dori",
+    "Ushiro katate dori kubishime": "Oushiro kataté dori koubishimé",
+    "Ushiro eri dori": "Oushiro éri dori",
+    "Ushiro ryo kata dori": "Oushiro ryo kata dori",
+    "Shomen uchi": "Shomèn utchi",
+    "Yokomen uchi": "Yokomèn utchi",
+    "Chudan tsuki": "Tchoudan tsuki",
+    "Jodan tsuki": "Yodan tsuki",
+    "Tanto dori": "Tanto dori",
+    "Ken tai ken": "Ken taï ken",
+    "Jo tai jo": "Djo taï Djo",
+    "Jo dori": "Djo dori",
+    "Jo nage": "Djo nagué",
+    "Tachi waza": "Tatchi waza",
+    "Suwari waza": "Souwari waza",
+    "Hanmi handachi waza": "Hanmi handatchi waza",
+    "Kumijo": "KoumiDjo",
+    "Gyaku hanmi katate dori": "Gyakou hanmi kataté dori",
+    "Naname kokyu nage": "Nanamé kokyou nagué",
+    "Morote dori": "Moroté dori",
+    "Tachi dori": "Tatchi dori",
+    "Jiyu waza": "Djiyou waza",
+    "Randori": "Randori",
+    "Gyaku Yokomen": "Gyakou yokomèn"
+}
 
 # =========================
 # UTILITAIRES
 # =========================
-
-def extract_display_text(ssml_text):
-    """
-    Extrait le texte lisible depuis une balise phoneme
-    Exemple :
-    <phoneme ...>Omote</phoneme> -> Omote
-    """
-    match = re.search(r">(.*?)<", ssml_text)
-    if not match:
-        raise ValueError(f"Impossible d'extraire le texte depuis : {ssml_text}")
-    return match.group(1)
-
 
 def sanitize_filename(text, max_length=80):
     """
@@ -165,7 +160,7 @@ def sanitize_filename(text, max_length=80):
 # GÉNÉRATION AUDIO
 # =========================
 
-def generate_audio(ssml_text):
+def generate_audio(text):
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}"
 
     headers = {
@@ -175,7 +170,7 @@ def generate_audio(ssml_text):
     }
 
     payload = {
-        "text": ssml_text,
+        "text": text,
         "model_id": MODEL_ID,
         "voice_settings": {
             "stability": 0.6,
@@ -199,19 +194,17 @@ def generate_audio(ssml_text):
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    for ssml_text in TEXT_LIST:
-        display_text = extract_display_text(ssml_text)
-        filename = sanitize_filename(display_text) + ".mp3"
+    for filename_label, tts_text in TEXT_MAP.items():
+        filename = sanitize_filename(filename_label) + ".mp3"
         filepath = os.path.join(OUTPUT_DIR, filename)
 
-        print(f"Génération audio : {display_text}")
-        audio_data = generate_audio(ssml_text)
+        print(f"Génération audio : {filename_label} -> « {tts_text} »")
+        audio_data = generate_audio(tts_text)
 
         with open(filepath, "wb") as f:
             f.write(audio_data)
 
         print(f"✔ Sauvegardé : {filepath}")
-
 
 if __name__ == "__main__":
     main()
