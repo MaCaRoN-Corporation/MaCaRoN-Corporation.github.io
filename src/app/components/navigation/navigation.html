@@ -1,11 +1,11 @@
 <nav class="navigation" [class.maintenance-mode]="isMaintenancePage">
   <div class="navigation-container">
     <a *ngIf="!isMaintenancePage" routerLink="/" class="logo-link">
-      <img src="assets/images/belt.png" alt="Keiko Hub - Application d'entraînement aux passages de grade Aïkido" class="logo" />
+      <img src="assets/images/icon_white.png" alt="Keiko Hub - Application d'entraînement aux passages de grade Aïkido" class="logo" />
       <span class="logo-text">Keiko Hub</span>
     </a>
     <div *ngIf="isMaintenancePage" class="logo-container">
-      <img src="assets/images/belt.png" alt="Keiko Hub - Application d'entraînement aux passages de grade Aïkido" class="logo" />
+      <img src="assets/images/icon_white.png" alt="Keiko Hub - Application d'entraînement aux passages de grade Aïkido" class="logo" />
       <span class="logo-text">Keiko Hub</span>
     </div>
     <div class="nav-actions" *ngIf="!isMaintenancePage">
