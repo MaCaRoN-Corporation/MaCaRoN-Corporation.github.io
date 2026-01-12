@@ -1,0 +1,86 @@
+[
+  {
+    "id": "Male1",
+    "label": "Voix masculine 1",
+    "displayName": "Alexandre",
+    "gender": "male",
+    "language": "French"
+  },
+  {
+    "id": "Male2",
+    "label": "Voix masculine 2",
+    "displayName": "Thomas",
+    "gender": "male",
+    "language": "French"
+  },
+  {
+    "id": "Male3",
+    "label": "Voix masculine 3",
+    "displayName": "Lucas",
+    "gender": "male",
+    "language": "French"
+  },
+  {
+    "id": "Female1",
+    "label": "Voix féminine 1",
+    "displayName": "Sophie",
+    "gender": "female",
+    "language": "French"
+  },
+  {
+    "id": "Female2",
+    "label": "Voix féminine 2",
+    "displayName": "Emma",
+    "gender": "female",
+    "language": "French"
+  },
+  {
+    "id": "Female3",
+    "label": "Voix féminine 3",
+    "displayName": "Léa",
+    "gender": "female",
+    "language": "French"
+  },
+  {
+    "id": "Male1",
+    "label": "Male voice 1",
+    "displayName": "Hiroshi",
+    "gender": "male",
+    "language": "Japanese"
+  },
+  {
+    "id": "Male2",
+    "label": "Male voice 2",
+    "displayName": "Takeshi",
+    "gender": "male",
+    "language": "Japanese"
+  },
+  {
+    "id": "Male3",
+    "label": "Male voice 3",
+    "displayName": "Kenji",
+    "gender": "male",
+    "language": "Japanese"
+  },
+  {
+    "id": "Female1",
+    "label": "Female voice 1",
+    "displayName": "Yuki",
+    "gender": "female",
+    "language": "Japanese"
+  },
+  {
+    "id": "Female2",
+    "label": "Female voice 2",
+    "displayName": "Sakura",
+    "gender": "female",
+    "language": "Japanese"
+  },
+  {
+    "id": "Female3",
+    "label": "Female voice 3",
+    "displayName": "Aiko",
+    "gender": "female",
+    "language": "Japanese"
+  }
+]

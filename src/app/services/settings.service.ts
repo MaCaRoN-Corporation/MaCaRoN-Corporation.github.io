@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { UserSettings, DEFAULT_SETTINGS, Appearance, Theme } from '../models/settings.model';
+import { UserSettings, DEFAULT_SETTINGS, Appearance, Theme, VoiceId } from '../models/settings.model';
 
 /**
  * Clé utilisée pour stocker les réglages dans localStorage
@@ -201,6 +201,25 @@ export class SettingsService {
       }
 
       const parsed: unknown = JSON.parse(stored);
+      
+      // Vérifier et migrer les anciens formats avant la validation stricte
+      if (parsed && typeof parsed === 'object') {
+        const parsedObj = parsed as Record<string, unknown>;
+        const voiceValue = parsedObj['voice'];
+        if (voiceValue === 'masculin' || voiceValue === 'féminin') {
+          // Migration : convertir les anciens formats 'masculin'/'féminin' vers les nouveaux IDs
+          const oldVoice = voiceValue as 'masculin' | 'féminin';
+          parsedObj['voice'] = this.migrateVoiceId(oldVoice);
+          // Sauvegarder la version migrée
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(parsedObj));
+        } else if (typeof voiceValue === 'string' && !voiceValue.includes('_')) {
+          // Migration : convertir les anciens IDs sans langue (ex: "Male1") vers le nouveau format avec langue (ex: "French_Male1")
+          parsedObj['voice'] = `French_${voiceValue}`;
+          // Sauvegarder la version migrée
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(parsedObj));
+        }
+      }
+      
       if (!this.isValidSettings(parsed)) {
         console.warn('[SettingsService] Invalid settings in localStorage, using defaults');
         return DEFAULT_SETTINGS;
@@ -210,6 +229,19 @@ export class SettingsService {
     } catch (error) {
       console.error('[SettingsService] Error loading settings from localStorage:', error);
       return DEFAULT_SETTINGS;
+    }
+  }
+
+  /**
+   * Migre un ancien ID de voix ('masculin'/'féminin') vers un nouveau format (VoiceId avec langue)
+   * @param oldVoiceId L'ancien ID de voix
+   * @returns Le nouvel ID de voix avec langue (format: {language}_{id})
+   */
+  private migrateVoiceId(oldVoiceId: 'masculin' | 'féminin'): VoiceId {
+    if (oldVoiceId === 'masculin') {
+      return 'French_Male1'; // Première voix masculine française par défaut
+    } else {
+      return 'French_Female1'; // Première voix féminine française par défaut
     }
   }
 
@@ -272,8 +304,9 @@ export class SettingsService {
       return false;
     }
 
-    // Vérifier voice
-    if (settings['voice'] !== 'masculin' && settings['voice'] !== 'féminin') {
+    // Vérifier voice (doit être une chaîne non vide)
+    const voice = settings['voice'];
+    if (typeof voice !== 'string' || voice.trim() === '') {
       return false;
     }
 

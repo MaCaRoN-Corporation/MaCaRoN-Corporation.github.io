@@ -1,5 +1,6 @@
 import { Technique } from './technique.model';
 import { PassageFilters } from './passage-filters.model';
+import { VoiceId } from './settings.model';
 
 /**
  * Représente un passage de grade généré avec sa séquence de techniques
@@ -10,7 +11,7 @@ export interface Passage {
   techniques: Technique[];
   duration: number;
   timeBetweenTechniques: number;
-  voice: 'masculin' | 'féminin';
+  voice: VoiceId;
   filters: PassageFilters;
   createdAt: Date;
   completedAt: Date | null;
@@ -34,5 +35,5 @@ export interface PassageState {
 export interface PassageConfig {
   duration: number;
   timeBetweenTechniques: number;
-  voice: 'masculin' | 'féminin';
+  voice: VoiceId;
 }

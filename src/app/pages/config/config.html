@@ -208,6 +208,56 @@
       </div>
     </section>
 
+    <!-- Section Sélection de la voix -->
+    <section class="config-section voice-selection-section">
+      <h2>Sélection de la voix</h2>
+      <p class="config-description">Choisissez une voix pour les annonces ({{ availableVoices.length }} voix disponibles)</p>
+      
+      <!-- Voix japonaises -->
+      <div class="voice-language-group voice-language-group-japanese">
+        <h4 class="voice-language-title">Voix japonaises</h4>
+        <div class="voice-selector">
+          <button
+            *ngFor="let voice of japaneseVoices"
+            (click)="onVoiceChange(voice)"
+            class="voice-option"
+            [class.active]="isVoiceSelected(voice)"
+            [attr.aria-label]="'Sélectionner la voix ' + voice.displayName"
+            type="button">
+            <div class="voice-preview">
+              <img 
+                [src]="'assets/images/avatar/' + voice.language + '/' + voice.id + '.png'" 
+                [alt]="voice.displayName"
+                class="voice-avatar" />
+            </div>
+            <span class="voice-name">{{ voice.displayName }}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Voix françaises -->
+      <div class="voice-language-group voice-language-group-french">
+        <h4 class="voice-language-title">Voix françaises</h4>
+        <div class="voice-selector">
+          <button
+            *ngFor="let voice of frenchVoices"
+            (click)="onVoiceChange(voice)"
+            class="voice-option"
+            [class.active]="isVoiceSelected(voice)"
+            [attr.aria-label]="'Sélectionner la voix ' + voice.displayName"
+            type="button">
+            <div class="voice-preview">
+              <img 
+                [src]="'assets/images/avatar/' + voice.language + '/' + voice.id + '.png'" 
+                [alt]="voice.displayName"
+                class="voice-avatar" />
+            </div>
+            <span class="voice-name">{{ voice.displayName }}</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- Les autres sections de configuration seront ajoutées dans les stories suivantes -->
   </div>
 </div>

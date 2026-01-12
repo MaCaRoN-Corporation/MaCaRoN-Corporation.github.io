@@ -820,12 +820,26 @@
     flex: 0 1 600px;
     display: flex;
     flex-direction: column;
-    overflow: visible;
+    overflow: hidden;
+    align-self: center; // Centre le panel au lieu de l'étirer
+    max-height: 98%; // Limite la hauteur à 98% de la hauteur disponible
+    min-height: 0; // Permet au flex de fonctionner correctement
 
     .config-content {
       display: block;
       padding: var(--spacing-lg);
-      overflow: visible;
+      overflow-y: auto;
+      overflow-x: hidden;
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      // Masquer la scrollbar tout en gardant le scroll
+      scrollbar-width: none; // Firefox
+      -ms-overflow-style: none; // IE et Edge
+      
+      &::-webkit-scrollbar {
+        display: none; // Chrome, Safari, Opera
+      }
     }
   }
 
@@ -843,8 +857,8 @@
 // Icône de réglage en haut à droite du panel de configuration (non cliquable)
 .config-settings-icon {
   position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-md);
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
   width: 40px;
   height: 40px;
   display: flex;
@@ -863,6 +877,64 @@
   }
 }
 
+// Icône de souris animée en bas du panel pour indiquer le scroll (PC uniquement)
+.config-scroll-indicator {
+  display: none; // Masqué sur mobile
+
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: var(--spacing-xs);
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-text-secondary);
+    pointer-events: none;
+    z-index: 5;
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scroll-indicator-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0; // Collé, sans espace entre la souris et le chevron
+      animation: scrollIndicatorMove 2s ease-in-out infinite;
+    }
+
+    .mouse-icon {
+      width: 40px;
+      height: 52px;
+      display: block;
+      vertical-align: bottom;
+      margin-bottom: -12px; // Fait descendre la souris pour qu'elle chevauche le chevron
+    }
+
+    .chevron-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+// Animation pour l'indicateur de scroll (mouvement vers le bas)
+@keyframes scrollIndicatorMove {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
 .config-content {
   padding: 0 var(--spacing-lg) var(--spacing-lg);
   animation: slideDown var(--transition-normal) ease-out;
@@ -871,6 +943,7 @@
     overflow: visible;
     max-height: none;
   }
+  // Sur PC, les styles sont définis dans .config-panel @media (min-width: 768px)
 }
 
 @keyframes slideDown {
@@ -1328,6 +1401,201 @@
   }
 }
 
+// Section Sélection de la voix (PC)
+.voice-selection-section {
+  margin-bottom: 0;
+
+  @media (max-width: 767px) {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+  }
+
+  .config-description {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .voice-language-group {
+    .voice-language-title {
+      margin: 0 0 var(--spacing-xs) 0;
+      font-size: 0.875rem; // 14px
+      font-weight: var(--font-weight-semibold); // 600
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+
+      @media (max-width: 767px) {
+        font-size: 0.8125rem; // 13px
+        margin-bottom: var(--spacing-xs);
+      }
+    }
+
+    &.voice-language-group-japanese {
+      margin-top: var(--spacing-md);
+    }
+
+    &.voice-language-group-french {
+      margin-top: calc(var(--spacing-xl) * 1.5);
+      margin-bottom: var(--spacing-md);
+    }
+  }
+}
+
+.voice-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  width: 100%;
+  box-sizing: border-box;
+  justify-items: center;
+  row-gap: calc(var(--spacing-md) + 35px);
+  
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+    gap: var(--spacing-sm);
+    row-gap: calc(var(--spacing-sm) + 30px);
+  }
+}
+
+.voice-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: var(--spacing-xs);
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  aspect-ratio: 1;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  justify-content: center;
+  padding-bottom: 0;
+  width: 100%;
+  max-width: 80px;
+  
+  @media (max-width: 767px) {
+    max-width: 65px;
+    padding: 4px;
+  }
+  
+  &:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+  
+  &.active {
+    border-color: var(--color-accent);
+    background-color: var(--color-background);
+    box-shadow: var(--shadow-lg);
+    border-width: 3px;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 24px;
+      height: 24px;
+      background-color: var(--color-accent);
+      border-radius: 50%;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    &::after {
+      content: '✓';
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 24px;
+      height: 24px;
+      color: var(--color-background);
+      font-size: 14px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 11;
+    }
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
+  }
+  
+  -webkit-tap-highlight-color: transparent;
+}
+
+.voice-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(80px - var(--spacing-xs) * 2 - 4px);
+  height: calc(80px - var(--spacing-xs) * 2 - 4px);
+  border-radius: 50%;
+  overflow: visible;
+  z-index: 1;
+  position: relative;
+  margin: 0 auto;
+  flex-shrink: 0;
+  background-color: transparent;
+  color: var(--color-primary);
+  
+  @media (min-width: 768px) {
+    transform: translateY(-4px);
+  }
+  
+  @media (max-width: 767px) {
+    width: calc(65px - 8px - 4px);
+    height: calc(65px - 8px - 4px);
+  }
+  
+  .voice-avatar {
+    width: 145%;
+    height: 145%;
+    object-fit: contain;
+    border-radius: 50%;
+    transform: translateY(-4px);
+  }
+}
+
+.voice-option.active .voice-preview {
+  @media (min-width: 768px) {
+    transform: translate(-1px, -4px);
+  }
+  
+  @media (max-width: 767px) {
+    transform: translateX(-1px);
+  }
+}
+
+.voice-name {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+  text-align: center;
+  z-index: 1;
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  
+  @media (max-width: 767px) {
+    font-size: 0.85rem;
+    bottom: -30px;
+  }
+}
+
 // La coche a été remplacée par une pastille via ::before et ::after sur .pill-toggle-button.active
 
 // Styles pour le toggle switch sur mobile uniquement
@@ -1659,7 +1927,8 @@
   .config-panel {
     // La hauteur est automatiquement alignée avec main-actions
     // grâce à align-items: stretch sur .home-content
-    // Pas de scroll, tout doit être visible
+    // Le scroll vertical est disponible à l'intérieur du panel (config-content)
+    // La scrollbar est cachée pour un design plus épuré
   }
 
 }
