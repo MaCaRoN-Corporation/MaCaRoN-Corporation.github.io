@@ -34,13 +34,7 @@
   text-decoration: none;
   color: var(--color-primary);
   font-weight: var(--font-weight-bold); // 800 pour un style très gras
-  transition: all var(--transition-fast);
   padding: var(--spacing-xs) 0;
-
-  &:hover {
-    opacity: 0.85;
-    transform: translateY(-1px);
-  }
 }
 
 .logo-container {
