@@ -27,7 +27,9 @@
 
   // Animation d'entrée : glissement depuis la droite vers la gauche (visible uniquement sur mobile)
   @media (max-width: 767px) {
-    animation: slideInLeft 0.3s ease-out forwards;
+    &.slide-in {
+      animation: slideInLeft 0.3s ease-out forwards;
+    }
     
     &.slide-out-right {
       animation: slideOutRight 0.3s ease-out forwards;
