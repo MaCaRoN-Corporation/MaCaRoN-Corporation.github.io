@@ -1,10 +1,13 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ChangeDetectorRef } from '@angular/core';
 import { RouterLink, Router, NavigationStart } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { GradeService } from '../../services/grade.service';
 import { ConfigService } from '../../services/config.service';
+import { SettingsService } from '../../services/settings.service';
+import { VoiceService } from '../../services/voice.service';
+import { VoiceId, Voice, DEFAULT_SETTINGS, getFullVoiceId, parseVoiceId } from '../../models/settings.model';
 
 @Component({
   selector: 'app-config',
@@ -33,6 +36,10 @@ export class ConfigComponent implements OnInit, OnDestroy {
   selectedGrade: string = '1er Dan'; // Grade par défaut
   isGradeDropdownOpen = false; // État du dropdown
 
+  // Sélection de la voix
+  selectedVoice: VoiceId = DEFAULT_SETTINGS.voice; // Voix par défaut
+  availableVoices: Voice[] = []; // Liste des voix disponibles (chargée dynamiquement)
+
   // Configuration du temps
   timeBetweenTechniques: number = 20; // secondes, valeur par défaut
   totalDuration: number = 10; // minutes, valeur par défaut (sera mis à jour selon le grade)
@@ -53,7 +60,10 @@ export class ConfigComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private gradeService: GradeService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private settingsService: SettingsService,
+    private voiceService: VoiceService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -72,8 +82,37 @@ export class ConfigComponent implements OnInit, OnDestroy {
     // Détecter le retour arrière du navigateur
     window.addEventListener('popstate', this.handlePopState);
 
+    // Charger les voix disponibles dynamiquement
+    this.loadVoices();
+
     // Charger la configuration depuis localStorage
     this.loadConfigFromStorage();
+  }
+
+  /**
+   * Charge les voix disponibles depuis le service
+   */
+  private loadVoices(): void {
+    this.subscriptions.add(
+      this.voiceService.getAvailableVoices().subscribe(voices => {
+        this.availableVoices = voices;
+        this.cdr.detectChanges(); // Forcer la détection de changement pour mobile
+      })
+    );
+  }
+
+  /**
+   * Getter pour les voix françaises
+   */
+  get frenchVoices(): Voice[] {
+    return this.availableVoices.filter(voice => voice.language === 'French');
+  }
+
+  /**
+   * Getter pour les voix japonaises
+   */
+  get japaneseVoices(): Voice[] {
+    return this.availableVoices.filter(voice => voice.language === 'Japanese');
   }
 
   /**
@@ -240,6 +279,13 @@ export class ConfigComponent implements OnInit, OnDestroy {
     this.includeWeaponTime = savedIncludeWeaponTime;
     this.includeRandoriTime = savedIncludeRandoriTime;
     this.randoriTime = savedRandoriTime;
+
+        // Charger la préférence de voix depuis SettingsService
+        this.settingsService.getSettings()
+          .pipe(take(1))
+          .subscribe(settings => {
+            this.selectedVoice = settings.voice || DEFAULT_SETTINGS.voice;
+          });
   }
 
   /**
@@ -410,6 +456,114 @@ export class ConfigComponent implements OnInit, OnDestroy {
   toggleIncludeRandoriTime(): void {
     this.includeRandoriTime = !this.includeRandoriTime;
     this.configService.updateIncludeRandoriTime(this.includeRandoriTime);
+  }
+
+  /**
+   * Vérifie si une voix est sélectionnée
+   * @param voice La voix à vérifier
+   * @returns true si la voix est sélectionnée
+   */
+  isVoiceSelected(voice: Voice): boolean {
+    const fullVoiceId = getFullVoiceId(voice);
+    return this.selectedVoice === fullVoiceId;
+  }
+
+  /**
+   * Gère le changement de voix
+   * @param voice La voix sélectionnée
+   */
+  onVoiceChange(voice: Voice): void {
+    const fullVoiceId = getFullVoiceId(voice);
+    this.selectedVoice = fullVoiceId;
+    this.settingsService.updateSettings({ voice: fullVoiceId });
+    // Jouer un extrait audio pour prévisualiser la voix
+    this.playVoicePreview(voice);
+  }
+  
+  /**
+   * Liste des fichiers audio possibles pour la prévisualisation
+   * Sélection aléatoire parmi cette liste
+   */
+  private readonly PREVIEW_AUDIO_FILES = [
+    'ai_hanmi_katate_dori.mp3',
+    'ikkyo.mp3',
+    'nikyo.mp3',
+    'sankyo.mp3',
+    'yonkyo.mp3',
+    'gokyo.mp3',
+    'irimi_nage.mp3',
+    'shiho_nage.mp3',
+    'kote_gaeshi.mp3',
+    'tenchi_nage.mp3',
+    'uchi_kaiten_nage.mp3',
+    'soto_kaiten_nage.mp3',
+    'koshi_nage.mp3',
+    'kokyu_nage.mp3',
+    'shomen_uchi.mp3',
+    'yokomen_uchi.mp3',
+    'katate_dori.mp3',
+    'ryote_dori.mp3',
+    'kata_dori.mp3',
+    'muna_dori.mp3'
+  ];
+
+  /**
+   * Joue un extrait audio aléatoire pour prévisualiser la voix sélectionnée
+   * @param voice La voix à prévisualiser
+   */
+  private playVoicePreview(voice: Voice): void {
+    // Sélectionner un fichier audio aléatoire
+    const randomIndex = Math.floor(Math.random() * this.PREVIEW_AUDIO_FILES.length);
+    const randomAudioFile = this.PREVIEW_AUDIO_FILES[randomIndex];
+    const audioPath = `assets/audio/${voice.language}/${voice.id}/${randomAudioFile}`;
+    
+    // Utiliser Web Audio API pour amplifier le volume de 50%
+    try {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const audio = new Audio(audioPath);
+      const source = audioContext.createMediaElementSource(audio);
+      const gainNode = audioContext.createGain();
+      
+      // Augmenter le volume de 50% (gain de 1.5)
+      gainNode.gain.value = 1.5;
+      
+      // Connecter la chaîne audio
+      source.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      // Gérer les erreurs silencieusement (fichier manquant, etc.)
+      audio.onerror = () => {
+        // Ne rien faire en cas d'erreur, l'utilisateur peut toujours sélectionner la voix
+      };
+      
+      // Jouer l'audio
+      audio.play().catch(error => {
+        // Ignorer les erreurs de lecture (par exemple si l'utilisateur n'a pas encore interagi avec la page)
+        console.debug('[ConfigComponent] Could not play voice preview:', error);
+      });
+    } catch (error) {
+      // Fallback vers l'API HTML Audio standard si Web Audio API n'est pas disponible
+      const audio = new Audio(audioPath);
+      audio.volume = 1.0;
+      
+      audio.onerror = () => {
+        // Ne rien faire en cas d'erreur
+      };
+      
+      audio.play().catch(err => {
+        console.debug('[ConfigComponent] Could not play voice preview:', err);
+      });
+    }
+  }
+  
+  /**
+   * Récupère l'icône SVG pour une voix donnée
+   * @param voiceId L'ID de la voix
+   * @returns Le SVG correspondant à la voix
+   */
+  getVoiceIcon(voiceId: VoiceId): string {
+    // Les icônes seront définies dans le template HTML
+    return voiceId;
   }
 
   /**

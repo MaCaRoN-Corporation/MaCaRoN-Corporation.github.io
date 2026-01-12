@@ -227,14 +227,14 @@
     
     <!-- Panel de configuration visible uniquement sur PC -->
     <div class="config-panel" *ngIf="!isMobile">
-      <!-- Icône de réglage en haut à droite -->
-      <div class="config-settings-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-        </svg>
-      </div>
-      <div class="config-content">
+      <div class="config-content" #configContent (scroll)="onConfigContentScroll()">
+        <!-- Icône de réglage en haut à droite -->
+        <div class="config-settings-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </div>
         <!-- Section Sélection du grade -->
         <div class="config-section grade-selection-section">
           <h3>Sélection du grade</h3>
@@ -465,7 +465,72 @@
           </div>
         </div>
 
+        <!-- Section Sélection de la voix -->
+        <div class="config-section voice-selection-section">
+          <h3>Sélection de la voix</h3>
+          <p class="config-description">Choisissez une voix pour les annonces ({{ availableVoices.length }} voix disponibles)</p>
+          
+          <!-- Voix japonaises -->
+          <div class="voice-language-group voice-language-group-japanese">
+            <h4 class="voice-language-title">Voix japonaises</h4>
+            <div class="voice-selector">
+              <button
+                *ngFor="let voice of japaneseVoices"
+                (click)="onVoiceChange(voice)"
+                class="voice-option"
+                [class.active]="isVoiceSelected(voice)"
+                [attr.aria-label]="'Sélectionner la voix ' + voice.displayName"
+                type="button">
+                <div class="voice-preview">
+                  <img 
+                    [src]="'assets/images/avatar/' + voice.language + '/' + voice.id + '.png'" 
+                    [alt]="voice.displayName"
+                    class="voice-avatar" />
+                </div>
+                <span class="voice-name">{{ voice.displayName }}</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Voix françaises -->
+          <div class="voice-language-group voice-language-group-french">
+            <h4 class="voice-language-title">Voix françaises</h4>
+            <div class="voice-selector">
+              <button
+                *ngFor="let voice of frenchVoices"
+                (click)="onVoiceChange(voice)"
+                class="voice-option"
+                [class.active]="isVoiceSelected(voice)"
+                [attr.aria-label]="'Sélectionner la voix ' + voice.displayName"
+                type="button">
+                <div class="voice-preview">
+                  <img 
+                    [src]="'assets/images/avatar/' + voice.language + '/' + voice.id + '.png'" 
+                    [alt]="voice.displayName"
+                    class="voice-avatar" />
+                </div>
+                <span class="voice-name">{{ voice.displayName }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
         <!-- Les autres sections de configuration seront ajoutées dans les stories suivantes -->
+      </div>
+      
+      <!-- Icône de souris animée pour indiquer le scroll (PC uniquement) -->
+      <div class="config-scroll-indicator" [class.hidden]="isScrollAtBottom || !hasScroll">
+        <div class="scroll-indicator-content">
+          <svg class="mouse-icon" width="32" height="42" viewBox="0 0 24 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Corps de la souris -->
+            <rect x="7" y="2" width="10" height="18" rx="5" fill="none" stroke="currentColor"/>
+            <!-- Roulette de scroll -->
+            <circle cx="12" cy="8" r="1.5" fill="currentColor"/>
+          </svg>
+          <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
       </div>
     </div>
   </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Technique } from '../models/technique.model';
+import { VoiceId } from '../models/settings.model';
 
 /**
  * Service pour gérer la lecture audio
@@ -18,10 +19,10 @@ export class AudioService {
   /**
    * Joue l'annonce audio d'une technique
    * @param technique La technique à annoncer
-   * @param voice Le type de voix à utiliser ('masculin' ou 'féminin')
+   * @param voiceId L'ID complet de la voix à utiliser (format: '{language}_{id}', ex: 'French_Male1', 'Japanese_Female2')
    * @returns Promise qui se résout quand l'audio est terminé
    */
-  playTechnique(technique: Technique, voice: 'masculin' | 'féminin'): Promise<void> {
+  playTechnique(technique: Technique, voiceId: VoiceId): Promise<void> {
     // Implementation will be in future stories
     return Promise.resolve();
   }
