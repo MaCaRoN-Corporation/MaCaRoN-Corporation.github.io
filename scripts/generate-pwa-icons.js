@@ -46,7 +46,7 @@ async function generateIcons() {
       await sharp(sourceIcon)
         .resize(size, size, {
           fit: 'contain',
-          background: { r: 255, g: 255, b: 255, alpha: 0 } // Fond transparent
+          background: { r: 255, g: 255, b: 255, alpha: 1 } // Fond blanc
         })
         .toFile(outputPath);
       
@@ -64,21 +64,21 @@ async function generateIcons() {
       const safeSize = Math.round(size * SAFE_AREA_RATIO); // Taille de la zone de sécurité
       const padding = Math.round(size * PADDING_RATIO); // Padding de chaque côté
       
-      // Créer une image avec fond transparent
+      // Créer une image avec fond blanc
       const iconBuffer = await sharp(sourceIcon)
         .resize(safeSize, safeSize, {
           fit: 'contain',
-          background: { r: 255, g: 255, b: 255, alpha: 0 }
+          background: { r: 255, g: 255, b: 255, alpha: 1 }
         })
         .toBuffer();
       
-      // Créer une image de la taille finale avec le padding
+      // Créer une image de la taille finale avec le padding et fond blanc
       await sharp({
         create: {
           width: size,
           height: size,
           channels: 4,
-          background: { r: 255, g: 255, b: 255, alpha: 0 }
+          background: { r: 255, g: 255, b: 255, alpha: 1 }
         }
       })
         .composite([{
