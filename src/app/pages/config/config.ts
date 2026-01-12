@@ -71,6 +71,9 @@ export class ConfigComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // Forcer le redémarrage de l'animation en mode standalone
+    // En réinitialisant isLeaving pour déclencher l'animation d'entrée
+    this.isLeaving = false;
     // Détecter quand on quitte la page (navigation vers une autre route)
     this.subscriptions.add(
       this.router.events
