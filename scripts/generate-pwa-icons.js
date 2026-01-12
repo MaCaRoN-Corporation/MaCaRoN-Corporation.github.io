@@ -2,7 +2,7 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-const sourceIcon = path.join(__dirname, '..', 'src', 'assets', 'images', 'belt.png');
+const sourceIcon = path.join(__dirname, '..', 'src', 'assets', 'images', 'icon_white.png');
 const publicDir = path.join(__dirname, '..', 'public');
 
 // Vérifier que le dossier public existe
