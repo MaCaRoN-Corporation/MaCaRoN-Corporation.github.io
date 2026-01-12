@@ -39,6 +39,10 @@ export class ConfigComponent implements OnInit, OnDestroy {
   // Sélection de la voix
   selectedVoice: VoiceId = DEFAULT_SETTINGS.voice; // Voix par défaut
   availableVoices: Voice[] = []; // Liste des voix disponibles (chargée dynamiquement)
+  
+  // Références pour la prévisualisation audio (optimisation performance)
+  private currentPreviewAudio: HTMLAudioElement | null = null;
+  private previewDebounceTimer: any = null;
 
   // Configuration du temps
   timeBetweenTechniques: number = 20; // secondes, valeur par défaut
@@ -509,51 +513,58 @@ export class ConfigComponent implements OnInit, OnDestroy {
 
   /**
    * Joue un extrait audio aléatoire pour prévisualiser la voix sélectionnée
+   * Optimisé pour éviter les lags lors de clics rapides
    * @param voice La voix à prévisualiser
    */
   private playVoicePreview(voice: Voice): void {
+    // Debounce : annuler le timer précédent si l'utilisateur clique rapidement
+    if (this.previewDebounceTimer) {
+      clearTimeout(this.previewDebounceTimer);
+    }
+    
+    // Arrêter l'audio précédent s'il est en cours
+    if (this.currentPreviewAudio) {
+      this.currentPreviewAudio.pause();
+      this.currentPreviewAudio.currentTime = 0;
+      this.currentPreviewAudio = null;
+    }
+    
+    // Debounce de 100ms pour éviter trop de clics rapides
+    this.previewDebounceTimer = setTimeout(() => {
+      this._playVoicePreviewInternal(voice);
+      this.previewDebounceTimer = null;
+    }, 100);
+  }
+  
+  /**
+   * Implémentation interne de la prévisualisation audio
+   * @param voice La voix à prévisualiser
+   */
+  private _playVoicePreviewInternal(voice: Voice): void {
     // Sélectionner un fichier audio aléatoire
     const randomIndex = Math.floor(Math.random() * this.PREVIEW_AUDIO_FILES.length);
     const randomAudioFile = this.PREVIEW_AUDIO_FILES[randomIndex];
     const audioPath = `assets/audio/${voice.language}/${voice.id}/${randomAudioFile}`;
     
-    // Utiliser Web Audio API pour amplifier le volume de 50%
-    try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const audio = new Audio(audioPath);
-      const source = audioContext.createMediaElementSource(audio);
-      const gainNode = audioContext.createGain();
-      
-      // Augmenter le volume de 50% (gain de 1.5)
-      gainNode.gain.value = 1.5;
-      
-      // Connecter la chaîne audio
-      source.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-      
-      // Gérer les erreurs silencieusement (fichier manquant, etc.)
-      audio.onerror = () => {
-        // Ne rien faire en cas d'erreur, l'utilisateur peut toujours sélectionner la voix
-      };
-      
-      // Jouer l'audio
-      audio.play().catch(error => {
-        // Ignorer les erreurs de lecture (par exemple si l'utilisateur n'a pas encore interagi avec la page)
-        console.debug('[ConfigComponent] Could not play voice preview:', error);
-      });
-    } catch (error) {
-      // Fallback vers l'API HTML Audio standard si Web Audio API n'est pas disponible
-      const audio = new Audio(audioPath);
-      audio.volume = 1.0;
-      
-      audio.onerror = () => {
-        // Ne rien faire en cas d'erreur
-      };
-      
-      audio.play().catch(err => {
-        console.debug('[ConfigComponent] Could not play voice preview:', err);
-      });
-    }
+    // Utiliser l'API HTML Audio standard (volume par défaut)
+    const audio = new Audio(audioPath);
+    this.currentPreviewAudio = audio;
+    
+    // Nettoyer l'audio quand il se termine
+    audio.addEventListener('ended', () => {
+      this.currentPreviewAudio = null;
+    });
+    
+    // Gérer les erreurs silencieusement
+    audio.onerror = () => {
+      this.currentPreviewAudio = null;
+    };
+    
+    // Jouer l'audio
+    audio.play().catch(error => {
+      this.currentPreviewAudio = null;
+      console.debug('[ConfigComponent] Could not play voice preview:', error);
+    });
   }
   
   /**
@@ -580,6 +591,17 @@ export class ConfigComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // Nettoyer les ressources audio
+    if (this.currentPreviewAudio) {
+      this.currentPreviewAudio.pause();
+      this.currentPreviewAudio = null;
+    }
+    
+    if (this.previewDebounceTimer) {
+      clearTimeout(this.previewDebounceTimer);
+      this.previewDebounceTimer = null;
+    }
+    
     this.subscriptions.unsubscribe();
     window.removeEventListener('popstate', this.handlePopState);
   }
