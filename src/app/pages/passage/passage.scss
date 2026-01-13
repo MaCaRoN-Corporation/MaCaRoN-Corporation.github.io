@@ -1,0 +1,904 @@
+.passage-page {
+  display: grid;
+  grid-template-rows: 1fr auto auto; // Technique, Timer, Historique (mobile)
+  height: 100%; // Prend 100% de la hauteur du main-content (qui est dans un flex container)
+  overflow: hidden;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  
+  @media (min-width: 768px) {
+    padding: 0.75rem;
+    gap: 0.75rem;
+    grid-template-columns: 1fr 40%; // Technique à gauche (60%), Historique à droite (40%)
+    grid-template-rows: auto 1fr; // Timer en haut (auto), Technique+Historique en bas (1fr)
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+.passage-header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 0; // Permet au flex de fonctionner correctement
+  grid-row: 1; // Première ligne (au-dessus du timer sur mobile)
+  
+  @media (min-width: 768px) {
+    grid-column: 1; // Colonne gauche
+    grid-row: 2; // Deuxième ligne (sous le timer)
+  }
+}
+
+// Colonne droite PC (Historique)
+.passage-right-column {
+  display: none; // Masqué par défaut (mobile)
+  
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    grid-column: 2; // Colonne droite
+    grid-row: 2; // Deuxième ligne (sous le timer)
+    min-height: 0;
+  }
+  
+  @media (min-width: 1024px) {
+    gap: 1rem;
+  }
+}
+
+.passage-header-right {
+  grid-column: 1 / -1; // Toute la largeur
+  grid-row: 2; // Deuxième ligne (au-dessus de l'historique sur mobile)
+  flex-shrink: 0;
+  
+  @media (min-width: 768px) {
+    grid-row: 1; // Première ligne (au-dessus) sur PC
+  }
+}
+
+// Glassmorphism de base pour toutes les cartes
+.glass-card {
+  width: 100%;
+  border-radius: 16px;
+  padding: 1rem;
+  box-sizing: border-box;
+  
+  @media (min-width: 1024px) {
+    padding: 1.5rem;
+  }
+  
+  // Glassmorphism pour apparence claire - transparent pour voir l'arrière-plan
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  
+  // Glassmorphism pour apparence sombre
+  :host-context(.appearance-sombre) & {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+// Barre de contrôle mobile (utilise maintenant .controls-section directement)
+
+// Controls Section (Timer + Progression + Contrôles intégrés)
+.controls-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  min-height: auto;
+  padding: 0.75rem 1rem;
+  
+  // Séparateurs verticaux entre les sections (deux barres sur mobile et PC)
+  .timer-display {
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+  
+  .progress-content {
+    flex: 1;
+    padding: 0 1rem;
+    border-left: 1px solid var(--color-border); // Barre entre timer et progression
+    border-right: 1px solid var(--color-border); // Barre entre progression et boutons
+    min-width: 0;
+  }
+  
+  .controls-content {
+    margin-left: 1rem;
+    flex-shrink: 0;
+  }
+  
+  @media (min-width: 768px) {
+    padding: 1rem 1.5rem;
+    
+    .timer-display {
+      margin-right: 1.5rem;
+    }
+    
+    .progress-content {
+      padding: 0 1.5rem;
+    }
+    
+    .controls-content {
+      margin-left: 1.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 1.25rem 2rem;
+    
+    .timer-display {
+      margin-right: 2rem;
+    }
+    
+    .progress-content {
+      padding: 0 2rem;
+    }
+    
+    .controls-content {
+      margin-left: 2rem;
+    }
+  }
+  
+  .timer-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: var(--color-text-primary);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &.paused {
+      opacity: 0.7;
+    }
+    
+    :host-context(.appearance-sombre) & {
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    @media (min-width: 768px) {
+      font-size: 2.5rem;
+      letter-spacing: 0.1em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      
+      :host-context(.appearance-sombre) & {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      font-size: 3rem;
+    }
+  }
+  
+  .progress-content {
+    width: 100%;
+    flex: 1 1 auto; // Prend le maximum d'espace disponible
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 0;
+
+    @media (min-width: 768px) {
+      min-height: auto;
+      gap: 0.5rem;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-align: center;
+      white-space: nowrap;
+      margin-bottom: 0.375rem;
+      
+      @media (min-width: 768px) {
+        font-size: 0.9375rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      @media (min-width: 1024px) {
+        font-size: 1rem;
+        margin-bottom: 0.625rem;
+      }
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+      
+      :host-context(.appearance-sombre) & {
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+      
+      @media (min-width: 768px) {
+        height: 10px;
+        border-radius: 5px;
+      }
+      
+      @media (min-width: 1024px) {
+        height: 12px;
+        border-radius: 6px;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+        border-radius: inherit;
+        transition: width 0.3s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  .controls-content {
+    display: flex;
+    gap: 0.875rem;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    @media (min-width: 1024px) {
+      gap: 1rem;
+    }
+    
+    .control-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background-color: var(--color-button-primary);
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+      
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+      
+      &:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+      }
+      
+      &:active {
+        transform: translateY(0) scale(0.95);
+      }
+      
+      &.paused {
+        background-color: var(--color-accent);
+      }
+      
+      &.restart-button {
+        background-color: var(--color-secondary);
+        
+        &:hover {
+          background-color: var(--color-primary);
+        }
+      }
+      
+      @media (min-width: 768px) {
+        width: 48px;
+        height: 48px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+        
+        svg {
+          width: 22px;
+          height: 22px;
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        width: 52px;
+        height: 52px;
+        
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
+}
+
+// Current Technique Section (avec compte à rebours intégré)
+.current-technique-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 150px;
+  gap: 1rem;
+  container-type: size;
+  
+  .countdown-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+    
+    :host-context(.appearance-sombre) & {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .countdown-number {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: var(--color-text-primary);
+    }
+    
+    @media (min-width: 768px) {
+      width: 70px;
+      height: 70px;
+      
+      .countdown-number {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      width: 80px;
+      height: 80px;
+      border-width: 4px;
+      
+      .countdown-number {
+        font-size: 2.5rem;
+      }
+    }
+  }
+
+  .technique-content {
+    text-align: center;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0; // Permet au contenu de rétrécir
+    padding: 0 1rem; // Padding horizontal pour éviter que les textes touchent les bords
+    box-sizing: border-box;
+
+    .technique-attack {
+      font-size: clamp(1.125rem, 6.25cqw, 6rem);
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.75rem;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .technique-name {
+      font-size: clamp(1.875rem, 10cqw, 14rem);
+      font-weight: bold;
+      color: var(--color-text-primary);
+      margin-bottom: 0.75rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      line-height: 1.1;
+      white-space: nowrap;
+      
+      :host-context(.appearance-sombre) & {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .technique-position {
+      font-size: clamp(1rem, 4.25cqw, 4rem);
+      color: var(--color-text-secondary);
+      font-style: italic;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+}
+
+
+// History Section (PC)
+.passage-history {
+  display: none; // Masqué par défaut (mobile)
+  
+  @media (min-width: 768px) {
+    display: block;
+    max-height: none;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    position: relative;
+    
+    // Masquer la scrollbar
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE et Edge
+    
+    &::-webkit-scrollbar {
+      display: none; // Chrome, Safari, Opera
+    }
+    
+    .history-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 1rem 0.5rem 1rem;
+      background-color: transparent;
+      z-index: 4;
+      pointer-events: none;
+      
+      @media (min-width: 1024px) {
+        padding: 1.5rem 1.5rem 0.75rem 1.5rem;
+      }
+      
+      h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--color-text-primary);
+        pointer-events: auto;
+      }
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding-top: 3.5rem; // Espace pour le header fixe
+
+      .history-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem;
+        border-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.05);
+        
+        :host-context(.appearance-sombre) & {
+          background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .history-number {
+          font-weight: bold;
+          color: var(--color-text-secondary);
+          min-width: 40px;
+        }
+
+        .history-content {
+          flex: 1;
+
+          .history-attack-technique {
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 0.25rem;
+          }
+
+          .history-position {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            font-style: italic;
+          }
+        }
+      }
+    }
+    
+    // Indicateur de scroll (2 chevrons)
+    .history-scroll-indicator {
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: var(--spacing-xs);
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--color-text-secondary);
+      pointer-events: none;
+      z-index: 5;
+      opacity: 1;
+      transition: opacity 0.3s ease-out;
+
+      &.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .scroll-icon {
+        width: 24px;
+        height: 24px;
+        animation: scrollIndicatorMove 2s ease-in-out infinite;
+      }
+    }
+  }
+}
+
+// History Section (Mobile)
+.passage-history-mobile {
+  max-height: 30vh;
+  overflow-y: auto;
+  border-top: 1px solid var(--color-border);
+  position: relative;
+  grid-row: 3; // Troisième ligne (sous le timer sur mobile)
+  
+  // Masquer la scrollbar
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE et Edge
+  
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, Opera
+  }
+  
+  @media (min-width: 768px) {
+    display: none; // Masqué sur PC
+  }
+  
+  .history-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0.75rem 0.75rem 0.5rem 0.75rem;
+    background-color: transparent;
+    z-index: 4;
+    pointer-events: none;
+    
+    h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--color-text-primary);
+      pointer-events: auto;
+    }
+  }
+
+  .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 3rem; // Espace pour le header fixe
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      background-color: rgba(0, 0, 0, 0.05);
+      
+      :host-context(.appearance-sombre) & {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .history-number {
+        font-weight: bold;
+        color: var(--color-text-secondary);
+        min-width: 40px;
+      }
+
+      .history-content {
+        flex: 1;
+
+        .history-attack-technique {
+          font-weight: 600;
+          color: var(--color-text-primary);
+          margin-bottom: 0.25rem;
+        }
+
+        .history-position {
+          font-size: 0.875rem;
+          color: var(--color-text-secondary);
+          font-style: italic;
+        }
+      }
+    }
+  }
+  
+  // Indicateur de scroll (2 chevrons - PC et mobile)
+  .history-scroll-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: var(--spacing-xs);
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-text-secondary);
+    pointer-events: none;
+    z-index: 5;
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scroll-icon {
+      width: 24px;
+      height: 24px;
+      animation: scrollIndicatorMove 2s ease-in-out infinite;
+    }
+  }
+}
+
+// Animation pour l'indicateur de scroll (mouvement vers le bas)
+@keyframes scrollIndicatorMove {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
+}
+
+// Responsive: Mobile (<768px) - Layout vertical
+@media (max-width: 767px) {
+  .passage-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%; // Prend 100% de la hauteur du main-content
+    overflow: hidden;
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  // Barre de contrôle mobile (timer + progression + boutons alignés)
+  .mobile-controls-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    flex-shrink: 0;
+    
+    .mobile-timer {
+      flex-shrink: 0;
+      
+      .timer-display {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--color-text-primary);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        transition: opacity 0.3s ease;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+        
+        &.paused {
+          opacity: 0.7;
+        }
+        
+        :host-context(.appearance-sombre) & {
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+    
+    .mobile-progress {
+      flex: 0 1 auto;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      max-width: 35%;
+      
+      .progress-text {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+        text-align: center;
+        white-space: nowrap;
+      }
+      
+      .progress-bar-container {
+        width: 100%;
+        height: 4px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+        overflow: hidden;
+        
+        :host-context(.appearance-sombre) & {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+          height: 100%;
+          background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+          border-radius: inherit;
+          transition: width 0.3s ease;
+        }
+      }
+    }
+    
+    .mobile-controls-buttons {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-shrink: 0;
+      
+      .control-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background-color: var(--color-button-primary);
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+        
+        &:active {
+          transform: scale(0.9);
+        }
+        
+        &.paused {
+          background-color: var(--color-accent);
+        }
+        
+        &.restart-button {
+          background-color: var(--color-secondary);
+          
+          &:active {
+            background-color: var(--color-primary);
+          }
+        }
+      }
+    }
+  }
+
+  .passage-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto; // Scroll si nécessaire
+  }
+
+  .passage-header-left,
+  .passage-header-center,
+  .passage-header-right {
+    width: 100%;
+  }
+
+  .passage-header-left {
+    display: none; // Masqué sur mobile
+  }
+
+  .passage-header-center {
+    flex: 1;
+    min-height: 0;
+    order: 1; // Première position (techniques)
+  }
+
+  .passage-header-right {
+    order: 2; // Deuxième position (timer au-dessus de l'historique)
+  }
+
+  .passage-history-mobile {
+    order: 3; // Troisième position (historique sous le timer)
+  }
+
+
+  .current-technique-section {
+    min-height: 150px;
+    gap: 0.75rem;
+    padding: 5% !important; // 5% de padding = 90% de contenu (override du padding du glass-card)
+    
+    .countdown-circle {
+      width: 50px;
+      height: 50px;
+      border-width: 2px;
+      flex-shrink: 0;
+      
+      .countdown-number {
+        font-size: 1.5rem;
+      }
+    }
+    
+    .technique-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      min-height: 0;
+      
+      .technique-attack {
+        font-size: clamp(1.125rem, 6cqw, 6rem);
+      }
+
+      .technique-name {
+        font-size: clamp(1.75rem, 9.5cqw, 14rem);
+        line-height: 1.1;
+      }
+
+      .technique-position {
+        font-size: clamp(1rem, 4cqw, 4rem);
+      }
+    }
+  }
+
+
+  .passage-history-mobile {
+    padding: 0.75rem;
+    width: 100%; // Pleine largeur sur mobile
+    
+    .history-header h3 {
+      font-size: 1.1rem;
+    }
+    
+    .history-list {
+      padding-top: 3rem; // Espace pour le header fixe (déjà défini dans le style de base)
+      gap: 0.5rem;
+      
+      .history-item {
+        padding: 0.5rem;
+        
+        .history-number {
+          min-width: 35px;
+          font-size: 0.9rem;
+        }
+        
+        .history-content {
+          .history-attack-technique {
+            font-size: 0.9rem;
+          }
+          
+          .history-position {
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Desktop: Ajustements pour grandes tailles
+@media (min-width: 1024px) {
+  .passage-page {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .controls-section .timer-display {
+    font-size: 4rem;
+  }
+}

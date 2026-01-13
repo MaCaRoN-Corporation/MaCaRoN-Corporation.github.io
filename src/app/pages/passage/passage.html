@@ -1,4 +1,98 @@
 <div class="passage-page">
-  <h1>Passage de Grade</h1>
-  <p>Page d'exécution du passage</p>
+  <!-- Timer + Progression + Contrôles (PC - au-dessus) -->
+  <div class="passage-header-right">
+    <div class="controls-section glass-card">
+      <div class="timer-display" [class.paused]="isPaused">
+        {{ formatTime(elapsedTime) }}
+      </div>
+      <div class="progress-content">
+        <div class="progress-text">{{ currentProgress }} / {{ totalTechniques }}</div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" [style.width.%]="progressPercentage"></div>
+        </div>
+      </div>
+      <div class="controls-content">
+        <button class="control-button" type="button" [class.paused]="isPaused" (click)="togglePause()">
+          <svg *ngIf="!isPaused" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+          <svg *ngIf="isPaused" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </button>
+        <button class="control-button restart-button" type="button" (click)="restartPassage()" title="Recommencer">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zone principale: Grid 2 colonnes sur PC (technique à gauche, historique à droite), vertical sur mobile -->
+  <div class="passage-header-center">
+    <div class="current-technique-section glass-card">
+      <div class="countdown-circle">
+        <span class="countdown-number">{{ countdown }}</span>
+      </div>
+      <div class="technique-content">
+        <div class="technique-attack">{{ currentTechnique.attack }}</div>
+        <div class="technique-name">{{ currentTechnique.technique }}</div>
+        <div class="technique-position">{{ getPositionLabel(currentTechnique.position) }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Colonne droite PC: Historique -->
+  <div class="passage-right-column">
+    <!-- Historique (PC) -->
+    <div class="passage-history glass-card" #historyElement (scroll)="onHistoryScroll()">
+      <div class="history-header">
+        <h3>Historique</h3>
+      </div>
+      <div class="history-list">
+        <div class="history-item" *ngFor="let item of history.slice().reverse(); let i = index">
+          <div class="history-number">#{{ history.length - i }}</div>
+          <div class="history-content">
+            <div class="history-attack-technique">{{ item.attack }} - {{ item.technique }}</div>
+            <div class="history-position">{{ getPositionLabel(item.position) }}</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Indicateur de scroll (2 chevrons) -->
+      <div class="history-scroll-indicator" [class.hidden]="!hasScroll">
+        <svg class="scroll-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+          <polyline points="6 15 12 21 18 15"></polyline>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Historique (Mobile) -->
+  <div class="passage-history-mobile glass-card" #historyElementMobile (scroll)="onHistoryScroll()">
+    <div class="history-header">
+      <h3>Historique</h3>
+    </div>
+    <div class="history-list">
+      <div class="history-item" *ngFor="let item of history.slice().reverse(); let i = index">
+        <div class="history-number">#{{ history.length - i }}</div>
+        <div class="history-content">
+          <div class="history-attack-technique">{{ item.attack }} - {{ item.technique }}</div>
+          <div class="history-position">{{ getPositionLabel(item.position) }}</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Indicateur de scroll (2 chevrons) -->
+    <div class="history-scroll-indicator" [class.hidden]="isScrollAtBottom || !hasScroll">
+      <svg class="scroll-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+        <polyline points="6 15 12 21 18 15"></polyline>
+      </svg>
+    </div>
+  </div>
 </div>
