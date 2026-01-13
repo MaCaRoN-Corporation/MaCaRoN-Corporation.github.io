@@ -285,12 +285,13 @@ export class TechniqueFilterComponent implements OnInit, AfterViewChecked {
   /**
    * Vérifie si une position est sélectionnée
    * Une position est sélectionnée uniquement si toutes ses attaques sont sélectionnées
+   * Inclut même les attaques avec des listes vides (Jiyu Waza)
    */
   isPositionSelected(position: Position): boolean {
     const positionData = this.hierarchicalData.get(position);
     if (!positionData) return false;
     
-    // Vérifier que toutes les attaques sont sélectionnées
+    // Vérifier que toutes les attaques sont sélectionnées (y compris celles avec listes vides)
     for (const [attack, techniques] of positionData.attacks.entries()) {
       if (!this.isAttackSelected(position, attack)) {
         return false;
@@ -303,6 +304,7 @@ export class TechniqueFilterComponent implements OnInit, AfterViewChecked {
 
   /**
    * Vérifie si une position est dans un état indéterminé (certaines attaques/techniques sélectionnées mais pas toutes)
+   * Inclut même les attaques avec des listes vides (Jiyu Waza)
    */
   isPositionIndeterminate(position: Position): boolean {
     const positionData = this.hierarchicalData.get(position);
@@ -318,6 +320,18 @@ export class TechniqueFilterComponent implements OnInit, AfterViewChecked {
     for (const [attack, techniques] of positionData.attacks.entries()) {
       const key = `${position}-${attack}`;
       const techniquesSet = this.selectedTechniques.get(key);
+      
+      // Pour les attaques avec liste vide (Jiyu Waza), vérifier si la clé existe
+      if (techniques.length === 0) {
+        if (techniquesSet !== undefined) {
+          hasAnySelection = true;
+        } else {
+          allAttacksSelected = false;
+        }
+        continue;
+      }
+      
+      // Pour les attaques avec techniques
       const selectedCount = techniquesSet ? techniquesSet.size : 0;
       
       if (selectedCount > 0) {
@@ -336,31 +350,37 @@ export class TechniqueFilterComponent implements OnInit, AfterViewChecked {
 
   /**
    * Vérifie si une attaque est sélectionnée
-   * Une attaque est sélectionnée uniquement si toutes ses techniques sont sélectionnées
+   * Une attaque est sélectionnée si toutes ses techniques sont sélectionnées
+   * Pour les attaques avec liste vide (Jiyu Waza), elles sont sélectionnées si la clé existe avec un Set vide
    */
   isAttackSelected(position: Position, attack: string): boolean {
     const positionData = this.hierarchicalData.get(position);
     if (!positionData) return false;
     
     const techniques = positionData.attacks.get(attack) || [];
-    if (techniques.length === 0) return false;
-    
     const key = `${position}-${attack}`;
     const techniquesSet = this.selectedTechniques.get(key);
-    if (!techniquesSet) return false;
     
-    // L'attaque est sélectionnée si toutes ses techniques sont sélectionnées
+    // Si l'attaque n'a pas de techniques (Jiyu Waza), elle est sélectionnée si la clé existe
+    if (techniques.length === 0) {
+      return techniquesSet !== undefined;
+    }
+    
+    // Si l'attaque a des techniques, elle est sélectionnée si toutes ses techniques sont sélectionnées
+    if (!techniquesSet) return false;
     return techniquesSet.size === techniques.length;
   }
 
   /**
    * Vérifie si une attaque est dans un état indéterminé (certaines techniques sélectionnées mais pas toutes)
+   * Les attaques avec liste vide (Jiyu Waza) ne peuvent pas être indéterminées
    */
   isAttackIndeterminate(position: Position, attack: string): boolean {
     const positionData = this.hierarchicalData.get(position);
     if (!positionData) return false;
     
     const techniques = positionData.attacks.get(attack) || [];
+    // Les attaques avec liste vide (Jiyu Waza) ne peuvent pas être indéterminées
     if (techniques.length === 0) return false;
     
     // Si l'attaque est complètement sélectionnée, elle n'est pas indéterminée
@@ -387,12 +407,24 @@ export class TechniqueFilterComponent implements OnInit, AfterViewChecked {
 
   /**
    * Gère le toggle d'une position (avec cascade)
+   * Inclut même les attaques avec des listes vides (Jiyu Waza)
    */
-  onPositionToggle(position: Position): void {
+  onPositionToggle(position: Position, event?: Event): void {
+    // Empêcher la propagation de l'événement si fourni
+    if (event) {
+      event.stopPropagation();
+    }
+    
     const isSelected = this.isPositionSelected(position);
+    const positionData = this.hierarchicalData.get(position);
+    
+    if (!positionData) {
+      console.warn(`[TechniqueFilterComponent] No data found for position: ${position}`);
+      return;
+    }
     
     if (isSelected) {
-      // Désélectionner toutes les techniques de cette position
+      // Désélectionner toutes les techniques de cette position (y compris les listes vides)
       const keysToDelete: string[] = [];
       this.selectedTechniques.forEach((_, key) => {
         if (key.startsWith(`${position}-`)) {
@@ -402,15 +434,14 @@ export class TechniqueFilterComponent implements OnInit, AfterViewChecked {
       keysToDelete.forEach(key => this.selectedTechniques.delete(key));
     } else {
       // Sélectionner toutes les techniques de toutes les attaques de cette position
-      const positionData = this.hierarchicalData.get(position);
-      if (positionData) {
-        positionData.attacks.forEach((techniques, attack) => {
-          // Sélectionner toutes les techniques de cette attaque
-          const key = `${position}-${attack}`;
-          const techniquesSet = new Set<string>(techniques);
-          this.selectedTechniques.set(key, techniquesSet);
-        });
-      }
+      // Inclure même les attaques sans techniques (Jiyu Waza) avec un Set vide
+      positionData.attacks.forEach((techniques, attack) => {
+        const key = `${position}-${attack}`;
+        // Pour les attaques avec techniques, créer un Set avec toutes les techniques
+        // Pour les attaques sans techniques (Jiyu Waza), créer un Set vide pour marquer la sélection
+        const techniquesSet = new Set<string>(techniques);
+        this.selectedTechniques.set(key, techniquesSet);
+      });
     }
     
     // Mettre à jour l'état indéterminé après le changement

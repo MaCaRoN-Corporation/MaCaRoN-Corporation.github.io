@@ -68,7 +68,7 @@
               #positionCheckbox
               type="checkbox"
               [checked]="isPositionSelected(position)"
-              (change)="onPositionToggle(position)"
+              (click)="onPositionToggle(position, $event)"
               [attr.aria-label]="'Sélectionner ' + position">
             <span class="position-label">{{ position }}</span>
           </label>
@@ -120,7 +120,7 @@
               #positionCheckbox
               type="checkbox"
               [checked]="isPositionSelected(position)"
-              (change)="onPositionToggle(position)"
+              (click)="onPositionToggle(position, $event)"
               [attr.aria-label]="'Sélectionner ' + position">
             <span class="position-label">{{ position }}</span>
           </label>
