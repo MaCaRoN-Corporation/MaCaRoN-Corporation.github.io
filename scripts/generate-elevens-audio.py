@@ -20,7 +20,7 @@ import requests
 # F2-"YxrwjAKoUKULGd0g8K9Y"
 # F3-"12CHcREbuPdJY02VY7zT"
 
-API_KEY = " "
+API_KEY = ""
 VOICE_ID = "12CHcREbuPdJY02VY7zT"
 OUTPUT_DIR = "../src/assets/audio/French/Female3"
 MODEL_ID = "eleven_multilingual_v2"
