@@ -18,6 +18,7 @@
     padding: var(--spacing-lg);
     box-sizing: border-box;
   }
+
   &::before {
     content: '';
     position: absolute;
@@ -29,7 +30,7 @@
     pointer-events: none;
     z-index: 0;
   }
-  
+
   // Overlay adapté pour le thème sombre (voile léger pour améliorer la lisibilité)
   .appearance-sombre &::before {
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.1) 100%);
@@ -49,6 +50,7 @@
   box-sizing: border-box;
 
   flex-direction: column;
+
   // Sur mobile : titre en haut, reste du contenu espacé pour occuper toute la hauteur
   @media (max-width: 767px) {
     justify-content: flex-start; // Titre en haut
@@ -58,7 +60,7 @@
     height: 100%; // Prend toute la hauteur disponible
     min-height: 100vh; // Minimum la hauteur de la vue
   }
-  
+
   @media (min-width: 768px) {
     flex-direction: row;
     align-items: stretch;
@@ -127,7 +129,7 @@
   margin: 0 auto;
   padding: 0;
   line-height: 1.4;
-  
+
   // Mobile : centré sur la page, glassmorphism avec même effet
   @media (max-width: 767px) {
     font-size: 0.95rem; // Réduit de 1.4rem
@@ -148,20 +150,20 @@
     // Glassmorphism original : même effet que sur PC
     backdrop-filter: blur(16px) saturate(200%) brightness(1.1);
     -webkit-backdrop-filter: blur(16px) saturate(200%) brightness(1.1);
-    
+
     // Renforcement du backdrop-filter pour le mode clair
     :host-context(.appearance-clair) &,
     .appearance-clair & {
       backdrop-filter: blur(20px) saturate(250%) brightness(1.15);
       -webkit-backdrop-filter: blur(20px) saturate(250%) brightness(1.15);
     }
-    
+
     // Border-radius asymétrique pour une forme plus organique et originale
     border-radius: 20px 8px 20px 8px; // Coins alternés pour un effet unique
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
-    
+
     // Effet de brillance animé en arrière-plan
     &::before {
       content: '';
@@ -170,90 +172,77 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(
-        45deg,
-        transparent 30%,
-        rgba(255, 255, 255, 0.15) 50%,
-        transparent 70%
-      );
+      background: linear-gradient(45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.15) 50%,
+          transparent 70%);
       animation: shimmer 8s infinite;
       pointer-events: none;
       z-index: 0;
     }
-    
+
     // Le texte doit être au-dessus de l'effet de brillance
-    > * {
+    >* {
       position: relative;
       z-index: 1;
     }
-    
+
     // Adaptation pour le thème clair (explicite) - fond assombri pour meilleur contraste
     :host-context(.appearance-clair) &,
     .appearance-clair & {
-      background: linear-gradient(
-        135deg,
-        rgba(240, 235, 225, 0.9) 0%,
-        rgba(235, 230, 220, 0.85) 50%,
-        rgba(240, 235, 225, 0.9) 100%
-      );
+      background: linear-gradient(135deg,
+          rgba(240, 235, 225, 0.9) 0%,
+          rgba(235, 230, 220, 0.85) 50%,
+          rgba(240, 235, 225, 0.9) 100%);
       border: none; // Pas de bordure pour le glassmorphism
-      box-shadow: 
+      box-shadow:
         0 12px 40px rgba(0, 0, 0, 0.35), // Ombre très prononcée
         0 6px 20px rgba(0, 0, 0, 0.3),
         0 2px 8px rgba(0, 0, 0, 0.2),
         inset 0 2px 0 rgba(255, 255, 255, 0.6), // Highlight modéré
         inset 0 -2px 0 rgba(200, 190, 180, 0.3);
       color: var(--color-text-secondary);
-      
+
       &::before {
-        background: linear-gradient(
-          45deg,
-          transparent 30%,
-          rgba(255, 255, 255, 0.3) 50%, // Brillance modérée
-          transparent 70%
-        );
+        background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.3) 50%, // Brillance modérée
+            transparent 70%);
       }
     }
-    
+
     // Thème clair par défaut (si pas de classe spécifique)
-    background: linear-gradient(
-      135deg,
+    background: linear-gradient(135deg,
       rgba(240, 235, 225, 0.9) 0%,
       rgba(235, 230, 220, 0.85) 50%,
-      rgba(240, 235, 225, 0.9) 100%
-    );
+      rgba(240, 235, 225, 0.9) 100%);
     border: none; // Pas de bordure pour le glassmorphism
-    box-shadow: 
-      0 12px 40px rgba(0, 0, 0, 0.35),
-      0 6px 20px rgba(0, 0, 0, 0.3),
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      inset 0 2px 0 rgba(255, 255, 255, 0.6),
-      inset 0 -2px 0 rgba(200, 190, 180, 0.3);
-    
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35),
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -2px 0 rgba(200, 190, 180, 0.3);
+
     // Adaptation pour le thème sombre
     :host-context(.appearance-sombre) &,
     .appearance-sombre & {
-      background: linear-gradient(
-        135deg,
-        rgba(15, 20, 30, 0.7) 0%,
-        rgba(20, 25, 35, 0.65) 50%,
-        rgba(15, 20, 30, 0.7) 100%
-      );
+      background: linear-gradient(135deg,
+          rgba(15, 20, 30, 0.7) 0%,
+          rgba(20, 25, 35, 0.65) 50%,
+          rgba(15, 20, 30, 0.7) 100%);
       border: none; // Pas de bordure pour le glassmorphism
-      box-shadow: 
+      box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.5),
         0 4px 16px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
         inset 0 -1px 0 rgba(0, 0, 0, 0.3);
       color: var(--color-text-secondary);
-      
+
       &::before {
-        background: linear-gradient(
-          45deg,
-          transparent 30%,
-          rgba(255, 255, 255, 0.12) 50%,
-          transparent 70%
-        );
+        background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.12) 50%,
+            transparent 70%);
       }
     }
   }
@@ -270,19 +259,20 @@
     // Glassmorphism original : forme asymétrique avec effets visuels uniques
     backdrop-filter: blur(16px) saturate(200%) brightness(1.1);
     -webkit-backdrop-filter: blur(16px) saturate(200%) brightness(1.1);
-    
+
     // Renforcement du backdrop-filter pour le mode clair
     :host-context(.appearance-clair) &,
     .appearance-clair & {
       backdrop-filter: blur(20px) saturate(250%) brightness(1.15);
       -webkit-backdrop-filter: blur(20px) saturate(250%) brightness(1.15);
     }
+
     // Border-radius asymétrique pour une forme plus organique et originale
     border-radius: 20px 8px 20px 8px; // Coins alternés pour un effet unique
     box-sizing: border-box; // Inclut le padding dans la largeur (comme le bouton)
     position: relative;
     overflow: hidden;
-    
+
     // Effet de brillance animé en arrière-plan
     &::before {
       content: '';
@@ -291,90 +281,77 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(
-        45deg,
-        transparent 30%,
-        rgba(255, 255, 255, 0.1) 50%,
-        transparent 70%
-      );
+      background: linear-gradient(45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%);
       animation: shimmer 8s infinite;
       pointer-events: none;
       z-index: 0;
     }
-    
+
     // Le texte doit être au-dessus de l'effet de brillance
-    > * {
+    >* {
       position: relative;
       z-index: 1;
     }
-    
+
     // Adaptation pour le thème clair (explicite) - fond assombri pour meilleur contraste
     :host-context(.appearance-clair) &,
     .appearance-clair & {
-      background: linear-gradient(
-        135deg,
-        rgba(240, 235, 225, 0.9) 0%,
-        rgba(235, 230, 220, 0.85) 50%,
-        rgba(240, 235, 225, 0.9) 100%
-      );
+      background: linear-gradient(135deg,
+          rgba(240, 235, 225, 0.9) 0%,
+          rgba(235, 230, 220, 0.85) 50%,
+          rgba(240, 235, 225, 0.9) 100%);
       border: none; // Pas de bordure pour le glassmorphism
-      box-shadow: 
+      box-shadow:
         0 12px 40px rgba(0, 0, 0, 0.35), // Ombre très prononcée
         0 6px 20px rgba(0, 0, 0, 0.3),
         0 2px 8px rgba(0, 0, 0, 0.2),
         inset 0 2px 0 rgba(255, 255, 255, 0.6), // Highlight modéré
         inset 0 -2px 0 rgba(200, 190, 180, 0.3);
       color: var(--color-text-secondary);
-      
+
       &::before {
-        background: linear-gradient(
-          45deg,
-          transparent 30%,
-          rgba(255, 255, 255, 0.3) 50%, // Brillance modérée
-          transparent 70%
-        );
+        background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.3) 50%, // Brillance modérée
+            transparent 70%);
       }
     }
-    
+
     // Thème clair par défaut (si pas de classe spécifique)
-    background: linear-gradient(
-      135deg,
+    background: linear-gradient(135deg,
       rgba(240, 235, 225, 0.9) 0%,
       rgba(235, 230, 220, 0.85) 50%,
-      rgba(240, 235, 225, 0.9) 100%
-    );
+      rgba(240, 235, 225, 0.9) 100%);
     border: none; // Pas de bordure pour le glassmorphism
-    box-shadow: 
-      0 12px 40px rgba(0, 0, 0, 0.35),
-      0 6px 20px rgba(0, 0, 0, 0.3),
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      inset 0 2px 0 rgba(255, 255, 255, 0.6),
-      inset 0 -2px 0 rgba(200, 190, 180, 0.3);
-    
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35),
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -2px 0 rgba(200, 190, 180, 0.3);
+
     // Adaptation pour le thème sombre
     :host-context(.appearance-sombre) &,
     .appearance-sombre & {
-      background: linear-gradient(
-        135deg,
-        rgba(15, 20, 30, 0.7) 0%,
-        rgba(20, 25, 35, 0.65) 50%,
-        rgba(15, 20, 30, 0.7) 100%
-      );
+      background: linear-gradient(135deg,
+          rgba(15, 20, 30, 0.7) 0%,
+          rgba(20, 25, 35, 0.65) 50%,
+          rgba(15, 20, 30, 0.7) 100%);
       border: none; // Pas de bordure pour le glassmorphism
-      box-shadow: 
+      box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.5),
         0 4px 16px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
         inset 0 -1px 0 rgba(0, 0, 0, 0.3);
       color: var(--color-text-secondary);
-      
+
       &::before {
-        background: linear-gradient(
-          45deg,
-          transparent 30%,
-          rgba(255, 255, 255, 0.12) 50%,
-          transparent 70%
-        );
+        background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.12) 50%,
+            transparent 70%);
       }
     }
   }
@@ -395,6 +372,7 @@
   0% {
     transform: translateX(-100%) translateY(-100%) rotate(45deg);
   }
+
   100% {
     transform: translateX(100%) translateY(100%) rotate(45deg);
   }
@@ -402,17 +380,22 @@
 
 .buttons-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-md);
   width: 100%;
   position: relative;
 
   @media (max-width: 767px) {
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     gap: var(--spacing-sm);
+    justify-content: center; // Par défaut, centrer les boutons
+    padding: 0;
+    width: 100%;
+    max-width: 85%; // Réduire la largeur disponible pour les autres modes
+
     .start-button {
       position: relative;
     }
@@ -420,7 +403,507 @@
     .config-button {
       position: relative;
       margin-left: var(--spacing-sm);
+      flex-shrink: 0; // Ne pas rétrécir, garder la forme carrée
     }
+
+    // Quand le bouton technique est présent (mode révision), répartir de manière homogène
+    &:has(.technique-filter-button) {
+      justify-content: space-between; // Répartir les boutons de manière homogène
+      padding: 0;
+      gap: var(--spacing-xs); // Réduire l'espace entre les boutons
+      max-width: none; // Pas de limite de largeur en mode révision
+
+      .start-button {
+        flex: 0 1 auto; // Ne pas grandir, garder sa largeur naturelle
+        max-width: 200px; // Même largeur max que dans les autres modes (min-width du start-button)
+      }
+
+      .config-button {
+        margin-left: 0; // Retirer la marge car géré par gap
+        flex-shrink: 0; // Ne pas rétrécir, garder la forme carrée
+      }
+
+      .technique-filter-button {
+        flex-shrink: 0; // Ne pas rétrécir le bouton technique
+      }
+    }
+  }
+}
+
+// Bouton de filtrage des techniques
+.technique-filter-button {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-accent);
+  border-radius: 12px;
+  padding: 0; // Pas de padding pour garder le carré parfait
+  font-size: 1rem;
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family-primary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px; // Carré : largeur = hauteur du bouton démarrer par défaut
+  min-height: 64px; // Même hauteur que le bouton démarrer par défaut
+  width: 64px; // Force la largeur à être égale à la hauteur
+  height: 64px; // Force la hauteur
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  .technique-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    transition: all var(--transition-normal);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    z-index: 2;
+    position: relative;
+
+    // Mobile : réduire la taille de l'icône pour plus d'espace
+    @media (max-width: 767px) {
+      width: 48px;
+      height: 48px;
+    }
+
+    // PC 768px : maximiser la taille dans un bouton de min-height 50px
+    @media (min-width: 768px) {
+      width: 46px;
+      height: 46px;
+    }
+
+    // PC 1024px : maximiser la taille dans un bouton de min-height 56px
+    @media (min-width: 1024px) {
+      width: 52px;
+      height: 52px;
+    }
+
+    // PC 1440px : maximiser la taille dans un bouton de min-height 64px
+    @media (min-width: 1440px) {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  // Effet de fond animé (mobile)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease-out, height 0.4s ease-out, opacity 0.4s ease-out;
+    opacity: 0;
+    z-index: 0;
+  }
+
+  // Effet de brillance mobile
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 70%
+    );
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: transform 0.6s ease-out;
+    opacity: 0;
+    z-index: 1;
+  }
+
+  &:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(var(--color-accent-rgb, 184, 92, 56), 0.3);
+
+    &::before {
+      width: 200%;
+      height: 200%;
+      opacity: 0.15;
+    }
+
+    &::after {
+      transform: translate(50%, 50%) rotate(45deg);
+      opacity: 1;
+    }
+
+    .technique-icon {
+      transform: scale(1.1) rotate(5deg);
+      filter: drop-shadow(0 4px 8px rgba(var(--color-accent-rgb, 184, 92, 56), 0.4));
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+
+    .technique-icon {
+      transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 767px) {
+    min-width: 60px; // Carré : largeur = hauteur du bouton démarrer sur mobile
+    min-height: 60px; // Même hauteur que le bouton démarrer sur mobile
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    // Style glassmorphism avec dégradé rouge (comme PC)
+    background: linear-gradient(135deg, 
+      rgba(196, 30, 58, 0.9) 0%, 
+      rgba(230, 57, 70, 0.85) 50%,
+      rgba(196, 30, 58, 0.9) 100%);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 4px 12px rgba(196, 30, 58, 0.4),
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    // Effet de brillance animé au survol
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 70%
+      );
+      transform: translate(-50%, -50%) rotate(45deg);
+      transition: transform 0.6s ease-out;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    // Effet de pulsation subtile
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      opacity: 0;
+      animation: pulse 2s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.5;
+        transform: scale(1.05);
+      }
+    }
+
+    .technique-icon {
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) brightness(1.1);
+    }
+
+    &:hover {
+      background: linear-gradient(135deg, 
+        rgba(230, 57, 70, 0.95) 0%, 
+        rgba(196, 30, 58, 0.9) 50%,
+        rgba(230, 57, 70, 0.95) 100%);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 
+        0 8px 24px rgba(196, 30, 58, 0.5),
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+      &::before {
+        transform: translate(50%, 50%) rotate(45deg);
+        opacity: 1;
+      }
+
+      &::after {
+        animation: none;
+        opacity: 0;
+      }
+
+      .technique-icon {
+        transform: scale(1.15) rotate(-5deg);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4)) brightness(1.2);
+      }
+    }
+
+    &:active {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 
+        0 4px 12px rgba(196, 30, 58, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+      .technique-icon {
+        transform: scale(1.1);
+      }
+    }
+
+    // Adaptation thème clair (mobile)
+    :host-context(.appearance-clair) &,
+    .appearance-clair & {
+      background: linear-gradient(135deg, 
+        rgba(196, 30, 58, 0.85) 0%, 
+        rgba(230, 57, 70, 0.8) 50%,
+        rgba(196, 30, 58, 0.85) 100%);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 
+        0 4px 12px rgba(196, 30, 58, 0.35),
+        0 2px 4px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+      &:hover {
+        background: linear-gradient(135deg, 
+          rgba(230, 57, 70, 0.9) 0%, 
+          rgba(196, 30, 58, 0.85) 50%,
+          rgba(230, 57, 70, 0.9) 100%);
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 
+          0 8px 24px rgba(196, 30, 58, 0.45),
+          0 4px 8px rgba(0, 0, 0, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    // Adaptation thème sombre (mobile)
+    :host-context(.appearance-sombre) &,
+    .appearance-sombre & {
+      background: linear-gradient(135deg, 
+        rgba(196, 30, 58, 0.75) 0%, 
+        rgba(230, 57, 70, 0.7) 50%,
+        rgba(196, 30, 58, 0.75) 100%);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 4px 12px rgba(196, 30, 58, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+      &:hover {
+        background: linear-gradient(135deg, 
+          rgba(230, 57, 70, 0.85) 0%, 
+          rgba(196, 30, 58, 0.8) 50%,
+          rgba(230, 57, 70, 0.85) 100%);
+        border-color: rgba(255, 255, 255, 0.25);
+        box-shadow: 
+          0 8px 24px rgba(196, 30, 58, 0.6),
+          0 4px 8px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      }
+    }
+  }
+
+  // Sur PC : style glassmorphism moderne avec effet de profondeur, adapté aux thèmes
+  @media (min-width: 768px) {
+    padding: 0; // Pas de padding pour garder le carré parfait
+    width: 50px; // Carré : largeur = hauteur
+    height: 50px; // Carré : hauteur = largeur
+    min-width: 50px;
+    min-height: 50px;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    // Style par défaut (thème clair)
+    background: linear-gradient(135deg, 
+      rgba(196, 30, 58, 0.9) 0%, 
+      rgba(230, 57, 70, 0.85) 50%,
+      rgba(196, 30, 58, 0.9) 100%);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 4px 12px rgba(196, 30, 58, 0.4),
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    // Effet de brillance animé au survol
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 70%
+      );
+      transform: translate(-50%, -50%) rotate(45deg);
+      transition: transform 0.6s ease-out;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    // Effet de pulsation subtile
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      opacity: 0;
+      animation: pulse 2s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.5;
+        transform: scale(1.05);
+      }
+    }
+
+    .technique-icon {
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) brightness(1.1);
+    }
+
+    &:hover {
+      background: linear-gradient(135deg, 
+        rgba(230, 57, 70, 0.95) 0%, 
+        rgba(196, 30, 58, 0.9) 50%,
+        rgba(230, 57, 70, 0.95) 100%);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 
+        0 8px 24px rgba(196, 30, 58, 0.5),
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+      &::before {
+        transform: translate(50%, 50%) rotate(45deg);
+        opacity: 1;
+      }
+
+      &::after {
+        animation: none;
+        opacity: 0;
+      }
+
+      .technique-icon {
+        transform: scale(1.15) rotate(-5deg);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4)) brightness(1.2);
+      }
+    }
+
+    &:active {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 
+        0 4px 12px rgba(196, 30, 58, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+      .technique-icon {
+        transform: scale(1.1);
+      }
+    }
+
+    &:focus {
+      outline: 3px solid rgba(196, 30, 58, 0.5);
+      outline-offset: 3px;
+    }
+
+    // Adaptation thème clair (PC)
+    :host-context(.appearance-clair) &,
+    .appearance-clair & {
+      background: linear-gradient(135deg, 
+        rgba(196, 30, 58, 0.85) 0%, 
+        rgba(230, 57, 70, 0.8) 50%,
+        rgba(196, 30, 58, 0.85) 100%);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 
+        0 4px 12px rgba(196, 30, 58, 0.35),
+        0 2px 4px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+      &:hover {
+        background: linear-gradient(135deg, 
+          rgba(230, 57, 70, 0.9) 0%, 
+          rgba(196, 30, 58, 0.85) 50%,
+          rgba(230, 57, 70, 0.9) 100%);
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 
+          0 8px 24px rgba(196, 30, 58, 0.45),
+          0 4px 8px rgba(0, 0, 0, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    // Adaptation thème sombre (PC)
+    :host-context(.appearance-sombre) &,
+    .appearance-sombre & {
+      background: linear-gradient(135deg, 
+        rgba(196, 30, 58, 0.75) 0%, 
+        rgba(230, 57, 70, 0.7) 50%,
+        rgba(196, 30, 58, 0.75) 100%);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 4px 12px rgba(196, 30, 58, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+      &:hover {
+        background: linear-gradient(135deg, 
+          rgba(230, 57, 70, 0.85) 0%, 
+          rgba(196, 30, 58, 0.8) 50%,
+          rgba(230, 57, 70, 0.85) 100%);
+        border-color: rgba(255, 255, 255, 0.25);
+        box-shadow: 
+          0 8px 24px rgba(196, 30, 58, 0.6),
+          0 4px 8px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    width: 56px; // Carré : largeur = hauteur
+    height: 56px; // Carré : hauteur = largeur
+    min-width: 56px;
+    min-height: 56px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 80px; // Carré : largeur = hauteur
+    height: 80px; // Carré : hauteur = largeur
+    min-width: 64px;
+    min-height: 64px;
   }
 }
 
@@ -742,6 +1225,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   white-space: nowrap;
+
   &::before {
     content: '';
     position: absolute;
@@ -772,6 +1256,28 @@
     outline-offset: 3px;
   }
 
+  // Style pour le bouton désactivé (classe au lieu de :disabled pour permettre les clics)
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+
+      &::before {
+        left: -100%;
+      }
+    }
+
+    &:active {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
   @media (max-width: 767px) {
     min-height: 60px;
     min-width: 200px;
@@ -787,17 +1293,128 @@
     min-width: 300px; // Réduit
     min-height: 50px; // Réduit de 56px
   }
+
   @media (min-width: 1024px) {
     font-size: 2.1rem; // Réduit encore
     padding: var(--spacing-sm) calc(var(--spacing-xl) + 2rem); // Réduit padding vertical
     min-width: 340px; // Réduit
     min-height: 56px; // Réduit de 64px
   }
+
   @media (min-width: 1440px) {
     font-size: 2.4rem; // Réduit encore
-    padding: var(--spacing-md) calc(var(--spacing-xl) + 3rem);
     min-width: 380px; // Réduit
     min-height: 64px; // Réduit de 72px
+  }
+}
+
+// Wrapper pour le bouton et l'infobulle d'erreur
+.start-button-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+// Infobulle d'erreur au-dessus du bouton
+.start-button-error-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: rgba(220, 53, 69, 0.95);
+  color: #ffffff;
+  border-radius: 8px;
+  font-family: var(--font-family-primary);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  pointer-events: none;
+  
+  // Flèche pointant vers le bouton
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(220, 53, 69, 0.95);
+  }
+
+  // Texte desktop (masqué sur mobile)
+  .error-text-desktop {
+    display: inline;
+  }
+
+  // Texte mobile (masqué sur desktop)
+  .error-text-mobile {
+    display: none;
+  }
+
+  // Sur mobile, afficher le texte court et rendre l'infobulle plus large
+  @media (max-width: 767px) {
+    .error-text-desktop {
+      display: none;
+    }
+
+    .error-text-mobile {
+      display: inline;
+    }
+    
+    font-size: 0.875rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-width: 180px;
+    max-width: 90vw;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  // Thème sombre
+  .appearance-sombre & {
+    background: rgba(220, 53, 69, 0.98);
+    
+    &::after {
+      border-top-color: rgba(220, 53, 69, 0.98);
+    }
+  }
+}
+
+// Réduction de la largeur du bouton démarrer uniquement en mode révision sur PC
+.buttons-container.revision-mode {
+  @media (min-width: 768px) {
+    .start-button {
+      min-width: 260px; // Réduit de 300px
+    }
+
+    .start-button-error-message {
+      min-width: 260px; // Même largeur réduite que le bouton
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .start-button {
+      min-width: 290px; // Réduit de 340px
+    }
+
+    .start-button-error-message {
+      min-width: 290px; // Même largeur réduite que le bouton
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .start-button {
+      min-width: 330px; // Réduit de 380px
+    }
+
+    .start-button-error-message {
+      min-width: 330px; // Même largeur réduite que le bouton
+    }
   }
 }
 
@@ -815,6 +1432,7 @@
   @media (max-width: 767px) {
     display: none;
   }
+
   @media (min-width: 768px) {
     max-width: 600px;
     flex: 0 1 600px;
@@ -836,7 +1454,7 @@
       // Masquer la scrollbar tout en gardant le scroll
       scrollbar-width: none; // Firefox
       -ms-overflow-style: none; // IE et Edge
-      
+
       &::-webkit-scrollbar {
         display: none; // Chrome, Safari, Opera
       }
@@ -925,10 +1543,13 @@
 
 // Animation pour l'indicateur de scroll (mouvement vers le bas)
 @keyframes scrollIndicatorMove {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
     opacity: 0.6;
   }
+
   50% {
     transform: translateY(8px);
     opacity: 1;
@@ -939,10 +1560,12 @@
   padding: 0 var(--spacing-lg) var(--spacing-lg);
   animation: slideDown var(--transition-normal) ease-out;
   overflow: visible;
+
   @media (max-width: 767px) {
     overflow: visible;
     max-height: none;
   }
+
   // Sur PC, les styles sont définis dans .config-panel @media (min-width: 768px)
 }
 
@@ -1158,7 +1781,7 @@
     color: var(--color-background);
     font-weight: var(--font-weight-semibold);
     box-shadow: var(--shadow-sm);
-    
+
     // S'assurer que le texte reste lisible sur thème sombre où primary peut être clair
     // On utilise --color-text-primary comme fallback si nécessaire, mais --color-background devrait fonctionner
   }
@@ -1200,11 +1823,11 @@
 // Section Options supplémentaires
 .additional-options-section {
   margin-bottom: var(--spacing-lg);
-  
+
   @media (min-width: 768px) {
     margin-bottom: var(--spacing-lg);
   }
-  
+
   // Réduire l'espace au-dessus des toggles
   .config-description {
     margin-bottom: var(--spacing-sm);
@@ -1218,7 +1841,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
-  
+
   // Sur PC, afficher les boutons pill centrés
   @media (min-width: 768px) {
     align-items: center;
@@ -1229,7 +1852,7 @@
 // Conteneur pour les boutons pill sur PC
 .pill-toggles-container {
   display: none; // Masquer sur mobile
-  
+
   // Afficher sur PC
   @media (min-width: 768px) {
     display: flex;
@@ -1243,7 +1866,7 @@
 
 .pill-toggles-buttons {
   display: none; // Masquer sur mobile
-  
+
   // Afficher sur PC
   @media (min-width: 768px) {
     display: flex;
@@ -1265,7 +1888,7 @@
   background: var(--color-background);
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  
+
   // Masquer sur PC
   @media (min-width: 768px) {
     display: none;
@@ -1305,7 +1928,7 @@
 // Boutons Pill/Tab style pour PC
 .pill-toggle-button {
   display: none; // Masquer sur mobile
-  
+
   // Afficher sur PC
   @media (min-width: 768px) {
     display: inline-flex;
@@ -1325,14 +1948,14 @@
     width: 35%; // 35% de la largeur disponible pour chaque bouton
     flex-shrink: 0;
     position: relative; // Pour positionner la pastille
-    
+
     // Hover sur PC
     &:hover:not(.active) {
       border-color: var(--color-primary);
       background: rgba(var(--color-primary-rgb, 61, 47, 31), 0.05);
       color: var(--color-primary);
     }
-    
+
     // État actif (surbrillance)
     &.active {
       background: var(--color-primary);
@@ -1340,7 +1963,7 @@
       color: var(--color-background);
       font-weight: var(--font-weight-semibold);
       box-shadow: 0 2px 8px rgba(var(--color-primary-rgb, 61, 47, 31), 0.25);
-      
+
       // Pastille sur le bord haut droit (même style que les boutons de thème)
       &::before {
         content: '';
@@ -1357,7 +1980,7 @@
         z-index: 10;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
-      
+
       // Coche dans la pastille (même style que les boutons de thème)
       &::after {
         content: '✓';
@@ -1375,13 +1998,13 @@
         z-index: 11; // Au-dessus de ::before
       }
     }
-    
+
     // État focus
     &:focus {
       outline: none;
       box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
     }
-    
+
     // Désactiver le tap highlight
     -webkit-tap-highlight-color: transparent;
   }
@@ -1449,7 +2072,7 @@
   box-sizing: border-box;
   justify-items: center;
   row-gap: calc(var(--spacing-md) + 35px);
-  
+
   @media (max-width: 767px) {
     grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
     gap: var(--spacing-sm);
@@ -1475,23 +2098,23 @@
   padding-bottom: 0;
   width: 100%;
   max-width: 80px;
-  
+
   @media (max-width: 767px) {
     max-width: 65px;
     padding: 4px;
   }
-  
+
   &:hover {
     border-color: var(--color-accent);
     box-shadow: var(--shadow-md);
   }
-  
+
   &.active {
     border-color: var(--color-accent);
     background-color: var(--color-background);
     box-shadow: var(--shadow-lg);
     border-width: 3px;
-    
+
     &::before {
       content: '';
       position: absolute;
@@ -1504,7 +2127,7 @@
       z-index: 10;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-    
+
     &::after {
       content: '✓';
       position: absolute;
@@ -1521,13 +2144,13 @@
       z-index: 11;
     }
   }
-  
+
   &:focus {
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
   }
-  
+
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -1545,16 +2168,16 @@
   flex-shrink: 0;
   background-color: transparent;
   color: var(--color-primary);
-  
+
   @media (min-width: 768px) {
     transform: translateY(-4px);
   }
-  
+
   @media (max-width: 767px) {
     width: calc(65px - 8px - 4px);
     height: calc(65px - 8px - 4px);
   }
-  
+
   .voice-avatar {
     width: 145%;
     height: 145%;
@@ -1568,7 +2191,7 @@
   @media (min-width: 768px) {
     transform: translate(-1px, -4px);
   }
-  
+
   @media (max-width: 767px) {
     transform: translateX(-1px);
   }
@@ -1589,7 +2212,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events: none;
-  
+
   @media (max-width: 767px) {
     font-size: 0.85rem;
     bottom: -30px;
@@ -1610,21 +2233,21 @@
   cursor: pointer;
   transition: all var(--transition-fast);
   flex-shrink: 0;
-  
+
   // Masquer sur PC
   @media (min-width: 768px) {
     display: none;
   }
-  
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 61, 47, 31), 0.15);
   }
-  
+
   &:hover {
     border-color: var(--color-primary);
   }
-  
+
   &.active {
     background: var(--color-primary);
     border-color: var(--color-primary);
@@ -1800,11 +2423,16 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(90, 74, 58, 0.3);
+
   @media (max-width: 767px) {
-    min-height: 60px;
-    width: 60px;
-    height: 60px;
+    min-width: 60px; // Force la largeur minimale
+    min-height: 60px; // Force la hauteur minimale
+    width: 60px; // Largeur fixe
+    height: 60px; // Hauteur fixe
+    aspect-ratio: 1; // Force le ratio 1:1 (carré parfait)
+    flex-shrink: 0; // Ne pas rétrécir
   }
+
   &::before {
     content: '';
     position: absolute;
@@ -1840,10 +2468,12 @@
     height: 24px;
     flex-shrink: 0;
   }
+
   @media (min-width: 768px) {
     display: none;
   }
 }
+
 @media (max-width: 767px) {
   .home-page {
     overflow: hidden;
@@ -1869,7 +2499,7 @@
     align-items: center;
     width: 100%;
   }
-  
+
   .main-actions {
     width: 100%;
     align-items: center; // Centre les enfants horizontalement
@@ -1902,8 +2532,30 @@
 
   .buttons-container {
     width: 100%;
-    max-width: 100%;
+    max-width: 85%; // Réduire la largeur disponible pour les autres modes
     margin-top: var(--spacing-sm);
+    display: flex;
+    flex-direction: row;
+    justify-content: center; // Par défaut, centrer les boutons
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 0;
+
+    // Quand le bouton technique est présent (mode révision), répartir de manière homogène
+    &:has(.technique-filter-button) {
+      max-width: none; // Pas de limite de largeur en mode révision
+      justify-content: space-between; // Répartir les boutons de manière homogène
+      gap: var(--spacing-xs); // Réduire l'espace entre les boutons
+
+      .start-button {
+        flex: 0 1 auto; // Ne pas grandir, garder sa largeur naturelle
+        max-width: 200px; // Même largeur max que dans les autres modes (min-width du start-button)
+      }
+
+      .technique-filter-button {
+        flex-shrink: 0; // Ne pas rétrécir le bouton technique
+      }
+    }
   }
 
   .mode-carousel-wrapper {
@@ -1930,5 +2582,197 @@
     // Le scroll vertical est disponible à l'intérieur du panel (config-content)
     // La scrollbar est cachée pour un design plus épuré
   }
+}
 
+// Overlay pour la popup/modal Technique Filter
+.technique-filter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--spacing-md);
+  padding-top: calc(72px + var(--spacing-xs) * 2 + var(--spacing-md));
+  animation: fadeIn 0.3s ease-out;
+
+  // Mobile: commencer au-dessus du footer
+  @media (max-width: 767px) {
+    bottom: 60px; // Espace pour le footer de la page
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  // Animation de fermeture pour mobile
+  @media (max-width: 767px) {
+    &.closing {
+      animation: fadeOut 0.3s ease-in forwards;
+      pointer-events: none; // Désactiver les interactions pendant la fermeture
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+// Popup/Modal
+.technique-filter-popup {
+  background: var(--color-surface);
+  border-radius: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp var(--transition-normal) ease-out;
+  border: 1px solid var(--color-border);
+  max-height: 90vh;
+  overflow: hidden; // Empêcher le contenu de déborder et forcer le scroll interne
+
+  // Desktop: taille adaptée, centrée, hauteur maximale sans chevaucher bannière/footer
+  // Bannière: logo 72px + padding ≈ 88px, Footer: padding + texte ≈ 60px, Marges: ~10px
+  // Total à soustraire: ~158px avec marge de sécurité minimale pour maximiser la hauteur
+  @media (min-width: 768px) {
+    width: 90%;
+    max-width: 90%;
+    max-height: calc(100vh - 88px - 60px - 10px); // Bannière + Footer + Marges minimales
+    height: calc(100vh - 88px - 60px - 10px);
+    min-height: calc(100vh - 88px - 60px - 5px); // Force la hauteur minimale
+  }
+
+  @media (min-width: 1024px) {
+    width: 90%;
+    max-width: 90%;
+    max-height: calc(100vh - 88px - 60px - 10px);
+    height: calc(100vh - 88px - 60px - 10px);
+    min-height: calc(100vh - 88px - 60px - 5px); // Force la hauteur minimale
+  }
+
+  @media (min-width: 1440px) {
+    width: 90%;
+    max-width: 90%;
+    max-height: calc(100vh - 88px - 60px - 10px);
+    height: calc(100vh - 88px - 60px - 10px);
+    min-height: calc(100vh - 88px - 60px - 5px); // Force la hauteur minimale
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  &.mobile {
+    max-width: 100vw;
+    width: 100vw;
+    max-height: calc(100vh - 80px - 60px); // Hauteur totale moins bannière (80px) et footer (60px)
+    height: calc(100vh - 80px - 60px);
+    border-radius: 16px 16px 0 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    animation: slideUpMobile 0.3s ease-out;
+
+    @keyframes slideUpMobile {
+      from {
+        transform: translateY(100%);
+      }
+
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    // Animation de fermeture pour mobile
+    &.closing {
+      animation: slideDownMobile 0.3s ease-in forwards;
+      pointer-events: none; // Désactiver les interactions pendant la fermeture
+    }
+
+    @keyframes slideDownMobile {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(100%);
+      }
+    }
+  }
+
+  .technique-filter-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+    flex-shrink: 0; // Ne pas rétrécir, hauteur fixe
+    flex-grow: 0; // Ne pas grandir, hauteur fixe
+    border-radius: 16px 16px 0 0; // Arrondi en haut pour correspondre à la popup
+
+    h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      font-family: var(--font-family-primary);
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      color: var(--color-text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: all var(--transition-normal);
+
+      &:hover {
+        background: var(--color-background);
+        color: var(--color-accent);
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+        stroke: currentColor;
+      }
+    }
+  }
+
+  // S'assurer que app-technique-filter prend toute la hauteur disponible
+  app-technique-filter {
+    display: block;
+    flex: 1 1 0%; // Prend tout l'espace restant après le header
+    min-height: 0; // Permet au flex de fonctionner correctement
+    overflow: hidden; // Empêcher le débordement
+  }
 }

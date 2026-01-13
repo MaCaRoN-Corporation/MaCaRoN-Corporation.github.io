@@ -1,0 +1,667 @@
+// Host element (app-technique-filter) - toujours 100% de hauteur
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.technique-filter-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border-radius: 0;
+  overflow: hidden;
+  font-family: var(--font-family-primary);
+  min-height: 0;
+
+  &.mobile {
+    border-radius: 0;
+  }
+}
+
+// Header - Fixe en haut
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  flex-shrink: 0; // Ne pas rétrécir, hauteur fixe
+
+  .search-actions-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    flex: 0 1 auto;
+  }
+
+  .search-container {
+    flex: 0 1 auto;
+    min-width: 200px;
+    max-width: 300px; // Limiter la largeur de la barre de recherche
+
+    .search-input {
+      width: 100%;
+      padding: var(--spacing-xs) var(--spacing-md);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: var(--font-family-primary);
+      background: var(--color-background);
+      color: var(--color-text-primary);
+      transition: all var(--transition-normal);
+
+      &:focus {
+        outline: none;
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0 2px rgba(184, 92, 56, 0.2);
+      }
+
+      &::placeholder {
+        color: var(--color-text-secondary);
+      }
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: var(--spacing-xs);
+    flex-shrink: 0; // Ne pas rétrécir les boutons
+
+    .action-btn {
+      padding: 0; // Pas de padding pour maximiser l'espace pour l'icône
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-background);
+      color: var(--color-text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-normal);
+      width: auto; // Largeur automatique basée sur la hauteur
+      height: calc(1rem + var(--spacing-xs) * 2 + 2px); // Même hauteur que la barre de recherche (font-size + padding vertical + border)
+      min-width: calc(1rem + var(--spacing-xs) * 2 + 2px); // Largeur minimale = hauteur (carré)
+      aspect-ratio: 1; // Force le ratio 1:1 (carré parfait)
+
+      svg {
+        width: calc(1rem + var(--spacing-xs) * 2 + 2px - 8px); // Taille maximale avec marge de 4px de chaque côté
+        height: calc(1rem + var(--spacing-xs) * 2 + 2px - 8px);
+        display: block; // Assure un centrage parfait
+        margin: 0; // Pas de marge
+        transform: translate(2.5px, 2.5px); // Décalage de 2.5px vers la droite et 2.5px vers le bas
+      }
+
+      &:hover {
+        background: var(--color-surface);
+        border-color: var(--color-accent);
+        transform: scale(1.1);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+
+  .display-mode-buttons {
+    display: flex;
+    gap: var(--spacing-xs);
+    flex-shrink: 0; // Ne pas rétrécir les boutons de mode
+
+    .display-mode-btn {
+      padding: var(--spacing-xs) var(--spacing-md);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-background);
+      color: var(--color-text-primary);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: var(--font-family-primary);
+      font-weight: var(--font-weight-medium);
+      transition: all var(--transition-normal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: var(--color-surface);
+        border-color: var(--color-accent);
+      }
+
+      &.active {
+        background: var(--color-accent);
+        color: #ffffff;
+        border-color: var(--color-accent);
+        box-shadow: var(--shadow-sm);
+      }
+
+      // Style pour le bouton avec icône position
+      &.position-mode {
+        padding: var(--spacing-xs);
+        min-width: 40px;
+        min-height: 40px;
+
+        .position-icon {
+          width: 24px;
+          height: 24px;
+          display: block;
+          transition: filter var(--transition-normal);
+        }
+
+        // Apparence claire -> non sélectionné => icône noire
+        :host-context(.appearance-clair) &:not(.active) {
+          .position-icon {
+            filter: brightness(0);
+          }
+        }
+
+        // Apparence claire -> sélectionné => icône origine (blanc)
+        :host-context(.appearance-clair) &.active {
+          .position-icon {
+            filter: none;
+          }
+        }
+
+        // Apparence sombre -> non sélectionné => icône origine (blanc)
+        :host-context(.appearance-sombre) &:not(.active) {
+          .position-icon {
+            filter: none;
+          }
+        }
+
+        // Apparence sombre -> sélectionné => icône noire
+        :host-context(.appearance-sombre) &.active {
+          .position-icon {
+            filter: brightness(0);
+          }
+        }
+      }
+
+      // Style pour le bouton avec icône attaque (P+A)
+      &.attack-mode {
+        padding: var(--spacing-xs);
+        min-width: 40px;
+        min-height: 40px;
+
+        .attack-icon {
+          width: 24px;
+          height: 24px;
+          display: block;
+          transition: filter var(--transition-normal);
+        }
+
+        // Apparence claire -> non sélectionné => icône noire
+        :host-context(.appearance-clair) &:not(.active) {
+          .attack-icon {
+            filter: brightness(0);
+          }
+        }
+
+        // Apparence claire -> sélectionné => icône origine (blanc)
+        :host-context(.appearance-clair) &.active {
+          .attack-icon {
+            filter: none;
+          }
+        }
+
+        // Apparence sombre -> non sélectionné => icône origine (blanc)
+        :host-context(.appearance-sombre) &:not(.active) {
+          .attack-icon {
+            filter: none;
+          }
+        }
+
+        // Apparence sombre -> sélectionné => icône noire
+        :host-context(.appearance-sombre) &.active {
+          .attack-icon {
+            filter: brightness(0);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Contenu principal - Scrollable, hauteur flexible (toujours hauteur maximale)
+.filter-content {
+  flex: 1 1 0%; // Prend tout l'espace disponible, utilise 0% comme base pour forcer le flex
+  overflow-y: auto; // Scroll vertical si le contenu dépasse
+  overflow-x: hidden;
+  padding: var(--spacing-md);
+  background: var(--color-background);
+  min-height: 0; // Permet au flex de fonctionner correctement
+  
+  // Desktop: hauteur maximale en gardant les boutons visibles en bas
+  @media (min-width: 768px) {
+    flex: 1 1 0%; // Prend tout l'espace disponible entre header et footer
+    min-height: 0;
+    max-height: 100%; // Ne pas dépasser la hauteur du conteneur
+  }
+  
+  // Mobile: hauteur maximale, boutons juste au-dessus du footer
+  @media (max-width: 767px) {
+    flex: 1 1 0%; // Prend tout l'espace disponible entre header et footer
+    min-height: 0;
+    max-height: 100%; // Ne pas dépasser la hauteur du conteneur
+  }
+  
+  // Masquer la scrollbar mais garder le scroll fonctionnel
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE et Edge
+  
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, Opera
+  }
+}
+
+// Desktop: 4 colonnes
+.positions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xs);
+
+  .position-column {
+    border-right: 1px solid var(--color-border);
+    padding-right: var(--spacing-md);
+
+    &:last-child {
+      border-right: none;
+    }
+
+    .position-header {
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 2px solid var(--color-accent);
+
+      .position-checkbox {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        cursor: pointer;
+        font-weight: var(--font-weight-bold);
+        font-size: 1.1rem;
+        color: var(--color-text-primary);
+        font-family: var(--font-family-primary);
+
+        input[type="checkbox"] {
+          width: 18px;
+          height: 18px;
+          cursor: pointer;
+          accent-color: var(--color-accent);
+        }
+
+        .position-label {
+          user-select: none;
+        }
+      }
+    }
+
+    .attacks-list {
+      .attack-item {
+        margin-bottom: var(--spacing-sm);
+
+        .attack-checkbox {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-xs);
+          cursor: pointer;
+          font-weight: var(--font-weight-medium);
+          margin-bottom: var(--spacing-xs);
+          color: var(--color-text-primary);
+          font-family: var(--font-family-primary);
+
+          input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: var(--color-accent);
+          }
+
+          .attack-label {
+            user-select: none;
+          }
+        }
+
+        .techniques-list {
+          margin-left: var(--spacing-lg);
+          margin-top: var(--spacing-xs);
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-xs);
+
+          .technique-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            font-family: var(--font-family-primary);
+
+            input[type="checkbox"] {
+              width: 14px;
+              height: 14px;
+              cursor: pointer;
+              accent-color: var(--color-accent);
+            }
+
+            .technique-label {
+              user-select: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Responsive: 2 colonnes sur tablettes
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+
+    .position-column {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+      padding-right: 0;
+      padding-bottom: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+
+      &:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Mobile: Liste verticale avec glassmorphism
+.positions-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+
+  .position-section {
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: var(--spacing-md);
+    background-color: var(--color-surface);
+    
+    // Glassmorphism pour apparence claire (mobile uniquement)
+    @media (max-width: 767px) {
+      :host-context(.appearance-clair) & {
+        background-color: rgba(255, 252, 245, 0.7);
+        backdrop-filter: blur(12px) saturate(180%);
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      // Glassmorphism pour apparence sombre (mobile uniquement)
+      :host-context(.appearance-sombre) & {
+        background-color: rgba(15, 20, 30, 0.65);
+        backdrop-filter: blur(12px) saturate(180%);
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
+        border: 1px solid rgba(180, 160, 130, 0.3);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    .position-header {
+      margin-bottom: var(--spacing-sm);
+      padding-bottom: var(--spacing-xs);
+      border-bottom: 1px solid var(--color-border);
+
+      .position-checkbox {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        cursor: pointer;
+        font-weight: var(--font-weight-bold);
+        font-size: 1.1rem;
+        color: var(--color-text-primary);
+        font-family: var(--font-family-primary);
+
+        input[type="checkbox"] {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+          accent-color: var(--color-accent);
+        }
+
+        .position-label {
+          user-select: none;
+        }
+      }
+    }
+
+    .attacks-list {
+      .attack-item {
+        margin-bottom: var(--spacing-xs);
+
+        .attack-checkbox {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-xs);
+          cursor: pointer;
+          font-weight: var(--font-weight-medium);
+          margin-bottom: var(--spacing-xs);
+          color: var(--color-text-primary);
+          font-family: var(--font-family-primary);
+
+          input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--color-accent);
+          }
+
+          .attack-label {
+            user-select: none;
+          }
+        }
+
+        .techniques-list {
+          margin-left: var(--spacing-md);
+          margin-top: var(--spacing-xs);
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-xs);
+
+          .technique-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            font-family: var(--font-family-primary);
+
+            input[type="checkbox"] {
+              width: 16px;
+              height: 16px;
+              cursor: pointer;
+              accent-color: var(--color-accent);
+            }
+
+            .technique-label {
+              user-select: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Chargement
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-primary);
+}
+
+// Footer - Fixe en bas, toujours positionné en bas de la popup
+.filter-footer {
+  padding: var(--spacing-xs) var(--spacing-lg);
+  padding-bottom: var(--spacing-md); // Plus d'espace sous les boutons
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  flex-shrink: 0; // Ne pas rétrécir, hauteur fixe, toujours en bas
+  flex-grow: 0; // Ne pas grandir, hauteur fixe
+  border-radius: 0 0 16px 16px; // Arrondi en bas pour correspondre à la popup
+  padding-bottom: 10px;
+  padding-top: 10px;
+
+
+  // Desktop: indicateur et boutons sur la même ligne
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center; // Alignement vertical centré
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+  }
+
+  .selection-summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+
+    // Mobile: centrer le texte
+    @media (max-width: 767px) {
+      text-align: center;
+      align-items: center;
+    }
+
+    // PC: alignement vertical centré
+    @media (min-width: 768px) {
+      align-items: flex-start;
+      justify-content: center; // Centrer verticalement le contenu
+      height: 100%; // Prendre toute la hauteur disponible pour l'alignement
+      min-height: 40px; // Hauteur minimale pour correspondre aux boutons
+    }
+
+    .summary-text {
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-primary);
+      font-family: var(--font-family-primary);
+      line-height: 1.5; // Hauteur de ligne cohérente
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 0.9rem;
+      font-family: var(--font-family-primary);
+      line-height: 1.5; // Hauteur de ligne cohérente
+    }
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-xs);
+    flex-shrink: 0; // Ne pas rétrécir les boutons
+    align-items: center; // Alignement vertical centré des boutons
+
+    .dialog-btn {
+      padding: var(--spacing-sm) var(--spacing-lg);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: var(--font-weight-semibold);
+      font-family: var(--font-family-primary);
+      transition: all var(--transition-normal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px; // Hauteur minimale pour alignement vertical
+
+      &.cancel-btn {
+        background: var(--color-surface);
+        color: var(--color-text-primary);
+        border: 1px solid var(--color-border);
+
+        &:hover {
+          background: var(--color-background);
+          border-color: var(--color-accent);
+        }
+      }
+
+      &.apply-btn {
+        background: linear-gradient(135deg, var(--color-button-primary) 0%, var(--color-button-primary-light) 100%);
+        color: #ffffff;
+        box-shadow: var(--button-shadow-default);
+
+        &:hover:not(:disabled) {
+          box-shadow: var(--button-shadow-hover);
+          transform: translateY(-2px);
+        }
+
+        &:active:not(:disabled) {
+          box-shadow: var(--button-shadow-active);
+          transform: translateY(0);
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          transform: none;
+        }
+      }
+    }
+  }
+}
+
+// Responsive pour mobile
+@media (max-width: 768px) {
+  .filter-header {
+    flex-direction: column;
+    align-items: stretch;
+
+    .search-actions-group {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .search-container {
+      min-width: auto;
+      flex: 1;
+      max-width: none;
+    }
+
+    .action-buttons {
+      flex-shrink: 0;
+    }
+
+    .display-mode-buttons {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  .filter-footer {
+    .dialog-actions {
+      flex-direction: row; // Boutons sur une seule ligne sur mobile
+      justify-content: center;
+      gap: var(--spacing-sm);
+
+      .dialog-btn {
+        flex: 1; // Les boutons prennent l'espace disponible
+        max-width: 200px; // Limiter la largeur maximale
+      }
+    }
+  }
+}

@@ -9,6 +9,8 @@ import { ConfigService } from '../../services/config.service';
 import { SettingsService } from '../../services/settings.service';
 import { VoiceService } from '../../services/voice.service';
 import { VoiceId, Voice, DEFAULT_SETTINGS, getFullVoiceId, parseVoiceId } from '../../models/settings.model';
+import { TechniqueFilterComponent } from '../../components/technique-filter/technique-filter.component';
+import { HierarchicalSelection } from '../../models/hierarchical-selection.model';
 
 interface PassageMode {
   id: string;
@@ -18,7 +20,7 @@ interface PassageMode {
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TechniqueFilterComponent],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -101,6 +103,74 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.passageModes[this.currentModeIndex];
   }
 
+  // Technique filter (mode révision)
+  isTechniqueFilterOpen: boolean = false;
+  isTechniqueFilterClosing: boolean = false;
+  currentTechniqueSelection: HierarchicalSelection | null = null;
+
+  // Message d'erreur pour le bouton désactivé
+  showStartButtonError: boolean = false;
+  private startButtonErrorTimer: any = null;
+
+  get shouldShowTechniqueFilter(): boolean {
+    return this.currentMode.id === 'revision';
+  }
+
+  /**
+   * Vérifie si le bouton "Hajime" doit être désactivé
+   * Désactivé uniquement en mode révision si aucune technique n'est sélectionnée
+   */
+  get isStartButtonDisabled(): boolean {
+    // Si on n'est pas en mode révision, le bouton est toujours actif
+    if (this.currentMode.id !== 'revision') {
+      return false;
+    }
+
+    // En mode révision, vérifier si des techniques sont sélectionnées
+    if (!this.currentTechniqueSelection) {
+      return true; // Pas de sélection = désactivé
+    }
+
+    // Vérifier selon le mode d'affichage de la sélection
+    const displayMode = this.currentTechniqueSelection.displayMode;
+
+    // Mode "positions" : vérifier si au moins une position est sélectionnée
+    if (displayMode === 'positions') {
+      return !this.currentTechniqueSelection.selectedPositions || 
+             this.currentTechniqueSelection.selectedPositions.length === 0;
+    }
+
+    // Mode "positions-attacks" : vérifier si au moins une attaque est sélectionnée
+    if (displayMode === 'positions-attacks') {
+      const selectedAttacks = this.currentTechniqueSelection.selectedAttacks;
+      if (!selectedAttacks || Object.keys(selectedAttacks).length === 0) {
+        return true;
+      }
+      // Vérifier si au moins un tableau d'attaques contient des éléments
+      for (const attacks of Object.values(selectedAttacks)) {
+        if (attacks && attacks.length > 0) {
+          return false; // Au moins une attaque sélectionnée = activé
+        }
+      }
+      return true; // Aucune attaque sélectionnée = désactivé
+    }
+
+    // Mode "all" : vérifier si au moins une technique est sélectionnée
+    const selectedTechniques = this.currentTechniqueSelection.selectedTechniques;
+    if (!selectedTechniques || Object.keys(selectedTechniques).length === 0) {
+      return true; // Aucune technique sélectionnée = désactivé
+    }
+
+    // Vérifier si au moins un tableau de techniques contient des éléments
+    for (const techniques of Object.values(selectedTechniques)) {
+      if (techniques && techniques.length > 0) {
+        return false; // Au moins une technique sélectionnée = activé
+      }
+    }
+
+    return true; // Aucune technique dans les tableaux = désactivé
+  }
+
   constructor(
     private router: Router,
     private gradeService: GradeService,
@@ -169,8 +239,15 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         } else {
           this.randoriTime = 3;
         }
+
+        // Charger la sélection de techniques depuis localStorage après avoir chargé le grade
+        // (nécessaire pour que le bouton soit correctement activé/désactivé)
+        this.loadTechniqueSelectionFromStorage();
       })
     );
+
+    // Charger aussi la sélection au démarrage initial (au cas où la config n'aurait pas encore émis)
+    this.loadTechniqueSelectionFromStorage();
   }
 
   checkMobile(): void {
@@ -757,6 +834,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   startPassage(): void {
+    // Vérifier si le bouton est désactivé (mode révision sans sélection)
+    if (this.isStartButtonDisabled) {
+      this.showStartButtonErrorMessage();
+      return;
+    }
+
     // Sauvegarder la configuration actuelle avant de démarrer
     this.configService.updateConfig({
       selectedGrade: this.selectedGrade,
@@ -766,6 +849,113 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     // Rediriger vers la page de passage avec le mode sélectionné
     // La configuration sera gérée par le service dans les stories suivantes
     this.router.navigate(['/passage'], { queryParams: { mode: this.currentMode.id } });
+  }
+
+  /**
+   * Affiche une infobulle d'erreur au-dessus du bouton quand il est cliqué alors qu'il est désactivé
+   */
+  private showStartButtonErrorMessage(): void {
+    // Annuler le timer précédent s'il existe
+    if (this.startButtonErrorTimer) {
+      clearTimeout(this.startButtonErrorTimer);
+    }
+
+    // Afficher l'infobulle
+    this.showStartButtonError = true;
+    this.cdr.detectChanges();
+
+    // Masquer automatiquement après 3 secondes
+    this.startButtonErrorTimer = setTimeout(() => {
+      this.showStartButtonError = false;
+      this.startButtonErrorTimer = null;
+      this.cdr.detectChanges();
+    }, 3000);
+  }
+
+  /**
+   * Ouvre l'interface de filtrage des techniques (mode révision)
+   */
+  openTechniqueFilter(): void {
+    this.isTechniqueFilterClosing = false;
+    this.isTechniqueFilterOpen = true;
+    // Charger la sélection sauvegardée si elle existe
+    this.loadTechniqueSelectionFromStorage();
+  }
+
+  /**
+   * Ferme l'interface de filtrage des techniques
+   */
+  closeTechniqueFilter(): void {
+    if (this.isMobile) {
+      // Sur mobile, déclencher l'animation de fermeture
+      this.isTechniqueFilterClosing = true;
+      setTimeout(() => {
+        this.isTechniqueFilterOpen = false;
+        this.isTechniqueFilterClosing = false;
+      }, 300); // Durée de l'animation
+    } else {
+      this.isTechniqueFilterOpen = false;
+    }
+  }
+
+  /**
+   * Gère l'application de la sélection de techniques
+   */
+  onTechniqueSelectionApplied(selection: HierarchicalSelection): void {
+    this.currentTechniqueSelection = selection;
+    this.saveTechniqueSelectionToStorage(selection);
+    this.closeTechniqueFilter();
+    // TODO: Utiliser la sélection pour la génération du passage (Story 2.9)
+  }
+
+  /**
+   * Gère l'annulation de la sélection de techniques
+   */
+  onTechniqueSelectionCancelled(): void {
+    this.closeTechniqueFilter();
+  }
+
+  /**
+   * Charge la sélection de techniques depuis localStorage
+   * Si le localStorage est vide ou invalide, currentTechniqueSelection reste null
+   */
+  private loadTechniqueSelectionFromStorage(): void {
+    try {
+      const key = `technique-filter-selection-${this.selectedGrade}`;
+      const stored = localStorage.getItem(key);
+      
+      // Si le localStorage est vide, aucune technique n'est sélectionnée
+      if (!stored) {
+        this.currentTechniqueSelection = null;
+        return;
+      }
+
+      const parsed = JSON.parse(stored);
+      
+      // Vérifier que la sélection est valide et correspond au grade actuel
+      if (parsed && parsed.grade === this.selectedGrade) {
+        this.currentTechniqueSelection = parsed;
+      } else {
+        // Si le grade ne correspond pas ou la sélection est invalide, réinitialiser
+        this.currentTechniqueSelection = null;
+      }
+    } catch (error) {
+      console.error('[HomeComponent] Error loading technique selection:', error);
+      // En cas d'erreur, considérer qu'aucune technique n'est sélectionnée
+      this.currentTechniqueSelection = null;
+    }
+  }
+
+  /**
+   * Sauvegarde la sélection de techniques dans localStorage
+   */
+  private saveTechniqueSelectionToStorage(selection: HierarchicalSelection): void {
+    try {
+      const key = `technique-filter-selection-${selection.grade}`;
+      localStorage.setItem(key, JSON.stringify(selection));
+    } catch (error) {
+      console.error('[HomeComponent] Error saving technique selection:', error);
+    }
   }
 
   ngOnDestroy(): void {
@@ -778,6 +968,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.previewDebounceTimer) {
       clearTimeout(this.previewDebounceTimer);
       this.previewDebounceTimer = null;
+    }
+
+    // Nettoyer le timer d'erreur
+    if (this.startButtonErrorTimer) {
+      clearTimeout(this.startButtonErrorTimer);
+      this.startButtonErrorTimer = null;
     }
     
     this.subscriptions.unsubscribe();

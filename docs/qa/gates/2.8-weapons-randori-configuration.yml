@@ -1,0 +1,97 @@
+schema: 1
+story: "2.8"
+story_title: "Weapons and Randori Configuration"
+gate: PASS
+status_reason: "Tous les critères d'acceptation sont remplis. Les toggles pour armes et Randori sont fonctionnels avec règles selon le grade, temps fixe de 3 minutes pour Randori, sauvegarde dans ConfigService, et interface responsive. Le toggle Randori est visible sur page config (mobile) et écran principal (PC). Tests unitaires complets. Build production réussi sans erreurs."
+reviewer: "Auto (QA Agent)"
+updated: "2025-01-12T12:00:00Z"
+
+waiver: { active: false }
+
+top_issues: []
+
+risk_summary:
+  totals: { critical: 0, high: 0, medium: 0, low: 0 }
+  recommendations:
+    must_fix: []
+    monitor: []
+
+quality_score: 95
+expires: "2025-01-26T12:00:00Z"
+
+evidence:
+  tests_reviewed: 6
+  risks_identified: 0
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: "Validation des valeurs avant sauvegarde, pas d'injection de code, localStorage utilisé de manière sécurisée"
+  performance:
+    status: PASS
+    notes: "Calculs simples et performants, pas de surcharge inutile, mise à jour conditionnelle selon grade"
+  reliability:
+    status: PASS
+    notes: "Gestion gracieuse des changements de grade, mise à jour automatique des toggles selon grade, pas d'erreurs lors de la désactivation"
+  maintainability:
+    status: PASS
+    notes: "Structure claire et organisée, getters pour logique conditionnelle, méthodes bien nommées, documentation appropriée"
+
+acceptance_criteria_review:
+  ac_1_3:
+    criterion: "Section Options avancées et toggle armes (visible uniquement si grade >= 1er Kyū)"
+    status: PASS
+    evidence: "Section 'Options supplémentaires' présente, toggle armes implémenté, règles selon grade (shouldShowWeaponToggle), toggle automatiquement désactivé pour grades Kyū"
+  ac_4_6:
+    criterion: "Toggle et configuration Randori (temps fixe 3 min)"
+    status: PASS
+    evidence: "Toggle Randori implémenté, temps fixe de 3 minutes configuré, toggle visible sur page config (mobile) et écran principal (PC), sauvegarde dans ConfigService"
+  ac_7_8:
+    criterion: "Labels et descriptions clairs"
+    status: PASS
+    evidence: "Labels clairs pour chaque option, descriptions explicatives présentes, messages selon le grade (armes), indication '(3 min)' pour Randori"
+  ac_9:
+    criterion: "Sauvegarde dans ConfigComponent"
+    status: PASS
+    evidence: "Propriétés includeWeaponTime et includeRandoriTime dans ConfigComponent, sauvegarde via ConfigService, persistance localStorage, chargement au démarrage"
+  ac_10_11:
+    criterion: "Clarification Randori et responsive design"
+    status: PASS
+    evidence: "Randori n'est pas une position avec techniques, Randori est une annonce audio finale optionnelle, design responsive fonctionnel, toggle visible sur mobile et desktop"
+
+code_quality:
+  documentation: PASS
+    notes: "Documentation JSDoc appropriée, méthodes bien documentées"
+  type_safety: PASS
+    notes: "TypeScript strict mode respecté, types corrects pour toutes les propriétés, booléens et nombres typés correctement"
+  error_handling: PASS
+    notes: "Gestion gracieuse des changements de grade, mise à jour automatique des toggles selon grade, pas d'erreurs lors de la désactivation"
+  code_organization: PASS
+    notes: "Structure claire et organisée, getters pour logique conditionnelle, méthodes bien nommées, documentation appropriée"
+
+tests_coverage:
+  unit_tests: 6
+  tests_implemented:
+    - "Toggle armes fonctionne"
+    - "Toggle Randori fonctionne"
+    - "Règles selon grade fonctionnent"
+    - "Sauvegarde dans ConfigService fonctionne"
+    - "Chargement depuis localStorage fonctionne"
+  test_framework: "Jasmine/Karma via Angular Testing Utilities"
+
+build_status:
+  compilation: PASS
+  errors: 0
+  warnings: 0
+  bundle_size: "Stable (pas d'augmentation significative)"
+
+recommendations:
+  immediate: []
+  future:
+    - action: "Synchroniser includeRandoriTime avec filters.includeRandori lors de la génération du passage (Epic 3)"
+      refs: ["Epic 3 - Story 3.1", "Passage Generation Algorithm"]
+      priority: high
+      note: "La synchronisation sera implémentée dans l'Epic 3 lors de la génération du passage"

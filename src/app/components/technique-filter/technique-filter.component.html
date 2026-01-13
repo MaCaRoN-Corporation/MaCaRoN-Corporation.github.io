@@ -1,0 +1,213 @@
+<div class="technique-filter-container" [class.mobile]="isMobile">
+  <!-- Header avec recherche et filtres - Fixe en haut -->
+  <div class="filter-header">
+    <div class="search-actions-group">
+      <div class="search-container">
+        <input 
+          type="text" 
+          class="search-input"
+          placeholder="Rechercher..."
+          [(ngModel)]="searchTerm"
+          aria-label="Rechercher dans les techniques">
+      </div>
+      
+      <div class="action-buttons">
+        <button 
+          type="button"
+          class="action-btn select-all-btn"
+          (click)="selectAll()"
+          title="Tout sélectionner"
+          aria-label="Tout sélectionner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="select-all-icon">
+            <rect x="3" y="3" width="5" height="5" rx="1"></rect>
+            <rect x="11" y="3" width="5" height="5" rx="1"></rect>
+            <rect x="3" y="11" width="5" height="5" rx="1"></rect>
+            <rect x="11" y="11" width="5" height="5" rx="1"></rect>
+            <path d="M5 5l2 2M13 5l2 2M5 13l2 2M13 13l2 2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <button 
+          type="button"
+          class="action-btn deselect-all-btn"
+          (click)="deselectAll()"
+          title="Tout désélectionner"
+          aria-label="Tout désélectionner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="deselect-all-icon">
+            <rect x="3" y="3" width="5" height="5" rx="1"></rect>
+            <rect x="11" y="3" width="5" height="5" rx="1"></rect>
+            <rect x="3" y="11" width="5" height="5" rx="1"></rect>
+            <rect x="11" y="11" width="5" height="5" rx="1"></rect>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="display-mode-buttons">
+      <button 
+        *ngFor="let mode of displayModes"
+        type="button"
+        class="display-mode-btn"
+        [class.active]="displayMode === mode.id"
+        [class.position-mode]="mode.id === 'positions'"
+        [class.attack-mode]="mode.id === 'positions-attacks'"
+        (click)="onDisplayModeChange(mode.id)"
+        [attr.aria-pressed]="displayMode === mode.id"
+        [title]="mode.id === 'positions' ? 'Filtrer par position' : (mode.id === 'positions-attacks' ? 'Filtrer par attaque' : 'Tout afficher')">
+        <img 
+          *ngIf="mode.id === 'positions'"
+          src="assets/images/position.png" 
+          alt="Position"
+          class="position-icon">
+        <img 
+          *ngIf="mode.id === 'positions-attacks'"
+          src="assets/images/attaque.png" 
+          alt="Position + Attaque"
+          class="attack-icon">
+        <span *ngIf="mode.id !== 'positions' && mode.id !== 'positions-attacks'">{{ mode.label }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenu principal - Scrollable, hauteur flexible -->
+  <div class="filter-content" *ngIf="!isLoading; else loadingTemplate">
+    <!-- Desktop: 4 colonnes -->
+    <div class="positions-grid" *ngIf="!isMobile">
+      <div 
+        *ngFor="let position of getFilteredPositions()" 
+        class="position-column">
+        <div class="position-header">
+          <label class="position-checkbox">
+            <input 
+              #positionCheckbox
+              type="checkbox"
+              [checked]="isPositionSelected(position)"
+              (click)="onPositionToggle(position, $event)"
+              [attr.aria-label]="'Sélectionner ' + position">
+            <span class="position-label">{{ position }}</span>
+          </label>
+        </div>
+        
+        <div class="attacks-list">
+          <div 
+            *ngFor="let attack of getAttacksForPosition(position)"
+            class="attack-item">
+            <label class="attack-checkbox" *ngIf="displayMode !== 'positions'">
+              <input 
+                #attackCheckbox
+                type="checkbox"
+                [checked]="isAttackSelected(position, attack)"
+                [attr.data-position]="position"
+                [attr.data-attack]="attack"
+                (change)="onAttackToggle(position, attack)"
+                [attr.aria-label]="'Sélectionner ' + attack + ' dans ' + position">
+              <span class="attack-label">{{ attack }}</span>
+            </label>
+            
+            <div 
+              *ngIf="displayMode === 'all'"
+              class="techniques-list">
+              <label 
+                *ngFor="let technique of getTechniquesForPositionAttack(position, attack)"
+                class="technique-checkbox">
+                <input 
+                  type="checkbox"
+                  [checked]="isTechniqueSelected(position, attack, technique)"
+                  (change)="onTechniqueToggle(position, attack, technique)"
+                  [attr.aria-label]="'Sélectionner ' + technique + ' pour ' + attack + ' dans ' + position">
+                <span class="technique-label">{{ technique }}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile: Liste verticale -->
+    <div class="positions-list" *ngIf="isMobile">
+      <div 
+        *ngFor="let position of getFilteredPositions()" 
+        class="position-section">
+        <div class="position-header">
+          <label class="position-checkbox">
+            <input 
+              #positionCheckbox
+              type="checkbox"
+              [checked]="isPositionSelected(position)"
+              (click)="onPositionToggle(position, $event)"
+              [attr.aria-label]="'Sélectionner ' + position">
+            <span class="position-label">{{ position }}</span>
+          </label>
+        </div>
+        
+        <div class="attacks-list">
+          <div 
+            *ngFor="let attack of getAttacksForPosition(position)"
+            class="attack-item">
+            <label class="attack-checkbox" *ngIf="displayMode !== 'positions'">
+              <input 
+                #attackCheckbox
+                type="checkbox"
+                [checked]="isAttackSelected(position, attack)"
+                [attr.data-position]="position"
+                [attr.data-attack]="attack"
+                (change)="onAttackToggle(position, attack)"
+                [attr.aria-label]="'Sélectionner ' + attack + ' dans ' + position">
+              <span class="attack-label">{{ attack }}</span>
+            </label>
+            
+            <div 
+              *ngIf="displayMode === 'all'"
+              class="techniques-list">
+              <label 
+                *ngFor="let technique of getTechniquesForPositionAttack(position, attack)"
+                class="technique-checkbox">
+                <input 
+                  type="checkbox"
+                  [checked]="isTechniqueSelected(position, attack, technique)"
+                  (change)="onTechniqueToggle(position, attack, technique)"
+                  [attr.aria-label]="'Sélectionner ' + technique + ' pour ' + attack + ' dans ' + position">
+                <span class="technique-label">{{ technique }}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Template de chargement -->
+  <ng-template #loadingTemplate>
+    <div class="loading-container">
+      <p>Chargement des données...</p>
+    </div>
+  </ng-template>
+
+  <!-- Footer avec résumé et actions -->
+  <div class="filter-footer">
+    <div class="selection-summary">
+      <span class="summary-text">
+        {{ selectedTechniquesCount }} technique(s) sélectionnée(s)
+      </span>
+      <span *ngIf="!hasSelection" class="error-message" role="alert">
+        ⚠️ Au moins une sélection requise
+      </span>
+    </div>
+    
+    
+    <div class="dialog-actions">
+      <button 
+        type="button"
+        class="dialog-btn cancel-btn"
+        (click)="cancel()">
+        Annuler
+      </button>
+      <button 
+        type="button"
+        class="dialog-btn apply-btn"
+        [disabled]="!hasSelection"
+        (click)="apply()">
+        Appliquer
+      </button>
+    </div>
+  </div>
+</div>
