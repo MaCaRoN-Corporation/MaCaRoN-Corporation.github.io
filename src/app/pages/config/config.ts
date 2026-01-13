@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { RouterLink, Router, NavigationStart } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { VoiceId, Voice, DEFAULT_SETTINGS, getFullVoiceId, parseVoiceId } from '
   templateUrl: './config.html',
   styleUrl: './config.scss',
 })
-export class ConfigComponent implements OnInit, OnDestroy {
+export class ConfigComponent implements OnInit, OnDestroy, AfterViewInit {
   private subscriptions = new Subscription();
   isLeaving = false; // État pour l'animation de sortie
 
@@ -94,6 +94,18 @@ export class ConfigComponent implements OnInit, OnDestroy {
 
     // Charger la configuration depuis localStorage
     this.loadConfigFromStorage();
+  }
+
+  ngAfterViewInit(): void {
+    // Forcer le déclenchement de l'animation d'entrée sur mobile après l'initialisation de la vue
+    // Utiliser un timeout pour s'assurer que le DOM est complètement rendu et que l'état initial est appliqué
+    if (window.innerWidth <= 767) {
+      setTimeout(() => {
+        // Forcer un reflow pour déclencher l'animation
+        this.isLeaving = false;
+        this.cdr.detectChanges();
+      }, 10);
+    }
   }
 
   /**

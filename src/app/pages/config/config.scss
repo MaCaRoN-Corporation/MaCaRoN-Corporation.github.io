@@ -27,12 +27,22 @@
 
   // Animation d'entrée : glissement depuis la droite vers la gauche (visible uniquement sur mobile)
   @media (max-width: 767px) {
-    &.slide-in {
-      animation: slideInLeft 0.3s ease-out forwards;
+    // État initial : positionné hors écran à droite (uniquement avant l'animation)
+    &:not(.slide-in):not(.slide-out-right) {
+      transform: translateX(100%);
+      opacity: 0;
     }
     
+    // Animation d'entrée
+    &.slide-in {
+      animation: slideInLeft 0.3s ease-out forwards;
+      will-change: transform, opacity;
+    }
+    
+    // Animation de sortie
     &.slide-out-right {
       animation: slideOutRight 0.3s ease-out forwards;
+      will-change: transform, opacity;
     }
   }
 }
