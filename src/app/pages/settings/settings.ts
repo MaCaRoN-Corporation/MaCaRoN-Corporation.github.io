@@ -76,10 +76,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   resetAppData(): void {
-    if (confirm('Êtes-vous sûr de vouloir réinitialiser toutes les données de l\'application ? Cette action effacera vos réglages, votre historique et vos configurations. Cette action est irréversible.')) {
+    if (confirm('Êtes-vous sûr de vouloir réinitialiser toutes les données de l\'application ? Cette action effacera vos réglages, votre historique, vos configurations et toutes vos sélections de techniques. Cette action est irréversible.')) {
       try {
-        // Effacer toutes les clés localStorage de l'application
-        const keysToRemove = [
+        // Liste des clés fixes à supprimer
+        const fixedKeysToRemove = [
           'keiko-hub-settings',
           'keiko-hub-config',
           'keiko-hub-history',
@@ -87,9 +87,35 @@ export class SettingsComponent implements OnInit, OnDestroy {
           'pwa-install-notification-dismissed'
         ];
         
-        keysToRemove.forEach(key => {
+        // Supprimer les clés fixes
+        fixedKeysToRemove.forEach(key => {
           localStorage.removeItem(key);
         });
+        
+        // Supprimer toutes les clés dynamiques de sélection de techniques
+        // Format: technique-filter-selection-{grade}
+        const allGrades = [
+          '6e Kyū', '5e Kyū', '4e Kyū', '3e Kyū', '2e Kyū', '1er Kyū',
+          '1er Dan', '2e Dan', '3e Dan', '4e Dan', '5e Dan'
+        ];
+        
+        allGrades.forEach(grade => {
+          const key = `technique-filter-selection-${grade}`;
+          localStorage.removeItem(key);
+        });
+        
+        // Par sécurité, parcourir toutes les clés localStorage et supprimer celles qui commencent par nos préfixes
+        const prefixesToRemove = ['keiko-hub-', 'technique-filter-selection-', 'pwa-install-notification-dismissed'];
+        
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const key = localStorage.key(i);
+          if (key) {
+            // Supprimer si la clé commence par un de nos préfixes
+            if (prefixesToRemove.some(prefix => key.startsWith(prefix))) {
+              localStorage.removeItem(key);
+            }
+          }
+        }
         
         // Recharger la page pour appliquer les changements
         window.location.reload();

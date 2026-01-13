@@ -771,6 +771,11 @@ so que l'application peut créer des passages variés et réalistes.
 6. La génération est déterministe en termes de structure mais aléatoire en termes de sélection
 7. Les techniques sont uniques dans le passage (pas de doublons)
 8. Le service expose la séquence générée via un observable RxJS
+9. **Randori:** Si `includeRandoriTime` est activé dans la configuration, l'algorithme doit :
+   - Synchroniser `includeRandoriTime` (PassageConfig) avec `filters.includeRandori` (PassageFilters) lors de la génération
+   - Ajouter une annonce audio finale "Randori" à la fin de la séquence de techniques
+   - Utiliser le temps configuré (`randoriTime: 3 minutes` fixe) pour la durée de l'annonce Randori
+   - L'annonce Randori n'est pas une technique avec position/attaque, mais une annonce audio finale optionnelle
 
 ### Story 3.2: Passage State Management
 
@@ -787,6 +792,7 @@ so que l'application peut suivre l'avancement et contrôler l'exécution.
 5. Le service calcule automatiquement le nombre total de techniques
 6. Le service gère la transition entre techniques selon le temps configuré
 7. L'état est accessible depuis n'importe quel composant via injection du service
+8. **Randori:** L'état du passage doit inclure l'information si l'annonce Randori est activée (`includeRandoriTime`), et gérer la transition vers l'annonce Randori après la dernière technique si activée
 
 ### Story 3.3: Passage Page Layout and Timer
 
@@ -876,13 +882,14 @@ so que je sais que l'entraînement est complet.
 
 **Acceptance Criteria:**
 
-1. Quand toutes les techniques ont été énoncées, un écran de fin s'affiche
+1. Quand toutes les techniques ont été énoncées (et l'annonce Randori si activée), un écran de fin s'affiche
 2. L'écran de fin affiche un message de félicitations/completion
-3. Un résumé du passage est affiché (nombre de techniques, durée totale)
+3. Un résumé du passage est affiché (nombre de techniques, durée totale, incluant le temps Randori si activé)
 4. Un bouton "Exporter" est disponible pour exporter le passage
 5. Un bouton "Nouveau passage" permet de générer un nouveau passage
 6. Un bouton "Retour à l'accueil" permet de revenir à la page d'accueil
 7. L'écran de fin est clair et encourageant
+8. **Randori:** Si `includeRandoriTime` était activé, l'écran de fin indique que l'annonce Randori a été incluse dans le passage
 
 ---
 

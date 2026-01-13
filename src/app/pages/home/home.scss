@@ -1256,6 +1256,28 @@
     outline-offset: 3px;
   }
 
+  // Style pour le bouton désactivé (classe au lieu de :disabled pour permettre les clics)
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+
+      &::before {
+        left: -100%;
+      }
+    }
+
+    &:active {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
   @media (max-width: 767px) {
     min-height: 60px;
     min-width: 200px;
@@ -1286,11 +1308,92 @@
   }
 }
 
+// Wrapper pour le bouton et l'infobulle d'erreur
+.start-button-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+// Infobulle d'erreur au-dessus du bouton
+.start-button-error-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: rgba(220, 53, 69, 0.95);
+  color: #ffffff;
+  border-radius: 8px;
+  font-family: var(--font-family-primary);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  pointer-events: none;
+  
+  // Flèche pointant vers le bouton
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(220, 53, 69, 0.95);
+  }
+
+  // Texte desktop (masqué sur mobile)
+  .error-text-desktop {
+    display: inline;
+  }
+
+  // Texte mobile (masqué sur desktop)
+  .error-text-mobile {
+    display: none;
+  }
+
+  // Sur mobile, afficher le texte court et rendre l'infobulle plus large
+  @media (max-width: 767px) {
+    .error-text-desktop {
+      display: none;
+    }
+
+    .error-text-mobile {
+      display: inline;
+    }
+    
+    font-size: 0.875rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-width: 180px;
+    max-width: 90vw;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  // Thème sombre
+  .appearance-sombre & {
+    background: rgba(220, 53, 69, 0.98);
+    
+    &::after {
+      border-top-color: rgba(220, 53, 69, 0.98);
+    }
+  }
+}
+
 // Réduction de la largeur du bouton démarrer uniquement en mode révision sur PC
 .buttons-container.revision-mode {
   @media (min-width: 768px) {
     .start-button {
       min-width: 260px; // Réduit de 300px
+    }
+
+    .start-button-error-message {
+      min-width: 260px; // Même largeur réduite que le bouton
     }
   }
 
@@ -1298,11 +1401,19 @@
     .start-button {
       min-width: 290px; // Réduit de 340px
     }
+
+    .start-button-error-message {
+      min-width: 290px; // Même largeur réduite que le bouton
+    }
   }
 
   @media (min-width: 1440px) {
     .start-button {
       min-width: 330px; // Réduit de 380px
+    }
+
+    .start-button-error-message {
+      min-width: 330px; // Même largeur réduite que le bouton
     }
   }
 }

@@ -48,9 +48,22 @@
         type="button"
         class="display-mode-btn"
         [class.active]="displayMode === mode.id"
+        [class.position-mode]="mode.id === 'positions'"
+        [class.attack-mode]="mode.id === 'positions-attacks'"
         (click)="onDisplayModeChange(mode.id)"
-        [attr.aria-pressed]="displayMode === mode.id">
-        {{ mode.label }}
+        [attr.aria-pressed]="displayMode === mode.id"
+        [title]="mode.id === 'positions' ? 'Filtrer par position' : (mode.id === 'positions-attacks' ? 'Filtrer par attaque' : 'Tout afficher')">
+        <img 
+          *ngIf="mode.id === 'positions'"
+          src="assets/images/position.png" 
+          alt="Position"
+          class="position-icon">
+        <img 
+          *ngIf="mode.id === 'positions-attacks'"
+          src="assets/images/attaque.png" 
+          alt="Position + Attaque"
+          class="attack-icon">
+        <span *ngIf="mode.id !== 'positions' && mode.id !== 'positions-attacks'">{{ mode.label }}</span>
       </button>
     </div>
   </div>

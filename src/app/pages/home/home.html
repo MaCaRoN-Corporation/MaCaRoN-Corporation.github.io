@@ -211,9 +211,28 @@
       </div>
       
       <div class="buttons-container" [class.revision-mode]="currentMode.id === 'revision'">
-        <button class="start-button" (click)="startPassage()" type="button">
-          Hajime | 始め
-        </button>
+        <div class="start-button-wrapper">
+          <!-- Bouton Hajime -->
+          <button 
+            class="start-button" 
+            [class.disabled]="isStartButtonDisabled"
+            (click)="startPassage()" 
+            type="button"
+            [attr.aria-disabled]="isStartButtonDisabled"
+            [title]="isStartButtonDisabled ? 'Veuillez sélectionner au moins une technique en mode révision' : 'Démarrer le passage'">
+            Hajime | 始め
+          </button>
+          
+          <!-- Infobulle d'erreur au-dessus du bouton -->
+          <div 
+            *ngIf="showStartButtonError" 
+            class="start-button-error-tooltip"
+            role="alert"
+            [attr.aria-live]="'polite'">
+            <span class="error-text-desktop">Veuillez sélectionner au moins une technique pour démarrer le passage en mode révision</span>
+            <span class="error-text-mobile">Technique(s) requise(s)</span>
+          </div>
+        </div>
         
         <!-- Bouton de filtrage des techniques (visible uniquement en mode révision) -->
         <button 

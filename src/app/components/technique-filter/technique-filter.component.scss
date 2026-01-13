@@ -125,6 +125,9 @@
       font-family: var(--font-family-primary);
       font-weight: var(--font-weight-medium);
       transition: all var(--transition-normal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &:hover {
         background: var(--color-surface);
@@ -136,6 +139,90 @@
         color: #ffffff;
         border-color: var(--color-accent);
         box-shadow: var(--shadow-sm);
+      }
+
+      // Style pour le bouton avec icône position
+      &.position-mode {
+        padding: var(--spacing-xs);
+        min-width: 40px;
+        min-height: 40px;
+
+        .position-icon {
+          width: 24px;
+          height: 24px;
+          display: block;
+          transition: filter var(--transition-normal);
+        }
+
+        // Apparence claire -> non sélectionné => icône noire
+        :host-context(.appearance-clair) &:not(.active) {
+          .position-icon {
+            filter: brightness(0);
+          }
+        }
+
+        // Apparence claire -> sélectionné => icône origine (blanc)
+        :host-context(.appearance-clair) &.active {
+          .position-icon {
+            filter: none;
+          }
+        }
+
+        // Apparence sombre -> non sélectionné => icône origine (blanc)
+        :host-context(.appearance-sombre) &:not(.active) {
+          .position-icon {
+            filter: none;
+          }
+        }
+
+        // Apparence sombre -> sélectionné => icône noire
+        :host-context(.appearance-sombre) &.active {
+          .position-icon {
+            filter: brightness(0);
+          }
+        }
+      }
+
+      // Style pour le bouton avec icône attaque (P+A)
+      &.attack-mode {
+        padding: var(--spacing-xs);
+        min-width: 40px;
+        min-height: 40px;
+
+        .attack-icon {
+          width: 24px;
+          height: 24px;
+          display: block;
+          transition: filter var(--transition-normal);
+        }
+
+        // Apparence claire -> non sélectionné => icône noire
+        :host-context(.appearance-clair) &:not(.active) {
+          .attack-icon {
+            filter: brightness(0);
+          }
+        }
+
+        // Apparence claire -> sélectionné => icône origine (blanc)
+        :host-context(.appearance-clair) &.active {
+          .attack-icon {
+            filter: none;
+          }
+        }
+
+        // Apparence sombre -> non sélectionné => icône origine (blanc)
+        :host-context(.appearance-sombre) &:not(.active) {
+          .attack-icon {
+            filter: none;
+          }
+        }
+
+        // Apparence sombre -> sélectionné => icône noire
+        :host-context(.appearance-sombre) &.active {
+          .attack-icon {
+            filter: brightness(0);
+          }
+        }
       }
     }
   }
