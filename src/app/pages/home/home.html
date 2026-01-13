@@ -210,9 +210,20 @@
         </button>
       </div>
       
-      <div class="buttons-container">
+      <div class="buttons-container" [class.revision-mode]="currentMode.id === 'revision'">
         <button class="start-button" (click)="startPassage()" type="button">
           Hajime | 始め
+        </button>
+        
+        <!-- Bouton de filtrage des techniques (visible uniquement en mode révision) -->
+        <button 
+          *ngIf="shouldShowTechniqueFilter"
+          class="technique-filter-button"
+          (click)="openTechniqueFilter()"
+          type="button"
+          title="Configurer les filtres de techniques"
+          aria-label="Ouvrir les filtres de techniques">
+          <img src="assets/images/technique.png" alt="Icône technique" class="technique-icon">
         </button>
         
         <!-- Bouton de configuration visible uniquement sur mobile -->
@@ -532,6 +543,38 @@
           </svg>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Popup/Modal pour Technique Filter -->
+  <div class="technique-filter-overlay" 
+       *ngIf="isTechniqueFilterOpen" 
+       [class.closing]="isTechniqueFilterClosing"
+       (click)="closeTechniqueFilter()">
+    <div class="technique-filter-popup" 
+         [class.mobile]="isMobile"
+         [class.closing]="isTechniqueFilterClosing"
+         (click)="$event.stopPropagation()">
+      <div class="technique-filter-popup-header">
+        <h2>Filtre de techniques</h2>
+        <button 
+          type="button"
+          class="close-button"
+          (click)="closeTechniqueFilter()"
+          aria-label="Fermer">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <app-technique-filter
+        [grade]="selectedGrade"
+        [currentSelection]="currentTechniqueSelection"
+        [isMobile]="isMobile"
+        (selectionApplied)="onTechniqueSelectionApplied($event)"
+        (cancelled)="onTechniqueSelectionCancelled()">
+      </app-technique-filter>
     </div>
   </div>
 </div>

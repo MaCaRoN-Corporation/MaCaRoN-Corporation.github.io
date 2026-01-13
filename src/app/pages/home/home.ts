@@ -9,6 +9,8 @@ import { ConfigService } from '../../services/config.service';
 import { SettingsService } from '../../services/settings.service';
 import { VoiceService } from '../../services/voice.service';
 import { VoiceId, Voice, DEFAULT_SETTINGS, getFullVoiceId, parseVoiceId } from '../../models/settings.model';
+import { TechniqueFilterComponent } from '../../components/technique-filter/technique-filter.component';
+import { HierarchicalSelection } from '../../models/hierarchical-selection.model';
 
 interface PassageMode {
   id: string;
@@ -18,7 +20,7 @@ interface PassageMode {
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TechniqueFilterComponent],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -99,6 +101,15 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   get currentMode(): PassageMode {
     return this.passageModes[this.currentModeIndex];
+  }
+
+  // Technique filter (mode révision)
+  isTechniqueFilterOpen: boolean = false;
+  isTechniqueFilterClosing: boolean = false;
+  currentTechniqueSelection: HierarchicalSelection | null = null;
+
+  get shouldShowTechniqueFilter(): boolean {
+    return this.currentMode.id === 'revision';
   }
 
   constructor(
@@ -766,6 +777,76 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     // Rediriger vers la page de passage avec le mode sélectionné
     // La configuration sera gérée par le service dans les stories suivantes
     this.router.navigate(['/passage'], { queryParams: { mode: this.currentMode.id } });
+  }
+
+  /**
+   * Ouvre l'interface de filtrage des techniques (mode révision)
+   */
+  openTechniqueFilter(): void {
+    this.isTechniqueFilterClosing = false;
+    this.isTechniqueFilterOpen = true;
+    // Charger la sélection sauvegardée si elle existe
+    this.loadTechniqueSelectionFromStorage();
+  }
+
+  /**
+   * Ferme l'interface de filtrage des techniques
+   */
+  closeTechniqueFilter(): void {
+    if (this.isMobile) {
+      // Sur mobile, déclencher l'animation de fermeture
+      this.isTechniqueFilterClosing = true;
+      setTimeout(() => {
+        this.isTechniqueFilterOpen = false;
+        this.isTechniqueFilterClosing = false;
+      }, 300); // Durée de l'animation
+    } else {
+      this.isTechniqueFilterOpen = false;
+    }
+  }
+
+  /**
+   * Gère l'application de la sélection de techniques
+   */
+  onTechniqueSelectionApplied(selection: HierarchicalSelection): void {
+    this.currentTechniqueSelection = selection;
+    this.saveTechniqueSelectionToStorage(selection);
+    this.closeTechniqueFilter();
+    // TODO: Utiliser la sélection pour la génération du passage (Story 2.9)
+  }
+
+  /**
+   * Gère l'annulation de la sélection de techniques
+   */
+  onTechniqueSelectionCancelled(): void {
+    this.closeTechniqueFilter();
+  }
+
+  /**
+   * Charge la sélection de techniques depuis localStorage
+   */
+  private loadTechniqueSelectionFromStorage(): void {
+    try {
+      const key = `technique-filter-selection-${this.selectedGrade}`;
+      const stored = localStorage.getItem(key);
+      if (stored) {
+        this.currentTechniqueSelection = JSON.parse(stored);
+      }
+    } catch (error) {
+      console.error('[HomeComponent] Error loading technique selection:', error);
+    }
+  }
+
+  /**
+   * Sauvegarde la sélection de techniques dans localStorage
+   */
+  private saveTechniqueSelectionToStorage(selection: HierarchicalSelection): void {
+    try {
+      const key = `technique-filter-selection-${selection.grade}`;
+      localStorage.setItem(key, JSON.stringify(selection));
+    } catch (error) {
+      console.error('[HomeComponent] Error saving technique selection:', error);
+    }
   }
 
   ngOnDestroy(): void {
