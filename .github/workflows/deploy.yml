@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -44,7 +44,7 @@ jobs:
 
       - name: Create CNAME file
         run: |
-          echo "www.keikohub.fr" > ./dist/keiko-hub/browser/CNAME
+          echo "keikohub.fr" > ./dist/keiko-hub/browser/CNAME
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
