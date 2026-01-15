@@ -1,9 +1,9 @@
 <div class="passage-page">
   <!-- Timer + Progression + Contrôles (PC - au-dessus) -->
   <div class="passage-header-right">
-    <div class="controls-section glass-card">
-      <div class="timer-display" [class.paused]="isPaused">
-        {{ formatTime(elapsedTime) }}
+    <div #topBanner class="controls-section glass-card">
+      <div class="timer-display" [class.paused]="isPaused" [class.warning]="remainingTime <= 60">
+        {{ getRemainingTimeFormatted() }}
       </div>
       <div class="progress-content">
         <div class="progress-text">{{ currentProgress }} / {{ totalTechniques }}</div>
@@ -21,10 +21,10 @@
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
           </svg>
         </button>
-        <button class="control-button restart-button" type="button" (click)="restartPassage()" title="Recommencer">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 4 23 10 17 10"></polyline>
-            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+        <button class="control-button skip-button" type="button" (click)="skipTechnique()" title="Passer la technique">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="10 8 14 12 10 16"></polyline>
           </svg>
         </button>
       </div>
@@ -34,13 +34,17 @@
   <!-- Zone principale: Grid 2 colonnes sur PC (technique à gauche, historique à droite), vertical sur mobile -->
   <div class="passage-header-center">
     <div class="current-technique-section glass-card">
-      <div class="countdown-circle">
+      <div class="countdown-circle" [@countdownPulse]="{ value: countdownAnimationToken, params: { duration: countdownAnimationDuration } }">
         <span class="countdown-number">{{ countdown }}</span>
       </div>
-      <div class="technique-content">
+      <div class="technique-content" *ngIf="currentTechnique">
         <div class="technique-attack">{{ currentTechnique.attack }}</div>
         <div class="technique-name">{{ currentTechnique.technique }}</div>
         <div class="technique-position">{{ getPositionLabel(currentTechnique.position) }}</div>
+      </div>
+      <div class="technique-content loading" *ngIf="!currentTechnique">
+        <div class="technique-attack">Chargement...</div>
+        <div class="technique-name">Préparation du passage</div>
       </div>
     </div>
   </div>
@@ -93,6 +97,62 @@
         <polyline points="6 9 12 15 18 9"></polyline>
         <polyline points="6 15 12 21 18 15"></polyline>
       </svg>
+    </div>
+  </div>
+
+  <!-- Écran de fin de passage -->
+  <div class="end-screen" *ngIf="isPassageCompleted && showEndScreen">
+    <canvas #confettiCanvas class="confetti-canvas"></canvas>
+    <div #endScreenContent class="end-screen-content glass-card">
+      <button class="close-button" type="button" (click)="closeEndScreen()" title="Fermer">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2 class="completion-message">Félicitations !</h2>
+      <p class="completion-text">Vous avez terminé le passage.</p>
+      
+      <div class="summary" *ngIf="passageSummary">
+        <div class="summary-item">
+          <span class="summary-label">Techniques :</span>
+          <span class="summary-value">{{ passageSummary.totalTechniques }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Durée :</span>
+          <span class="summary-value">{{ formatTime(passageSummary.duration) }}</span>
+        </div>
+        <div class="summary-item" *ngIf="passageSummary.includeRandori">
+          <span class="summary-label">Randori :</span>
+          <span class="summary-value">Inclus</span>
+        </div>
+      </div>
+      
+      <div class="end-screen-actions">
+        <button class="btn btn-primary" type="button" (click)="exportPassage()" title="Exporter le passage">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Exporter</span>
+        </button>
+        <button class="btn btn-secondary" type="button" (click)="newPassage()" title="Générer un nouveau passage">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          <span>Nouveau passage</span>
+        </button>
+        <button class="btn btn-outline" type="button" (click)="goHome()" title="Retour à l'accueil">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>Retour à l'accueil</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>

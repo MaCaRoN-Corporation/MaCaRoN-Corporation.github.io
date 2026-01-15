@@ -171,7 +171,7 @@ describe('GradeService', () => {
           next: (data) => {
             expect(data).toBeDefined();
             expect(typeof data).toBe('object');
-            expect(data).toHaveProperty('6e Kyū');
+            expect('6e Kyū' in data).toBe(true);
             resolve();
           },
           error: reject
@@ -310,7 +310,7 @@ describe('GradeService', () => {
           next: (data) => {
             expect(data).toBeDefined();
             expect(typeof data).toBe('object');
-            expect(data).toHaveProperty('Shomen Uchi-Ikkyo');
+            expect('Shomen Uchi-Ikkyo' in data).toBe(true);
             expect(Array.isArray(data['Shomen Uchi-Ikkyo'])).toBe(true);
             resolve();
           },

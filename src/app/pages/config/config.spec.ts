@@ -431,11 +431,11 @@ describe('ConfigComponent', () => {
     });
 
     it('should have correct default voice value', () => {
-      expect(component.selectedVoice).toBe('masculin');
+      expect(component.selectedVoice).toBe(DEFAULT_SETTINGS.voice);
     });
 
     it('should load voice from SettingsService on init', () => {
-      const settingsSpy = spyOn(settingsService, 'getSettings').and.returnValue(of({ ...DEFAULT_SETTINGS, voice: 'féminin' }));
+      const settingsSpy = spyOn(settingsService, 'getSettings').and.returnValue(of({ ...DEFAULT_SETTINGS, voice: 'French_Female1' }));
       
       component.ngOnInit();
       
@@ -444,11 +444,12 @@ describe('ConfigComponent', () => {
 
     it('should change voice when onVoiceChange is called', () => {
       const updateSpy = spyOn(settingsService, 'updateSettings');
+      const mockVoice = { id: 'Female1', label: 'Voix féminine 1', displayName: 'Sophie', gender: 'female' as const, language: 'French' as const };
       
-      component.onVoiceChange('féminin');
+      component.onVoiceChange(mockVoice);
       
-      expect(component.selectedVoice).toBe('féminin');
-      expect(updateSpy).toHaveBeenCalledWith({ voice: 'féminin' });
+      expect(component.selectedVoice).toBe('French_Female1');
+      expect(updateSpy).toHaveBeenCalledWith({ voice: 'French_Female1' });
     });
 
     it('should display both voice options in template', () => {
@@ -491,7 +492,9 @@ describe('ConfigComponent', () => {
         
         const ariaChecked = button.getAttribute('aria-checked');
         expect(ariaChecked).toBeTruthy();
-        expect(['true', 'false']).toContain(ariaChecked);
+        if (ariaChecked) {
+          expect(['true', 'false']).toContain(ariaChecked);
+        }
       });
     });
 

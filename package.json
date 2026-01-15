@@ -25,6 +25,7 @@
   "private": true,
   "packageManager": "npm@11.7.0",
   "dependencies": {
+    "@angular/animations": "^21.0.8",
     "@angular/common": "^21.0.0",
     "@angular/compiler": "^21.0.0",
     "@angular/core": "^21.0.0",
@@ -38,6 +39,7 @@
     "@angular/build": "^21.0.5",
     "@angular/cli": "^21.0.5",
     "@angular/compiler-cli": "^21.0.0",
+    "@types/jasmine": "^5.1.15",
     "jsdom": "^27.1.0",
     "sharp": "^0.34.5",
     "to-ico": "^1.1.5",

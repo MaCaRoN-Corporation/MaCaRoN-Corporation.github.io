@@ -1,4 +1,5 @@
 import { PassageFilters } from './passage-filters.model';
+import { VoiceId } from './settings.model';
 
 /**
  * Configuration complète pour la génération d'un passage
@@ -19,6 +20,11 @@ export interface PassageConfig {
    * Mode de passage sélectionné (ex: "classique", "progression", "aleatoire", "revision")
    */
   passageMode?: string;
+  
+  /**
+   * Voix sélectionnée pour les annonces
+   */
+  voice?: VoiceId;
   
   /**
    * Temps entre chaque technique (en secondes)

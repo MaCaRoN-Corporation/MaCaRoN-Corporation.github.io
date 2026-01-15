@@ -1,5 +1,9 @@
 # Epic 3: Passage Generation & Core Execution
 
+**Status:** ✅ **COMPLETE**  
+**Completion Date:** 2026-01-14  
+**Summary:** `docs/prd/epic-3-completion-summary.md`
+
 **Objectif étendu :** Développer le cœur fonctionnel de l'application en créant l'algorithme de génération aléatoire de passages respectant l'ordre strict traditionnel (Suwariwaza → Hanmi Handachi → Tashiwaza → Armes → Randori), implémenter le PassageService pour gérer l'état et la logique des passages, et créer la page de passage complète avec tous les éléments visuels nécessaires (timer, compte à rebours, affichage des techniques, historique, progression). Cet epic délivre la fonctionnalité principale permettant à l'utilisateur de s'entraîner avec des passages de grade générés.
 
 # Story 3.1: Passage Generation Algorithm
