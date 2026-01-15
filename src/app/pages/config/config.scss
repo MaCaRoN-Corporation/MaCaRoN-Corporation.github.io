@@ -508,11 +508,11 @@
 // Boutons Pill/Tab style pour mobile (même style que PC mais adapté et plus grand)
 .pill-toggle-button-mobile {
   display: inline-flex;
-  flex-direction: column; // Permettre le passage à la ligne pour "(3 min)"
+  flex-direction: column; // Permettre le passage à la ligne pour "(2 min)"
   align-items: center; // Centrer le contenu horizontalement
   justify-content: center;
   padding: var(--spacing-md) var(--spacing-lg); // Padding horizontal augmenté
-  font-size: 0.9375rem; // 15px - plus grand maintenant que "(3 min)" est à la ligne
+  font-size: 0.9375rem; // 15px - plus grand maintenant que "(2 min)" est à la ligne
   font-weight: var(--font-weight-bold); // Texte en gras
   color: var(--color-text-primary);
   background: var(--color-surface);
@@ -524,7 +524,7 @@
   flex: 1; // Prendre l'espace disponible pour être côte à côte (répartis équitablement)
   flex-shrink: 0;
   max-width: calc(50% - var(--spacing-md) / 2); // Chaque bouton ne dépasse pas la moitié de l'espace disponible (moins la moitié du gap)
-  gap: 2px; // Espace entre le texte principal et "(3 min)"
+  gap: 2px; // Espace entre le texte principal et "(2 min)"
   position: relative; // Pour positionner la pastille
   box-sizing: border-box; // Inclure le padding dans la hauteur
   
@@ -615,7 +615,7 @@
   opacity: 0.9;
   line-height: 1.2;
   display: block; // Sur une nouvelle ligne
-  text-align: center; // Centrer "(3 min)"
+  text-align: center; // Centrer "(2 min)"
   width: 100%; // Prendre toute la largeur pour le centrage
   margin: 0; // Pas de margin pour un meilleur alignement
   

@@ -220,13 +220,44 @@ export class GradeService {
       return [];
     }
 
-    const positions = Object.keys(gradeData).filter(pos => {
-      // Filtrer "Randori" si présent (ne devrait pas être dans les données)
-      // Vérifier que c'est une position valide
-      return pos === 'Suwariwaza' || pos === 'Hanmi Handachi' || pos === 'Tashiwaza' || pos === 'Armes';
-    }) as Position[];
-    
+    // Normaliser les noms de positions du JSON vers le type Position
+    // Le JSON utilise "Suwari Waza", "Hanmi Handachi Waza", "Tachi Waza"
+    // Le type Position utilise "Suwariwaza", "Hanmi Handachi", "Tachiwaza"
+    const positionMap: { [key: string]: Position } = {
+      'Suwari Waza': 'Suwariwaza',
+      'Suwariwaza': 'Suwariwaza',
+      'Hanmi Handachi Waza': 'Hanmi Handachi',
+      'Hanmi Handachi': 'Hanmi Handachi',
+      'Tachi Waza': 'Tachiwaza',
+      'Tachiwaza': 'Tachiwaza',
+      'Armes': 'Armes'
+    };
+
+    const positions: Position[] = [];
+    for (const pos of Object.keys(gradeData)) {
+      const normalizedPos = positionMap[pos];
+      if (normalizedPos) {
+        positions.push(normalizedPos);
+      }
+    }
+
     return positions;
+  }
+
+  /**
+   * Convertit un Position (type) en nom de clé JSON
+   * @param position La position au format Position
+   * @returns Le nom de clé dans le JSON
+   * @private
+   */
+  private positionToJsonKey(position: Position): string {
+    const positionMap: { [key in Position]: string } = {
+      'Suwariwaza': 'Suwari Waza',
+      'Hanmi Handachi': 'Hanmi Handachi Waza',
+      'Tachiwaza': 'Tachi Waza',
+      'Armes': 'Armes'
+    };
+    return positionMap[position] || position;
   }
 
   /**
@@ -242,16 +273,22 @@ export class GradeService {
     }
 
     const gradeData = nomenclature[grade];
-    if (!gradeData || !(position in gradeData)) {
+    if (!gradeData) {
       return [];
     }
 
-    const positionData = gradeData[position];
+    // Convertir le Position en nom de clé JSON
+    const jsonPositionKey = this.positionToJsonKey(position);
+    if (!(jsonPositionKey in gradeData)) {
+      return [];
+    }
+
+    const positionData = gradeData[jsonPositionKey];
     if (!positionData) {
       return [];
     }
 
-    // Pour les positions normales (Suwariwaza, Hanmi Handachi, Tashiwaza)
+    // Pour les positions normales (Suwariwaza, Hanmi Handachi, Tachiwaza)
     // positionData est un objet { attack: techniques[] }
     if (position !== 'Armes') {
       if (Array.isArray(positionData)) {
@@ -299,11 +336,17 @@ export class GradeService {
     }
 
     const gradeData = nomenclature[grade];
-    if (!gradeData || !(position in gradeData)) {
+    if (!gradeData) {
       return [];
     }
 
-    const positionData = gradeData[position];
+    // Convertir le Position en nom de clé JSON
+    const jsonPositionKey = this.positionToJsonKey(position);
+    if (!(jsonPositionKey in gradeData)) {
+      return [];
+    }
+
+    const positionData = gradeData[jsonPositionKey];
     if (!positionData) {
       return [];
     }

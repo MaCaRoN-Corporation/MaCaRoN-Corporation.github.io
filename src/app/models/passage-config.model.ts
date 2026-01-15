@@ -59,11 +59,11 @@ export interface PassageConfig {
   /**
    * Indique si un temps dédié au randori doit être inclus
    * Valeur par défaut: false
-   * Temps fixe d'environ 3 minutes pour le randori
+   * Temps fixe de 3 minutes pour le randori
    * Ce temps est aussi soustrait de la durée totale pour calculer le nombre de techniques
    */
   includeRandoriTime?: boolean;
-  
+
   /**
    * Temps dédié au randori (en minutes)
    * Valeur par défaut: 3 minutes

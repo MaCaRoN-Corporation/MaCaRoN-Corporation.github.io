@@ -29,7 +29,7 @@ describe('PassageService', () => {
     {
       attack: 'Katate Dori',
       technique: 'Ikkyo',
-      position: 'Tashiwaza',
+      position: 'Tachiwaza',
       order: 3,
       videoUrl: ['https://example.com/video3.mp4']
     },
@@ -98,13 +98,13 @@ describe('PassageService', () => {
       expect(passage.completedAt).toBeNull();
     });
 
-    it('should respect strict order: Suwariwaza → Hanmi Handachi → Tashiwaza → Armes', () => {
+    it('should respect strict order: Suwariwaza → Hanmi Handachi → Tachiwaza → Armes', () => {
       const passage = service.generatePassage(mockGrade, mockFilters, mockConfig);
       const techniquesWithoutRandori = passage.techniques.filter(t => t.attack !== 'Randori');
       const positions = techniquesWithoutRandori.map(t => t.position);
 
       // Vérifier que les positions respectent l'ordre strict
-      const strictOrder = ['Suwariwaza', 'Hanmi Handachi', 'Tashiwaza', 'Armes'];
+      const strictOrder = ['Suwariwaza', 'Hanmi Handachi', 'Tachiwaza', 'Armes'];
       let lastPositionIndex = -1;
 
       for (const position of positions) {
@@ -133,7 +133,7 @@ describe('PassageService', () => {
         expect(technique.technique).toBeDefined();
         expect(typeof technique.technique).toBe('string');
         expect(technique.position).toBeDefined();
-        expect(['Suwariwaza', 'Hanmi Handachi', 'Tashiwaza', 'Armes']).toContain(technique.position);
+        expect(['Suwariwaza', 'Hanmi Handachi', 'Tachiwaza', 'Armes']).toContain(technique.position);
         expect(technique.order).toBeDefined();
         expect(typeof technique.order).toBe('number');
         expect(technique.order).toBeGreaterThan(0);
@@ -197,7 +197,7 @@ describe('PassageService', () => {
     it('should reorganize techniques by position while maintaining strict order', () => {
       // Créer des techniques dans un ordre désordonné
       const unorderedTechniques: Technique[] = [
-        { attack: 'A', technique: 'T1', position: 'Tashiwaza', order: 1, videoUrl: null },
+        { attack: 'A', technique: 'T1', position: 'Tachiwaza', order: 1, videoUrl: null },
         { attack: 'B', technique: 'T2', position: 'Suwariwaza', order: 2, videoUrl: null },
         { attack: 'C', technique: 'T3', position: 'Hanmi Handachi', order: 3, videoUrl: null },
         { attack: 'D', technique: 'T4', position: 'Suwariwaza', order: 4, videoUrl: null }
@@ -206,12 +206,12 @@ describe('PassageService', () => {
       gradeServiceSpy.getTechniquesForGrade = () => unorderedTechniques;
       const passage = service.generatePassage(mockGrade, mockFilters, mockConfig);
 
-      // Vérifier que l'ordre est respecté : Suwariwaza d'abord, puis Hanmi Handachi, puis Tashiwaza
+      // Vérifier que l'ordre est respecté : Suwariwaza d'abord, puis Hanmi Handachi, puis Tachiwaza
       const positions = passage.techniques
         .filter(t => t.attack !== 'Randori') // Exclure Randori
         .map(t => t.position);
 
-      const strictOrder = ['Suwariwaza', 'Hanmi Handachi', 'Tashiwaza', 'Armes'];
+      const strictOrder = ['Suwariwaza', 'Hanmi Handachi', 'Tachiwaza', 'Armes'];
       let lastIndex = -1;
 
       for (const pos of positions) {
@@ -225,14 +225,14 @@ describe('PassageService', () => {
 
     it('should handle techniques with only one position', () => {
       const singlePositionTechniques: Technique[] = [
-        { attack: 'A', technique: 'T1', position: 'Tashiwaza', order: 1, videoUrl: null }
+        { attack: 'A', technique: 'T1', position: 'Tachiwaza', order: 1, videoUrl: null }
       ];
 
       gradeServiceSpy.getTechniquesForGrade = () => singlePositionTechniques;
       const passage = service.generatePassage(mockGrade, mockFilters, mockConfig);
 
       expect(passage.techniques.length).toBeGreaterThan(0);
-      expect(passage.techniques[0].position).toBe('Tashiwaza');
+      expect(passage.techniques[0].position).toBe('Tachiwaza');
     });
   });
 

@@ -12,6 +12,7 @@ import { DEFAULT_PASSAGE_CONFIG, PassageConfig } from '../../models/passage-conf
 import { SettingsService } from '../../services/settings.service';
 import { PassageFilters } from '../../models/passage-filters.model';
 import { GradeService } from '../../services/grade.service';
+import { AudioService } from '../../services/audio.service';
 
 /**
  * Composant pour afficher et gérer l'exécution d'un passage de grade
@@ -40,6 +41,7 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
   private subscriptions = new Subscription();
   private previousHistoryLength = 0;
   private countdownInterval: ReturnType<typeof setInterval> | null = null;
+  private countdownTimeout: ReturnType<typeof setTimeout> | null = null;
   private lastTechniqueIndex: number | null = null;
   private confettiAnimationId: number | null = null;
   configuredCountdownSeconds = DEFAULT_PASSAGE_CONFIG.timeBetweenTechniques ?? 20; // Public pour le template
@@ -54,6 +56,8 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
   totalPassageDuration: number = 0; // Durée totale du passage en secondes
   isPaused: boolean = false;
   currentState: PassageState | null = null;
+  randoriTime: number = 3; // Temps du randori en minutes (depuis la config)
+  private techniqueStartTime: number = 0; // Temps écoulé au début de la technique actuelle
   
   // État pour l'indicateur de scroll
   isScrollAtBottom = false;
@@ -80,11 +84,19 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
   // Historique des techniques déjà exécutées
   history: Technique[] = [];
 
+  // Voix actuelle pour l'audio
+  private currentVoiceId: string = 'French_Male1'; // Valeur par défaut
+
+  // État d'erreur
+  hasError = false;
+  errorMessage: string | null = null;
+
   constructor(
     private passageService: PassageService,
     private configService: ConfigService,
     private settingsService: SettingsService,
     private gradeService: GradeService,
+    private audioService: AudioService,
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
@@ -100,11 +112,30 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
         take(1)
       ).subscribe({
         next: ([config, settings]) => {
-          const timeBetween = config.timeBetweenTechniques ?? DEFAULT_PASSAGE_CONFIG.timeBetweenTechniques ?? 20;
-          this.configuredCountdownSeconds = Math.max(1, Math.floor(timeBetween));
+          try {
+            const timeBetween = config.timeBetweenTechniques ?? DEFAULT_PASSAGE_CONFIG.timeBetweenTechniques ?? 20;
+            this.configuredCountdownSeconds = Math.max(1, Math.floor(timeBetween));
 
-          // Générer et démarrer le passage
-          this.generateAndStartPassage(config, settings.voice);
+            // Stocker la voix actuelle
+            this.currentVoiceId = settings.voice || 'French_Male1';
+            console.log('[PassageComponent] Voice ID:', this.currentVoiceId);
+
+          // Réinitialiser l'état de comparaison audio pour le nouveau passage
+          try {
+            this.audioService.resetComparisonState();
+            console.log('[PassageComponent] Audio comparison state reset successfully');
+          } catch (error) {
+            console.warn('[PassageComponent] Error resetting audio comparison state:', error);
+            // Continuer même si la réinitialisation échoue
+          }
+
+            // Générer et démarrer le passage
+            this.generateAndStartPassage(config, settings.voice);
+          } catch (error) {
+            console.error('[PassageComponent] Error in next handler:', error);
+            // Ne pas rediriger automatiquement, laisser l'erreur remonter
+            throw error;
+          }
         },
         error: (error) => {
           console.error('[PassageComponent] Error loading data:', error);
@@ -126,6 +157,13 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
     this.subscriptions.add(
       this.passageService.getPassageState().subscribe((state: PassageState) => {
         this.handlePassageState(state);
+      })
+    );
+
+    // Souscrire aux changements de voix pour mettre à jour currentVoiceId
+    this.subscriptions.add(
+      this.settingsService.getSettings().subscribe((settings) => {
+        this.currentVoiceId = settings.voice || 'French_Male1';
       })
     );
   }
@@ -193,6 +231,19 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
       }
 
       // Générer le passage (le service attend PassageConfig avec passageMode)
+      console.log('[PassageComponent] Generating passage with:', {
+        grade: config.selectedGrade,
+        mode: fullConfig.passageMode,
+        filters
+      });
+      
+      // Réinitialiser l'état d'erreur
+      this.hasError = false;
+      this.errorMessage = null;
+      
+      // Stocker randoriTime pour les calculs de temps
+      this.randoriTime = fullConfig.randoriTime ?? DEFAULT_PASSAGE_CONFIG.randoriTime ?? 2;
+      
       const passage = this.passageService.generatePassage(
         config.selectedGrade,
         filters,
@@ -202,7 +253,8 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
 
       console.log('[PassageComponent] Passage généré:', {
         totalTechniques: passage.techniques.length,
-        mode: fullConfig.passageMode
+        mode: fullConfig.passageMode,
+        firstTechnique: passage.techniques[0] || null
       });
 
       // Initialiser totalTechniques immédiatement pour éviter l'affichage "0/X"
@@ -216,8 +268,27 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
       console.log('[PassageComponent] Passage démarré');
     } catch (error) {
       console.error('[PassageComponent] Error generating passage:', error);
-      // Rediriger vers la page d'accueil en cas d'erreur
-      this.router.navigate(['/']);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error('[PassageComponent] Error details:', {
+        message: errorMessage,
+        stack: error instanceof Error ? error.stack : undefined,
+        error
+      });
+      
+      // Afficher l'erreur à l'utilisateur au lieu de rediriger
+      this.hasError = true;
+      
+      // Améliorer le message d'erreur pour qu'il soit plus informatif
+      if (errorMessage.includes('Aucune technique disponible')) {
+        this.errorMessage = `Aucune technique disponible pour le grade "${config.selectedGrade}" avec les filtres sélectionnés.\n\nVeuillez ajuster vos filtres dans la page de configuration ou sélectionner un autre grade.`;
+      } else {
+        this.errorMessage = errorMessage;
+      }
+      
+      this.cdr.detectChanges();
+      
+      // Ne pas rediriger automatiquement, laisser l'utilisateur voir l'erreur
+      // et décider de retourner à la page d'accueil
     }
   }
 
@@ -244,6 +315,8 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
     this.subscriptions.unsubscribe();
     this.stopCountdown();
     this.stopConfetti();
+    // Arrêter tous les audios en cours
+    this.audioService.stopAudio();
   }
 
   /**
@@ -308,17 +381,32 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
    * @returns Le temps formaté (ex: "05:23")
    */
   formatTime(seconds: number): string {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    // Arrondir à la seconde près
+    const roundedSeconds = Math.round(seconds);
+    
+    // Calculer les minutes et secondes
+    const minutes = Math.floor(roundedSeconds / 60);
+    const secs = roundedSeconds % 60;
+    
+    // Limiter à 99:59 maximum (4 chiffres : 2 pour minutes + 2 pour secondes)
+    // Si on dépasse 99:59, afficher 99:59
+    const maxMinutes = 99;
+    const maxSeconds = 59;
+    const finalMinutes = Math.min(minutes, maxMinutes);
+    const finalSecs = minutes > maxMinutes ? maxSeconds : secs;
+    
+    return `${finalMinutes.toString().padStart(2, '0')}:${finalSecs.toString().padStart(2, '0')}`;
   }
 
   /**
    * Formate le temps restant pour l'affichage (compte à rebours)
+   * Arrondit à la seconde près et limite à 4 chiffres maximum (99:59)
    * @returns Le temps restant formaté (ex: "05:23")
    */
   getRemainingTimeFormatted(): string {
-    return this.formatTime(Math.max(0, this.remainingTime));
+    // Arrondir remainingTime à la seconde près avant de formater
+    const roundedTime = Math.round(Math.max(0, this.remainingTime));
+    return this.formatTime(roundedTime);
   }
 
   /**
@@ -330,9 +418,33 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
     this.isPaused = state.isPaused;
 
     // Calculer le temps restant (compte à rebours)
+    // Arrondir à la seconde près pour éviter les décimales
     if (state.currentPassage) {
       this.totalPassageDuration = state.currentPassage.duration * 60; // Convertir minutes en secondes
-      this.remainingTime = Math.max(0, this.totalPassageDuration - state.elapsedTime);
+      
+      // Vérifier si on est sur le randori (technique spéciale)
+      const techniques = state.currentPassage.techniques || [];
+      const currentTechnique = techniques[state.currentTechniqueIndex];
+      const isRandori = currentTechnique && currentTechnique.attack === 'Randori' && currentTechnique.technique === 'Randori';
+      
+      if (isRandori) {
+        // Pour le randori : calculer le temps restant à partir du temps configuré
+        // Le randori dure randoriTime minutes, donc on calcule le temps écoulé depuis le début du randori
+        // et on soustrait du temps configuré
+        const randoriDurationSeconds = this.randoriTime * 60; // Convertir minutes en secondes
+        
+        // Calculer le temps écoulé depuis le début du passage
+        const totalElapsed = state.elapsedTime;
+        // Calculer le temps écoulé avant le randori (durée totale - temps du randori)
+        const timeBeforeRandori = this.totalPassageDuration - randoriDurationSeconds;
+        // Calculer le temps écoulé pendant le randori
+        const elapsedInRandori = Math.max(0, totalElapsed - timeBeforeRandori);
+        // Le temps restant pour le randori
+        this.remainingTime = Math.round(Math.max(0, randoriDurationSeconds - elapsedInRandori));
+      } else {
+        // Pour les techniques normales : calculer normalement
+        this.remainingTime = Math.round(Math.max(0, this.totalPassageDuration - state.elapsedTime));
+      }
     } else {
       this.totalPassageDuration = 0;
       this.remainingTime = 0;
@@ -341,6 +453,9 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
     // Vérifier si le passage est terminé
     this.isPassageCompleted = this.isPassageCompletedState(state);
     if (this.isPassageCompleted) {
+      // Arrêter tous les audios en cours
+      this.audioService.stopAudio();
+      
       // Mettre à jour la progression à 100% avant d'afficher l'écran de fin
       if (state.currentPassage) {
         this.totalTechniques = state.currentPassage.techniques.length;
@@ -385,8 +500,30 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
 
     // Mettre à jour la technique actuelle
     const currentTechnique = techniques[state.currentTechniqueIndex];
+    const previousTechnique = this.currentTechnique;
+    
     if (currentTechnique) {
+      const isNewTechnique = !previousTechnique || (previousTechnique.order !== currentTechnique.order);
       this.currentTechnique = currentTechnique;
+      
+      // Jouer l'audio si c'est une nouvelle technique (ou la première)
+      // L'audio joue immédiatement quand la technique change (avant le countdown)
+      if (isNewTechnique) {
+        // Utiliser setTimeout pour éviter les erreurs de timing avec le changement d'état
+        // et permettre à Angular de terminer le cycle de détection de changement
+        // Délai de 100ms pour s'assurer que tout est bien initialisé
+        setTimeout(() => {
+          // Vérifier à nouveau que la technique est toujours valide
+          if (this.currentTechnique && this.currentTechnique === currentTechnique) {
+            try {
+              this.playTechniqueAudio(this.currentTechnique);
+            } catch (error) {
+              console.error('[PassageComponent] Error in playTechniqueAudio:', error);
+              // Ne pas interrompre le passage en cas d'erreur audio
+            }
+          }
+        }, 100);
+      }
     } else {
       this.currentTechnique = null;
     }
@@ -402,9 +539,44 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
       // Démarrer le compte à rebours si on change de technique ou au démarrage
       if (this.lastTechniqueIndex !== state.currentTechniqueIndex || this.lastTechniqueIndex === null) {
         this.lastTechniqueIndex = state.currentTechniqueIndex;
+        // Enregistrer le temps de début de la technique actuelle pour calculer le countdown
+        this.techniqueStartTime = state.elapsedTime;
         // Démarrer le compte à rebours seulement si on a une technique valide
         if (currentTechnique) {
-          this.startCountdown(this.configuredCountdownSeconds);
+          // Vérifier si c'est un randori (technique spéciale avec un countdown basé sur randoriTime)
+          const isRandori = currentTechnique.attack === 'Randori' && currentTechnique.technique === 'Randori';
+          
+          if (isRandori) {
+            // Pour le randori : countdown basé sur randoriTime configuré (en minutes, converti en secondes)
+            const randoriDurationSeconds = this.randoriTime * 60; // Convertir minutes en secondes
+            this.countdown = randoriDurationSeconds;
+          } else {
+            // Pour les techniques normales : utiliser le countdown configuré
+            this.countdown = this.configuredCountdownSeconds;
+          }
+          this.countdownAnimationDuration = 1;
+          this.bumpCountdownAnimation();
+        }
+      }
+      
+      // Calculer le countdown basé sur le temps écoulé depuis le début de la technique
+      // Cela synchronise le countdown avec le timer principal
+      if (currentTechnique && !this.isPaused) {
+        const elapsedSinceTechniqueStart = state.elapsedTime - this.techniqueStartTime;
+        const isRandori = currentTechnique.attack === 'Randori' && currentTechnique.technique === 'Randori';
+        const countdownDuration = isRandori ? (this.randoriTime * 60) : this.configuredCountdownSeconds;
+        const newCountdown = Math.max(0, countdownDuration - elapsedSinceTechniqueStart);
+        
+        // Mettre à jour le countdown seulement si la valeur a changé (pour éviter les animations inutiles)
+        if (Math.floor(newCountdown) !== Math.floor(this.countdown)) {
+          this.countdown = newCountdown;
+          this.bumpCountdownAnimation();
+          
+          // Quand le countdown arrive à 0, passer à la technique suivante
+          if (this.countdown <= 0) {
+            // Passage automatique : le timer a déjà compté le temps
+            this.passageService.nextTechnique(false);
+          }
         }
       }
     }
@@ -458,8 +630,61 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
   togglePause(): void {
     if (this.isPaused) {
       this.passageService.resumePassage();
+      // Reprendre l'audio
+      this.audioService.resumeAudio();
     } else {
       this.passageService.pausePassage();
+      // Mettre en pause l'audio
+      this.audioService.pauseAudio();
+    }
+  }
+
+  /**
+   * Joue l'audio d'une technique
+   * @param technique La technique à annoncer
+   * @private
+   */
+  private playTechniqueAudio(technique: Technique): void {
+    try {
+      // Vérifications de sécurité
+      if (!technique) {
+        console.warn('[PassageComponent] Cannot play audio: technique is null or undefined');
+        return;
+      }
+
+      // Vérifier que la technique a les propriétés nécessaires
+      if (!technique.attack || !technique.technique || !technique.position) {
+        console.warn('[PassageComponent] Cannot play audio: technique is missing required properties', technique);
+        return;
+      }
+
+      // Vérifier que la voix est valide
+      if (!this.currentVoiceId || typeof this.currentVoiceId !== 'string' || this.currentVoiceId.trim().length === 0) {
+        console.warn('[PassageComponent] Cannot play audio: voiceId is invalid', this.currentVoiceId);
+        return;
+      }
+
+      // Ne pas jouer l'audio si le passage est en pause
+      if (this.isPaused) {
+        return;
+      }
+
+      // Jouer l'audio de la technique avec la voix actuelle
+      // Utiliser setTimeout pour éviter les erreurs de timing et permettre à Angular de terminer le cycle
+      setTimeout(() => {
+        try {
+          this.audioService.playTechnique(technique, this.currentVoiceId).catch((error) => {
+            // Logger l'erreur mais ne pas interrompre le passage
+            console.warn('[PassageComponent] Failed to play technique audio (async error):', error);
+          });
+        } catch (syncError) {
+          // Capturer les erreurs synchrones (par exemple dans buildAudioPath)
+          console.warn('[PassageComponent] Failed to play technique audio (sync error):', syncError);
+        }
+      }, 0);
+    } catch (error) {
+      // Capturer toutes les erreurs pour éviter qu'elles ne remontent et causent une redirection
+      console.warn('[PassageComponent] Error in playTechniqueAudio:', error);
     }
   }
 
@@ -467,43 +692,17 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
    * Lance le compte a rebours visuel avant chaque technique
    * Compte à rebours classique : décrémente chaque seconde
    */
-  private startCountdown(durationSeconds: number): void {
-    // Arrêter tout countdown précédent
-    this.stopCountdown();
-    
-    // Initialiser le countdown avec la valeur complète
-    const safeDuration = Math.max(1, Math.floor(durationSeconds));
-    this.countdown = safeDuration;
-    this.countdownAnimationDuration = 1;
-    this.bumpCountdownAnimation();
-
-    // Compte à rebours classique : décrémente chaque seconde
-    this.countdownInterval = setInterval(() => {
-      // Ne pas décrémenter si le passage est en pause
-      if (this.isPaused) {
-        return;
-      }
-
-      // Décrémenter le countdown
-      this.countdown = this.countdown - 1;
-      this.bumpCountdownAnimation();
-
-      // Quand le countdown arrive à 0, passer à la technique suivante
-      if (this.countdown <= 0) {
-        this.stopCountdown();
-        // Passage automatique : le timer a déjà compté le temps
-        this.passageService.nextTechnique(false);
-      }
-    }, 1000);
-  }
-
   /**
-   * Arrête le compte à rebours
+   * Arrête le compte à rebours (nettoyage des timers si nécessaire)
    */
   private stopCountdown(): void {
     if (this.countdownInterval !== null) {
       clearInterval(this.countdownInterval);
       this.countdownInterval = null;
+    }
+    if (this.countdownTimeout !== null) {
+      clearTimeout(this.countdownTimeout);
+      this.countdownTimeout = null;
     }
   }
 
@@ -515,8 +714,12 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
    * Passe à la technique suivante (skip l'attaque en cours)
    */
   skipTechnique(): void {
+    // Arrêter l'audio en cours avant de passer à la technique suivante
+    this.audioService.stopAudio();
+    
     // Arrêter le countdown actuel
     this.stopCountdown();
+    
     // Passer à la technique suivante avec skip=true pour ajouter le temps entre techniques
     this.passageService.nextTechnique(true);
   }

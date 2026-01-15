@@ -28,7 +28,7 @@ export class PassageService {
   /**
    * Ordre strict traditionnel des positions
    */
-  private readonly STRICT_POSITION_ORDER: Position[] = ['Suwariwaza', 'Hanmi Handachi', 'Tashiwaza', 'Armes'];
+  private readonly STRICT_POSITION_ORDER: Position[] = ['Suwariwaza', 'Hanmi Handachi', 'Tachiwaza', 'Armes'];
 
   /**
    * Référence au timer pour incrémenter elapsedTime
@@ -104,14 +104,16 @@ export class PassageService {
     const requestedWeaponTime = config.weaponTime ?? 5; // minutes
     const includeWeaponTime = config.includeWeaponTime ?? false;
     const includeRandoriTime = config.includeRandoriTime ?? false;
-    const randoriTime = config.randoriTime ?? 3; // minutes
+    const randoriTime = config.randoriTime ?? 2; // minutes
     
     // Calculer le temps disponible pour les techniques normales (hors armes et randori)
+    // Utiliser syncedFilters.includeRandori pour savoir si le randori sera ajouté au passage
+    const willHaveRandori = syncedFilters.includeRandori || false;
     let availableTimeForTechniques = requestedDuration;
     if (includeWeaponTime) {
       availableTimeForTechniques -= requestedWeaponTime;
     }
-    if (includeRandoriTime) {
+    if (willHaveRandori) {
       availableTimeForTechniques -= randoriTime;
     }
     availableTimeForTechniques = Math.max(1, availableTimeForTechniques); // Au moins 1 minute
@@ -126,13 +128,16 @@ export class PassageService {
     }
     
     // Séparer les techniques normales et les techniques d'armes
-    const normalTechniques = selectedTechniques.filter(t => t.position !== 'Armes');
-    const weaponTechniques = selectedTechniques.filter(t => t.position === 'Armes');
+    // Exclure le randori des techniques normales (c'est une technique spéciale)
+    const normalTechniques = selectedTechniques.filter(t => t.position !== 'Armes' && !(t.attack === 'Randori' && t.technique === 'Randori'));
+    const weaponTechniques = selectedTechniques.filter(t => t.position === 'Armes' && !(t.attack === 'Randori' && t.technique === 'Randori'));
+    const hasRandori = selectedTechniques.some(t => t.attack === 'Randori' && t.technique === 'Randori');
     
     // Calculer le temps réel basé sur les techniques sélectionnées
     const actualNormalTime = (normalTechniques.length * timeBetweenTechniques) / 60;
     const actualWeaponTime = (weaponTechniques.length * timeBetweenTechniques) / 60;
-    const actualTotalTime = actualNormalTime + (includeWeaponTime ? actualWeaponTime : 0) + (includeRandoriTime ? randoriTime : 0);
+    // Si le randori fait partie du passage, ajouter le temps configuré (randoriTime) au temps total
+    const actualTotalTime = actualNormalTime + (includeWeaponTime ? actualWeaponTime : 0) + (hasRandori ? randoriTime : 0);
     
     // Calculer la durée finale en essayant de se rapprocher du temps demandé
     // Utiliser le temps réel calculé (qui se rapproche le plus possible du temps demandé)
@@ -594,6 +599,25 @@ export class PassageService {
   }
 
   /**
+   * Extrait le nom de l'arme d'une technique d'armes
+   * @param technique La technique à analyser
+   * @returns Le nom de l'arme (ex: "Tanto Dori", "Jo Dori") ou null si ce n'est pas une arme
+   * @private
+   */
+  private extractWeaponName(technique: Technique): string | null {
+    if (technique.position !== 'Armes') {
+      return null;
+    }
+    // Pour les armes, l'attaque peut être "Tanto Dori-Chudan Tsuki" ou "Jo Dori"
+    if (technique.attack.includes('-')) {
+      const [weapon] = technique.attack.split('-', 2);
+      return weapon.trim();
+    } else {
+      return technique.attack.trim();
+    }
+  }
+
+  /**
    * Organise les techniques par position puis par attaque
    * Structure: Map<Position, Map<Attack, Technique[]>>
    * @param techniques Liste de toutes les techniques
@@ -686,6 +710,7 @@ export class PassageService {
   ): Technique[] {
     const selectedTechniques: Technique[] = [];
     const usedTechniques = new Set<string>(); // Pour éviter les doublons
+    const usedWeapons = new Set<string>(); // Pour suivre les armes déjà utilisées (une fois utilisée, on ne revient plus dessus)
     let sittingPositionsCount = 0; // Compteur pour Suwariwaza + Hanmi Handachi Waza
     let totalSelected = 0; // Compteur total de techniques sélectionnées
 
@@ -730,15 +755,26 @@ export class PassageService {
       const shuffledAttacks = shuffle ? this.shuffleArray([...attacks]) : [...attacks];
 
       // Calculer le temps disponible pour cette position
-      // Pour les positions assises, on distribue le temps restant de manière flexible
+      // Règle : maximum 30% pour Suwariwaza + Hanmi Handachi Waza, minimum 70% pour Tachiwaza
       const remainingTechniques = estimatedTotalTechniques - totalSelected;
-      const remainingSittingTechniques = isSittingPosition 
-        ? maxTechniquesForSittingPositions - sittingPositionsCount
-        : remainingTechniques;
       
-      const techniquesForThisPosition = isSittingPosition
-        ? Math.min(remainingSittingTechniques, remainingTechniques)
-        : remainingTechniques;
+      let techniquesForThisPosition: number;
+      if (isSittingPosition) {
+        // Pour les positions assises : utiliser le minimum entre le quota restant (30%) et le temps total restant
+        const remainingSittingTechniques = maxTechniquesForSittingPositions - sittingPositionsCount;
+        techniquesForThisPosition = Math.min(remainingSittingTechniques, remainingTechniques);
+      } else {
+        // Pour Tachiwaza : garantir qu'on utilise au moins 70% du temps total
+        // Calculer le minimum garanti pour Tachiwaza (70% du temps total = total - 30%)
+        const minTechniquesForTachiwaza = estimatedTotalTechniques - maxTechniquesForSittingPositions;
+        // Le temps disponible pour Tachiwaza est le maximum entre :
+        // - Le temps restant actuel (ce qui reste après toutes les sélections précédentes)
+        // - Le minimum garanti moins ce qui a déjà été sélectionné pour Tachiwaza (0 pour l'instant)
+        // Cela garantit qu'on aura au moins 70% du temps pour Tachiwaza
+        const alreadySelectedForTachiwaza = totalSelected - sittingPositionsCount;
+        const guaranteedRemaining = minTechniquesForTachiwaza - alreadySelectedForTachiwaza;
+        techniquesForThisPosition = Math.max(remainingTechniques, guaranteedRemaining, 0); // Au moins 0
+      }
 
       // Parcourir les attaques dans l'ordre mélangé (pas de retour en arrière)
       let positionTechniquesSelected = 0;
@@ -772,12 +808,19 @@ export class PassageService {
         const minTechniquesPerAttack = 2;
         
         // Calculer le maximum disponible pour cette attaque
-        const maxAvailableForThisAttack = Math.min(
-          remainingTechniquesInPosition,
-          isSittingPosition 
-            ? maxTechniquesForSittingPositions - sittingPositionsCount
-            : estimatedTotalTechniques - totalSelected
-        );
+        let maxAvailableForThisAttack: number;
+        if (isSittingPosition) {
+          maxAvailableForThisAttack = Math.min(
+            remainingTechniquesInPosition,
+            maxTechniquesForSittingPositions - sittingPositionsCount
+          );
+        } else {
+          // Pour Tachiwaza, utiliser le temps restant après les positions assises
+          maxAvailableForThisAttack = Math.min(
+            remainingTechniquesInPosition,
+            estimatedTotalTechniques - totalSelected
+          );
+        }
         
         // Si on n'a pas assez de temps ou de techniques pour faire au moins 1 technique, on saute cette attaque
         // (ce n'est pas grave de ne pas faire toutes les attaques)
@@ -863,6 +906,7 @@ export class PassageService {
   ): Technique[] {
     const selectedTechniques: Technique[] = [];
     const usedTechniques = new Set<string>(); // Règle 1: Éviter les doublons (position + attaque + technique)
+    const usedWeapons = new Set<string>(); // Règle spéciale: Une fois qu'une arme est utilisée, on ne revient plus dessus
     let sittingPositionsCount = 0; // Compteur pour la règle 2: 30% max pour Suwariwaza + Hanmi Handachi Waza
     let totalSelected = 0;
 
@@ -870,10 +914,16 @@ export class PassageService {
     const getAvailableTechniques = (): Technique[] => {
       return allTechniques.filter(technique => {
         const key = `${technique.attack}-${technique.technique}-${technique.position}`;
-        
+
         // Règle 1: Pas de doublon
         if (usedTechniques.has(key)) {
           return false;
+        }
+
+        // Règle spéciale: Pour les armes, vérifier si l'arme a déjà été utilisée
+        const weaponName = this.extractWeaponName(technique);
+        if (weaponName && usedWeapons.has(weaponName)) {
+          return false; // Ignorer les techniques d'armes déjà utilisées
         }
 
         // Règle 2: Contrainte de 30% pour les positions assises
@@ -903,6 +953,13 @@ export class PassageService {
       // Ajouter la technique
       const key = `${selectedTechnique.attack}-${selectedTechnique.technique}-${selectedTechnique.position}`;
       usedTechniques.add(key);
+      
+      // Si c'est une arme, la marquer comme utilisée (on ne reviendra plus dessus)
+      const weaponName = this.extractWeaponName(selectedTechnique);
+      if (weaponName) {
+        usedWeapons.add(weaponName);
+      }
+      
       selectedTechniques.push({ ...selectedTechnique });
       totalSelected++;
       
