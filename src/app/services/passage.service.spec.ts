@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { firstValueFrom } from 'rxjs';
 import { PassageService } from './passage.service';
 import { GradeService } from './grade.service';
 import { Passage, PassageConfig } from '../models/passage.model';
@@ -289,53 +290,45 @@ describe('PassageService', () => {
       gradeServiceSpy.getTechniquesForGrade = () => [...mockTechniques];
     });
 
-    it('should initialize state with default values', (done) => {
-      service.getPassageState().subscribe((state) => {
-        expect(state.currentPassage).toBeNull();
-        expect(state.currentTechniqueIndex).toBe(0);
-        expect(state.isPlaying).toBe(false);
-        expect(state.isPaused).toBe(false);
-        expect(state.elapsedTime).toBe(0);
-        expect(state.progress).toBe(0);
-        done();
-      });
+    it('should initialize state with default values', async () => {
+      const state = await firstValueFrom(service.getPassageState());
+      expect(state.currentPassage).toBeNull();
+      expect(state.currentTechniqueIndex).toBe(0);
+      expect(state.isPlaying).toBe(false);
+      expect(state.isPaused).toBe(false);
+      expect(state.elapsedTime).toBe(0);
+      expect(state.progress).toBe(0);
     });
 
-    it('should start a passage and update state correctly', (done) => {
+    it('should start a passage and update state correctly', async () => {
       service.startPassage(mockPassage);
 
-      service.getPassageState().subscribe((state) => {
-        expect(state.currentPassage).toEqual(mockPassage);
-        expect(state.currentTechniqueIndex).toBe(0);
-        expect(state.isPlaying).toBe(true);
-        expect(state.isPaused).toBe(false);
-        expect(state.elapsedTime).toBe(0);
-        expect(state.progress).toBe(0);
-        done();
-      });
+      const state = await firstValueFrom(service.getPassageState());
+      expect(state.currentPassage).toEqual(mockPassage);
+      expect(state.currentTechniqueIndex).toBe(0);
+      expect(state.isPlaying).toBe(true);
+      expect(state.isPaused).toBe(false);
+      expect(state.elapsedTime).toBe(0);
+      expect(state.progress).toBe(0);
     });
 
-    it('should pause a passage correctly', (done) => {
+    it('should pause a passage correctly', async () => {
       service.startPassage(mockPassage);
       service.pausePassage();
 
-      service.getPassageState().subscribe((state) => {
-        expect(state.isPaused).toBe(true);
-        expect(state.isPlaying).toBe(true);
-        done();
-      });
+      const state = await firstValueFrom(service.getPassageState());
+      expect(state.isPaused).toBe(true);
+      expect(state.isPlaying).toBe(true);
     });
 
-    it('should resume a paused passage correctly', (done) => {
+    it('should resume a paused passage correctly', async () => {
       service.startPassage(mockPassage);
       service.pausePassage();
       service.resumePassage();
 
-      service.getPassageState().subscribe((state) => {
-        expect(state.isPaused).toBe(false);
-        expect(state.isPlaying).toBe(true);
-        done();
-      });
+      const state = await firstValueFrom(service.getPassageState());
+      expect(state.isPaused).toBe(false);
+      expect(state.isPlaying).toBe(true);
     });
 
     it('should get current technique correctly', () => {
@@ -352,18 +345,16 @@ describe('PassageService', () => {
       expect(currentTechnique).toBeNull();
     });
 
-    it('should move to next technique correctly', (done) => {
+    it('should move to next technique correctly', async () => {
       service.startPassage(mockPassage);
       service.nextTechnique();
 
-      service.getPassageState().subscribe((state) => {
-        expect(state.currentTechniqueIndex).toBe(1);
-        expect(state.progress).toBeGreaterThan(0);
-        done();
-      });
+      const state = await firstValueFrom(service.getPassageState());
+      expect(state.currentTechniqueIndex).toBe(1);
+      expect(state.progress).toBeGreaterThan(0);
     });
 
-    it('should complete passage when reaching the last technique', (done) => {
+    it('should complete passage when reaching the last technique', async () => {
       service.startPassage(mockPassage);
       
       // Move to the last technique
@@ -372,25 +363,21 @@ describe('PassageService', () => {
         service.nextTechnique();
       }
 
-      service.getPassageState().subscribe((state) => {
-        expect(state.isPlaying).toBe(false);
-        expect(state.isPaused).toBe(false);
-        expect(state.currentTechniqueIndex).toBe(totalTechniques - 1);
-        expect(mockPassage.completedAt).toBeInstanceOf(Date);
-        done();
-      });
+      const state = await firstValueFrom(service.getPassageState());
+      expect(state.isPlaying).toBe(false);
+      expect(state.isPaused).toBe(false);
+      expect(state.currentTechniqueIndex).toBe(totalTechniques - 1);
+      expect(mockPassage.completedAt).toBeInstanceOf(Date);
     });
 
-    it('should calculate progress correctly', (done) => {
+    it('should calculate progress correctly', async () => {
       service.startPassage(mockPassage);
       service.nextTechnique();
       service.nextTechnique();
 
-      service.getPassageState().subscribe((state) => {
-        const expectedProgress = (state.currentTechniqueIndex / mockPassage.techniques.length) * 100;
-        expect(state.progress).toBeCloseTo(expectedProgress, 1);
-        done();
-      });
+      const state = await firstValueFrom(service.getPassageState());
+      const expectedProgress = (state.currentTechniqueIndex / mockPassage.techniques.length) * 100;
+      expect(state.progress).toBeCloseTo(expectedProgress, 1);
     });
 
     it('should handle pause when not playing', () => {
