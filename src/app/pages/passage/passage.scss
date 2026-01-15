@@ -20,6 +20,52 @@
   }
 }
 
+// Écran d'erreur
+.error-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 2rem;
+  grid-column: 1 / -1; // Prend toute la largeur
+  grid-row: 1 / -1; // Prend toute la hauteur
+}
+
+.error-content {
+  max-width: 600px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-title {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-error, #dc3545);
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  font-size: 1.1rem;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  white-space: pre-line; // Permet d'afficher les \n comme des sauts de ligne
+}
+
+.error-suggestion {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.error-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .passage-header-center {
   display: flex;
   flex-direction: column;
@@ -293,9 +339,12 @@
         height: 18px;
       }
       
-      &:hover {
-        transform: translateY(-2px) scale(1.05);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+      // Hover uniquement sur desktop (appareils avec souris)
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          transform: translateY(-2px) scale(1.05);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+        }
       }
       
       &:active {
@@ -308,9 +357,11 @@
         background-color: #4caf50; // Vert pour "play"
         box-shadow: 0 3px 12px rgba(76, 175, 80, 0.4);
         
-        &:hover {
-          background-color: #45a049; // Vert plus foncé au survol
-          box-shadow: 0 5px 18px rgba(76, 175, 80, 0.5);
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            background-color: #45a049; // Vert plus foncé au survol
+            box-shadow: 0 5px 18px rgba(76, 175, 80, 0.5);
+          }
         }
       }
       
@@ -319,9 +370,11 @@
         background-color: #ff6b35; // Orange-rouge pour "pause"
         box-shadow: 0 3px 12px rgba(255, 107, 53, 0.4);
         
-        &:hover {
-          background-color: #e55a2b; // Orange-rouge plus foncé au survol
-          box-shadow: 0 5px 18px rgba(255, 107, 53, 0.5);
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            background-color: #e55a2b; // Orange-rouge plus foncé au survol
+            box-shadow: 0 5px 18px rgba(255, 107, 53, 0.5);
+          }
         }
       }
       
@@ -337,11 +390,13 @@
           filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
         }
 
-        &:hover {
-          background: linear-gradient(135deg, #ffb74d 0%, #ff9800 100%);
-          transform: translateY(-2px) scale(1.08);
-          box-shadow: 0 6px 20px rgba(255, 167, 38, 0.6);
-          border-color: rgba(255, 255, 255, 0.5);
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            background: linear-gradient(135deg, #ffb74d 0%, #ff9800 100%);
+            transform: translateY(-2px) scale(1.08);
+            box-shadow: 0 6px 20px rgba(255, 167, 38, 0.6);
+            border-color: rgba(255, 255, 255, 0.5);
+          }
         }
 
         &:active {
@@ -404,6 +459,10 @@
       font-size: 1.75rem;
       font-weight: bold;
       color: var(--color-text-primary);
+      
+      &.countdown-small {
+        font-size: 1.25rem;
+      }
     }
     
     @media (min-width: 768px) {
@@ -412,6 +471,10 @@
       
       .countdown-number {
         font-size: 2rem;
+        
+        &.countdown-small {
+          font-size: 1.5rem;
+        }
       }
     }
     
@@ -422,6 +485,10 @@
       
       .countdown-number {
         font-size: 2.5rem;
+        
+        &.countdown-small {
+          font-size: 2.1rem;
+        }
       }
     }
   }
@@ -435,9 +502,27 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center; // Centrer horizontalement
     min-width: 0; // Permet au contenu de rétrécir
     padding: 0 1rem; // Padding horizontal pour éviter que les textes touchent les bords
     box-sizing: border-box;
+    
+    &.loading {
+      // Styles spécifiques pour l'état de chargement
+      padding: 1rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      max-width: 100%;
+      
+      .technique-attack,
+      .technique-name {
+        max-width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal; // Permet le retour à la ligne
+        text-align: center;
+      }
+    }
 
     .technique-attack {
       font-size: clamp(1.125rem, 6.25cqw, 6rem);
@@ -936,6 +1021,10 @@
       
       .countdown-number {
         font-size: 1.5rem;
+        
+        &.countdown-small {
+          font-size: 1.1rem;
+        }
       }
     }
     
@@ -944,7 +1033,25 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center; // Centrer horizontalement
       width: 100%;
+      
+      &.loading {
+        // Styles spécifiques pour l'état de chargement sur mobile
+        padding: 1rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+        
+        .technique-attack,
+        .technique-name {
+          max-width: 100%;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          white-space: normal; // Permet le retour à la ligne
+          text-align: center;
+        }
+      }
       min-height: 0;
       
       .technique-attack {
@@ -1074,10 +1181,13 @@
       width: 36px;
       height: 36px;
 
-      &:hover {
-        background: var(--color-background);
-        color: var(--color-text-primary);
-        transform: rotate(90deg);
+      // Hover uniquement sur desktop (appareils avec souris)
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background: var(--color-background);
+          color: var(--color-text-primary);
+          transform: rotate(90deg);
+        }
       }
 
       &:active {
@@ -1172,11 +1282,14 @@
           line-height: 1.2;
         }
 
-        &:hover {
-          transform: translateY(-2px);
-          
-          svg {
-            transform: scale(1.15);
+        // Hover uniquement sur desktop (appareils avec souris)
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            transform: translateY(-2px);
+            
+            svg {
+              transform: scale(1.15);
+            }
           }
         }
 
@@ -1191,9 +1304,12 @@
           color: var(--color-text-primary);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
           
-          &:hover {
-            background: var(--color-button-primary-light, var(--color-accent));
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+          // Hover uniquement sur desktop (appareils avec souris)
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              background: var(--color-button-primary-light, var(--color-accent));
+              box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            }
           }
 
           &:active {
@@ -1207,10 +1323,13 @@
           border: 2px solid var(--color-border);
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
           
-          &:hover {
-            background: var(--color-surface);
-            border-color: var(--color-primary);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          // Hover uniquement sur desktop (appareils avec souris)
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              background: var(--color-surface);
+              border-color: var(--color-primary);
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
           }
 
           &:active {
@@ -1223,10 +1342,13 @@
           color: var(--color-text-primary);
           border: 2px solid var(--color-border);
           
-          &:hover {
-            background: var(--color-background);
-            border-color: var(--color-primary);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          // Hover uniquement sur desktop (appareils avec souris)
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              background: var(--color-background);
+              border-color: var(--color-primary);
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
           }
 
           &:active {

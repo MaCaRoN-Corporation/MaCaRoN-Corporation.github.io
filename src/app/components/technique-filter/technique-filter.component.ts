@@ -31,7 +31,7 @@ export class TechniqueFilterComponent implements OnInit, AfterViewChecked {
   @Output() cancelled = new EventEmitter<void>();
 
   // Positions disponibles (toujours les 4 mêmes)
-  readonly positions: Position[] = ['Suwariwaza', 'Hanmi Handachi', 'Tashiwaza', 'Armes'];
+  readonly positions: Position[] = ['Suwariwaza', 'Hanmi Handachi', 'Tachiwaza', 'Armes'];
 
   // Mode d'affichage
   displayMode: DisplayMode = 'all';

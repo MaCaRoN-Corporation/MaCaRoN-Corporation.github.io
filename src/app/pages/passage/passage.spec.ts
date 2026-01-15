@@ -123,7 +123,7 @@ describe('PassageComponent', () => {
   describe('getPositionLabel', () => {
     it('should return the position as-is', () => {
       expect(component.getPositionLabel('Suwariwaza' as Position)).toBe('Suwariwaza');
-      expect(component.getPositionLabel('Tashiwaza' as Position)).toBe('Tashiwaza');
+      expect(component.getPositionLabel('Tachiwaza' as Position)).toBe('Tachiwaza');
       expect(component.getPositionLabel('Hanmi Handachi' as Position)).toBe('Hanmi Handachi');
     });
   });
@@ -266,8 +266,8 @@ describe('PassageComponent', () => {
       // Access private property via bracket notation for testing
       (component as any).previousHistoryLength = 5;
       component.history = [
-        { attack: 'Test', technique: 'Test', position: 'Tashiwaza' as Position, order: 1, videoUrl: null },
-        { attack: 'Test', technique: 'Test', position: 'Tashiwaza' as Position, order: 2, videoUrl: null }
+        { attack: 'Test', technique: 'Test', position: 'Tachiwaza' as Position, order: 1, videoUrl: null },
+        { attack: 'Test', technique: 'Test', position: 'Tachiwaza' as Position, order: 2, videoUrl: null }
       ];
       
       component.ngAfterViewChecked();
@@ -301,8 +301,8 @@ describe('PassageComponent', () => {
         id: 'passage-test',
         grade: '1er Dan',
         techniques: [
-          { attack: 'A', technique: 'B', position: 'Tashiwaza' as Position, order: 1, videoUrl: null },
-          { attack: 'C', technique: 'D', position: 'Tashiwaza' as Position, order: 2, videoUrl: null }
+          { attack: 'A', technique: 'B', position: 'Tachiwaza' as Position, order: 1, videoUrl: null },
+          { attack: 'C', technique: 'D', position: 'Tachiwaza' as Position, order: 2, videoUrl: null }
         ],
         duration: 10,
         timeBetweenTechniques: 2,
@@ -365,7 +365,7 @@ describe('PassageComponent', () => {
       
       expect(attackElement?.textContent?.trim()).toBe('Katate Dori Men Uchi');
       expect(nameElement?.textContent?.trim()).toBe('Sokumen Irimi Nage');
-      expect(positionElement?.textContent?.trim()).toBe('Tashiwaza');
+      expect(positionElement?.textContent?.trim()).toBe('Tachiwaza');
     });
 
     it('should display progress information', () => {
@@ -430,7 +430,7 @@ describe('PassageComponent', () => {
         grade: '6e Kyū',
         techniques: [
           { attack: 'A1', technique: 'T1', position: 'Suwariwaza' as Position, order: 1, videoUrl: null },
-          { attack: 'A2', technique: 'T2', position: 'Tashiwaza' as Position, order: 2, videoUrl: null }
+          { attack: 'A2', technique: 'T2', position: 'Tachiwaza' as Position, order: 2, videoUrl: null }
         ],
         duration: 10,
         timeBetweenTechniques: 20,
@@ -475,7 +475,7 @@ describe('PassageComponent', () => {
     it('should display history with attack, technique, and position', () => {
       component.history = [
         { attack: 'A1', technique: 'T1', position: 'Suwariwaza' as Position, order: 1, videoUrl: null },
-        { attack: 'A2', technique: 'T2', position: 'Tashiwaza' as Position, order: 2, videoUrl: null }
+        { attack: 'A2', technique: 'T2', position: 'Tachiwaza' as Position, order: 2, videoUrl: null }
       ];
       fixture.detectChanges();
       
@@ -496,8 +496,8 @@ describe('PassageComponent', () => {
         grade: '6e Kyū',
         techniques: [
           { attack: 'A1', technique: 'T1', position: 'Suwariwaza' as Position, order: 1, videoUrl: null },
-          { attack: 'A2', technique: 'T2', position: 'Tashiwaza' as Position, order: 2, videoUrl: null },
-          { attack: 'A3', technique: 'T3', position: 'Tashiwaza' as Position, order: 3, videoUrl: null }
+          { attack: 'A2', technique: 'T2', position: 'Tachiwaza' as Position, order: 2, videoUrl: null },
+          { attack: 'A3', technique: 'T3', position: 'Tachiwaza' as Position, order: 3, videoUrl: null }
         ],
         duration: 10,
         timeBetweenTechniques: 20,
@@ -564,8 +564,8 @@ describe('PassageComponent', () => {
         grade: '6e Kyū',
         techniques: [
           { attack: 'A1', technique: 'T1', position: 'Suwariwaza' as Position, order: 1, videoUrl: null },
-          { attack: 'A2', technique: 'T2', position: 'Tashiwaza' as Position, order: 2, videoUrl: null },
-          { attack: 'A3', technique: 'T3', position: 'Tashiwaza' as Position, order: 3, videoUrl: null }
+          { attack: 'A2', technique: 'T2', position: 'Tachiwaza' as Position, order: 2, videoUrl: null },
+          { attack: 'A3', technique: 'T3', position: 'Tachiwaza' as Position, order: 3, videoUrl: null }
         ],
         duration: 10,
         timeBetweenTechniques: 20,
@@ -600,7 +600,7 @@ describe('PassageComponent', () => {
         grade: '6e Kyū',
         techniques: [
           { attack: 'A1', technique: 'T1', position: 'Suwariwaza' as Position, order: 1, videoUrl: null },
-          { attack: 'A2', technique: 'T2', position: 'Tashiwaza' as Position, order: 2, videoUrl: null }
+          { attack: 'A2', technique: 'T2', position: 'Tachiwaza' as Position, order: 2, videoUrl: null }
         ],
         duration: 10,
         timeBetweenTechniques: 20,

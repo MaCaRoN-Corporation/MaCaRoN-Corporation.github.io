@@ -73,7 +73,7 @@ export const DEFAULT_HIERARCHICAL_SELECTION: Omit<HierarchicalSelection, 'grade'
   selectedAttacks: {
     'Suwariwaza': [],
     'Hanmi Handachi': [],
-    'Tashiwaza': [],
+    'Tachiwaza': [],
     'Armes': []
   },
   selectedTechniques: {},

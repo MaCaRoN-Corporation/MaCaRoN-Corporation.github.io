@@ -94,7 +94,7 @@ TEXT_MAP = {
     "Shiho nage": "Shiho nagué",
     "Kote gaeshi": "Koté gaéshi",
     "Tenchi nage": "Tentchi nagué",
-    "Uchi kaiten nage": "Utchi kaïtèn nagué",
+    "Uchi kaiten nage": "Outchi kaïtèn nagué",
     "Soto kaiten nage": "Soto kaïtèn nagué",
     "Koshi nage": "Koshi nagué",
     "Kokyu nage": "Kokyou nagué",

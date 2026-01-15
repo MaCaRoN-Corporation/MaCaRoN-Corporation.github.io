@@ -15,7 +15,7 @@ describe('GradeService', () => {
         'Shomen Uchi': ['Ikkyo', 'Nikyo'],
         'Yokomen Uchi': ['Ikkyo']
       },
-      'Tashiwaza': {
+      'Tachiwaza': {
         'Katate Dori': ['Ikkyo', 'Shihonage']
       }
     }
@@ -379,7 +379,7 @@ describe('GradeService', () => {
           const positions = service.getPositionsForGrade('6e Kyū');
           expect(positions.length).toBeGreaterThan(0);
           expect(positions).toContain('Suwariwaza');
-          expect(positions).toContain('Tashiwaza');
+          expect(positions).toContain('Tachiwaza');
           resolve();
         }, reject);
 
@@ -516,7 +516,7 @@ describe('GradeService', () => {
       return new Promise<void>((resolve, reject) => {
         const mockNomenclatureWithWeapons: NomenclatureData = {
           '1er Dan': {
-            'Tashiwaza': {
+            'Tachiwaza': {
               'Katate Dori': ['Ikkyo']
             },
             'Armes': {

@@ -20,7 +20,7 @@ describe('ConfigComponent', () => {
       'Suwariwaza': {
         'Shomen Uchi': ['Ikkyo', 'Nikyo']
       },
-      'Tashiwaza': {
+      'Tachiwaza': {
         'Katate Dori': ['Ikkyo', 'Shihonage']
       }
     }
@@ -40,7 +40,7 @@ describe('ConfigComponent', () => {
       isLoadingVideos$: new BehaviorSubject<boolean>(false),
       getGrades: () => mockGrades,
       validateGrade: (grade: string) => mockGrades.includes(grade),
-      getPositionsForGrade: (grade: string) => ['Suwariwaza', 'Tashiwaza'] as any,
+      getPositionsForGrade: (grade: string) => ['Suwariwaza', 'Tachiwaza'] as any,
       getAttacksForGradeAndPosition: () => [],
       getTechniquesForGradePositionAttack: () => [],
       getVideoUrls: () => null,
@@ -340,7 +340,7 @@ describe('ConfigComponent', () => {
     it('should calculate estimated technique count excluding randori time', () => {
       component.totalDuration = 10; // 10 minutes = 600 secondes
       component.timeBetweenTechniques = 20; // 20 secondes
-      component.randoriTime = 3; // 3 minutes
+      component.randoriTime = 2; // 2 minutes
       component.includeWeaponTime = false;
       component.includeRandoriTime = true;
       
