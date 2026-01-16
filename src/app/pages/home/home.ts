@@ -264,6 +264,38 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
+   * Gère les raccourcis clavier pour la page d'accueil
+   * @param event L'événement clavier
+   */
+  @HostListener('document:keydown', ['$event'])
+  onKeyboardShortcut(event: Event): void {
+    const keyboardEvent = event as KeyboardEvent;
+    
+    // Ne pas intercepter si l'utilisateur est en train de taper dans un champ de saisie
+    const target = keyboardEvent.target as HTMLElement;
+    if (target instanceof HTMLInputElement || 
+        target instanceof HTMLTextAreaElement || 
+        (target instanceof HTMLButtonElement && target.type === 'submit') ||
+        target.isContentEditable) {
+      return;
+    }
+
+    // Flèche gauche : Mode précédent
+    if (keyboardEvent.code === 'ArrowLeft' || keyboardEvent.key === 'ArrowLeft') {
+      keyboardEvent.preventDefault();
+      this.previousMode();
+      return;
+    }
+
+    // Flèche droite : Mode suivant
+    if (keyboardEvent.code === 'ArrowRight' || keyboardEvent.key === 'ArrowRight') {
+      keyboardEvent.preventDefault();
+      this.nextMode();
+      return;
+    }
+  }
+
+  /**
    * Charge les voix disponibles depuis le service
    */
   private loadVoices(): void {

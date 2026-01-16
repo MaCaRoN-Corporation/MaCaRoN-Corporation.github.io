@@ -200,7 +200,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
    * Déclenche l'installation de l'application PWA
    */
   async installPWA(): Promise<void> {
-    // Si on a l'événement beforeinstallprompt (Chrome/Edge/Opera)
+    // Si on a l'événement beforeinstallprompt (Chrome/Edge/Opera/Samsung Internet)
     if (this.deferredPrompt) {
       try {
         // Afficher l'invite d'installation
@@ -223,10 +223,26 @@ export class NavigationComponent implements OnInit, OnDestroy {
       this.showInstallNotification = false;
     } else {
       // Sur iOS ou autres navigateurs sans beforeinstallprompt
-      // On peut rediriger vers des instructions ou simplement fermer la notification
-      console.log('[PWA Install] Installation manuelle requise (iOS ou autre)');
-      // Pour iOS, l'utilisateur doit utiliser le menu "Partager" > "Sur l'écran d'accueil"
-      // On ferme juste la notification ici
+      console.log('[PWA Install] Installation programmatique non disponible sur ce navigateur');
+      
+      // Détecter iOS/Safari
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      
+      if (isIOS || isSafari) {
+        // Afficher des instructions pour iOS
+        alert('Pour installer l\'application sur iOS:\n\n' +
+              '1. Appuyez sur le bouton de partage (carré avec flèche)\n' +
+              '2. Faites défiler et sélectionnez "Sur l\'écran d\'accueil"\n' +
+              '3. Appuyez sur "Ajouter"');
+      } else {
+        // Pour d'autres navigateurs (Firefox desktop, etc.)
+        console.log('[PWA Install] Ce navigateur ne supporte pas l\'installation PWA programmatique');
+        alert('L\'installation automatique n\'est pas disponible sur ce navigateur.\n\n' +
+              'Utilisez Chrome, Edge, Opera ou Samsung Internet pour installer l\'application.');
+      }
+      
+      // Fermer la notification
       this.showInstallNotification = false;
     }
   }

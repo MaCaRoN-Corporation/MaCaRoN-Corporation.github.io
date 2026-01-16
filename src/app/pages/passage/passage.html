@@ -5,7 +5,7 @@
       <h2 class="error-title">Erreur de génération du passage</h2>
       <p class="error-message">{{ errorMessage }}</p>
       <div class="error-actions">
-        <button class="btn btn-primary" type="button" (click)="goHome()" title="Retour à l'accueil">
+        <button class="btn btn-outline" type="button" (click)="goHome()" title="Retour à l'accueil">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="controls-content">
-        <button class="control-button" type="button" [class.paused]="isPaused" (click)="togglePause()">
+        <button class="control-button" type="button" [class.paused]="isPaused" (click)="togglePause()" title="Mettre en pause / Reprendre (Espace)">
           <svg *ngIf="!isPaused" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="6" y="4" width="4" height="16"></rect>
             <rect x="14" y="4" width="4" height="16"></rect>
@@ -40,7 +40,7 @@
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
           </svg>
         </button>
-        <button class="control-button skip-button" type="button" (click)="skipTechnique()" title="Passer la technique">
+        <button class="control-button skip-button" type="button" (click)="skipTechnique()" title="Passer la technique (Flèche droite)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
             <polyline points="10 8 14 12 10 16"></polyline>
@@ -52,7 +52,11 @@
 
   <!-- Zone principale: Grid 2 colonnes sur PC (technique à gauche, historique à droite), vertical sur mobile -->
   <div class="passage-header-center">
-    <div class="current-technique-section glass-card">
+    <div class="current-technique-section glass-card" 
+         [class.clickable]="currentTechnique" 
+         [class.disabled]="!currentTechnique"
+         (click)="currentTechnique && repeatLastTechnique()" 
+         [title]="currentTechnique ? 'Cliquer pour répéter l\'annonce audio (Entrée)' : ''">
       <div class="countdown-circle" [@countdownPulse]="{ value: countdownAnimationToken, params: { duration: countdownAnimationDuration } }">
         <span class="countdown-number" [class.countdown-small]="countdown > 99">{{ countdown }}</span>
       </div>

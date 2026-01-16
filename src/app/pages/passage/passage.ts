@@ -376,6 +376,52 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
   }
 
   /**
+   * Gère les raccourcis clavier pour la page de passage
+   * @param event L'événement clavier
+   */
+  @HostListener('document:keydown', ['$event'])
+  onKeyboardShortcut(event: Event): void {
+    const keyboardEvent = event as KeyboardEvent;
+    
+    // Ne pas intercepter si l'utilisateur est en train de taper dans un champ de saisie
+    const target = keyboardEvent.target as HTMLElement;
+    if (target instanceof HTMLInputElement || 
+        target instanceof HTMLTextAreaElement || 
+        (target instanceof HTMLButtonElement && target.type === 'submit') ||
+        target.isContentEditable) {
+      return;
+    }
+
+    // Ne pas traiter les raccourcis si on est sur l'écran de fin
+    if (this.showEndScreen || this.isPassageCompleted) {
+      return;
+    }
+
+    // Espace : Pause/Resume
+    if (keyboardEvent.code === 'Space' || keyboardEvent.key === ' ') {
+      keyboardEvent.preventDefault();
+      this.togglePause();
+      return;
+    }
+
+    // Entrée : Répéter la dernière technique
+    if (keyboardEvent.code === 'Enter' || keyboardEvent.key === 'Enter') {
+      keyboardEvent.preventDefault();
+      if (this.currentTechnique) {
+        this.repeatLastTechnique();
+      }
+      return;
+    }
+
+    // Flèche droite : Skip la technique en cours
+    if (keyboardEvent.code === 'ArrowRight' || keyboardEvent.key === 'ArrowRight') {
+      keyboardEvent.preventDefault();
+      this.skipTechnique();
+      return;
+    }
+  }
+
+  /**
    * Formate le temps en secondes au format MM:SS
    * @param seconds Le nombre de secondes
    * @returns Le temps formaté (ex: "05:23")
@@ -636,6 +682,27 @@ export class PassageComponent implements OnInit, OnDestroy, AfterViewInit, After
       this.passageService.pausePassage();
       // Mettre en pause l'audio
       this.audioService.pauseAudio();
+    }
+  }
+
+  /**
+   * Répète l'annonce audio de la dernière technique (ou technique en cours)
+   * Fonctionne même si le passage est en pause
+   */
+  repeatLastTechnique(): void {
+    // Vérifier qu'une technique a été annoncée
+    if (!this.currentTechnique) {
+      console.warn('[PassageComponent] No technique to repeat');
+      return;
+    }
+
+    try {
+      // La répétition ne doit pas affecter l'état du passage
+      // Elle fonctionne même si le passage est en pause
+      this.audioService.repeatLastTechnique();
+    } catch (error) {
+      console.error('[PassageComponent] Error repeating technique:', error);
+      // Ne pas interrompre le passage en cas d'erreur audio
     }
   }
 
