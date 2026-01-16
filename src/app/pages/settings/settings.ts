@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { SettingsService } from '../../services/settings.service';
 import { PwaService } from '../../services/pwa.service';
+import { AnalyticsService } from '../../services/analytics.service';
 import { UserSettings, Appearance, Theme } from '../../models/settings.model';
 
 @Component({
@@ -30,9 +31,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
   canInstallPWA = false;
   isPWAInstalled = false;
 
+  // Métriques Google Analytics
+  visitorsToday: number | null = null;
+  visitorsThisMonth: number | null = null;
+
   constructor(
     private settingsService: SettingsService,
-    private pwaService: PwaService
+    private pwaService: PwaService,
+    private analyticsService: AnalyticsService
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +55,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.currentTheme = settings.theme;
       })
     );
+
+    // Charger les métriques Google Analytics
+    this.loadAnalyticsMetrics();
   }
 
   ngOnDestroy(): void {
@@ -162,5 +171,17 @@ export class SettingsComponent implements OnInit, OnDestroy {
     const secondary = this.getThemeColor(theme, 'secondary');
     // Gradient conique qui fait un tour complet avec les 3 couleurs
     return `conic-gradient(from 0deg, ${primary} 0deg, ${accent} 120deg, ${secondary} 240deg, ${primary} 360deg)`;
+  }
+
+  /**
+   * Charge les métriques Google Analytics
+   */
+  private loadAnalyticsMetrics(): void {
+    this.subscriptions.add(
+      this.analyticsService.getMetrics().subscribe(metrics => {
+        this.visitorsToday = metrics.visitorsToday;
+        this.visitorsThisMonth = metrics.visitorsThisMonth;
+      })
+    );
   }
 }

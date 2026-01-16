@@ -64,6 +64,69 @@
   display: flex;
   justify-content: center;
   gap: 1rem;
+
+  .btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.25rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    svg {
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    // Hover uniquement sur desktop (appareils avec souris)
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        transform: translateY(-2px);
+        
+        svg {
+          transform: scale(1.15);
+        }
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &.btn-outline {
+      background: transparent;
+      color: var(--color-text-primary);
+      border: 2px solid var(--color-border);
+      
+      // Hover uniquement sur desktop (appareils avec souris)
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background: var(--color-background);
+          border-color: var(--color-primary);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      &:active {
+        background: var(--color-surface);
+      }
+    }
+  }
 }
 
 .passage-header-center {
@@ -378,10 +441,10 @@
         }
       }
       
-      // Bouton skip : couleur distincte et plus visible
+      // Bouton skip : utilise les couleurs du thème
       &.skip-button {
-        background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%); // Dégradé orange
-        box-shadow: 0 4px 14px rgba(255, 167, 38, 0.5);
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
         border: 2px solid rgba(255, 255, 255, 0.3); // Bordure blanche subtile pour contraste
         
         svg {
@@ -392,16 +455,16 @@
 
         @media (hover: hover) and (pointer: fine) {
           &:hover {
-            background: linear-gradient(135deg, #ffb74d 0%, #ff9800 100%);
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
             transform: translateY(-2px) scale(1.08);
-            box-shadow: 0 6px 20px rgba(255, 167, 38, 0.6);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
             border-color: rgba(255, 255, 255, 0.5);
           }
         }
 
         &:active {
           transform: translateY(0) scale(0.95);
-          box-shadow: 0 2px 8px rgba(255, 167, 38, 0.4);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
       }
       
@@ -440,6 +503,18 @@
   min-height: 150px;
   gap: 1rem;
   container-type: size;
+  
+  // Style cliquable quand une technique est présente
+  &.clickable {
+    cursor: pointer;
+    // Pas d'animation au hover, seulement le curseur change en main
+  }
+  
+  // Style désactivé quand aucune technique
+  &.disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
   .countdown-circle {
     width: 60px;
     height: 60px;
@@ -954,8 +1029,8 @@
 
         // Bouton skip : couleur distincte et plus visible
         &.skip-button {
-          background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%);
-          box-shadow: 0 4px 14px rgba(255, 167, 38, 0.5);
+          background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
           border: 2px solid rgba(255, 255, 255, 0.3);
           
           svg {
@@ -965,9 +1040,9 @@
           }
 
           &:active {
-            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
             transform: scale(0.95);
-            box-shadow: 0 2px 8px rgba(255, 167, 38, 0.4);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
           }
         }
       }

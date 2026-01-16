@@ -4,21 +4,25 @@
 
 # Story 6.1: History Storage Service
 
+**Status:** ⏳ **À FAIRE**
+
 As a developer,
 I want un service qui stocke l'historique des passages dans localStorage,
 so que l'application peut conserver les passages précédents pour référence.
 
 **Acceptance Criteria:**
 
-1. Le `PassageService` ou un nouveau `HistoryService` gère le stockage de l'historique
-2. Chaque passage terminé est sauvegardé avec : date, grade, durée, nombre de techniques, liste des techniques
-3. L'historique est stocké dans localStorage avec une limite de 50 passages
-4. Quand la limite est atteinte, les passages les plus anciens sont supprimés (FIFO)
-5. Le service peut récupérer l'historique complet ou filtré
-6. Le service peut supprimer des passages de l'historique
-7. Les erreurs de localStorage (quota dépassé) sont gérées gracieusement
+1. ⏳ Le `PassageService` ou un nouveau `HistoryService` gère le stockage de l'historique (à créer)
+2. ⏳ Chaque passage terminé est sauvegardé avec : date, grade, durée, nombre de techniques, liste des techniques (à implémenter)
+3. ⏳ L'historique est stocké dans localStorage avec une limite de 50 passages (à implémenter)
+4. ⏳ Quand la limite est atteinte, les passages les plus anciens sont supprimés (FIFO) (à implémenter)
+5. ⏳ Le service peut récupérer l'historique complet ou filtré (à implémenter)
+6. ⏳ Le service peut supprimer des passages de l'historique (à implémenter)
+7. ⏳ Les erreurs de localStorage (quota dépassé) sont gérées gracieusement (à implémenter)
 
 ## Story 6.2: History Page Implementation
+
+**Status:** ⚠️ **PARTIELLEMENT FAIT** (page créée mais vide)
 
 As a user,
 I want voir l'historique de mes passages précédents,
@@ -26,14 +30,16 @@ so que je peux revoir mes entraînements passés.
 
 **Acceptance Criteria:**
 
-1. La page d'historique (`/history`) est créée avec un layout clair
-2. La page affiche la liste des passages précédents avec : date, grade, durée, nombre de techniques
-3. Les passages sont triés par date (plus récents en premier)
-4. Chaque passage peut être cliqué pour voir les détails
-5. Un bouton permet de réexporter un passage précédent
-6. Un bouton permet de générer un nouveau passage similaire (même grade, même configuration)
-7. La page est responsive et fonctionne sur tous les appareils
-8. Un message s'affiche si l'historique est vide
+1. ✅ La page d'historique (`/history`) est créée avec un layout clair (page existe dans `history.html` mais contenu minimal - placeholder)
+2. ⏳ La page affiche la liste des passages précédents avec : date, grade, durée, nombre de techniques (à implémenter)
+3. ⏳ Les passages sont triés par date (plus récents en premier) (à implémenter)
+4. ⏳ Chaque passage peut être cliqué pour voir les détails (à implémenter)
+5. ⏳ Un bouton permet de réexporter un passage précédent (à implémenter)
+6. ⏳ Un bouton permet de générer un nouveau passage similaire (même grade, même configuration) (à implémenter)
+7. ⏳ La page est responsive et fonctionne sur tous les appareils (à implémenter)
+8. ⏳ Un message s'affiche si l'historique est vide (à implémenter)
+
+**Note :** La page `/history` existe déjà (route configurée, composant créé) mais contient seulement un placeholder avec titre "Historique". Le composant `HistoryComponent` est vide.
 
 ## Story 6.3: Animations and Transitions
 

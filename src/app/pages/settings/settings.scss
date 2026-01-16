@@ -520,3 +520,145 @@
     max-width: 100%;
   }
 }
+
+// Section Métriques & sponsors
+.metrics-sponsors-section {
+  .section-description {
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+// Conteneur des métriques
+.metrics-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  width: 100%;
+
+  @media (max-width: 767px) {
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+// Carte de métrique
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  text-align: center;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+
+  @media (max-width: 767px) {
+    padding: var(--spacing-sm);
+    border-radius: 10px;
+  }
+
+  &:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+}
+
+.metric-label {
+  font-size: 0.875rem; // 14px
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  @media (max-width: 767px) {
+    font-size: 0.8125rem; // 13px
+  }
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: 1.2;
+
+  @media (max-width: 767px) {
+    font-size: 1.25rem;
+  }
+}
+
+// Conteneur sponsor
+.sponsor-container {
+  display: flex;
+  flex-direction: row; // Sur PC : en ligne
+  align-items: center;
+  justify-content: space-between; // Texte à gauche, bouton à droite
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  text-align: left; // Texte aligné à gauche sur PC
+
+  @media (max-width: 767px) {
+    flex-direction: column; // Sur mobile : en colonne
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-sm);
+    border-radius: 10px;
+  }
+}
+
+.sponsor-text {
+  margin: 0;
+  font-size: 0.9375rem; // 15px
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  flex: 1; // Prend l'espace disponible sur PC
+
+  @media (max-width: 767px) {
+    font-size: 0.875rem; // 14px
+  }
+}
+
+.buy-me-coffee-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; // Ne pas rétrécir sur PC
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.buy-me-coffee-link {
+  display: inline-block;
+  text-decoration: none;
+  transition: transform var(--transition-fast);
+  border-radius: 8px;
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    border: none;
+    border-radius: 8px;
+  }
+}
