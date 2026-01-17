@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -19,17 +19,25 @@ export interface AnalyticsMetrics {
  * Note: Pour récupérer les métriques depuis Google Analytics, il faut utiliser
  * l'API Google Analytics Data API qui nécessite une authentification côté serveur.
  * Ce service peut être étendu pour utiliser un backend proxy ou une fonction serverless.
+ * 
+ * SÉCURITÉ: Les valeurs par défaut sont publiques et peuvent être dans le repo.
+ * Pour des secrets, utiliser analytics.config.ts (non versionné) - voir docs/security-google-analytics.md
  */
 @Injectable({
   providedIn: 'root'
 })
 export class AnalyticsService {
-  private readonly GA_PROPERTY_ID = 'G-H0MY2T492N'; // ID de la propriété Google Analytics
+  // ID Measurement Google Analytics - PUBLIC (visible dans le code source du site)
+  // C'est normal et attendu pour GA4
+  private readonly GA_PROPERTY_ID = 'G-H0MY2T492N';
   
-  // URL de votre Google Apps Script déployé
-  // IMPORTANT: Remplacer YOUR_SCRIPT_ID par l'ID réel de votre script déployé
-  // Format: https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec
+  // URL de l'API Google Apps Script
+  // IMPORTANT: Si vous avez une clé API, utilisez analytics.config.ts (non versionné)
+  // Voir docs/security-google-analytics.md pour la sécurisation
   private readonly METRICS_API_URL = 'https://script.google.com/macros/s/AKfycbyURxdAhitjOSShrRlpCwjaK1iSPVZJTiq7w1ePtS9j5dXjBDUZ0meF5kHvQF5i93RHTg/exec';
+  
+  // Clé API optionnelle (à configurer dans analytics.config.ts si nécessaire)
+  private readonly METRICS_API_KEY: string | null = null;
   
   private metrics$ = new BehaviorSubject<AnalyticsMetrics>({
     visitorsToday: null,
@@ -77,7 +85,13 @@ export class AnalyticsService {
       return;
     }
 
-    this.http.get<AnalyticsMetrics>(this.METRICS_API_URL)
+    // Préparer les paramètres de requête
+    let params = new HttpParams();
+    if (this.METRICS_API_KEY) {
+      params = params.set('key', this.METRICS_API_KEY);
+    }
+
+    this.http.get<AnalyticsMetrics>(this.METRICS_API_URL, { params })
       .pipe(
         catchError(error => {
           console.error('[AnalyticsService] Error loading analytics metrics:', error);

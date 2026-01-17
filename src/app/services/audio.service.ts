@@ -24,6 +24,10 @@ export class AudioService {
   private lastAttack: string | null = null;
   private lastTechniqueName: string | null = null;
 
+  // AudioContext pour l'amplification du volume (créé de manière lazy)
+  private audioContext: AudioContext | null = null;
+  private gainNodes: Map<HTMLAudioElement, { source: MediaElementAudioSourceNode; gain: GainNode }> = new Map();
+
   // Observables pour les événements audio
   private audioFinishedSubject = new Subject<{ technique: Technique; voiceId: VoiceId }>();
   private audioErrorSubject = new Subject<{ error: Error; technique: Technique; voiceId: VoiceId }>();
@@ -44,6 +48,47 @@ export class AudioService {
 
   constructor() {
     // Initialisation du service
+    // L'AudioContext sera créé de manière lazy au premier usage
+  }
+
+  /**
+   * Crée ou récupère l'AudioContext (création lazy)
+   * @private
+   */
+  private getOrCreateAudioContext(): AudioContext | null {
+    if (!this.audioContext) {
+      try {
+        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+        if (AudioContextClass) {
+          this.audioContext = new AudioContextClass();
+          console.log('[AudioService] AudioContext created, state:', this.audioContext.state);
+        }
+      } catch (error) {
+        console.warn('[AudioService] Web Audio API not supported:', error);
+        return null;
+      }
+    }
+    return this.audioContext;
+  }
+
+  /**
+   * S'assure que l'AudioContext est actif (nécessaire après une interaction utilisateur)
+   * @private
+   */
+  private async ensureAudioContextActive(): Promise<void> {
+    const context = this.getOrCreateAudioContext();
+    if (!context) {
+      return;
+    }
+
+    if (context.state === 'suspended') {
+      try {
+        await context.resume();
+        console.log('[AudioService] AudioContext resumed, new state:', context.state);
+      } catch (error) {
+        console.error('[AudioService] Failed to resume AudioContext:', error);
+      }
+    }
   }
 
   /**
@@ -163,7 +208,7 @@ export class AudioService {
   }
 
   /**
-   * Crée et configure un élément audio HTML
+   * Crée et configure un élément audio HTML avec amplification à 250% via Web Audio API
    * @param path Le chemin vers le fichier audio
    * @returns Une Promise qui se résout quand l'audio est chargé ou rejetée en cas d'erreur
    */
@@ -171,7 +216,41 @@ export class AudioService {
     return new Promise((resolve, reject) => {
       const audio = new Audio(path);
 
-      audio.addEventListener('loadeddata', () => {
+      // Définir le volume au maximum (1.0 = 100%)
+      audio.volume = 1.0;
+
+      audio.addEventListener('loadeddata', async () => {
+        // Configurer l'amplification à 250% via Web Audio API
+        const context = this.getOrCreateAudioContext();
+        if (context) {
+          try {
+            // S'assurer que l'AudioContext est actif
+            await this.ensureAudioContextActive();
+            
+            // Créer une source depuis l'élément audio
+            const source = context.createMediaElementSource(audio);
+            
+            // Créer un gain node avec gain = 2.5 (250%)
+            // Ce niveau augmente le volume sans causer de distorsion excessive
+            const gainNode = context.createGain();
+            gainNode.gain.value = 2.5;
+            
+            // Connecter: source → gain → destination
+            source.connect(gainNode);
+            gainNode.connect(context.destination);
+            
+            // Stocker la référence pour le nettoyage
+            this.gainNodes.set(audio, { source, gain: gainNode });
+            
+            console.log('[AudioService] Web Audio amplification configured: 250% (gain =', gainNode.gain.value + ')');
+          } catch (error) {
+            console.error('[AudioService] Failed to setup Web Audio amplification:', error);
+            // Continuer avec le volume standard si l'amplification échoue
+          }
+        } else {
+          console.warn('[AudioService] AudioContext not available, using standard volume');
+        }
+        
         resolve(audio);
       });
 
@@ -203,6 +282,9 @@ export class AudioService {
             audio.removeEventListener('ended', onEnded);
             audio.removeEventListener('error', onError);
             
+            // Nettoyer les références Web Audio
+            this.cleanupAudioNode(audio);
+            
             // Retirer de la file d'attente
             const index = this.audioQueue.indexOf(audio);
             if (index > -1) {
@@ -222,6 +304,9 @@ export class AudioService {
             audio.removeEventListener('ended', onEnded);
             audio.removeEventListener('error', onError);
             
+            // Nettoyer les références Web Audio
+            this.cleanupAudioNode(audio);
+            
             const index = this.audioQueue.indexOf(audio);
             if (index > -1) {
               this.audioQueue.splice(index, 1);
@@ -237,6 +322,11 @@ export class AudioService {
 
           audio.addEventListener('ended', onEnded);
           audio.addEventListener('error', onError);
+
+          // Reprendre l'AudioContext si nécessaire (certains navigateurs le suspendent)
+          // Note: L'AudioContext devrait déjà être repris dans createAudioElement,
+          // mais on le reprend ici aussi pour être sûr
+          this.ensureAudioContextActive();
 
           // Jouer l'audio si pas en pause
           if (!this.isPaused) {
@@ -481,17 +571,38 @@ export class AudioService {
   }
 
   /**
+   * Nettoie les nœuds Web Audio associés à un élément audio
+   * @param audio L'élément audio à nettoyer
+   * @private
+   */
+  private cleanupAudioNode(audio: HTMLAudioElement): void {
+    const nodeData = this.gainNodes.get(audio);
+    if (nodeData) {
+      try {
+        // Déconnecter les nœuds
+        nodeData.source.disconnect();
+        nodeData.gain.disconnect();
+      } catch (error) {
+        // Ignorer les erreurs de déconnexion
+      }
+      this.gainNodes.delete(audio);
+    }
+  }
+
+  /**
    * Arrête complètement tous les audios en cours
    */
   stopAudio(): void {
     this.isPaused = false;
     if (this.currentAudio) {
+      this.cleanupAudioNode(this.currentAudio);
       this.currentAudio.pause();
       this.currentAudio.currentTime = 0;
       this.currentAudio = null;
     }
     // Arrêter et nettoyer tous les audios dans la file d'attente
     this.audioQueue.forEach((audio) => {
+      this.cleanupAudioNode(audio);
       audio.pause();
       audio.currentTime = 0;
     });
