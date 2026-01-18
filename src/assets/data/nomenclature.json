@@ -1,260 +1,967 @@
+  {
+    "6e Kyū": {
+      "Suwari Waza": {
+        "Ai Hammi Katate Dori": [
+          "Ikkyo",
+          "Irimi Nage"
+        ],
+        "Shomen Uchi": [
+          "Ikkyo"
+        ]
+      },
+      "Tachi Waza": {
+        "Ai Hammi Katate Dori": [
+          "Ikkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Tenshi Nage",
+          "Kokyu Nage"
+        ],
+        "Katate Dori": [
+          "Ikkyo",
+          "Shiho Nage",
+          "Uchi Kaiten Nage",
+          "Kote Gaeshi",
+          "Tenshi Nage",
+          "Kokyu Nage"
+        ],
+        "Shomen Uchi": [
+          "Ikkyo",
+          "Irimi Nage"
+        ]
+      }
+    }
+  },
+  {
+    "5e Kyū": {
+      "Suwari Waza": {
+        "Ai Hammi Katate Dori": [
+          "Ikkyo",
+          "Irimi Nage"
+        ],
+        "Shomen Uchi": [
+          "Ikkyo"
+        ]
+      },
+      "Tachi Waza": {
+        "Ai Hammi Katate Dori": [
+          "Ikkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Tenshi Nage",
+          "Kokyu Nage"
+        ],
+        "Katate Dori": [
+          "Ikkyo",
+          "Shiho Nage",
+          "Uchi Kaiten Nage",
+          "Kote Gaeshi",
+          "Tenshi Nage",
+          "Kokyu Nage"
+        ],
+        "Shomen Uchi": [
+          "Ikkyo",
+          "Irimi Nage"
+        ]
+      }
+    }
+  },
+  {
+    "4e Kyū": {
+      "Suwari Waza": {
+        "Ai Hammi Katate Dori": [
+          "Nikyo",
+          "Irimi Nage"
+        ],
+        "Katate Dori": [
+          "Ikkyo",
+          "Irimi Nage",
+          "Soto Kaiten Nage"
+        ],
+        "Kata Dori": [
+          "Ikkyo",
+          "Nikyo"
+        ],
+        "Shomen Uchi": [
+          "Ikkyo",
+          "Nikyo",
+          "Irimi Nage",
+          "Kote Gaeshi"
+        ]
+      },
+      "Hanmi Handachi Waza": {
+        "Katate Dori": [
+          "Ikkyo",
+          "Uchi Kaiten Nage"
+        ]
+      },
+      "Tachi Waza": {
+        "Ai Hammi Katate Dori": [
+          "Uchi Kaiten Nage",
+          "Kote Gaeshi",
+          "Ude Kime Nage",
+          "Hiji Kime Osae"
+        ],
+        "Katate Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Tenchi Nage",
+          "Soto Kaiten Nage",
+          "Ude Kime Nage",
+          "Kokyu Nage",
+          "Shiho Nage"
+        ],
+        "Katadori Men Uchi": [
+          "Ikkyo",
+          "Nikyo",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Tenchi Nage",
+          "Kokyu Nage"
+        ],
+        "Ushiro Ryote Dori": [
+          "Ikkyo",
+          "Sankyo"
+        ],
+        "Shomen Uchi": [
+          "Ikkyo",
+          "Nikyo",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Kokyu Nage",
+          "Shiho Nage"
+        ],
+        "Yokomen Uchi": [
+          "Ikkyo",
+          "Irimi Nage",
+          "Shiho Nage",
+          "Ude Kime Nage",
+          "Kote Gaeshi"
+        ]
+      }
+    }
+  },
+  {
+    "3e Kyū": {
+      "Suwari Waza": {
+        "Katate Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo"
+        ],
+        "Muna Dori": [
+          "Ikkyo",
+          "Nikyo"
+        ],
+        "Yokomen Uchi": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Gokyo"
+        ]
+      },
+      "Hanmi Handachi Waza": {
+        "Katate Dori": [
+          "Ikkyo",
+          "Shiho Nage"
+        ],
+        "Shomen Uchi": [
+          "Ikkyo",
+          "Irimi Nage"
+        ]
+      },
+      "Tachi Waza": {
+        "Ai Hammi Katate Dori": [
+          "Nikyo",
+          "Soto Kaiten Nage",
+          "Yonkyo",
+          "Uchi Kaiten Nage",
+          "Koshi Nage"
+        ],
+        "Katate Dori": [
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Sokumen Irimi Nage",
+          "Koshi Nage",
+          "Soto Kaiten Nage"
+        ],
+        "Katate Ryote Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Kote Gaeshi",
+          "Ude Kime Nage",
+          "Sokumen Irimi Nage",
+          "Koshi Nage",
+          "Kokyu Nage"
+        ],
+        "Ryote Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Ude Kime Nage",
+          "Tenchi Nage",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Sokumen Irimi Nage",
+          "Koshi Nage"
+        ],
+        "Kata Dori": [
+          "Sankyo",
+          "Hiji Kime Osae",
+          "Shiho Nage",
+          "Koshi Nage",
+          "Kokyu Nage"
+        ],
+        "Kata Dori Men Uchi": [
+          "Sankyo",
+          "Hiji Kime Osae",
+          "Shiho Nage",
+          "Koshi Nage",
+          "Kokyu Nage"
+        ],
+        "Ushiro Ryote Dori": [
+          "Nikyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Ude Kime Nage",
+          "Irimi Nage",
+          "Kokyu Nage",
+          "Koshi Nage"
+        ],
+        "Ushiro Ryo Kata Dori": [
+          "Ikkyo",
+          "Sankyo"
+        ],
+        "Mae Ryo Kata Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Koshi Nage"
+        ],
+        "Muna Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Koshi Nage"
+        ],
+        "Shomen Uchi": [
+          "Yonkyo",
+          "Shiho Nage",
+          "Koshi Nage"
+        ],
+        "Yokomen Uchi": [
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Kokyu Nage",
+          "Ude Garami"
+        ],
+        "Chudan Tsuki": [
+          "Ikkyo",
+          "Hiji Kime Osae"
+        ],
+        "Jodan Tsuki": [
+          "Ikkyo",
+          "Hiji Kime Osae"
+        ]
+      }
+    }
+  },
+  {
+    "2ème Kyū": {
+      "Suwari Waza": {
+        "Katate Dori": [
+          "Yonkyo",
+          "Kote Gaeshi",
+          "Irimi Nage",
+          "Soto Kaiten Nage"
+        ],
+        "Kata Dori": [
+          "Sankyo",
+          "Yonkyo"
+        ],
+        "Mae Ryo Kata Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo"
+        ],
+        "Yokomen Uchi": [
+          "Kote Gaeshi",
+          "Irimi Nage",
+          "Kokyu Nage"
+        ]
+      },
+      "Hanmi Handachi Waza": {
+        "Katate Dori": [
+          "Nikyo",
+          "Uchi Kaiten Nage",
+          "Soto Kaiten Nage"
+        ],
+        "Ryote Dori": [
+          "Shiho Nage"
+        ],
+        "Shomen Uchi": [
+          "Nikyo",
+          "Kote Gaeshi"
+        ]
+      },
+      "Tachi Waza": {
+        "Ai Hammi Katate Dori": [
+          "Kokyu Nage"
+        ],
+        "Katate Dori": [
+          "Sankyo",
+          "Yonkyo",
+          "Sumi Otoshi"
+        ],
+        "Morote Dori": [
+          "Irimi Nage"
+        ],
+        "Ryote Dori": [
+          "Kote Gaeshi",
+          "Irimi Nage",
+          "Kokyu Nage"
+        ],
+        "Mae Ryo Kata Dori": [
+          "Yonkyo",
+          "Irimi Nage",
+          "Kokyu Nage"
+        ],
+        "Kata Dori Men Uchi": [
+          "Yonkyo",
+          "Kote Gaeshi",
+          "Sokumen Irimi Nage",
+          "Koshi Nage"
+        ],
+        "Muna Dori": [
+          "Yonkyo",
+          "Shiho Nage"
+        ],
+        "Muna Dori Men Uchi": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo"
+        ],
+        "Ushiro Ryote Dori": [
+          "Juji Garami",
+          "Soto Kaiten Nage",
+          "Uchi Kaiten Nage"
+        ],
+        "Ushiro Ryo Kata Dori": [
+          "Nikyo",
+          "Yonkyo",
+          "Irimi Nage"
+        ],
+        "Ushiro Katate Dori Kube Shime": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage"
+        ],
+        "Shomen Uchi": [
+          "Uchi Kaiten Sankyo",
+          "Soto Kaiten Sankyo",
+          "Uchi Kaiten Nage"
+        ],
+        "Yokomen Uchi": [
+          "Gokyo",
+          "Koshi Nage"
+        ],
+        "Chudan Tsuki": [
+          "Shiho Nage",
+          "Irimi Nage"
+        ],
+        "Jodan Tsuki": [
+          "Nikyo",
+          "Sankyo",
+          "Irimi Nage",
+          "Shiho Nage"
+        ]
+      }
+    }
+  },
+  {
+    "1er Kyū": {
+      "Suwari Waza": {
+        "Ai Hammi Katate Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Irimi Nage"
+        ],
+        "Katate Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Soto Kaiten Nage"
+        ],
+        "Kata Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo"
+        ],
+        "Mae Ryo Kata Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo"
+        ],
+        "Muna Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo"
+        ],
+        "Shomen Uchi": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Irimi Nage",
+          "Kote Gaeshi"
+        ],
+        "Yokomen Uchi": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Gokyo",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Kokyu Nage"
+        ]
+      },
+      "Hanmi Handachi Waza": {
+        "Katate Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Uchi Kaiten Nage",
+          "Soto Kaiten Nage"
+        ],
+        "Ryote Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage"
+        ],
+        "Shomen Uchi": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Irimi Nage",
+          "Kote Gaeshi"
+        ]
+      },
+      "Tachi Waza": {
+        "Ai Hammi Katate Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Tenchi Nage",
+          "Kokyu Nage",
+          "Uchi Kaiten Nage",
+          "Soto Kaiten Nage",
+          "Ude Kime Nage",
+          "Hiji Kime Osae",
+          "Koshi Nage",
+          "Aiki Otoshi",
+          "Ushiro Kiri Otoshi"
+        ],
+        "Katate Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Tenchi Nage",
+          "Kokyu Nage",
+          "Sokumen Irimi Nage",
+          "Uchi Kaiten Nage",
+          "Soto Kaiten Nage",
+          "Ude Kime Nage",
+          "Koshi Nage",
+          "Sumi Otoshi",
+          "Uchi Kaiten Ikkyo",
+          "Ude Garami"
+        ],
+        "Morote Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Ude Kime Nage",
+          "Sokumen Irimi Nage",
+          "Koshi Nage",
+          "Kokyu Nage",
+          "Juji Garami",
+          "Ushiro Kiri Otoshi"
+        ],
+        "Ryote Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Tenchi Nage",
+          "Ude Kime Nage",
+          "Sokumen Irimi Nage",
+          "Koshi Nage",
+          "Kokyu Nage"
+        ],
+        "Kata Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Hiji Kime Osae",
+          "Koshi Nage",
+          "Kokyu Nage",
+          "Sumi Otoshi"
+        ],
+        "Kata Dori Men Uchi": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Tenchi Nage",
+          "Kokyu Nage",
+          "Sokumen Irimi Nage",
+          "Koshi Nage",
+          "Hiji Kime Osae",
+          "Juji Garami"
+        ],
+        "Mae Ryo Kata Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Irimi Nage",
+          "Kokyu Nage",
+          "Koshi Nage",
+          "Aiki Otoshi",
+          "Sumi Otoshi"
+        ],
+        "Muna Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Koshi Nage"
+        ],
+        "Ushiro Ryote Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Ude Kime Nage",
+          "Koshi Nage",
+          "Kokyu Nage",
+          "Juji Garami",
+          "Soto Kaiten Nage",
+          "Uchi Kaiten Nage",
+          "Hiji Kime Osae"
+        ],
+        "Ushiro Ryo Kata Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Irimi Nage",
+          "Aiki Otoshi"
+        ],
+        "Ushiro Katate Kubi Shime": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Kokyu Nage",
+          "Koshi Nage",
+          "Aiki Otoshi"
+        ],
+        "Ushiro Eri Dori": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Kote Gaeshi",
+          "Sokumen Irimi Nage",
+          "Juji Garami",
+          "Koshi Nage"
+        ],
+        "Shomen Uchi": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Kokyu Nage",
+          "Koshi Nage",
+          "Uchi Kaiten Sankyo",
+          "Soto Kaiten Sankyo",
+          "Uchi Kaiten Nage",
+          "Soto Kaiten Nage",
+          "Gokyo",
+          "Ude Garami"
+        ],
+        "Yokomen Uchi": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Gokyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Kote Gaeshi",
+          "Tenchi Nage",
+          "Ude Kime Nage",
+          "Ude Garami",
+          "Kokyu Nage",
+          "Koshi Nage"
+        ],
+        "Chudan Tsuki": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Hiji Kime Osae",
+          "Uchi Kaiten Sankyo",
+          "Soto Kaiten Sankyo",
+          "Uchi Kaiten Nage",
+          "Soto Kaiten Nage",
+          "Ushiro Kiri Otoshi",
+          "Ude Garami",
+          "Kokyu Nage",
+          "Koshi Nage"
+        ],
+        "Jodan Tsuki": [
+          "Ikkyo",
+          "Nikyo",
+          "Sankyo",
+          "Yonkyo",
+          "Shiho Nage",
+          "Irimi Nage",
+          "Hiji Kime Osae",
+          "Kokyu Nage",
+          "Koshi Nage"
+        ]
+      },
+      "Armes": {
+        "Tanto Dori": {
+          "Chudan Tsuki": [
+            "Ikkyo",
+            "Nikyo",
+            "Shihonage",
+            "Gokyo"
+          ],
+          "Shomen Uchi": [
+            "Ikkyo",
+            "Nikyo",
+            "Shihonage",
+            "Gokyo"
+          ],
+          "Yokomen Uchi": [
+            "Ikkyo",
+            "Nikyo",
+            "Shihonage",
+            "Gokyo"
+          ],
+          "Gyaku Yokomen": [
+            "Ikkyo",
+            "Nikyo",
+            "Shihonage",
+            "Gokyo"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "1er Dan": {
+      "Suwari Waza": {
+        "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Jiyu Waza"],
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Soto Kaiten Nage", "Jiyu Waza"],
+        "Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Mae Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Jiyu Waza"]
+      },
+      "Hanmi Handachi Waza": {
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Jiyu Waza"],
+        "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Jiyu Waza"]
+      },
+      "Tachi Waza": {
+        "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ude Kime Nage", "Hiji Kime Osae", "Koshi Nage", "Aiki Otoshi", "Ushiro Kiri Otoshi", "Jiyu Waza"],
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Sokumen Irimi Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ude Kime Nage", "Koshi Nage", "Sumi Otoshi", "Uchi Kaiten Ikkyo", "Ude Garami", "Jiyu Waza"],
+        "Morote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Ude Kime Nage", "Sokumen Irimi Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Ushiro Kiri Otoshi", "Jiyu Waza"],
+        "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Sokumen Irimi Nage", "Koshi Nage", "Kokyu Nage", "Jiyu Waza"],
+        "Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Hiji Kime Osae", "Koshi Nage", "Kokyu Nage", "Sumi Otoshi", "Jiyu Waza"],
+        "Kata Dori Men Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Sokumen Irimi Nage", "Koshi Nage", "Hiji Kime Osae", "Juji Garami", "Jiyu Waza"],
+        "Mae Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Sumi Otoshi", "Jiyu Waza"],
+        "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Koshi Nage", "Jiyu Waza"],
+        "Ushiro Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Ude Kime Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Soto Kaiten Nage", "Uchi Kaiten Nage", "Hiji Kime Osae", "Jiyu Waza"],
+        "Ushiro Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Katate Kubi Shime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Eri Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Juji Garami", "Koshi Nage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Gokyo", "Ude Garami", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
+        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Hiji Kime Osae", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ushiro Kiri Otoshi", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
+        "Jodan Tsuki": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Hiji Kime Osae", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"]
+      },
+      "Armes": {
+        "Tanto Dori": {
+          "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"]
+        },
+        "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      }
+    }
+  },
+  {
+    "2ème Dan": {
+      "Suwari Waza": {
+        "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Jiyu Waza"],
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Soto Kaiten Nage", "Jiyu Waza"],
+        "Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Mae Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Jiyu Waza"]
+      },
+      "Hanmi Handachi Waza": {
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Jiyu Waza"],
+        "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Jiyu Waza"]
+      },
+      "Tachi Waza": {
+        "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ude Kime Nage", "Hiji Kime Osae", "Koshi Nage", "Aiki Otoshi", "Ushiro Kiri Otoshi", "Jiyu Waza"],
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Sokumen Irimi Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ude Kime Nage", "Koshi Nage", "Sumi Otoshi", "Uchi Kaiten Ikkyo", "Ude Garami", "Jiyu Waza"],
+        "Morote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Ude Kime Nage", "Sokumen Irimi Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Ushiro Kiri Otoshi", "Jiyu Waza"],
+        "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Sokumen Irimi Nage", "Koshi Nage", "Kokyu Nage", "Jiyu Waza"],
+        "Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Hiji Kime Osae", "Koshi Nage", "Kokyu Nage", "Sumi Otoshi", "Jiyu Waza"],
+        "Kata Dori Men Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Sokumen Irimi Nage", "Koshi Nage", "Hiji Kime Osae", "Juji Garami", "Jiyu Waza"],
+        "Mae Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Sumi Otoshi", "Jiyu Waza"],
+        "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Koshi Nage", "Jiyu Waza"],
+        "Ushiro Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Ude Kime Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Soto Kaiten Nage", "Uchi Kaiten Nage", "Hiji Kime Osae", "Jiyu Waza"],
+        "Ushiro Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Katate Kubi Shime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Eri Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Juji Garami", "Koshi Nage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Gokyo", "Ude Garami", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
+        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Hiji Kime Osae", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ushiro Kiri Otoshi", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
+        "Jodan Tsuki": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Hiji Kime Osae", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"]
+      },
+      "Armes": {
+        "Tanto Dori": {
+          "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"]
+        },
+        "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+      }
+    }
+  },
+  {
+    "3ème Dan": {
+      "Suwari Waza": {
+        "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Jiyu Waza"],
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Soto Kaiten Nage", "Jiyu Waza"],
+        "Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Mae Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Jiyu Waza"]
+      },
+      "Hanmi Handachi Waza": {
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Jiyu Waza"],
+        "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Jiyu Waza"]
+      },
+      "Tachi Waza": {
+        "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ude Kime Nage", "Hiji Kime Osae", "Koshi Nage", "Aiki Otoshi", "Ushiro Kiri Otoshi", "Jiyu Waza"],
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Sokumen Irimi Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ude Kime Nage", "Koshi Nage", "Sumi Otoshi", "Uchi Kaiten Ikkyo", "Ude Garami", "Jiyu Waza"],
+        "Morote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Ude Kime Nage", "Sokumen Irimi Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Ushiro Kiri Otoshi", "Jiyu Waza"],
+        "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Sokumen Irimi Nage", "Koshi Nage", "Kokyu Nage", "Jiyu Waza"],
+        "Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Hiji Kime Osae", "Koshi Nage", "Kokyu Nage", "Sumi Otoshi", "Jiyu Waza"],
+        "Kata Dori Men Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Sokumen Irimi Nage", "Koshi Nage", "Hiji Kime Osae", "Juji Garami", "Jiyu Waza"],
+        "Mae Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Sumi Otoshi", "Jiyu Waza"],
+        "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Koshi Nage", "Jiyu Waza"],
+        "Ushiro Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Ude Kime Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Soto Kaiten Nage", "Uchi Kaiten Nage", "Hiji Kime Osae", "Jiyu Waza"],
+        "Ushiro Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Katate Kubi Shime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Eri Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Juji Garami", "Koshi Nage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Gokyo", "Ude Garami", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
+        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Hiji Kime Osae", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ushiro Kiri Otoshi", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
+        "Jodan Tsuki": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Hiji Kime Osae", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"]
+      },
+      "Armes": {
+        "Tanto Dori": {
+          "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"]
+        },
+        "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Ken Taï Ken": ["Jiyu Waza"],
+        "Jo Taï Jo": ["Jiyu Waza"],
+        "Tachi Dori": {
+          "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+        }
+      }
+    }
+  },
+  {
+    "4ème Dan": {
+      "Suwari Waza": {
+        "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Jiyu Waza"],
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Soto Kaiten Nage", "Jiyu Waza"],
+        "Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Mae Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Jiyu Waza"]
+      },
+      "Hanmi Handachi Waza": {
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Jiyu Waza"],
+        "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Jiyu Waza"]
+      },
+      "Tachi Waza": {
+        "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ude Kime Nage", "Hiji Kime Osae", "Koshi Nage", "Aiki Otoshi", "Ushiro Kiri Otoshi", "Jiyu Waza"],
+        "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Sokumen Irimi Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ude Kime Nage", "Koshi Nage", "Sumi Otoshi", "Uchi Kaiten Ikkyo", "Ude Garami", "Jiyu Waza"],
+        "Morote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Ude Kime Nage", "Sokumen Irimi Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Ushiro Kiri Otoshi", "Jiyu Waza"],
+        "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Sokumen Irimi Nage", "Koshi Nage", "Kokyu Nage", "Jiyu Waza"],
+        "Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Hiji Kime Osae", "Koshi Nage", "Kokyu Nage", "Sumi Otoshi", "Jiyu Waza"],
+        "Kata Dori Men Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Sokumen Irimi Nage", "Koshi Nage", "Hiji Kime Osae", "Juji Garami", "Jiyu Waza"],
+        "Mae Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Sumi Otoshi", "Jiyu Waza"],
+        "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Koshi Nage", "Jiyu Waza"],
+        "Ushiro Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Ude Kime Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Soto Kaiten Nage", "Uchi Kaiten Nage", "Hiji Kime Osae", "Jiyu Waza"],
+        "Ushiro Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Katate Kubi Shime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Eri Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Juji Garami", "Koshi Nage", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Gokyo", "Ude Garami", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
+        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Hiji Kime Osae", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Ushiro Kiri Otoshi", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
+        "Jodan Tsuki": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Hiji Kime Osae", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"]
+      },
+      "Armes": {
+        "Tanto Dori": {
+          "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"],
+          "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Jiyu Waza"]
+        },
+        "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
+        "Ken Taï Ken": ["Jiyu Waza"],
+        "Jo Taï Jo": ["Jiyu Waza"],
+        "Tachi Dori": {
+          "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+        }
+      }
+    }
+  },
 {
-  "6e Kyū": {
+  "5ème Dan": {
     "Suwari Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo"],
-      "Yokomen Uchi": ["Ikkyo"]
-    },
-    "Tachi Waza": {
-      "Katate Dori": ["Ikkyo", "Shihonage"],
-      "Ryote Dori": ["Tenchi Nage"]
-    }
-  },
-  "5e Kyū": {
-    "Suwari Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo"],
-      "Yokomen Uchi": ["Ikkyo", "Nikyo"]
+      "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Soto Kaiten Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Mae Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"]
     },
     "Hanmi Handachi Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo"]
+      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"]
     },
     "Tachi Waza": {
-      "Katate Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi"],
-      "Ryote Dori": ["Tenchi Nage", "Koshi Nage"]
-    }
-  },
-  "4e Kyū": {
-    "Suwari Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo"],
-      "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo"]
-    },
-    "Hanmi Handachi Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo"],
-      "Katate Dori": ["Ikkyo", "Nikyo"]
-    },
-    "Tachi Waza": {
-      "Katate Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage"],
-      "Ryote Dori": ["Tenchi Nage", "Koshi Nage"],
-      "Ushiro Ryote Dori": ["Ikkyo", "Shihonage"]
-    }
-  },
-  "3e Kyū": {
-    "Suwari Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo"],
-      "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo"]
-    },
-    "Hanmi Handachi Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo"],
-      "Ryote Dori": ["Ikkyo"]
-    },
-    "Tachi Waza": {
-      "Katate Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Kaiten Nage"],
-      "Ryote Dori": ["Tenchi Nage", "Koshi Nage", "Kote Gaeshi"],
-      "Ushiro Ryote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi"],
-      "Kata Dori Men Uchi": ["Shihonage", "Irimi Nage"]
-    }
-  },
-  "2e Kyū": {
-    "Suwari Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo"],
-      "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo"],
-      "Katate Dori": ["Ikkyo", "Nikyo"]
-    },
-    "Hanmi Handachi Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo"],
-      "Ryote Dori": ["Ikkyo", "Nikyo"]
-    },
-    "Tachi Waza": {
-      "Katate Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Kaiten Nage", "Uchi Kaiten Nage"],
-      "Ryote Dori": ["Tenchi Nage", "Koshi Nage", "Kote Gaeshi", "Sumi Otoshi"],
-      "Ushiro Ryote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Koshi Nage"],
-      "Kata Dori Men Uchi": ["Shihonage", "Irimi Nage", "Kaiten Nage"],
-      "Ryote Dori Tsuki": ["Kote Gaeshi", "Koshi Nage"]
-    }
-  },
-  "1er Kyū": {
-    "Suwari Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo"],
-      "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo"]
-    },
-    "Hanmi Handachi Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo"],
-      "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo"]
-    },
-    "Tachi Waza": {
-      "Katate Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Kaiten Nage", "Uchi Kaiten Nage", "Sokumen Irimi Nage"],
-      "Ryote Dori": ["Tenchi Nage", "Koshi Nage", "Kote Gaeshi", "Sumi Otoshi", "Aiki Otoshi"],
-      "Ushiro Ryote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Koshi Nage", "Irimi Nage"],
-      "Kata Dori Men Uchi": ["Shihonage", "Irimi Nage", "Kaiten Nage", "Kote Gaeshi"],
-      "Ryote Dori Tsuki": ["Kote Gaeshi", "Koshi Nage", "Irimi Nage"],
-      "Morote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi"]
-    }
-  },
-  "1er Dan": {
-    "Suwari Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"]
-    },
-    "Hanmi Handachi Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"]
-    },
-    "Tachi Waza": {
-      "Katate Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Kaiten Nage", "Uchi Kaiten Nage", "Sokumen Irimi Nage", "Jiyu Waza"],
-      "Ryote Dori": ["Tenchi Nage", "Koshi Nage", "Kote Gaeshi", "Sumi Otoshi", "Aiki Otoshi", "Jiyu Waza"],
-      "Ushiro Ryote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Koshi Nage", "Irimi Nage", "Kaiten Nage", "Jiyu Waza"],
-      "Kata Dori Men Uchi": ["Shihonage", "Irimi Nage", "Kaiten Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Jiyu Waza"],
-      "Ryote Dori Tsuki": ["Kote Gaeshi", "Koshi Nage", "Irimi Nage", "Sumi Otoshi", "Aiki Otoshi", "Jiyu Waza"],
-      "Morote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Koshi Nage", "Jiyu Waza"]
+      "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Kokyu Nage", "Sokumen Irimi Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Morote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Ude Kime Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Hiji Kime Osae", "Koshi Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Kata Dori Men Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Mae Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kokyu Nage", "Koshi Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Koshi Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Ushiro Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Ude Kime Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Ushiro Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Aiki Otoshi", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Ushiro Katate Kubi Shime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Ushiro Eri Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Kote Gaeshi", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Shiho Nage", "Irimi Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Chudan Tsuki": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Hiji Kime Osae", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Jodan Tsuki": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Hiji Kime Osae", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"]
     },
     "Armes": {
       "Tanto Dori": {
-        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+        "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Gokyo", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"]
       },
-      "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-      "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
-    }
-  },
-  "2e Dan": {
-    "Suwari Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"]
-    },
-    "Hanmi Handachi Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"]
-    },
-    "Tachi Waza": {
-      "Katate Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Kaiten Nage", "Uchi Kaiten Nage", "Sokumen Irimi Nage", "Jiyu Waza"],
-      "Ryote Dori": ["Tenchi Nage", "Koshi Nage", "Kote Gaeshi", "Sumi Otoshi", "Aiki Otoshi", "Jiyu Waza"],
-      "Ushiro Ryote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Koshi Nage", "Irimi Nage", "Kaiten Nage", "Jiyu Waza"],
-      "Kata Dori Men Uchi": ["Shihonage", "Irimi Nage", "Kaiten Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Jiyu Waza"],
-      "Ryote Dori Tsuki": ["Kote Gaeshi", "Koshi Nage", "Irimi Nage", "Sumi Otoshi", "Aiki Otoshi", "Jiyu Waza"],
-      "Morote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Koshi Nage", "Jiyu Waza"]
-    },
-    "Armes": {
-      "Tanto Dori": {
-        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
-      },
-      "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-      "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
-    }
-  },
-  "3e Dan": {
-    "Suwari Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"]
-    },
-    "Hanmi Handachi Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"]
-    },
-    "Tachi Waza": {
-      "Katate Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Kaiten Nage", "Uchi Kaiten Nage", "Sokumen Irimi Nage", "Jiyu Waza"],
-      "Ryote Dori": ["Tenchi Nage", "Koshi Nage", "Kote Gaeshi", "Sumi Otoshi", "Aiki Otoshi", "Jiyu Waza"],
-      "Ushiro Ryote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Koshi Nage", "Irimi Nage", "Kaiten Nage", "Jiyu Waza"],
-      "Kata Dori Men Uchi": ["Shihonage", "Irimi Nage", "Kaiten Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Jiyu Waza"],
-      "Ryote Dori Tsuki": ["Kote Gaeshi", "Koshi Nage", "Irimi Nage", "Sumi Otoshi", "Aiki Otoshi", "Jiyu Waza"],
-      "Morote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Koshi Nage", "Jiyu Waza"]
-    },
-    "Armes": {
-      "Tanto Dori": {
-        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
-      },
-      "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-      "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-      "Ken Taï Ken": ["Jiyu Waza"],
-      "Jo Taï Jo": ["Jiyu Waza"],
+      "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+      "Ken Taï Ken": ["Henka Waza", "Kaeshi Waza", "Jiyu Waza", "Kumitachi"],
+      "Jo Taï Jo": ["Henka Waza", "Kaeshi Waza", "Jiyu Waza", "Kumijo"],
       "Tachi Dori": {
-        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
-      }
-    }
-  },
-  "4e Dan": {
-    "Suwari Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"]
-    },
-    "Hanmi Handachi Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"]
-    },
-    "Tachi Waza": {
-      "Katate Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Kaiten Nage", "Uchi Kaiten Nage", "Sokumen Irimi Nage", "Jiyu Waza"],
-      "Ryote Dori": ["Tenchi Nage", "Koshi Nage", "Kote Gaeshi", "Sumi Otoshi", "Aiki Otoshi", "Jiyu Waza"],
-      "Ushiro Ryote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Koshi Nage", "Irimi Nage", "Kaiten Nage", "Jiyu Waza"],
-      "Kata Dori Men Uchi": ["Shihonage", "Irimi Nage", "Kaiten Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Jiyu Waza"],
-      "Ryote Dori Tsuki": ["Kote Gaeshi", "Koshi Nage", "Irimi Nage", "Sumi Otoshi", "Aiki Otoshi", "Jiyu Waza"],
-      "Morote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Koshi Nage", "Tenchi Nage", "Jiyu Waza"]
-    },
-    "Armes": {
-      "Tanto Dori": {
-        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
-      },
-      "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-      "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-      "Ken Taï Ken": ["Jiyu Waza"],
-      "Jo Taï Jo": ["Jiyu Waza"],
-      "Tachi Dori": {
-        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
-      }
-    }
-  },
-  "5e Dan": {
-    "Suwari Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"]
-    },
-    "Hanmi Handachi Waza": {
-      "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"],
-      "Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Rokkyo", "Jiyu Waza"]
-    },
-    "Tachi Waza": {
-      "Katate Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Kaiten Nage", "Uchi Kaiten Nage", "Sokumen Irimi Nage", "Jiyu Waza"],
-      "Ryote Dori": ["Tenchi Nage", "Koshi Nage", "Kote Gaeshi", "Sumi Otoshi", "Aiki Otoshi", "Jiyu Waza"],
-      "Ushiro Ryote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Koshi Nage", "Irimi Nage", "Kaiten Nage", "Jiyu Waza"],
-      "Kata Dori Men Uchi": ["Shihonage", "Irimi Nage", "Kaiten Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Jiyu Waza"],
-      "Ryote Dori Tsuki": ["Kote Gaeshi", "Koshi Nage", "Irimi Nage", "Sumi Otoshi", "Aiki Otoshi", "Jiyu Waza"],
-      "Morote Dori": ["Ikkyo", "Shihonage", "Kote Gaeshi", "Irimi Nage", "Koshi Nage", "Tenchi Nage", "Jiyu Waza"]
-    },
-    "Armes": {
-      "Tanto Dori": {
-        "Chudan Tsuki": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Yokomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-        "Gyaku Yokomen": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
-      },
-      "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-      "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
-      "Ken Taï Ken": ["Jiyu Waza"],
-      "Jo Taï Jo": ["Jiyu Waza"],
-      "Tachi Dori": {
-        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
+        "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"]
       }
     }
   }
