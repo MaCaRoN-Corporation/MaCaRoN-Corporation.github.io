@@ -1,4 +1,4 @@
-7  {
+  {
     "6e Kyū": {
       "Suwari Waza": {
         "Ai Hammi Katate Dori": [
@@ -272,7 +272,7 @@
     
   },
   
-    "2ème Kyū": {
+    "2e Kyū": {
       "Suwari Waza": {
         "Katate Dori": [
           "Yonkyo",
@@ -764,7 +764,7 @@
     
   },
   
-    "2ème Dan": {
+    "2e Dan": {
       "Suwari Waza": {
         "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Jiyu Waza"],
         "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Soto Kaiten Nage", "Jiyu Waza"],
@@ -810,7 +810,7 @@
     
   },
   
-    "3ème Dan": {
+    "3e Dan": {
       "Suwari Waza": {
         "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Jiyu Waza"],
         "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Soto Kaiten Nage", "Jiyu Waza"],
@@ -861,7 +861,7 @@
     }
   },
   
-    "4ème Dan": {
+    "4e Dan": {
       "Suwari Waza": {
         "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Jiyu Waza"],
         "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Soto Kaiten Nage", "Jiyu Waza"],
@@ -912,7 +912,7 @@
     }
   },
 
-  "5ème Dan": {
+  "5e Dan": {
     "Suwari Waza": {
       "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
       "Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Kote Gaeshi", "Soto Kaiten Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
