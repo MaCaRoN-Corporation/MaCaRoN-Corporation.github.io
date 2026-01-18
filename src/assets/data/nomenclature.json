@@ -31,9 +31,7 @@
           "Irimi Nage"
         ]
       }
-    }
   },
-  {
     "5e Kyū": {
       "Suwari Waza": {
         "Ai Hammi Katate Dori": [
@@ -66,9 +64,7 @@
           "Irimi Nage"
         ]
       }
-    }
   },
-  {
     "4e Kyū": {
       "Suwari Waza": {
         "Ai Hammi Katate Dori": [
@@ -141,9 +137,9 @@
           "Kote Gaeshi"
         ]
       }
-    }
+    
   },
-  {
+  
     "3e Kyū": {
       "Suwari Waza": {
         "Katate Dori": [
@@ -273,9 +269,9 @@
           "Hiji Kime Osae"
         ]
       }
-    }
+    
   },
-  {
+  
     "2ème Kyū": {
       "Suwari Waza": {
         "Katate Dori": [
@@ -388,9 +384,9 @@
           "Shiho Nage"
         ]
       }
-    }
+    
   },
-  {
+  
     "1er Kyū": {
       "Suwari Waza": {
         "Ai Hammi Katate Dori": [
@@ -719,9 +715,9 @@
           ]
         }
       }
-    }
+    
   },
-  {
+  
     "1er Dan": {
       "Suwari Waza": {
         "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Jiyu Waza"],
@@ -765,9 +761,9 @@
         "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
         "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
       }
-    }
+    
   },
-  {
+  
     "2ème Dan": {
       "Suwari Waza": {
         "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Jiyu Waza"],
@@ -811,9 +807,9 @@
         "Jo Dori": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"],
         "Jo Nage": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
       }
-    }
+    
   },
-  {
+  
     "3ème Dan": {
       "Suwari Waza": {
         "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Jiyu Waza"],
@@ -861,10 +857,10 @@
         "Tachi Dori": {
           "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
         }
-      }
+      
     }
   },
-  {
+  
     "4ème Dan": {
       "Suwari Waza": {
         "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Jiyu Waza"],
@@ -912,10 +908,10 @@
         "Tachi Dori": {
           "Shomen Uchi": ["Ikkyo", "Nikyo", "Shihonage", "Jiyu Waza"]
         }
-      }
+      
     }
   },
-{
+
   "5ème Dan": {
     "Suwari Waza": {
       "Ai Hammi Katate Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
@@ -965,4 +961,3 @@
       }
     }
   }
-}
