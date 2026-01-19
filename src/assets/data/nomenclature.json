@@ -357,7 +357,7 @@
           "Yonkyo",
           "Irimi Nage"
         ],
-        "Ushiro Katate Dori Kube Shime": [
+        "Ushiro Katate Dori Kubishime": [
           "Ikkyo",
           "Nikyo",
           "Sankyo",
@@ -603,7 +603,7 @@
           "Irimi Nage",
           "Aiki Otoshi"
         ],
-        "Ushiro Katate Dori Kubi Shime": [
+        "Ushiro Katate Dori Kubishime": [
           "Ikkyo",
           "Nikyo",
           "Sankyo",
@@ -744,7 +744,7 @@
         "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Koshi Nage", "Jiyu Waza"],
         "Ushiro Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Ude Kime Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Soto Kaiten Nage", "Uchi Kaiten Nage", "Hiji Kime Osae", "Jiyu Waza"],
         "Ushiro Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Aiki Otoshi", "Jiyu Waza"],
-        "Ushiro Katate Dori Kubi Shime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Katate Dori Kubishime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
         "Ushiro Eri Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Juji Garami", "Koshi Nage", "Jiyu Waza"],
         "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Gokyo", "Ude Garami", "Jiyu Waza"],
         "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
@@ -790,7 +790,7 @@
         "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Koshi Nage", "Jiyu Waza"],
         "Ushiro Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Ude Kime Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Soto Kaiten Nage", "Uchi Kaiten Nage", "Hiji Kime Osae", "Jiyu Waza"],
         "Ushiro Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Aiki Otoshi", "Jiyu Waza"],
-        "Ushiro Katate Dori Kubi Shime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Katate Dori Kubishime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
         "Ushiro Eri Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Juji Garami", "Koshi Nage", "Jiyu Waza"],
         "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Gokyo", "Ude Garami", "Jiyu Waza"],
         "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
@@ -836,7 +836,7 @@
         "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Koshi Nage", "Jiyu Waza"],
         "Ushiro Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Ude Kime Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Soto Kaiten Nage", "Uchi Kaiten Nage", "Hiji Kime Osae", "Jiyu Waza"],
         "Ushiro Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Aiki Otoshi", "Jiyu Waza"],
-        "Ushiro Katate Dori Kubi Shime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Katate Dori Kubishime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
         "Ushiro Eri Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Juji Garami", "Koshi Nage", "Jiyu Waza"],
         "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Gokyo", "Ude Garami", "Jiyu Waza"],
         "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
@@ -887,7 +887,7 @@
         "Muna Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Koshi Nage", "Jiyu Waza"],
         "Ushiro Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Ude Kime Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Soto Kaiten Nage", "Uchi Kaiten Nage", "Hiji Kime Osae", "Jiyu Waza"],
         "Ushiro Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Aiki Otoshi", "Jiyu Waza"],
-        "Ushiro Katate Dori Kubi Shime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Katate Dori Kubishime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
         "Ushiro Eri Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Kote Gaeshi", "Sokumen Irimi Nage", "Juji Garami", "Koshi Nage", "Jiyu Waza"],
         "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Uchi Kaiten Sankyo", "Soto Kaiten Sankyo", "Uchi Kaiten Nage", "Soto Kaiten Nage", "Gokyo", "Ude Garami", "Jiyu Waza"],
         "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Tenchi Nage", "Ude Kime Nage", "Ude Garami", "Kokyu Nage", "Koshi Nage", "Jiyu Waza"],
@@ -939,6 +939,9 @@
       "Ushiro Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Ude Kime Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
       "Ushiro Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Aiki Otoshi", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
       "Ushiro Katate Kubi Shime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
+        "Ushiro Ryote Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Ude Kime Nage", "Koshi Nage", "Kokyu Nage", "Juji Garami", "Soto Kaiten Nage", "Uchi Kaiten Nage", "Hiji Kime Osae", "Jiyu Waza"],
+        "Ushiro Ryo Kata Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Irimi Nage", "Aiki Otoshi", "Jiyu Waza"],
+        "Ushiro Katate Dori Kubishime": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Kokyu Nage", "Koshi Nage", "Aiki Otoshi", "Jiyu Waza"],
       "Ushiro Eri Dori": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Kote Gaeshi", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
       "Shomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Shiho Nage", "Irimi Nage", "Kote Gaeshi", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
       "Yokomen Uchi": ["Ikkyo", "Nikyo", "Sankyo", "Yonkyo", "Gokyo", "Shiho Nage", "Irimi Nage", "Henka Waza", "Kaeshi Waza", "Jiyu Waza"],
