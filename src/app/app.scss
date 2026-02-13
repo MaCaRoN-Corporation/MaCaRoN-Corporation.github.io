@@ -3,7 +3,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden; // Pas de scroll sur le conteneur principal
+  overflow: auto; // Pas de scroll sur le conteneur principal
   position: relative;
   
   // Sur PC, s'assurer qu'il n'y a pas de scroll
