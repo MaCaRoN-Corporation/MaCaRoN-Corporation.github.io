@@ -1,4 +1,4 @@
 {
-  "maintenanceEnabled": true,
+  "maintenanceEnabled": false,
   "allowedIPs": ["83.192.16.129", "41.230.210.103", "", ""]
 }
