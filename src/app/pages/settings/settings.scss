@@ -260,8 +260,7 @@
   transition: all var(--transition-normal);
   text-align: left;
   box-sizing: border-box;
-  overflow: hidden; // Empêcher tout débordement
-  
+  overflow-x: hidden; // Empêcher le scroll horizontal
   &:hover {
     background-color: var(--color-background);
     border-color: var(--color-accent);
